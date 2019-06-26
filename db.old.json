@@ -1,0 +1,202 @@
+{
+    "challenges": [
+      {		
+      "id": 1,
+      "name": "Jump rope /  Naruhyppy, 2  jumps",
+      "startDate": "16.6.2019",
+      "endDate": "25.8.2019",
+      "releaseDate": "9.6.2019",
+      "lastUpdateDate": "18.8.2019",
+      "sportTypeList": "sportTypeList01"
+      },		
+      {		
+      "id": 2,
+      "name": "Stretching -   venyttely, 5  minutes",
+      "startDate": "17.6.2019",
+      "endDate": "26.8.2019",
+      "releaseDate": "10.6.2019",
+      "lastUpdateDate": "19.8.2019",
+      "sportTypeList": "sportTypeList02"
+      },		
+      {		
+      "id": 3,
+      "name": "Box jumping /  boxihyppy, jump  (up+down)",
+      "startDate": "18.6.2019",
+      "endDate": "27.8.2019",
+      "releaseDate": "11.6.2019",
+      "lastUpdateDate": "20.8.2019",
+      "sportTypeList": "sportTypeList03"
+      },		
+      {		
+      "id": 4,
+      "name": "Stairs down /ﬂoor  -  portaiden  laskeutuminen  /krs",
+      "startDate": "19.6.2019",
+      "endDate": "28.8.2019",
+      "releaseDate": "12.6.2019",
+      "lastUpdateDate": "21.8.2019",
+      "sportTypeList": "sportTypeList04"
+      },		
+      {		
+      "id": 5,
+      "name": "Planks -  lankku,  per sec",
+      "startDate": "20.6.2019",
+      "endDate": "29.8.2019",
+      "releaseDate": "13.6.2019",
+      "lastUpdateDate": "22.8.2019",
+      "sportTypeList": "sportTypeList05"
+      },		
+      {		
+      "id": 6,
+      "name": "Pull- ups -   leuanveto",
+      "startDate": "21.6.2019",
+      "endDate": "30.8.2019",
+      "releaseDate": "14.6.2019",
+      "lastUpdateDate": "23.8.2019",
+      "sportTypeList": "sportTypeList06"
+      },		
+      {		
+      "id": 7,
+      "name": "Burpee -  yleisliike",
+      "startDate": "22.6.2019",
+      "endDate": "31.8.2019",
+      "releaseDate": "15.6.2019",
+      "lastUpdateDate": "24.8.2019",
+      "sportTypeList": "sportTypeList07"
+      },		
+      {		
+      "id": 8,
+      "name": "Stairs up /ﬂoor -   portaiden nousu  /krs",
+      "startDate": "23.6.2019",
+      "endDate": "1.9.2019",
+      "releaseDate": "16.6.2019",
+      "lastUpdateDate": "25.8.2019",
+      "sportTypeList": "sportTypeList08"
+      },		
+      {		
+      "id": 9,
+      "name": "Single hand pull -   yhden käden  leuanveto",
+      "startDate": "24.6.2019",
+      "endDate": "2.9.2019",
+      "releaseDate": "17.6.2019",
+      "lastUpdateDate": "26.8.2019",
+      "sportTypeList": "sportTypeList09"
+      },		
+      {		
+      "id": 10,
+      "name": "Cycling to/from  work -   työmatkapyöräily  /km",
+      "startDate": "25.6.2019",
+      "endDate": "3.9.2019",
+      "releaseDate": "18.6.2019",
+      "lastUpdateDate": "27.8.2019",
+      "sportTypeList": "sportTypeList10"
+      },		
+      {		
+      "id": 11,
+      "name": "Walking to/from  work -   työmatkakävely  /km",
+      "startDate": "26.6.2019",
+      "endDate": "4.9.2019",
+      "releaseDate": "19.6.2019",
+      "lastUpdateDate": "28.8.2019",
+      "sportTypeList": "sportTypeList11"
+      },		
+      {		
+      "id": 12,
+      "name": "Running to/from  work -   työmatkajuoksu  /km",
+      "startDate": "27.6.2019",
+      "endDate": "5.9.2019",
+      "releaseDate": "20.6.2019",
+      "lastUpdateDate": "29.8.2019",
+      "sportTypeList": "sportTypeList12"
+      },		
+      {		
+      "id": 13,
+      "name": "Skiing/Snowshoe  walking /km  from/to work",
+      "startDate": "28.6.2019",
+      "endDate": "6.9.2019",
+      "releaseDate": "21.6.2019",
+      "lastUpdateDate": "30.8.2019",
+      "sportTypeList": "sportTypeList13"
+      },		
+      {		
+      "id": 14,
+      "name": "Kettlebell /  Floorball (HML),  jogging (JNS) Kahvakuulatunti /  sähly (HML),  lenkkeily (JNS)",
+      "startDate": "29.6.2019",
+      "endDate": "7.9.2019",
+      "releaseDate": "22.6.2019",
+      "lastUpdateDate": "31.8.2019",
+      "sportTypeList": "sportTypeList14"
+      },		
+      {		
+      "id": 15,
+      "name": "Kettlebell 1: swing  -  Kahvakuula 1:  etuheilautus",
+      "startDate": "30.6.2019",
+      "endDate": "8.9.2019",
+      "releaseDate": "23.6.2019",
+      "lastUpdateDate": "1.9.2019",
+      "sportTypeList": "sportTypeList15"
+      },		
+      {		
+      "id": 16,
+      "name": "Walking  meeting -   kävelykokous  /10 min",
+      "startDate": "1.7.2019",
+      "endDate": "9.9.2019",
+      "releaseDate": "24.6.2019",
+      "lastUpdateDate": "2.9.2019",
+      "sportTypeList": "sportTypeList16"
+      },		
+      {		
+      "id": 17,
+      "name": "Meeting at  gym -  kokous  salilla /10 min",
+      "startDate": "2.7.2019",
+      "endDate": "10.9.2019",
+      "releaseDate": "25.6.2019",
+      "lastUpdateDate": "3.9.2019",
+      "sportTypeList": "sportTypeList17"
+      },		
+      {		
+      "id": 18,
+      "name": "Free time  sports  activities /  60 min",
+      "startDate": "3.7.2019",
+      "endDate": "11.9.2019",
+      "releaseDate": "26.6.2019",
+      "lastUpdateDate": "4.9.2019",
+      "sportTypeList": "sportTypeList18"
+      },		
+      {		
+      "id": 19,
+      "name": "Squats -  kyykky",
+      "startDate": "4.7.2019",
+      "endDate": "12.9.2019",
+      "releaseDate": "27.6.2019",
+      "lastUpdateDate": "5.9.2019",
+      "sportTypeList": "sportTypeList19"
+      },		
+      {		
+      "id": 20,
+      "name": "Stepsquats -   askelkyykky",
+      "startDate": "5.7.2019",
+      "endDate": "13.9.2019",
+      "releaseDate": "28.6.2019",
+      "lastUpdateDate": "6.9.2019",
+      "sportTypeList": "sportTypeList20"
+      },		
+      {		
+      "id": 21,
+      "name": "Curlups -   vatsalihasliike",
+      "startDate": "6.7.2019",
+      "endDate": "14.9.2019",
+      "releaseDate": "29.6.2019",
+      "lastUpdateDate": "7.9.2019",
+      "sportTypeList": "sportTypeList21"
+      },		
+      {		
+      "id": 22,
+      "name": "Pushup -   punnerrus",
+      "startDate": "7.7.2019",
+      "endDate": "15.9.2019",
+      "releaseDate": "30.6.2019",
+      "lastUpdateDate": "8.9.2019",
+      "sportTypeList": "sportTypeList22"
+      }	    
+    ]
+  }
