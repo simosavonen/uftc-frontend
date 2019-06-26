@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ChallengeList from './ChallengeList';
 
 const App = () => {
   const [challenges, setChallenges] = useState([]);
+  const user = {
+    id: 1,
+    name: 'Jaska Jokunen'
+  };
 
   useEffect(() => {
     console.log('effect');
@@ -16,9 +21,7 @@ const App = () => {
 
   return (
     <div>
-      {challenges.map(challenge => (
-        <p>{challenge.name}</p>
-      ))}
+      <ChallengeList challenges={challenges} />
     </div>
   );
 };
