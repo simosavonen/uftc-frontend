@@ -22,6 +22,12 @@
       "challengeId": 1,
       "name": "Työmatkakävely / km",
       "points": 2
+    },
+    {
+      "id": 2,
+      "challengeId": 1,
+      "name": "Työmatkapyöräily / km",
+      "points": 3
     }
   ],
   "users": [
