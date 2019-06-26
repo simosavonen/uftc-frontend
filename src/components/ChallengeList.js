@@ -5,7 +5,7 @@ const ChallengeList = props => {
   return (
     <>
       {props.challenges.map(item => (
-        <Challenge challenge={item} activities={props.activities} />
+        <Challenge challenge={item} />
       ))}
     </>
   );

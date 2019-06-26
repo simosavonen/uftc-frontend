@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import ChallengeList from './components/ChallengeList';
+import Header from './components/Header';
 
 const App = () => {
   const [challenges, setChallenges] = useState([]);
-  const [activities, setActivities] = useState([]);
-
-  const user = {
-    id: 1,
-    name: 'Jaska Jokunen'
-  };
 
   useEffect(() => {
     axios.get('http://localhost:3001/challenges').then(response => {
@@ -18,15 +13,15 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/activities').then(response => {
-      setActivities(response.data);
-    });
-  }, []);
+  const user = {
+    id: 1,
+    name: 'Jaska Jokunen'
+  };
 
   return (
     <>
-      <ChallengeList challenges={challenges} activities={activities} />
+      <Header user={user} />
+      <ChallengeList challenges={challenges} />
     </>
   );
 };

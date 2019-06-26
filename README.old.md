@@ -1,3 +1,0 @@
-# uftc-frontend
-
-capstone project
