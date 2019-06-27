@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import ChallengeList from './components/ChallengeList';
 import Header from './components/Header';
+import AddChallengeForm from './components/AddChallengeForm';
 
 const App = () => {
   const [challenges, setChallenges] = useState([]);
@@ -22,6 +23,7 @@ const App = () => {
     <>
       <Header user={user} />
       <ChallengeList challenges={challenges} />
+      <AddChallengeForm />
     </>
   );
 };
