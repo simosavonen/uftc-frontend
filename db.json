@@ -14,6 +14,15 @@
           "points": 20
         }
       ]
+    },
+    {
+      "name": "uusi",
+      "startDate": "2019-06-02",
+      "endDate": "2019-06-29",
+      "releaseDate": "2019-06-02",
+      "deadLine": "2019-06-29",
+      "pointsLimit": "1000",
+      "id": 2
     }
   ],
   "activities": [

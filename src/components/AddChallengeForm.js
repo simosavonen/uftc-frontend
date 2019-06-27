@@ -10,6 +10,15 @@ const AddChallengeForm = props => {
 
   const submit = event => {
     event.preventDefault();
+    const newChallenge = {
+      name,
+      startDate,
+      endDate,
+      releaseDate,
+      deadLine,
+      pointsLimit
+    };
+    props.addChallenge(newChallenge);
   };
   return (
     <form onSubmit={submit}>

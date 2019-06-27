@@ -9,10 +9,26 @@ const App = () => {
   const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/challenges').then(response => {
-      setChallenges(response.data);
-    });
+    axios
+      .get('http://localhost:3001/challenges')
+      .then(response => {
+        setChallenges(response.data);
+      })
+      .catch(error => {
+        console.log('get', error.message);
+      });
   }, []);
+
+  const addChallenge = challenge => {
+    axios
+      .post('http://localhost:3001/challenges', challenge)
+      .then(response => {
+        setChallenges(challenges.concat(response.data));
+      })
+      .catch(error => {
+        console.log('post', error.message);
+      });
+  };
 
   const user = {
     id: 1,
@@ -23,7 +39,7 @@ const App = () => {
     <>
       <Header user={user} />
       <ChallengeList challenges={challenges} />
-      <AddChallengeForm />
+      <AddChallengeForm addChallenge={addChallenge} />
     </>
   );
 };
