@@ -3,11 +3,11 @@
     {
       "id": 1,
       "name": "Syksy 2019 megahaaste",
-      "points": 9000,
+      "pointsLimit": 9000,
       "startDate": "16.6.2019",
       "endDate": "25.8.2019",
       "releaseDate": "9.6.2019",
-      "deadline": "18.8.2019",
+      "deadLine": "18.8.2019",
       "scores": [
         {
           "userId": 1,
@@ -16,13 +16,22 @@
       ]
     },
     {
-      "name": "uusi",
-      "startDate": "2019-06-02",
-      "endDate": "2019-06-29",
-      "releaseDate": "2019-06-02",
-      "deadLine": "2019-06-29",
-      "pointsLimit": "1000",
+      "name": "uutta testii",
+      "startDate": "2019-06-03",
+      "endDate": "2019-06-11",
+      "releaseDate": "2019-06-18",
+      "deadLine": "2019-06-25",
+      "pointsLimit": 9000,
       "id": 2
+    },
+    {
+      "name": "toimiiko numero",
+      "startDate": "2019-06-18",
+      "endDate": "2019-06-11",
+      "releaseDate": "2019-06-20",
+      "deadLine": "2019-06-11",
+      "pointsLimit": 5000,
+      "id": 3
     }
   ],
   "activities": [

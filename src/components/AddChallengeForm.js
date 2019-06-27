@@ -1,75 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useField } from '../hooks';
 
 const AddChallengeForm = props => {
-  const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [releaseDate, setReleaseDate] = useState('');
-  const [deadLine, setDeadLine] = useState('');
-  const [pointsLimit, setPointsLimit] = useState(0);
+  const [name, nameReset] = useField('text');
+  const [startDate, startDateReset] = useField('date');
+  const [endDate, endDateReset] = useField('date');
+  const [releaseDate, releaseDateReset] = useField('date');
+  const [deadLine, deadLineReset] = useField('date');
+  const [pointsLimit, pointsLimitReset] = useField('number');
 
   const submit = event => {
     event.preventDefault();
     const newChallenge = {
-      name,
-      startDate,
-      endDate,
-      releaseDate,
-      deadLine,
-      pointsLimit
+      name: name.value,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      releaseDate: releaseDate.value,
+      deadLine: deadLine.value,
+      pointsLimit: parseInt(pointsLimit.value, 10)
     };
     props.addChallenge(newChallenge);
+    nameReset();
+    startDateReset();
+    endDateReset();
+    releaseDateReset();
+    deadLineReset();
+    pointsLimitReset();
   };
   return (
     <form onSubmit={submit}>
       <p>
         <label htmlFor="name">Challenge name:</label>
-        <input id="name" onChange={({ target }) => setName(target.value)} value={name} />
+        <input id="name" {...name} />
       </p>
       <p>
         <label htmlFor="startdate">Start date:</label>
-        <input
-          id="startdate"
-          type="date"
-          onChange={({ target }) => setStartDate(target.value)}
-          value={startDate}
-        />
+        <input id="startdate" {...startDate} />
       </p>
       <p>
         <label htmlFor="endDate">End date:</label>
-        <input
-          id="endDate"
-          type="date"
-          onChange={({ target }) => setEndDate(target.value)}
-          value={endDate}
-        />
+        <input id="endDate" {...endDate} />
       </p>
       <p>
         <label htmlFor="releaseDate">Release date:</label>
-        <input
-          id="releaseDate"
-          type="date"
-          onChange={({ target }) => setReleaseDate(target.value)}
-          value={releaseDate}
-        />
+        <input id="releaseDate" {...releaseDate} />
       </p>
       <p>
         <label htmlFor="deadLine">Deadline:</label>
-        <input
-          id="deadLine"
-          type="date"
-          onChange={({ target }) => setDeadLine(target.value)}
-          value={deadLine}
-        />
+        <input id="deadLine" {...deadLine} />
       </p>
       <p>
         <label htmlFor="pointsLimit">Points limit:</label>
-        <input
-          id="pointsLimit"
-          type="number"
-          onChange={({ target }) => setPointsLimit(target.value)}
-          value={pointsLimit}
-        />
+        <input id="pointsLimit" {...pointsLimit} />
       </p>
       <button type="submit">Add new challenge</button>
     </form>
