@@ -18,7 +18,7 @@ const Challenge = props => {
       {props.challenge.name}
       <ul>
         {activities.map(activity => (
-          <li>{activity.name}</li>
+          <li key={activity.id}>{activity.name}</li>
         ))}
       </ul>
     </div>

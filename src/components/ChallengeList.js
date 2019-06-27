@@ -5,7 +5,7 @@ const ChallengeList = props => {
   return (
     <>
       {props.challenges.map(item => (
-        <Challenge challenge={item} />
+        <Challenge challenge={item} key={item.id} />
       ))}
     </>
   );
