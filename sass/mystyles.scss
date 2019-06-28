@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+// Set your brand colors
+$ambientia: #ff2457;
+$brown: #626674;
+$beige-light: #f2f2f2;
+$beige-lighter: #fefefe;
+
+// Update Bulma's global variables
+$family-sans-serif: 'Raleway', sans-serif;
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$info: $ambientia;
+
+// Update some of Bulma's component variables
+$body-background-color: $beige-lighter;
+$navbar-breakpoint: 800px;
+
+// Import all or just the modules you ended up using.
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/bulma/sass/base/_all.sass';
+@import '../node_modules/bulma/sass/components/_all.sass';
+@import '../node_modules/bulma/sass/elements/_all.sass';
+@import '../node_modules/bulma/sass/form/_all.sass';
+@import '../node_modules/bulma/sass/grid/_all.sass';
+@import '../node_modules/bulma/sass/layout/_all.sass';

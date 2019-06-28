@@ -14,15 +14,6 @@
           "points": 20
         }
       ]
-    },
-    {
-      "name": "uusi",
-      "startDate": "2019-06-02",
-      "endDate": "2019-06-29",
-      "releaseDate": "2019-06-02",
-      "deadLine": "2019-06-29",
-      "pointsLimit": "1000",
-      "id": 2
     }
   ],
   "activities": [
@@ -43,7 +34,20 @@
     {
       "id": 1,
       "name": "Teppo Testaaja",
-      "series": "beginner"
+      "email": "teppo.testaaja@ambientia.com",
+      "password": "$2a$10$tme1Cr4Vu/L93oBOq5i6r./whMvA0AxzNz0x119BKskiaJoHqGBQ6"
+    },
+    {
+      "email": "tyyne.testaaja@ambientia.com",
+      "password": "$2a$10$tme1Cr4Vu/L93oBOq5i6r./whMvA0AxzNz0x119BKskiaJoHqGBQ6",
+      "name": "Tyyne Testaaja",
+      "id": 2
+    },
+    {
+      "email": "tero.testaaja@ambientia.com",
+      "password": "$2a$10$tme1Cr4Vu/L93oBOq5i6r./whMvA0AxzNz0x119BKskiaJoHqGBQ6",
+      "name": "Tero Testaaja",
+      "id": 3
     }
   ],
   "performances": [

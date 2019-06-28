@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 import './App.css';
 import ChallengeList from './components/ChallengeList';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
+import LoginForm from './components/LoginForm';
 
 const App = () => {
   const [challenges, setChallenges] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     axios
@@ -15,8 +19,15 @@ const App = () => {
         setChallenges(response.data);
       })
       .catch(error => {
-        console.log('get', error.message);
+        console.log('getChallenges', error.message);
       });
+  }, []);
+
+  useEffect(() => {
+    const loggedUserJSON = localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      setUser(JSON.parse(loggedUserJSON));
+    }
   }, []);
 
   const addChallenge = challenge => {
@@ -26,21 +37,54 @@ const App = () => {
         setChallenges(challenges.concat(response.data));
       })
       .catch(error => {
-        console.log('post', error.message);
+        console.log('addChallenge', error.message);
       });
   };
 
-  const user = {
-    id: 1,
-    name: 'Jaska Jokunen'
+  const login = userDetails => {
+    axios
+      .get(`http://localhost:3001/users?email=${userDetails.email}`)
+      .then(response => {
+        bcrypt.compare(userDetails.password, response.data[0].password, (error, matched) => {
+          error && console.log('bcrypt.compare', error.message);
+          if (matched) {
+            setUser(response.data[0]);
+            localStorage.setItem('loggedUser', JSON.stringify(response.data[0]));
+          }
+        });
+      })
+      .catch(error => {
+        console.log('login', error.message);
+      });
+  };
+
+  const register = userDetails => {
+    const hashed = { ...userDetails, password: bcrypt.hashSync(userDetails.password, 10) };
+    axios
+      .post('http://localhost:3001/users', hashed)
+      .then(response => {
+        setUser(response.data);
+        localStorage.setItem('loggedUser', JSON.stringify(response.data));
+      })
+      .catch(error => {
+        console.log('register', error.message);
+      });
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('loggedUser');
   };
 
   return (
-    <>
-      <Header user={user} />
-      <ChallengeList challenges={challenges} />
+    <Router>
+      <Header user={user} logout={logout} />
+      <Switch>
+        {!user && <Route path="/" render={() => <LoginForm login={login} register={register} />} />}
+        <Route path="/" render={() => <ChallengeList challenges={challenges} />} />
+      </Switch>
       <AddChallengeForm addChallenge={addChallenge} />
-    </>
+    </Router>
   );
 };
 export default App;

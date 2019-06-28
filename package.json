@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-brands-svg-icons": "^5.9.0",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1"
   },
   "scripts": {
@@ -13,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --port=3001 --watch db.json"
+    "server": "json-server --port=3001 --watch db.json",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss src/bulma-custom.css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,6 +38,8 @@
     ]
   },
   "devDependencies": {
-    "json-server": "^0.15.0"
+    "json-server": "^0.15.0",
+    "bulma": "^0.7.5",
+    "node-sass": "^4.12.0"
   }
 }

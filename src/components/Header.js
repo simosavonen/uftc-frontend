@@ -1,19 +1,40 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
 
 const Header = props => {
   return (
-    <nav className="navbar is-primary is-spaced">
-      <div className="container">
+    <nav className="navbar is-info">
+      <div className="container" style={{ paddingLeft: '1em', paddingRight: '1em' }}>
         <div className="navbar-brand">
           <div className="navbar-item">
-            <Logo width={105} height={95} />
-            Ultimate Functional Training Challenge
+            <Logo width={80} height={60} />
           </div>
         </div>
-        <div className="navbar-menu">
+        <div id="navMenu" className="navbar-menu">
+          <div className="navbar-start">
+            {!props.user ? (
+              <div className="navbar-item">Ultimate Functional Training Challenge</div>
+            ) : (
+              <>
+                <Link className="navbar-item" to="/challenges">
+                  challenges
+                </Link>
+                <Link className="navbar-item" to="/leaderboard">
+                  leaderboard
+                </Link>
+                <Link className="navbar-item" to="/activities">
+                  activities
+                </Link>
+              </>
+            )}
+          </div>
           <div className="navbar-end">
-            <div className="navbar-item">Logged in as {props.user.name}</div>
+            {props.user && (
+              <Link to="/" className="navbar-item" onClick={props.logout}>
+                logout
+              </Link>
+            )}
           </div>
         </div>
       </div>
