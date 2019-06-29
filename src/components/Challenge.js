@@ -14,7 +14,7 @@ const Challenge = props => {
   }, [props.challenge]);
 
   return (
-    <div>
+    <div className="box">
       {props.challenge.name}
       <ul>
         {activities.map(activity => (

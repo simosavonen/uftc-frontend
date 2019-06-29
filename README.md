@@ -28,3 +28,7 @@ Asennettiin ohjeita noudattaen:
 - `npm i --save @fortawesome/free-solid-svg-icons`
 - `npm i --save @fortawesome/react-fontawesome`
 - `npm i --save @fortawesome/free-brands-svg-icons`
+
+## Reititys
+
+Kurssimateriaalin 7. kappale neuvoo miten tuo React-router toimii: https://fullstackopen.com/osa7/react_router

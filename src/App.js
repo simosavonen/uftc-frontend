@@ -81,9 +81,13 @@ const App = () => {
       <Header user={user} logout={logout} />
       <Switch>
         {!user && <Route path="/" render={() => <LoginForm login={login} register={register} />} />}
-        <Route path="/" render={() => <ChallengeList challenges={challenges} />} />
+        <Route exact path="/" render={() => <ChallengeList challenges={challenges} />} />
+        <Route
+          exact
+          path="/addchallenge"
+          render={() => <AddChallengeForm addChallenge={addChallenge} />}
+        />
       </Switch>
-      <AddChallengeForm addChallenge={addChallenge} />
     </Router>
   );
 };

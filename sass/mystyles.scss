@@ -8,6 +8,7 @@ $ambientia: #ff2457;
 $brown: #626674;
 $beige-light: #f2f2f2;
 $beige-lighter: #fefefe;
+$darken: rgba(0, 0, 0, 0.1);
 
 // Update Bulma's global variables
 $family-sans-serif: 'Raleway', sans-serif;
@@ -17,7 +18,12 @@ $info: $ambientia;
 
 // Update some of Bulma's component variables
 $body-background-color: $beige-lighter;
-$navbar-breakpoint: 800px;
+$navbar-breakpoint: 700px;
+$navbar-height: 4.5rem;
+$navbar-background-color: $ambientia;
+$navbar-item-hover-background-color: $darken;
+$navbar-item-color: #ffffff;
+$navbar-item-hover-color: $beige-lighter;
 
 // Import all or just the modules you ended up using.
 @import '../node_modules/bulma/sass/utilities/_all.sass';
