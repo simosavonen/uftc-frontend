@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 import './App.css';
 import ChallengeList from './components/ChallengeList';
 import Header from './components/Header';
@@ -43,15 +42,10 @@ const App = () => {
 
   const login = userDetails => {
     axios
-      .get(`http://localhost:3001/users?email=${userDetails.email}`)
+      .post('http://localhost:3001/api/users/login', userDetails)
       .then(response => {
-        bcrypt.compare(userDetails.password, response.data[0].password, (error, matched) => {
-          error && console.log('bcrypt.compare', error.message);
-          if (matched) {
-            setUser(response.data[0]);
-            localStorage.setItem('loggedUser', JSON.stringify(response.data[0]));
-          }
-        });
+        setUser(response.data);
+        localStorage.setItem('loggedUser', JSON.stringify(response.data));
       })
       .catch(error => {
         console.log('login', error.message);
@@ -59,12 +53,10 @@ const App = () => {
   };
 
   const register = userDetails => {
-    const hashed = { ...userDetails, password: bcrypt.hashSync(userDetails.password, 10) };
     axios
-      .post('http://localhost:3001/users', hashed)
+      .post('http://localhost:3001/api/users/register', userDetails)
       .then(response => {
-        setUser(response.data);
-        localStorage.setItem('loggedUser', JSON.stringify(response.data));
+        login(response.data);
       })
       .catch(error => {
         console.log('register', error.message);
