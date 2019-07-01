@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/challenges')
+      .get('http://localhost:3002/challenges')
       .then(response => {
         setChallenges(response.data);
       })
@@ -31,7 +31,7 @@ const App = () => {
 
   const addChallenge = challenge => {
     axios
-      .post('http://localhost:3001/challenges', challenge)
+      .post('http://localhost:3002/challenges', challenge)
       .then(response => {
         setChallenges(challenges.concat(response.data));
       })

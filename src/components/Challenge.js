@@ -7,7 +7,7 @@ const Challenge = props => {
   // fetch only a subset of all activities for this current challenge
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/challenges/${props.challenge.id}/activities`)
+      .get(`http://localhost:3002/challenges/${props.challenge.id}/activities`)
       .then(response => {
         setActivities(response.data);
       });
