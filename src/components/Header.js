@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,9 +8,9 @@ const Header = props => {
   return (
     <nav className="navbar is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="navbar-brand">
-        <div className="navbar-item">
+        <Link className="navbar-item" to="/">
           <Logo width={100} height={40} />
-        </div>
+        </Link>
         {props.user && (
           <button
             className={`navbar-burger burger button is-info is-shadowless ${burgerActive &&
@@ -32,15 +32,15 @@ const Header = props => {
             <div className="navbar-item">Ultimate Functional Training Challenge</div>
           ) : (
             <>
-              <Link className="navbar-item" to="/leaderboard">
+              <NavLink className="navbar-item" to="/activities" activeClassName="is-active">
+                activities
+              </NavLink>
+              <NavLink className="navbar-item" to="/badges" activeClassName="is-active">
+                badges
+              </NavLink>
+              <NavLink className="navbar-item" to="/leaderboard" activeClassName="is-active">
                 leaderboard
-              </Link>
-              <Link className="navbar-item" to="/badges">
-                earned badges
-              </Link>
-              <Link className="navbar-item" to="/activities">
-                your activities
-              </Link>
+              </NavLink>
             </>
           )}
         </div>

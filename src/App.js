@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 //import ChallengeList from './components/ChallengeList';
@@ -8,21 +8,10 @@ import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 
-const App = () => {
+const App = props => {
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/challenges')
-      .then(response => {
-        setChallenges(response.data);
-      })
-      .catch(error => {
-        console.log('getChallenges', error.message);
-      });
-  }, []);
 
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
@@ -35,6 +24,17 @@ const App = () => {
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] = token;
   }, [token]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/challenges')
+      .then(response => {
+        setChallenges(response.data);
+      })
+      .catch(error => {
+        console.log('getChallenges', error.message);
+      });
+  }, []);
 
   const addChallenge = challenge => {
     axios
@@ -53,6 +53,7 @@ const App = () => {
       .then(response => {
         setUser(response.data);
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
+        props.history.push('/');
       })
       .catch(error => {
         console.log('login', error.message);
@@ -76,19 +77,34 @@ const App = () => {
     localStorage.removeItem('loggedUser');
   };
 
+  const isAuthenticated = () => {
+    return localStorage.getItem('loggedUser') !== null;
+  };
+
   return (
-    <Router>
+    <>
+      {!isAuthenticated() && <Redirect to="/login" />}
       <Header user={user} logout={logout} />
       <Switch>
-        {!user && <Route path="/" render={() => <LoginForm login={login} register={register} />} />}
-        <Route exact path="/" render={() => <ActivitiesView challenges={challenges} />} />
+        <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
+        <Route path="/activities" render={() => <ActivitiesView challenges={challenges} />} />
         <Route
-          exact
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}
         />
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return (
+              <div className="section container box has-text-centered">
+                etusivu kirjautuneelle käyttäjälle
+              </div>
+            );
+          }}
+        />
       </Switch>
-    </Router>
+    </>
   );
 };
-export default App;
+export default withRouter(App);
