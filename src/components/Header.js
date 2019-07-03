@@ -32,14 +32,14 @@ const Header = props => {
             <div className="navbar-item">Ultimate Functional Training Challenge</div>
           ) : (
             <>
+              <Link className="navbar-item" to="/activities">
+                activities
+              </Link>
               <Link className="navbar-item" to="/leaderboard">
                 leaderboard
               </Link>
               <Link className="navbar-item" to="/badges">
-                earned badges
-              </Link>
-              <Link className="navbar-item" to="/activities">
-                your activities
+                badges
               </Link>
             </>
           )}
