@@ -10,10 +10,11 @@ import LoginForm from './components/LoginForm';
 const App = () => {
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     axios
-      .get('http://localhost:3002/challenges')
+      .get('http://localhost:3001/api/challenges')
       .then(response => {
         setChallenges(response.data);
       })
@@ -26,12 +27,17 @@ const App = () => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       setUser(JSON.parse(loggedUserJSON));
+      setToken(JSON.parse(loggedUserJSON).token);
     }
   }, []);
 
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = token;
+  }, [token]);
+
   const addChallenge = challenge => {
     axios
-      .post('http://localhost:3002/challenges', challenge)
+      .post('http://localhost:3001/api/challenges', challenge)
       .then(response => {
         setChallenges(challenges.concat(response.data));
       })
@@ -65,6 +71,7 @@ const App = () => {
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem('loggedUser');
   };
 
