@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import ChallengeList from './components/ChallengeList';
+//import ChallengeList from './components/ChallengeList';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
+import ActivitiesView from './components/ActivitiesView';
 
 const App = () => {
   const [challenges, setChallenges] = useState([]);
