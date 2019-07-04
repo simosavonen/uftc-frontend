@@ -1,0 +1,45 @@
+/*  https://www.sessions.edu/color-calculator/  */
+
+.ambientiaRed {
+  color: #ff2457;
+}
+
+/* complement */
+.ambientiaGreen {
+  color: #57ff24;
+}
+
+/* analogous */
+.ambientiaOrange {
+  color: #ff4124;
+}
+
+/* analogous */
+.ambientiaPurple {
+  color: #ff24c5;
+}
+
+/* split complement */
+.ambientiaCyan {
+  color: #24ff99;
+}
+
+/* split complement */
+.ambientiaLightGreen {
+  color: #c5ff24;
+}
+
+/* triadic */
+.ambientiaBlue {
+  color: #248aff;
+}
+
+/* triadic */
+.ambientiaYellow {
+  color: #ffe524;
+}
+
+/* tetradic */
+.ambientiaLightOrange {
+  color: #ff7824;
+}
