@@ -18,7 +18,7 @@ const ActivitiesView = props => {
   return (
     <div>
       <ChallengeTitle challenge={challenge} />
-      <WeeklyProgress activities={activities} />
+      <WeeklyProgress />
       <RecentActivities activities={props.activities} />
 
       <ActivityMenu activities={activities} />
