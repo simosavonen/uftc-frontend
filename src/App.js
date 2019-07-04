@@ -7,6 +7,7 @@ import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
+import AddActivityForm from './components/ActivityForm';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
@@ -21,9 +22,9 @@ const App = props => {
     }
   }, []);
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = token;
-  }, [token]);
+  //useEffect(() => {
+  //  axios.defaults.headers.common['Authorization'] = token;
+  //}, [token]);
 
   useEffect(() => {
     axios
@@ -45,6 +46,13 @@ const App = props => {
       .catch(error => {
         console.log('addChallenge', error.message);
       });
+  };
+
+  const addActivity = activity => {
+    axios.defaults.headers.common['Authorization'] = token;
+    axios
+      .post('http://localhost:3001/api/activities/', activity)
+      .catch(error => console.log('addActivity', error.message));
   };
 
   const login = userDetails => {
@@ -92,6 +100,7 @@ const App = props => {
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}
         />
+        <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
         <Route
           exact
           path="/"
