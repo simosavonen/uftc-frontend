@@ -7,7 +7,7 @@ import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
-import AddActivityForm from './components/ActivityForm';
+import AddActivityForm from './components/AddActivityForm';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
