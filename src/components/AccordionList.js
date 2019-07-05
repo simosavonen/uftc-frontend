@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { PoseGroup } from 'react-pose';
 import AccordionItem from './AccordionItem';
+import ActivityRow from './ActivityRow';
 
 const AccordionList = props => {
   const [opened, setOpened] = useState(false);
@@ -14,12 +16,16 @@ const AccordionList = props => {
       <button className="button is-info" onClick={handleClick}>
         {props.type}
       </button>
-
-      {props.activities.map(a => (
-        <AccordionItem pose={opened ? 'open' : 'closed'} key={a.id}>
-          <div>{a.name}</div>
-        </AccordionItem>
-      ))}
+      <PoseGroup animateOnMount="true">
+        {props.activities.map(
+          a =>
+            opened && (
+              <AccordionItem key={a.id}>
+                <ActivityRow activity={a} />
+              </AccordionItem>
+            )
+        )}
+      </PoseGroup>
     </div>
   );
 };
