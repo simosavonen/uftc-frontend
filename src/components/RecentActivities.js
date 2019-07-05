@@ -10,14 +10,7 @@ const RecentActivities = props => {
     let oldName = '';
     var exist = false;
 
-    if (props.workouts.length === 0) {
-      return (
-        <p>
-          <b>Have a nice day !</b>
-        </p>
-      );
-    }
-    if (props.activities.length === 0) {
+    if (!props.workouts || !props.activities) {
       return (
         <p>
           <b>Have a nice day !</b>
