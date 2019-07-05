@@ -1,25 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import moment from 'moment';
 
-const WeeklyProgress = () => {
-  const [workouts, setWorkouts] = useState([]);
+const WeeklyProgress = ({ workouts }) => {
   const [lastWeek, setLastWeek] = useState(0);
   const [thisWeek, setThisWeek] = useState(0);
-
-  // fetch the workouts for this logged in user, with the help
-  // of the token from localStorage
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('loggedUser')).token;
-    axios.defaults.headers.common['Authorization'] = token;
-    axios
-      .get('http://localhost:3001/api/workouts')
-      .then(result => {
-        setWorkouts(result.data);
-        //console.log(result.data);
-      })
-      .catch(error => console.log('weeklyprogress', error.message));
-  }, []);
 
   // calculate how many points the user earned last week and this week
   // Moment.js makes date calculations easy.
