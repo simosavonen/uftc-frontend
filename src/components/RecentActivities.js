@@ -1,4 +1,5 @@
 import React from 'react';
+import ActivityRow from './ActivityRow';
 
 const RecentActivities = props => {
   var threeLastActivitiesNameLenght;
@@ -10,7 +11,7 @@ const RecentActivities = props => {
     let oldName = '';
     var exist = false;
 
-    if (!props.workouts || !props.activities) {
+    if (props.workouts.length === 0 || props.activities.length === 0) {
       return (
         <p>
           <b>Have a nice day !</b>
@@ -31,7 +32,7 @@ const RecentActivities = props => {
     activityNameTable.map(ind => {
       if (oldName !== '') {
         exist = threeLastActivitiesId.includes(ind.activity);
-        if (!exist) {
+        if (!exist && threeLastActivitiesId.length <= 3) {
           threeLastActivitiesId.push(ind.activity);
         }
       } else {
@@ -44,7 +45,7 @@ const RecentActivities = props => {
     threeLastActivitiesId.map(ind => {
       props.activities.map(item => {
         if (item.id === ind) {
-          threeLastActivitiesName.push(item.name);
+          threeLastActivitiesName.push(item);
         }
         return 0;
       });
@@ -52,12 +53,20 @@ const RecentActivities = props => {
     });
     threeLastActivitiesNameLenght = threeLastActivitiesName.length;
 
+    if (!threeLastActivitiesNameLenght) {
+      return (
+        <p>
+          <b>Have a good day !</b>
+        </p>
+      );
+    }
+
     return (
       <>
         <b> Your {threeLastActivitiesNameLenght} most recent activities </b>
         <ol>
           {threeLastActivitiesName.map(item => (
-            <li key={item}>{item}</li>
+            <ActivityRow activity={item} key={item.name} />
           ))}
         </ol>
       </>
