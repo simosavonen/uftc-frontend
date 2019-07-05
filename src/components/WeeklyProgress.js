@@ -54,13 +54,18 @@ const WeeklyProgress = () => {
 
   return (
     <div className="has-text-centered">
-      <p>
+      <p className="title is-4 is-marginless">
         {thisWeek} / {lastWeek}
       </p>
       <p>
-        <progress className="progress is-danger" value={thisWeek} max={lastWeek} />
+        <progress
+          className="progress is-danger"
+          value={thisWeek}
+          max={lastWeek}
+          style={{ margin: '3px' }}
+        />
       </p>
-      <p>weekly progress</p>
+      <p className="title is-5 is-marginless">weekly progress</p>
     </div>
   );
 };

@@ -71,7 +71,7 @@ const LoginForm = props => {
               <input
                 className="input"
                 type="email"
-                placeholder="first.last@ambientia.com"
+                placeholder="first.last@ambientia.fi"
                 value={email}
                 onChange={({ target }) => setEmail(target.value)}
                 required
