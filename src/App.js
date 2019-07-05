@@ -8,6 +8,7 @@ import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
+import ScoresView from './components/ScoresView';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
@@ -96,6 +97,7 @@ const App = props => {
       <Switch>
         <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
         <Route path="/activities" render={() => <ActivitiesView challenges={challenges} />} />
+        <Route path="/leaderboard" render={() => <ScoresView />} />
         <Route
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}
