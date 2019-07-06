@@ -125,7 +125,7 @@ const App = props => {
           path="/activities/:id"
           render={({ match }) => <ActivityView activity={activityById(match.params.id)} />}
         />
-        <Route path="/leaderboard" render={() => <ScoresView />} />
+        <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
         <Route
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}

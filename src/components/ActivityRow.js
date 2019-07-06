@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const sampleActivity = {
@@ -58,13 +58,11 @@ const ActivityRow = props => {
     achievements = sampleAchievements
   } = props;
 
-  const handleClick = event => {
-    event.stopPropagation();
-    props.history.push(`/activities/${activity.id.substr(0, 8)}`);
-  };
-
   return (
-    <article className="columns is-centered is-mobile is-clickable" onClick={handleClick}>
+    <Link
+      to={`/activities/${activity.id.substr(0, 8)}`}
+      className="columns is-centered is-mobile is-clickable"
+    >
       <div className="column is-4 has-text-right">
         {badges.map(badge => (
           <FontAwesomeIcon
@@ -85,8 +83,8 @@ const ActivityRow = props => {
           </p>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 
-export default withRouter(ActivityRow);
+export default ActivityRow;

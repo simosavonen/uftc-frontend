@@ -5,6 +5,8 @@
 
 // Set your brand colors
 $ambientia: #ff2457;
+$ambientia-lighter: #ff245760;
+$blue: #1088b3;
 $brown: #626674;
 $beige-light: #f2f2f2;
 $beige-lighter: #fefefe;
@@ -15,6 +17,7 @@ $family-sans-serif: 'Raleway', sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $info: $ambientia;
+$primary: $blue;
 
 // Update some of Bulma's component variables
 $body-background-color: $beige-lighter;
@@ -24,6 +27,9 @@ $navbar-background-color: $ambientia;
 $navbar-item-hover-background-color: $darken;
 $navbar-item-color: #ffffff;
 $navbar-item-hover-color: $beige-lighter;
+$table-row-hover-background-color: $darken;
+$table-cell-border: 1px solid $ambientia-lighter;
+$progress-bar-background-color: $ambientia-lighter;
 
 // Import all or just the modules you ended up using.
 @import '../node_modules/bulma/sass/utilities/_all.sass';

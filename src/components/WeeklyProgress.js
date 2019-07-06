@@ -31,15 +31,13 @@ const WeeklyProgress = ({ workouts }) => {
       <p className="title is-4 is-marginless">
         {thisWeek} / {lastWeek}
       </p>
-      <p>
-        <progress
-          className="progress is-danger"
-          value={thisWeek}
-          max={lastWeek}
-          style={{ margin: '3px' }}
-        />
-      </p>
-      <p className="title is-5 is-marginless">weekly progress</p>
+      <progress
+        className="progress is-danger"
+        value={thisWeek}
+        max={lastWeek}
+        style={{ margin: '3px' }}
+      />
+      <p className="title is-5 is-marginless">weekly challenge</p>
     </div>
   );
 };
