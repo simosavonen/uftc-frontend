@@ -6,7 +6,8 @@
 // Set your brand colors
 $ambientia: #ff2457;
 $ambientia-lighter: #ff245760;
-$blue: #1088b3;
+$ambientia-hover: #ff245733;
+$blue: #248aff;
 $brown: #626674;
 $beige-light: #f2f2f2;
 $beige-lighter: #fefefe;
@@ -27,7 +28,7 @@ $navbar-background-color: $ambientia;
 $navbar-item-hover-background-color: $darken;
 $navbar-item-color: #ffffff;
 $navbar-item-hover-color: $beige-lighter;
-$table-row-hover-background-color: $darken;
+$table-row-hover-background-color: $ambientia-hover;
 $table-cell-border: 1px solid $ambientia-lighter;
 $progress-bar-background-color: $ambientia-lighter;
 
