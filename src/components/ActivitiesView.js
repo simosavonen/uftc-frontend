@@ -44,8 +44,6 @@ const ActivitiesView = props => {
       <RecentActivities activities={activities} workouts={workouts} />
 
       <ActivityMenu activities={activities} />
-
-      <ActivityRow />
     </div>
   );
 };
