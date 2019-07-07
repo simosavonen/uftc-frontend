@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const sampleActivity = {
@@ -50,10 +51,6 @@ const sampleAchievements = [
   }
 ];
 
-const clicked = name => {
-  console.log('klikkasit lajia: ', name);
-};
-
 const ActivityRow = props => {
   const {
     activity = sampleActivity,
@@ -62,7 +59,10 @@ const ActivityRow = props => {
   } = props;
 
   return (
-    <article className="columns is-centered is-mobile" onClick={() => clicked(activity.name)}>
+    <Link
+      to={`/activities/${activity.id.substr(0, 8)}`}
+      className="columns is-centered is-mobile is-clickable"
+    >
       <div className="column is-4 has-text-right">
         {badges.map(badge => (
           <FontAwesomeIcon
@@ -83,7 +83,7 @@ const ActivityRow = props => {
           </p>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 

@@ -32,7 +32,7 @@ const RecentActivities = props => {
     activityNameTable.map(ind => {
       if (oldName !== '') {
         exist = threeLastActivitiesId.includes(ind.activity);
-        if (!exist && threeLastActivitiesId.length <= 3) {
+        if (!exist && threeLastActivitiesId.length <= 2) {
           threeLastActivitiesId.push(ind.activity);
         }
       } else {
