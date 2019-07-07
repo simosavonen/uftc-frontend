@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import './App.css';
-//import ChallengeList from './components/ChallengeList';
+
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
 import ScoresView from './components/ScoresView';
+import ActivityView from './components/ActivityView';
+import BadgesView from './components/BadgesView';
+
+import './App.css';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    const loggedUserJSON = localStorage.getItem('loggedUser');
-    if (loggedUserJSON) {
-      setUser(JSON.parse(loggedUserJSON));
-      setToken(JSON.parse(loggedUserJSON).token);
-    }
-  }, []);
-
-  //useEffect(() => {
-  //  axios.defaults.headers.common['Authorization'] = token;
-  //}, [token]);
 
   useEffect(() => {
     axios
@@ -36,7 +28,29 @@ const App = props => {
       .catch(error => {
         console.log('getChallenges', error.message);
       });
+
+    const loggedUserJSON = localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      setToken(user.token);
+    }
   }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = token;
+    axios
+      .get('http://localhost:3001/api/workouts')
+      .then(result => {
+        setWorkouts(result.data);
+        //console.log(result.data);
+      })
+      .catch(error => console.log('workouts', error.message));
+  }, [token]);
+
+  //useEffect(() => {
+  //  axios.defaults.headers.common['Authorization'] = token;
+  //}, [token]);
 
   const addChallenge = challenge => {
     axios
@@ -61,6 +75,7 @@ const App = props => {
       .post('http://localhost:3001/api/users/login', userDetails)
       .then(response => {
         setUser(response.data);
+        setToken(response.data.token);
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
       })
@@ -83,11 +98,21 @@ const App = props => {
   const logout = () => {
     setUser(null);
     setToken(null);
+    setWorkouts([]);
     localStorage.removeItem('loggedUser');
   };
 
   const isAuthenticated = () => {
     return localStorage.getItem('loggedUser') !== null;
+  };
+
+  const activityById = id => {
+    const activities = challenges.length ? challenges[0].activities : [];
+    for (let a of activities) {
+      if (a.id.substr(0, 8) === id) {
+        return a;
+      }
+    }
   };
 
   return (
@@ -96,12 +121,22 @@ const App = props => {
       <Header user={user} logout={logout} />
       <Switch>
         <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
-        <Route path="/activities" render={() => <ActivitiesView challenges={challenges} />} />
-        <Route path="/leaderboard" render={() => <ScoresView />} />
+        <Route
+          exact
+          path="/activities"
+          render={() => <ActivitiesView challenges={challenges} workouts={workouts} />}
+        />
+        <Route
+          exact
+          path="/activities/:id"
+          render={({ match }) => <ActivityView activity={activityById(match.params.id)} />}
+        />
+        <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
         <Route
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}
         />
+        <Route path="/badges" render={() => <BadgesView />} />
         <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
         <Route
           exact
