@@ -9,6 +9,7 @@ import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
 import ScoresView from './components/ScoresView';
 import ActivityView from './components/ActivityView';
+import BadgesView from './components/BadgesView';
 
 import './App.css';
 
@@ -135,6 +136,7 @@ const App = props => {
           path="/addchallenge"
           render={() => <AddChallengeForm addChallenge={addChallenge} />}
         />
+        <Route path="/badges" render={() => <BadgesView />} />
         <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
         <Route
           exact
