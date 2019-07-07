@@ -68,6 +68,18 @@ const ApexChart = ({ chartData = sampleData }) => {
         bottom: 10,
         left: 10
       }
+    },
+    noData: {
+      text: 'Unable to find any data.',
+      align: 'center',
+      verticalAlign: 'middle',
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        color: '#ff2457',
+        fontSize: '14px',
+        fontFamily: 'Raleway'
+      }
     }
   };
 

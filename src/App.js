@@ -33,16 +33,19 @@ const App = props => {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
       setToken(user.token);
-      axios.defaults.headers.common['Authorization'] = user.token;
-      axios
-        .get('http://localhost:3001/api/workouts')
-        .then(result => {
-          setWorkouts(result.data);
-          //console.log(result.data);
-        })
-        .catch(error => console.log('workouts', error.message));
     }
   }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = token;
+    axios
+      .get('http://localhost:3001/api/workouts')
+      .then(result => {
+        setWorkouts(result.data);
+        //console.log(result.data);
+      })
+      .catch(error => console.log('workouts', error.message));
+  }, [token]);
 
   //useEffect(() => {
   //  axios.defaults.headers.common['Authorization'] = token;
@@ -71,6 +74,7 @@ const App = props => {
       .post('http://localhost:3001/api/users/login', userDetails)
       .then(response => {
         setUser(response.data);
+        setToken(response.data.token);
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
       })
@@ -93,6 +97,7 @@ const App = props => {
   const logout = () => {
     setUser(null);
     setToken(null);
+    setWorkouts([]);
     localStorage.removeItem('loggedUser');
   };
 
