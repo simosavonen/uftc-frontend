@@ -10,6 +10,7 @@ import AddActivityForm from './components/AddActivityForm';
 import ScoresView from './components/ScoresView';
 import ActivityView from './components/ActivityView';
 import BadgesView from './components/BadgesView';
+import FrontPage from './components/FrontPage';
 
 import './App.css';
 
@@ -136,17 +137,7 @@ const App = props => {
         />
         <Route path="/badges" render={() => <BadgesView />} />
         <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
-        <Route
-          exact
-          path="/"
-          render={() => {
-            return (
-              <div className="section container box has-text-centered">
-                etusivu kirjautuneelle käyttäjälle
-              </div>
-            );
-          }}
-        />
+        <Route exact path="/" render={() => <FrontPage />} />
       </Switch>
     </>
   );
