@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
 import ScoresView from './components/ScoresView';
-import ActivityView from './components/ActivityView';
+import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
@@ -129,7 +129,7 @@ const App = props => {
         <Route
           exact
           path="/activities/:id"
-          render={({ match }) => <ActivityView activity={activityById(match.params.id)} />}
+          render={({ match }) => <WorkoutView activity={activityById(match.params.id)} />}
         />
         <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
         <Route

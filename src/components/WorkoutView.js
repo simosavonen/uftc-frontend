@@ -10,7 +10,7 @@ const placeholder = {
   id: '12341234123412341234'
 };
 
-const ActivityView = ({ activity = placeholder }) => {
+const WorkoutView = ({ activity = placeholder }) => {
   return (
     <div className="section container">
       <h4 className="title is-4">{activity.name}</h4>
@@ -18,4 +18,4 @@ const ActivityView = ({ activity = placeholder }) => {
   );
 };
 
-export default ActivityView;
+export default WorkoutView;
