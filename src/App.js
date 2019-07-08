@@ -38,19 +38,17 @@ const App = props => {
   }, []);
 
   useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = token;
-    axios
-      .get('http://localhost:3001/api/workouts')
-      .then(result => {
-        setWorkouts(result.data);
-        //console.log(result.data);
-      })
-      .catch(error => console.log('workouts', error.message));
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token;
+      axios
+        .get('http://localhost:3001/api/workouts')
+        .then(result => {
+          setWorkouts(result.data);
+          //console.log(result.data);
+        })
+        .catch(error => console.log('workouts', error.message));
+    }
   }, [token]);
-
-  //useEffect(() => {
-  //  axios.defaults.headers.common['Authorization'] = token;
-  //}, [token]);
 
   const addChallenge = challenge => {
     axios
