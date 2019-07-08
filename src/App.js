@@ -72,7 +72,10 @@ const App = props => {
 
   const addWorkout = workout => {
     // tee axios kutsu joka lisää tietokantaan urheilusuorituksen
-    // eli jos lunttaamme REST kutsusta, axiosin pitää tietää token, urheilulaji ja haaste.
+    // eli jos lunttaamme REST kutsusta, pitää tietää token, urheilulaji ja haaste.
+
+    // haasteen saa selville täällä App.js, se on challenges[0].id
+    // tulevaisuudessa voidaan lukea myös user.activeChallenge
 
     // POST http://localhost:3001/api/workouts/
     // Content-Type: application/json
@@ -86,7 +89,8 @@ const App = props => {
 
     // kutsun jälkeen tietokanta ja paikallinen tila eriävät.
     // eli jos tietokantaan lisäys onnistui, pitää urheilusuoritus lisätä App.js tilaan.
-    // tai sitten voimme ladata koko listan uudestaan.
+    // ts. setWorkouts(workouts.concat(workout)) kunhan syntaksi on oikein
+
     console.log('workout', workout);
   };
 

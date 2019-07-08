@@ -9,6 +9,11 @@ const AddWorkoutForm = props => {
     event.preventDefault();
 
     // props.addWorkout(workout)
+
+    // luo olio workout, joka pitää sisällään tiedon
+    // lukumäärästä, päivästä, urheilulajin id.
+
+    // addWorkout lisää olioon vielä maininnan haasteen id:stä
   };
 
   return <form onSubmit={submit}>"lisää urheilusuoritus" -lomake</form>;
