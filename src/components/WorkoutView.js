@@ -17,7 +17,6 @@ const WorkoutView = ({ activity = placeholder, addWorkout }) => {
       <h4 className="title is-4">{activity.name}</h4>
 
       {/* tähän yleistä tietoa  urheilulajista */}
-      {activity.name}
 
       <AddWorkoutForm addWorkout={addWorkout} />
     </div>
