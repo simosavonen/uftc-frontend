@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import posed, { PoseGroup } from 'react-pose';
 import ApexChart from './ApexChart';
+
+import workoutService from '../services/workouts';
+import scoreService from '../services/scores';
 
 const UserScores = posed.div({
   enter: {
@@ -23,8 +25,8 @@ const ScoresView = props => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/scores/')
+    scoreService
+      .get()
       .then(result => {
         setScores(result.data);
       })
@@ -33,9 +35,8 @@ const ScoresView = props => {
 
   useEffect(() => {
     if (props.token) {
-      axios.defaults.headers.common['Authorization'] = props.token;
-      axios
-        .get('http://localhost:3001/api/workouts/all')
+      workoutService
+        .getAll(props.token)
         .then(result => {
           setWorkouts(result.data);
         })
