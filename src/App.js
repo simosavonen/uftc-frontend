@@ -11,6 +11,7 @@ import ScoresView from './components/ScoresView';
 import ActivityView from './components/ActivityView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
+import Footer from './components/Footer';
 
 import './App.css';
 
@@ -139,6 +140,7 @@ const App = props => {
         <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
         <Route exact path="/" render={() => <FrontPage />} />
       </Switch>
+      <Footer />
     </>
   );
 };
