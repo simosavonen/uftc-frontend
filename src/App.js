@@ -88,7 +88,7 @@ const App = props => {
     axios
       .post('http://localhost:3001/api/users/register', userDetails)
       .then(response => {
-        login(response.data);
+        login(userDetails);
       })
       .catch(error => {
         console.log('register', error.message);
