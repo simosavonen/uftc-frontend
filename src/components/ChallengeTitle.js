@@ -25,8 +25,6 @@ const ChallengeTitle = ({ challenge = placeholder }) => {
 
   const aloituksesta = -1 * aloitus.diff(today, 'days');
 
-  console.log('erotus', erotus);
-
   return (
     <div>
       {challenge.name}

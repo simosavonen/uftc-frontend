@@ -62,17 +62,13 @@ const RecentActivities = props => {
     }
 
     return (
-      <section className="section columns is-centered">
-        <div className="column is-4">
-          <h1 className="title is-4">
-            Your {threeLastActivitiesNameLenght} most recent activities
-          </h1>
+      <>
+        <h1 className="title is-4">Your {threeLastActivitiesNameLenght} most recent activities</h1>
 
-          {threeLastActivitiesName.map(item => (
-            <ActivityRow activity={item} key={item.name} />
-          ))}
-        </div>
-      </section>
+        {threeLastActivitiesName.map(item => (
+          <ActivityRow activity={item} key={item.name} />
+        ))}
+      </>
     );
   };
 

@@ -19,10 +19,15 @@ const ActivitiesView = ({ challenges, workouts }) => {
           <WeeklyProgress workouts={workouts} />
         </div>
       </div>
+      <section className="section columns is-centered">
+        <div className="column is-4">
+          <RecentActivities activities={activities} workouts={workouts} />
+        </div>
+      </section>
 
-      <RecentActivities activities={activities} workouts={workouts} />
-
-      <ActivityMenu activities={activities} />
+      <section className="section columns is-centered">
+        <ActivityMenu className="column is-6" activities={activities} />
+      </section>
     </div>
   );
 };
