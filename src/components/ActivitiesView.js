@@ -5,6 +5,8 @@ import RecentActivities from './RecentActivities';
 import ActivityMenu from './ActivityMenu';
 
 const ActivitiesView = ({ challenges, workouts }) => {
+  if (challenges.length === 0) return null;
+
   const activities = challenges.length ? challenges[0].activities : [];
 
   return (

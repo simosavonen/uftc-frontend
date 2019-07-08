@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const placeholder = {
   organizers: ['5d1798065367df2f28dd0708'],
@@ -6,8 +7,8 @@ const placeholder = {
   name: 'loading...',
   pointsGoal: 7500,
   releaseDate: '2019-07-01',
-  startDate: '2019-08-01',
-  endDate: '2019-11-30',
+  startDate: '2019-07-01',
+  endDate: '2019-10-30',
   deadline: '2019-12-14',
   seriesTitle: 'Placeholder',
   pointBonus: 1,
@@ -15,7 +16,26 @@ const placeholder = {
 };
 
 const ChallengeTitle = ({ challenge = placeholder }) => {
-  return <div>{challenge.name}</div>;
+  const aloitus = moment(challenge.startDate);
+  const lopetus = moment(challenge.endDate);
+
+  const erotus = -1 * aloitus.diff(lopetus, 'days');
+
+  const today = moment();
+
+  const aloituksesta = -1 * aloitus.diff(today, 'days');
+
+  console.log('erotus', erotus);
+
+  return (
+    <div>
+      {challenge.name}
+
+      <p>
+        {aloituksesta} / {erotus}
+      </p>
+    </div>
+  );
 };
 
 export default ChallengeTitle;
