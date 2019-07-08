@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import kettlebeach from '../media/kettlebeach.mp4';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
@@ -59,6 +60,10 @@ const LoginForm = props => {
 
   return (
     <section className="section columns is-centered">
+      <video autoPlay muted loop id="myVideo">
+        <source src={kettlebeach} type="video/mp4" />
+      </video>
+      <div className="column is-1-tablet is-2-desktop is-3-widescreen is-4-fullhd" />
       <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
         <form className="box" onSubmit={submit}>
           <h1 className="title is-4">Welcome to the UFTC</h1>

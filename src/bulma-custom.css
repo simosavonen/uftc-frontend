@@ -2810,7 +2810,7 @@ label.panel-block {
     font-size: 1.5rem; }
 
 .box {
-  background-color: white;
+  background-color: #f2f2f24b;
   border-radius: 6px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
   color: #626674;
@@ -6953,5 +6953,5 @@ a.tag:hover {
       padding: 18rem 1.5rem; } }
 
 .footer {
-  background-color: #fafafa;
+  background-color: #248aff70;
   padding: 3rem 1.5rem 6rem; }

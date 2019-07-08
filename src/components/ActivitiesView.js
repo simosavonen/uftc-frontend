@@ -12,21 +12,20 @@ const ActivitiesView = ({ challenges, workouts }) => {
   return (
     <div>
       <div className="section columns is-centered">
-        <div className="column is-4">
+        <div className="column is-4 has-text-centered">
           <ChallengeTitle challenge={challenges[0]} />
         </div>
-        <div className="column is-4">
+        <div className="column is-4 has-text-centered">
           <WeeklyProgress workouts={workouts} />
         </div>
       </div>
-      <section className="section columns is-centered">
-        <div className="column is-4">
+      <section className="section columns">
+        <div className="column has-text-centered">
           <RecentActivities activities={activities} workouts={workouts} />
         </div>
-      </section>
-
-      <section className="section columns is-centered">
-        <ActivityMenu className="column is-6" activities={activities} />
+        <div className="column has-text-centered">
+          <ActivityMenu className="column is-6" activities={activities} />
+        </div>
       </section>
     </div>
   );
