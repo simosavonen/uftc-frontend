@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { apiUrls } from '../config/config';
 
-const baseUrl = 'http://localhost:3001/api/challenges';
+const baseUrl = apiUrls.challenges;
 
 const get = () => {
   return axios.get(baseUrl);

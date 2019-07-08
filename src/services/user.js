@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { apiUrls } from '../config/config';
 
-const baseUrl = 'http://localhost:3001/api/users';
+const baseUrl = apiUrls.users;
 
 const login = userDetails => {
   return axios.post(baseUrl + '/login', userDetails);

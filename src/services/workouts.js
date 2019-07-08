@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { apiUrls } from '../config/config';
 
-const baseUrl = 'http://localhost:3001/api/workouts';
+const baseUrl = apiUrls.workouts;
 
 const get = token => {
   axios.defaults.headers.common['Authorization'] = token;

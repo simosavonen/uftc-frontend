@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { apiUrls } from '../config/config';
 
-const baseUrl = 'http://localhost:3001/api/activities';
+const baseUrl = apiUrls.activities;
 
 const get = () => {
   return axios.get(baseUrl);
