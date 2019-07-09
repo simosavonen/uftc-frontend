@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import axios from 'axios';
+
 import userService from './services/user';
 import workoutService from './services/workouts';
 import challengeService from './services/challenges';
@@ -71,9 +71,8 @@ const App = props => {
 
   const addWorkout = workout => {
     const workout2 = { ...workout, challenge: challenges[0].id };
-    axios.defaults.headers.common['Authorization'] = token;
-    axios
-      .post('http://localhost:3001/api/workouts', workout2)
+    workoutService
+      .add(workout2, token)
       .then(response => {
         setWorkouts(workouts.concat(workout2));
         console.log('newvorkout', workout2);

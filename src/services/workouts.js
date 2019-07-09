@@ -3,14 +3,23 @@ import { apiUrls } from '../config/config';
 
 const baseUrl = apiUrls.workouts;
 
+const setToken = newToken => {
+  axios.defaults.headers.common['Authorization'] = newToken;
+};
+
 const get = token => {
-  axios.defaults.headers.common['Authorization'] = token;
+  setToken(token);
   return axios.get(baseUrl);
 };
 
 const getAll = token => {
-  axios.defaults.headers.common['Authorization'] = token;
+  setToken(token);
   return axios.get(baseUrl + '/all');
 };
 
-export default { get, getAll };
+const add = (workout, token) => {
+  setToken(token);
+  return axios.post(baseUrl, workout);
+};
+
+export default { get, getAll, add };
