@@ -8,7 +8,21 @@ const AddWorkoutForm = props => {
   const [amount, setAmount] = useState(1);
   const [date, setDate] = useState('');
   const today = new Date().toISOString().substring(0, 10);
-  
+
+  const placeholder = {
+    organizers: ['5d1798065367df2f28dd0708'],
+    activities: [],
+    name: 'loading...',
+    pointsGoal: 7500,
+    releaseDate: '2019-07-01',
+    startDate: '2019-07-01',
+    endDate: '2019-10-30',
+    deadline: '2019-12-14',
+    seriesTitle: 'Placeholder',
+    pointBonus: 1,
+    id: '5d1c5237c360412fbcc98dcc'
+  };
+
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(Number(amount) + Number(1));
@@ -52,6 +66,7 @@ const AddWorkoutForm = props => {
           value={date}
           onChange={({ target }) => setDate(target.value)}
           type="date"
+          min={placeholder.startDate}
           max={today}
         />
         <br />
