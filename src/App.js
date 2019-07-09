@@ -168,7 +168,7 @@ const App = props => {
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
       </div>
-      <Footer />
+      <Footer user={user} />
     </div>
   );
 };

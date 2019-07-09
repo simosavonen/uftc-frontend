@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = props => {
   const [burgerActive, setBurgerActive] = useState(false);
+
+  if (!props.user) return null;
+
   return (
     <nav className="navbar is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="navbar-brand">

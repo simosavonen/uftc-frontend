@@ -17,6 +17,21 @@
   flex: 1;
 }
 
+.boxedLetter {
+  display: inline-flex;
+  border: 0.6vw solid #ff2457;
+  width: 5.5vw;
+  height: 5.5vw;
+  padding: 0.4vw;
+  margin: 1.5vw 0.4vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginHeader {
+  padding: 1rem 2rem 0rem 2rem !important;
+}
+
 #myVideo {
   position: absolute;
   top: 0;
@@ -26,8 +41,7 @@
   overflow: hidden;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
   object-fit: cover;
+  object-position: 35% 50%;
   z-index: -100;
 }
