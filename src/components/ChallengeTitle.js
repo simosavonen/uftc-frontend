@@ -19,11 +19,11 @@ const ChallengeTitle = ({ challenge = placeholder }) => {
   const aloitus = moment(challenge.startDate);
   const lopetus = moment(challenge.endDate);
 
-  const erotus = -1 * aloitus.diff(lopetus, 'days');
+  const erotus = lopetus.diff(aloitus, 'days');
 
   const today = moment();
 
-  const aloituksesta = -1 * aloitus.diff(today, 'days');
+  const aloituksesta = aloitus.diff(today, 'days');
 
   return (
     <div>
