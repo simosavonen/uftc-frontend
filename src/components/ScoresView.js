@@ -51,9 +51,13 @@ const ScoresView = props => {
         .map(i => {
           return {
             name: i.activity.name,
-            data: i.instances.map(x => {
-              return { x: x.date, y: x.amount };
-            })
+            data: i.instances
+              .sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+              })
+              .map(x => {
+                return { x: x.date, y: x.amount };
+              })
           };
         });
       console.log('filtered', filtered);
