@@ -44,9 +44,13 @@ const AddWorkoutForm = props => {
       <form onSubmit={submit}>
         "lisää urheilusuoritus" -lomake
         <input value={date} onChange={({ target }) => setDate(target.value)} type="date" />
-        <button onClick={handleMoreClick}>+</button>
+        <button className="button is-danger" onClick={handleMoreClick}>
+          +
+        </button>
         {amount}
-        <button onClick={handleLessClick}>-</button>
+        <button className="button is-success" onClick={handleLessClick}>
+          -
+        </button>
         <p>
           <button>Save</button>
         </p>
