@@ -70,27 +70,17 @@ const App = props => {
   };
 
   const addWorkout = workout => {
-    // tee axios kutsu joka lisää tietokantaan urheilusuorituksen
-    // eli jos lunttaamme REST kutsusta, pitää tietää token, urheilulaji ja haaste.
-
-    // haasteen saa selville täällä App.js, se on challenges[0].id
-    // tulevaisuudessa voidaan lukea myös user.activeChallenge
-
-    // POST http://localhost:3001/api/workouts/
-    // Content-Type: application/json
-    // Authorization: Bearer eyJhb......
-    // {
-    //   "date": "2019-08-25",
-    //   "amount": 34,
-    //   "activity": "5d1ece19f5c488558073c824",
-    //   "challenge": "5d1c5237c360412fbcc98dcc"
-    // }
-
-    // kutsun jälkeen tietokanta ja paikallinen tila eriävät.
-    // eli jos tietokantaan lisäys onnistui, pitää urheilusuoritus lisätä App.js tilaan.
-    // ts. setWorkouts(workouts.concat(workout)) kunhan syntaksi on oikein
-
-    console.log('workout', workout);
+    const workout2 = { ...workout, challenge: challenges[0].id };
+    axios.defaults.headers.common['Authorization'] = token;
+    axios
+      .post('http://localhost:3001/api/workouts', workout2)
+      .then(response => {
+        setWorkouts(workouts.concat(workout2));
+        console.log('newvorkout', workout2);
+      })
+      .catch(error => {
+        console.log('addWorkout', error.message);
+      });
   };
 
   const login = userDetails => {
