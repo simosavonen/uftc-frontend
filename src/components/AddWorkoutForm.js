@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 const AddWorkoutForm = props => {
   const [amount, setAmount] = useState(1);
   const [date, setDate] = useState('');
+  const today = new Date().toISOString().substring(0, 10);
+  
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(Number(amount) + Number(1));
@@ -46,7 +48,12 @@ const AddWorkoutForm = props => {
     <div>
       <form onSubmit={submit}>
         "lisää urheilusuoritus" -lomake
-        <input value={date} onChange={({ target }) => setDate(target.value)} type="date" />
+        <input
+          value={date}
+          onChange={({ target }) => setDate(target.value)}
+          type="date"
+          max={today}
+        />
         <br />
         Suorituskertoja (kpl):{' '}
         <button className="button is-danger" onClick={handleLessClick}>
