@@ -69,6 +69,30 @@ const App = props => {
     activityService.add(activity).catch(error => console.log('addActivity', error.message));
   };
 
+  const addWorkout = workout => {
+    // tee axios kutsu joka lisää tietokantaan urheilusuorituksen
+    // eli jos lunttaamme REST kutsusta, pitää tietää token, urheilulaji ja haaste.
+
+    // haasteen saa selville täällä App.js, se on challenges[0].id
+    // tulevaisuudessa voidaan lukea myös user.activeChallenge
+
+    // POST http://localhost:3001/api/workouts/
+    // Content-Type: application/json
+    // Authorization: Bearer eyJhb......
+    // {
+    //   "date": "2019-08-25",
+    //   "amount": 34,
+    //   "activity": "5d1ece19f5c488558073c824",
+    //   "challenge": "5d1c5237c360412fbcc98dcc"
+    // }
+
+    // kutsun jälkeen tietokanta ja paikallinen tila eriävät.
+    // eli jos tietokantaan lisäys onnistui, pitää urheilusuoritus lisätä App.js tilaan.
+    // ts. setWorkouts(workouts.concat(workout)) kunhan syntaksi on oikein
+
+    console.log('workout', workout);
+  };
+
   const login = userDetails => {
     userService
       .login(userDetails)
@@ -87,7 +111,7 @@ const App = props => {
     userService
       .register(userDetails)
       .then(response => {
-        login(response.data);
+        login(userDetails);
       })
       .catch(error => {
         console.log('register', error.message);
@@ -128,7 +152,9 @@ const App = props => {
         <Route
           exact
           path="/activities/:id"
-          render={({ match }) => <WorkoutView activity={activityById(match.params.id)} />}
+          render={({ match }) => (
+            <WorkoutView activity={activityById(match.params.id)} addWorkout={addWorkout} />
+          )}
         />
         <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
         <Route
