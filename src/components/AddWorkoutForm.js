@@ -7,10 +7,9 @@ import React, { useState } from 'react';
 const AddWorkoutForm = props => {
   const [amount, setAmount] = useState(1);
   const [date, setDate] = useState('');
-
   const handleMoreClick = event => {
     event.preventDefault();
-    setAmount(amount + 1);
+    setAmount(Number(amount) + Number(1));
   };
 
   const handleLessClick = event => {
@@ -18,7 +17,11 @@ const AddWorkoutForm = props => {
     if (amount < 0) {
       setAmount(0);
     }
-    setAmount(amount - 1);
+    setAmount(Number(amount) - Number(1));
+  };
+
+  const handleAmountChange = event => {
+    setAmount(event.target.value);
   };
 
   const submit = event => {
@@ -44,12 +47,14 @@ const AddWorkoutForm = props => {
       <form onSubmit={submit}>
         "lisää urheilusuoritus" -lomake
         <input value={date} onChange={({ target }) => setDate(target.value)} type="date" />
-        <button className="button is-danger" onClick={handleMoreClick}>
-          +
-        </button>
-        {amount}
-        <button className="button is-success" onClick={handleLessClick}>
+        <br />
+        Suorituskertoja (kpl):{' '}
+        <button className="button is-danger" onClick={handleLessClick}>
           -
+        </button>
+        <input value={amount} onChange={handleAmountChange} />
+        <button className="button is-success" onClick={handleMoreClick}>
+          +
         </button>
         <p>
           <button>Save</button>
