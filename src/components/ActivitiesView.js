@@ -19,13 +19,14 @@ const ActivitiesView = ({ challenges, workouts }) => {
           <WeeklyProgress workouts={workouts} />
         </div>
       </div>
-      <section className="section columns">
-        <div className="column has-text-centered">
+      <section className="section columns is-centered">
+        <div className="column is-8">
           <RecentActivities activities={activities} workouts={workouts} />
         </div>
-        <div className="column has-text-centered">
-          <ActivityMenu className="column is-6" activities={activities} />
-        </div>
+      </section>
+
+      <section className="section columns is-centered">
+        <ActivityMenu className="column is-8" activities={activities} />
       </section>
     </div>
   );

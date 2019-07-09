@@ -5,7 +5,6 @@ const ActivityMenu = props => {
   const activities = props.activities;
 
   const activityTypes = Array.from(new Set(activities.map(a => a.type)));
-  console.log('aMenu:', activityTypes);
 
   return (
     <div>

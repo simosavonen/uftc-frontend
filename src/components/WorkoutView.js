@@ -13,13 +13,32 @@ const placeholder = {
 
 const WorkoutView = ({ activity = placeholder, addWorkout }) => {
   return (
-    <div className="section container">
-      <h4 className="title is-4">{activity.name}</h4>
-
-      {/* tähän yleistä tietoa  urheilulajista */}
-
-      <AddWorkoutForm addWorkout={addWorkout} />
-    </div>
+    <>
+      <div className="section columns is-centered">
+        {/* tähän yleistä tietoa  urheilulajista */}
+        <div className="column is-6">
+          <h4 className="title is-4">{activity.name}</h4>
+          <ul>
+            <li>Sport activity type: {activity.type}</li>
+            <li>Unit: {activity.unit}</li>
+            <li>Description: {activity.description}</li>
+            {activity.url !== '' && (
+              <li>
+                Sport activity youtube link:{' '}
+                <a href={activity.url} target="_blank">
+                  {activity.url}
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+      <section className="section columns is-centered">
+        <div className="column is-6 ">
+          <AddWorkoutForm addWorkout={addWorkout} activity={activity} />
+        </div>
+      </section>
+    </>
   );
 };
 
