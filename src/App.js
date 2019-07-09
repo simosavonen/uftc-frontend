@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-
+import axios from 'axios';
 import userService from './services/user';
 import workoutService from './services/workouts';
 import challengeService from './services/challenges';
