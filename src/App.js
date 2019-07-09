@@ -75,7 +75,7 @@ const App = props => {
     axios
       .post('http://localhost:3001/api/workouts', workout2)
       .then(response => {
-        setWorkouts(workouts.concat(workout2));
+        setWorkouts(workouts.concat(response.data));
         console.log('newvorkout', workout2);
       })
       .catch(error => {

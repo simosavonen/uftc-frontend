@@ -20,13 +20,13 @@ const ActivitiesView = ({ challenges, workouts }) => {
         </div>
       </div>
       <section className="section columns is-centered">
-        <div className="column is-4">
+        <div className="column is-8">
           <RecentActivities activities={activities} workouts={workouts} />
         </div>
       </section>
 
       <section className="section columns is-centered">
-        <ActivityMenu className="column is-6" activities={activities} />
+        <ActivityMenu className="column is-8" activities={activities} />
       </section>
     </div>
   );
