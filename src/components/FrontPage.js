@@ -23,7 +23,9 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor }) => {
     >
       <FontAwesomeIcon icon={iconName} size="2x" />
       <p>{sarja}</p>
-      <p style={{ fontSize: '2.5vw', color: '#000000', fontWeight: 'bold' }}>{osallistujia}</p>
+      <p style={{ fontSize: '2.5vw', color: '#000000', fontWeight: 'bold' }}>
+        {osallistujia ? osallistujia : <>&nbsp;</>}
+      </p>
     </div>
   );
 };
