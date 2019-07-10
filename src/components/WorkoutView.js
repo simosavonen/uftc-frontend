@@ -25,7 +25,7 @@ const WorkoutView = ({ activity = placeholder, addWorkout }) => {
             {activity.url !== '' && (
               <li>
                 Sport activity youtube link:{' '}
-                <a href={activity.url} target="_blank">
+                <a href={activity.url} target="_blank" rel="noopener noreferrer">
                   {activity.url}
                 </a>
               </li>
