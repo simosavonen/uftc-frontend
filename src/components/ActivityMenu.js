@@ -8,8 +8,9 @@ const ActivityMenu = props => {
 
   return (
     <div>
-      {activityTypes.map(activityType => (
+      {activityTypes.map((activityType, rowIndex) => (
         <AccordionList
+          row={rowIndex}
           type={activityType}
           activities={activities.filter(a => {
             return a.type === activityType;

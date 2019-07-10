@@ -7,7 +7,24 @@ import {
   faSlash,
   faCouch,
   faStopwatch,
-  faSwimmer
+  faSwimmer,
+  faCrown,
+  faTrophy,
+  faAward,
+  faMedal
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fas, faAt, faUser, faLock, faSlash, faCouch, faStopwatch, faSwimmer);
+library.add(
+  fas,
+  faAt,
+  faUser,
+  faLock,
+  faSlash,
+  faCouch,
+  faStopwatch,
+  faSwimmer,
+  faMedal,
+  faCrown,
+  faTrophy,
+  faAward
+);

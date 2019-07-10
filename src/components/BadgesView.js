@@ -10,8 +10,8 @@ const MenuBox = posed.div({
     opacity: 0
   },
   idle: {
-    height: '35vw',
-    width: '35vw',
+    height: '25vw',
+    width: '25vw',
     delay: 100
   },
   selected: {
@@ -48,7 +48,7 @@ const menuTitle = {
 const menuWrapper = {
   padding: '1vw',
   textAlign: 'center',
-  maxWidth: '1000px',
+  maxWidth: '700px',
   margin: 'auto'
 };
 

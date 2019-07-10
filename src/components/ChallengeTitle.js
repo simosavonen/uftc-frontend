@@ -36,7 +36,7 @@ const challengeTiming = challenge => {
 
 const ChallengeTitle = ({ challenge = placeholder }) => {
   return (
-    <div>
+    <div className="is-size-5-mobile is-size-4">
       {challenge.name}
 
       <p>{challengeTiming(challenge)}</p>

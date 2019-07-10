@@ -58,26 +58,46 @@ const ActivityRow = props => {
     achievements = sampleAchievements
   } = props;
 
+  const randomColor = () => {
+    const colors = [
+      '#ff2457',
+      '#57ff24',
+      '#248aff',
+      '#ffe524',
+      '#ff4124',
+      '#ff24c5',
+      '#24ff99',
+      '#c5ff24',
+      '#ff7824'
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  const randomIcon = () => {
+    const icons = ['medal', 'crown', 'trophy', 'award'];
+    return icons[Math.floor(Math.random() * icons.length)];
+  };
+
   return (
     <Link
       to={`/activities/${activity.id.substr(0, 8)}`}
       className="columns is-centered is-mobile is-clickable"
     >
-      <div className="column is-4 has-text-right">
+      <div className="column is-5 has-text-right is-size-5-mobile is-size-4">
         {badges.map(badge => (
           <FontAwesomeIcon
             key={badge.id}
-            icon="medal"
-            size="3x"
-            color="#248aff"
-            style={{ paddingRight: '5px' }}
+            icon={randomIcon()}
+            size="2x"
+            color={randomColor()}
+            style={{ width: '70px' }}
           />
         ))}
       </div>
-      <div className="column is-6">
+      <div className="column is-7 has-text-left">
         <div>
-          <h4 className="title is-4 is-marginless">{activity.name}</h4>
-          <p>
+          <h4 className="title is-size-5-mobile is-size-4 is-marginless">{activity.name}</h4>
+          <p className="is-size-6-mobile is-size-5">
             next badge at{' '}
             <span className="has-text-info">{achievements[badges.length].requirement} points</span>
           </p>

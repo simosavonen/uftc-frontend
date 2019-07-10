@@ -45,3 +45,10 @@
   object-position: 35% 50%;
   z-index: -100;
 }
+
+.menurow-even {
+  background-color: #0898cc;
+}
+.menurow-odd {
+  background-color: #1088b3;
+}

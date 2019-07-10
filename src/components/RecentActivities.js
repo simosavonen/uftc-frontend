@@ -63,7 +63,13 @@ const RecentActivities = props => {
 
     return (
       <>
-        <h1 className="title is-4">Your {threeLastActivitiesNameLenght} most recent activities</h1>
+        <h1 className="title is-size-4-mobile is-size-3">
+          Your{' '}
+          <span style={{ fontSize: 'larger', color: '#ff2457' }}>
+            {threeLastActivitiesNameLenght}
+          </span>{' '}
+          most recent activities
+        </h1>
 
         {threeLastActivitiesName.map(item => (
           <ActivityRow activity={item} key={item.name} />
