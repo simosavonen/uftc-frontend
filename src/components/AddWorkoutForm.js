@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // propsina se funktio joka lisää suorituksen tietokantaan
 // funktio on määritelty tiedostossa App.js
@@ -25,19 +26,30 @@ const AddWorkoutForm = props => {
 
   const handleMoreClick = event => {
     event.preventDefault();
-    setAmount(Number(amount) + Number(1));
+    setAmount(amount + 1);
   };
 
   const handleLessClick = event => {
     event.preventDefault();
-    if (amount < 0) {
-      setAmount(0);
+    if (amount < 2) {
+      setAmount(1);
+    } else {
+      setAmount(amount - 1);
     }
-    setAmount(Number(amount) - Number(1));
   };
 
   const handleAmountChange = event => {
-    setAmount(event.target.value);
+    let theValue = event.target.value;
+    if (theValue < 0) {
+      theValue = Math.abs(theValue);
+    }
+    setAmount(theValue);
+  };
+
+  const dontAllowZero = event => {
+    event.preventDefault();
+
+    if (amount == 0) setAmount(1);
   };
 
   const submit = event => {
@@ -61,29 +73,47 @@ const AddWorkoutForm = props => {
   return (
     <div>
       <form onSubmit={submit}>
-        "lisää urheilusuoritus" -lomake
+        <label className="label">Date</label>
         <input
+          className="input"
           value={date}
           onChange={({ target }) => setDate(target.value)}
           type="date"
           min={placeholder.startDate}
           max={today}
         />
-        <br />
-        Suorituskertoja (kpl):{' '}
-        <button className="button is-danger" onClick={handleLessClick}>
-          -
-        </button>
-        <input value={amount} onChange={handleAmountChange} />
-        <button className="button is-success" onClick={handleMoreClick}>
-          +
-        </button>
+        <div className="section columns is-centered">
+          <div className="column has-text-right">
+            <button className="button is-danger is-large" onClick={handleLessClick}>
+              -
+            </button>
+          </div>
+          <div className="column">
+            <label className="label">Suorituskertoja (kpl):</label>
+            <input
+              className="input"
+              type="number"
+              min="1"
+              value={amount}
+              onChange={handleAmountChange}
+              onBlur={dontAllowZero}
+            />
+          </div>
+          <div className="column">
+            <button className="button is-success is-large" onClick={handleMoreClick}>
+              +
+            </button>
+          </div>
+        </div>
         <p>
-          <button>Save</button>
+          <button className="button">Save</button>
+          <button className="button is-danger" onClick={() => props.history.goBack()}>
+            Cancel
+          </button>
         </p>
       </form>
     </div>
   );
 };
 
-export default AddWorkoutForm;
+export default withRouter(AddWorkoutForm);
