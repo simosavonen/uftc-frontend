@@ -13,7 +13,7 @@ const AccordionList = props => {
 
   return (
     <div className="container is-fluid">
-      <button className="button title is-4 is-marginless is-info" onClick={handleClick}>
+      <button className="button is-info" onClick={handleClick}>
         {props.type}
       </button>
       <PoseGroup animateOnMount="true">

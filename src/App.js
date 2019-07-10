@@ -128,34 +128,36 @@ const App = props => {
   };
 
   return (
-    <>
+    <div className="site">
       {!isAuthenticated() && <Redirect to="/login" />}
       <Header user={user} logout={logout} />
-      <Switch>
-        <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
-        <Route
-          exact
-          path="/activities"
-          render={() => <ActivitiesView challenges={challenges} workouts={workouts} />}
-        />
-        <Route
-          exact
-          path="/activities/:id"
-          render={({ match }) => (
-            <WorkoutView activity={activityById(match.params.id)} addWorkout={addWorkout} />
-          )}
-        />
-        <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
-        <Route
-          path="/addchallenge"
-          render={() => <AddChallengeForm addChallenge={addChallenge} />}
-        />
-        <Route path="/badges" render={() => <BadgesView />} />
-        <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
-        <Route exact path="/" render={() => <FrontPage />} />
-      </Switch>
-      <Footer />
-    </>
+      <div className="main">
+        <Switch>
+          <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
+          <Route
+            exact
+            path="/activities"
+            render={() => <ActivitiesView challenges={challenges} workouts={workouts} />}
+          />
+          <Route
+            exact
+            path="/activities/:id"
+            render={({ match }) => (
+              <WorkoutView activity={activityById(match.params.id)} addWorkout={addWorkout} />
+            )}
+          />
+          <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
+          <Route
+            path="/addchallenge"
+            render={() => <AddChallengeForm addChallenge={addChallenge} />}
+          />
+          <Route path="/badges" render={() => <BadgesView />} />
+          <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
+          <Route exact path="/" render={() => <FrontPage />} />
+        </Switch>
+      </div>
+      <Footer user={user} />
+    </div>
   );
 };
 export default withRouter(App);

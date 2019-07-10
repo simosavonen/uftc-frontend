@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import kettlebeach from '../media/kettlebeach.mp4';
+import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
@@ -58,64 +60,112 @@ const LoginForm = props => {
   );
 
   return (
-    <section className="section columns is-centered">
-      <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
-        <form className="box" onSubmit={submit}>
-          <h1 className="title is-4">Welcome to the UFTC</h1>
-          <h2 className="subtitle is-5">
-            {isNewUser ? 'A new challenger appears' : 'Challenger, please log in'}
-          </h2>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control has-icons-left">
-              <input
-                className="input"
-                type="email"
-                placeholder="first.last@ambientia.fi"
-                value={email}
-                onChange={({ target }) => setEmail(target.value)}
-                required
-              />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon="at" />
-              </span>
+    <>
+      <video autoPlay muted loop id="myVideo">
+        <source src={kettlebeach} type="video/mp4" />
+      </video>
+      <section className="hero is-fullheight">
+        <div className="hero-head loginHeader columns is-centered is-mobile has-text-white-ter is-size-4">
+          <div className="column">
+            <Logo width={80} height={40} />
+          </div>
+          <div className="column" />
+          <div className="column has-text-right">15 / 70</div>
+        </div>
+        <div className="hero-body columns is-centered is-mobile">
+          <div
+            className="column has-text-white-bis is-hidden-mobile is-5-tablet is-5-desktop is-5-widescreen is-5-fullhd"
+            style={{ fontSize: '3.1vw' }}
+          >
+            <h1>
+              <span className="boxedLetter">U</span>ltimate
+            </h1>
+            <h1>
+              <span className="boxedLetter">F</span>unctional
+            </h1>
+            <h1>
+              <span className="boxedLetter">T</span>raining
+            </h1>
+            <h1>
+              <span className="boxedLetter">C</span>hallenge
+            </h1>
+          </div>
+          <div className="column is-6-tablet is-5-desktop is-4-widescreen is-4-fullhd">
+            <form className="box" onSubmit={submit}>
+              <h1 className="title is-4">Welcome to the UFTC</h1>
+              <h2 className="subtitle is-5">
+                {isNewUser ? 'A new challenger appears' : 'Challenger, please log in'}
+              </h2>
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control has-icons-left">
+                  <input
+                    className="input"
+                    type="email"
+                    placeholder="first.last@ambientia.fi"
+                    value={email}
+                    onChange={({ target }) => setEmail(target.value)}
+                    required
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon="at" />
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Password</label>
+                <div className="control has-icons-left">
+                  <input
+                    className="input"
+                    type="password"
+                    value={password}
+                    onChange={({ target }) => setPassword(target.value)}
+                    required
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon="lock" />
+                  </span>
+                </div>
+              </div>
+
+              {isNewUser && registerFields}
+
+              <div className="field">
+                <button className="button is-info is-outlined">
+                  {isNewUser ? 'Create an account' : 'Log in'}
+                </button>
+                <button
+                  className="button is-text is-pulled-right"
+                  onClick={event => {
+                    event.preventDefault();
+                    setIsNewUser(!isNewUser);
+                  }}
+                >
+                  {isNewUser ? 'cancel' : 'create an account'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="hero-foot footer">
+          <div className="columns is-centered is-mobile">
+            <div className="column has-text-centered">
+              Capstone Project
+              <p>University of Turku</p>
+            </div>
+            <div className="column has-text-centered is-hidden-mobile">
+              Middle Thingy
+              <p>Just In Case</p>
+            </div>
+            <div className="column has-text-centered">
+              admin tools
+              <p>link</p>
+              <p>link</p>
             </div>
           </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control has-icons-left">
-              <input
-                className="input"
-                type="password"
-                value={password}
-                onChange={({ target }) => setPassword(target.value)}
-                required
-              />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon="lock" />
-              </span>
-            </div>
-          </div>
-
-          {isNewUser && registerFields}
-
-          <div className="field">
-            <button className="button is-info is-outlined">
-              {isNewUser ? 'Create an account' : 'Log in'}
-            </button>
-            <button
-              className="button is-text is-pulled-right"
-              onClick={event => {
-                event.preventDefault();
-                setIsNewUser(!isNewUser);
-              }}
-            >
-              {isNewUser ? 'cancel' : 'create an account'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
 
