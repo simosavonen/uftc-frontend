@@ -12,7 +12,7 @@ const AddWorkoutForm = props => {
 
   const handleMoreClick = event => {
     event.preventDefault();
-    setAmount(amount + 1);
+    setAmount(+amount + 1);
   };
 
   const handleLessClick = event => {
@@ -20,7 +20,7 @@ const AddWorkoutForm = props => {
     if (amount < 2) {
       setAmount(1);
     } else {
-      setAmount(amount - 1);
+      setAmount(+amount - 1);
     }
   };
 
@@ -70,7 +70,7 @@ const AddWorkoutForm = props => {
           min={props.challenge && props.challenge.startDate.substr(0, 10)}
           max={today}
         />
-        <div className="section columns is-centered">
+        <div className="section columns is-centered is-mobile">
           <div className="column has-text-right">
             <button className="button is-danger is-large" onClick={handleLessClick}>
               -

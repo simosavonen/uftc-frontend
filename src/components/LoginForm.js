@@ -77,18 +77,18 @@ const LoginForm = props => {
             className="column has-text-white-bis is-hidden-mobile is-5-tablet is-5-desktop is-5-widescreen is-5-fullhd"
             style={{ fontSize: '3.1vw' }}
           >
-            <h1>
+            <p>
               <span className="boxedLetter">U</span>ltimate
-            </h1>
-            <h1>
+            </p>
+            <p>
               <span className="boxedLetter">F</span>unctional
-            </h1>
-            <h1>
+            </p>
+            <p>
               <span className="boxedLetter">T</span>raining
-            </h1>
-            <h1>
+            </p>
+            <p>
               <span className="boxedLetter">C</span>hallenge
-            </h1>
+            </p>
           </div>
           <div className="column is-6-tablet is-5-desktop is-4-widescreen is-4-fullhd">
             <form className="box" onSubmit={submit}>
@@ -147,7 +147,7 @@ const LoginForm = props => {
             </form>
           </div>
         </div>
-        <div className="hero-foot footer">
+        <div className="hero-foot footer has-text-white-ter">
           <div className="columns is-centered is-mobile">
             <div className="column has-text-centered">
               Capstone Project

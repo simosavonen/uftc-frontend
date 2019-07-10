@@ -18,14 +18,14 @@
 }
 
 .boxedLetter {
-  display: inline-flex;
-  border: 0.6vw solid #ff2457;
-  width: 5.5vw;
-  height: 5.5vw;
-  padding: 0.4vw;
-  margin: 1.5vw 0.4vw;
-  align-items: center;
-  justify-content: center;
+  padding: 0.1vw;
+  margin: 0.5vw 0.1vw;
+  width: 4vw;
+  max-width: 100px;
+  text-align: center;
+  display: inline-block;
+  font-size: 150%;
+  color: #ff2457;
 }
 
 .loginHeader {
