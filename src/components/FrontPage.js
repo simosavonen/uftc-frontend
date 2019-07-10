@@ -5,25 +5,26 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor }) => {
   const styles = {
     backgroundColor: bgColor,
     width: '16vw',
+    minWidth: '110px',
     height: '16vw',
-    borderRadius: '8vw',
+    minHeight: '110px',
+    borderRadius: '16vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 'auto',
-    fontSize: '2vw'
+    margin: 'auto'
   };
 
   return (
     <div
       style={styles}
-      className="has-text-centered has-text-white-ter"
+      className="has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
       onClick={() => console.log('klikkasit', sarja)}
     >
       <FontAwesomeIcon icon={iconName} size="2x" />
       <p>{sarja}</p>
-      <p style={{ fontSize: '2.5vw', color: '#000000', fontWeight: 'bold' }}>
+      <p style={{ color: '#000000', fontWeight: 'bold' }}>
         {osallistujia ? osallistujia : <>&nbsp;</>}
       </p>
     </div>
@@ -54,14 +55,14 @@ const FrontPage = props => {
           />
         </div>
         <div className="column is-3">
-          <Ikonipallo sarja="Professionals" osallistujia={9} iconName="swimmer" bgColor="#ff2457" />
+          <Ikonipallo sarja="Pros" osallistujia={9} iconName="swimmer" bgColor="#ff2457" />
         </div>
       </section>
 
-      <section className="columns is-mobile is-centered" style={{ fontSize: '2vw' }}>
-        <div className="column is-3 has-text-centered" />
+      <section className="columns is-mobile is-centered is-size-6-mobile is-size-5-tablet is-size-4">
+        <div className="column is-3 has-text-centered">For standard humans.</div>
         <div className="column is-3 has-text-centered">Not yet started!</div>
-        <div className="column is-3 has-text-centered">Earn 20% less points</div>
+        <div className="column is-3 has-text-centered">Earn 20% less points.</div>
       </section>
     </div>
   );
