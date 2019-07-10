@@ -7,22 +7,8 @@ import { withRouter } from 'react-router-dom';
 
 const AddWorkoutForm = props => {
   const [amount, setAmount] = useState(1);
-  const [date, setDate] = useState('');
   const today = new Date().toISOString().substring(0, 10);
-
-  const placeholder = {
-    organizers: ['5d1798065367df2f28dd0708'],
-    activities: [],
-    name: 'loading...',
-    pointsGoal: 7500,
-    releaseDate: '2019-07-01',
-    startDate: '2019-07-01',
-    endDate: '2019-10-30',
-    deadline: '2019-12-14',
-    seriesTitle: 'Placeholder',
-    pointBonus: 1,
-    id: '5d1c5237c360412fbcc98dcc'
-  };
+  const [date, setDate] = useState(today);
 
   const handleMoreClick = event => {
     event.preventDefault();
@@ -49,7 +35,7 @@ const AddWorkoutForm = props => {
   const dontAllowZero = event => {
     event.preventDefault();
 
-    if (amount == 0) setAmount(1);
+    if (amount === 0) setAmount(1);
   };
 
   const submit = event => {
@@ -70,6 +56,8 @@ const AddWorkoutForm = props => {
 
   //return <form onSubmit={submit}>"lisää urheilusuoritus" -lomake</form>;
 
+  console.log('challenge', props.challenge);
+
   return (
     <div>
       <form onSubmit={submit}>
@@ -79,7 +67,7 @@ const AddWorkoutForm = props => {
           value={date}
           onChange={({ target }) => setDate(target.value)}
           type="date"
-          min={placeholder.startDate}
+          min={props.challenge && props.challenge.startDate.substr(0, 10)}
           max={today}
         />
         <div className="section columns is-centered">

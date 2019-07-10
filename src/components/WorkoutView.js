@@ -11,7 +11,7 @@ const placeholder = {
   id: '12341234123412341234'
 };
 
-const WorkoutView = ({ activity = placeholder, addWorkout }) => {
+const WorkoutView = ({ activity = placeholder, addWorkout, challenge }) => {
   return (
     <>
       <div className="section columns is-centered">
@@ -35,7 +35,7 @@ const WorkoutView = ({ activity = placeholder, addWorkout }) => {
       </div>
       <section className="section columns is-centered">
         <div className="column is-6 ">
-          <AddWorkoutForm addWorkout={addWorkout} activity={activity} />
+          <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
         </div>
       </section>
     </>

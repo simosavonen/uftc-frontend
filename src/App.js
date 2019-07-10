@@ -143,7 +143,11 @@ const App = props => {
             exact
             path="/activities/:id"
             render={({ match }) => (
-              <WorkoutView activity={activityById(match.params.id)} addWorkout={addWorkout} />
+              <WorkoutView
+                activity={activityById(match.params.id)}
+                addWorkout={addWorkout}
+                challenge={challenges[0]}
+              />
             )}
           />
           <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
