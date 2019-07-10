@@ -16,10 +16,14 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor }) => {
   };
 
   return (
-    <div style={styles} className="has-text-centered has-text-white-ter">
+    <div
+      style={styles}
+      className="has-text-centered has-text-white-ter"
+      onClick={() => console.log('klikkasit', sarja)}
+    >
       <FontAwesomeIcon icon={iconName} size="2x" />
       <p>{sarja}</p>
-      <p>{osallistujia}</p>
+      <p style={{ fontSize: '2.5vw', color: '#000000', fontWeight: 'bold' }}>{osallistujia}</p>
     </div>
   );
 };
@@ -28,8 +32,11 @@ const FrontPage = props => {
   return (
     <div>
       <section className="section has-text-centered">
-        <h1>haasteen nimi</h1>
-        <h2>Valitse sarja</h2>
+        <h1 className="title is-2">
+          <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7b;</span> haasteen nimi{' '}
+          <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7d;</span>
+        </h1>
+        <h2 className="title is-3">Valitse sarja</h2>
       </section>
 
       <section className="columns is-mobile is-centered is-vcentered">
@@ -49,7 +56,7 @@ const FrontPage = props => {
         </div>
       </section>
 
-      <section className="columns is-mobile is-centered is-size-5-mobile is-size-4-tablet">
+      <section className="columns is-mobile is-centered" style={{ fontSize: '2vw' }}>
         <div className="column is-3 has-text-centered" />
         <div className="column is-3 has-text-centered">Not yet started!</div>
         <div className="column is-3 has-text-centered">Earn 20% less points</div>
