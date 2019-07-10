@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor }) => {
   const styles = {
     backgroundColor: bgColor,
-    width: '14vw',
-    height: '14vw',
-    borderRadius: '7vw',
+    width: '16vw',
+    height: '16vw',
+    borderRadius: '8vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -34,17 +34,22 @@ const FrontPage = props => {
 
       <section className="columns is-mobile is-centered is-vcentered">
         <div className="column is-3">
-          <Ikonipallo sarja="Tavikset" osallistujia={37} iconName="couch" bgColor="#ff2457" />
+          <Ikonipallo sarja="Defaults" osallistujia={37} iconName="couch" bgColor="#ff2457" />
         </div>
         <div className="column is-3">
-          <Ikonipallo sarja="Hitaat" osallistujia={0} iconName="stopwatch" bgColor="#ff245750" />
+          <Ikonipallo
+            sarja="Latecomers"
+            osallistujia={0}
+            iconName="stopwatch"
+            bgColor="#ff245750"
+          />
         </div>
         <div className="column is-3">
-          <Ikonipallo sarja="Atleetit" osallistujia={9} iconName="swimmer" bgColor="#ff2457" />
+          <Ikonipallo sarja="Professionals" osallistujia={9} iconName="swimmer" bgColor="#ff2457" />
         </div>
       </section>
 
-      <section className="columns is-mobile is-centered is-size-4">
+      <section className="columns is-mobile is-centered is-size-5-mobile is-size-4-tablet">
         <div className="column is-3 has-text-centered" />
         <div className="column is-3 has-text-centered">Not yet started!</div>
         <div className="column is-3 has-text-centered">Earn 20% less points</div>
