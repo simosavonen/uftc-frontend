@@ -25,7 +25,7 @@ const AddWorkoutForm = props => {
   };
 
   const handleAmountChange = event => {
-    let theValue = event.target.value;
+    let theValue = Number(event.target.value);
     if (theValue < 0) {
       theValue = Math.abs(theValue);
     }
