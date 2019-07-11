@@ -162,9 +162,9 @@ const App = props => {
           <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
+        <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
       </div>
       <Footer user={user} />
-      <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
     </div>
   );
 };
