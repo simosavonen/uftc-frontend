@@ -18,6 +18,7 @@ const WorkoutView = ({ activity = placeholder, addWorkout, challenge }) => {
         {/* tähän yleistä tietoa  urheilulajista */}
         <div className="column is-6">
           <h4 className="title is-4">{activity.name}</h4>
+          <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
           <ul>
             <li>Sport activity type: {activity.type}</li>
             <li>Unit: {activity.unit}</li>
@@ -33,11 +34,6 @@ const WorkoutView = ({ activity = placeholder, addWorkout, challenge }) => {
           </ul>
         </div>
       </div>
-      <section className="section columns is-centered">
-        <div className="column is-6 ">
-          <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
-        </div>
-      </section>
     </>
   );
 };
