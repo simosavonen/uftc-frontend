@@ -72,12 +72,13 @@ const App = props => {
   };
 
   const addWorkout = workout => {
-    const workout2 = { ...workout, challenge: challenges[0].id };
+    const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
     workoutService
-      .add(workout2, token)
+      .add(workoutWithChallengeId, token)
       .then(response => {
-        setWorkouts(workouts.concat(response.data));
-        //console.log('newvorkout', workout2);
+        //console.log('response.data', response.data);
+        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
+        setWorkouts(workoutsWithNew);
         toast.success('Workout saved.');
       })
       .catch(error => {
