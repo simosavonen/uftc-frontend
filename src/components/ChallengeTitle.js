@@ -36,9 +36,10 @@ const challengeTiming = challenge => {
 
 const ChallengeTitle = ({ challenge = placeholder }) => {
   return (
-    <div className="is-size-5-mobile is-size-4">
-      {challenge.name}
-
+    <div className="is-size-4 is-size-3-fullhd">
+      <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>{' '}
+      {challenge.name}{' '}
+      <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
       <p>{challengeTiming(challenge)}</p>
     </div>
   );

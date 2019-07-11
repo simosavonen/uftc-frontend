@@ -12,10 +12,10 @@ const ActivitiesView = ({ challenges, workouts }) => {
   return (
     <div>
       <div className="section columns is-centered">
-        <div className="column has-text-centered is-5-tablet is-4-desktop is-3-widescreen">
+        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
           <ChallengeTitle challenge={challenges[0]} />
         </div>
-        <div className="column has-text-centered is-5-tablet is-4-desktop is-3-widescreen">
+        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
           <WeeklyProgress workouts={workouts} />
         </div>
       </div>

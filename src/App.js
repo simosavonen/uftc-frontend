@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import userService from './services/user';
 import workoutService from './services/workouts';
@@ -17,6 +18,7 @@ import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
 
 import './App.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
@@ -75,7 +77,8 @@ const App = props => {
       .add(workout2, token)
       .then(response => {
         setWorkouts(workouts.concat(response.data));
-        console.log('newvorkout', workout2);
+        //console.log('newvorkout', workout2);
+        toast.success('Workout saved.');
       })
       .catch(error => {
         console.log('addWorkout', error.message);
@@ -161,6 +164,7 @@ const App = props => {
         </Switch>
       </div>
       <Footer user={user} />
+      <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
     </div>
   );
 };
