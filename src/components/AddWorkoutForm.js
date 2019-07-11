@@ -95,7 +95,13 @@ const AddWorkoutForm = props => {
         </div>
         <p>
           <button className="button">Save</button>
-          <button className="button is-danger" onClick={() => props.history.goBack()}>
+          <button
+            className="button is-danger"
+            onClick={event => {
+              event.preventDefault();
+              props.history.goBack();
+            }}
+          >
             Cancel
           </button>
         </p>
