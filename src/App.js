@@ -96,6 +96,7 @@ const App = props => {
       })
       .catch(error => {
         console.log('login', error.message);
+        toast.error('Login failed.');
       });
   };
 
