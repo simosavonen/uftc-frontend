@@ -2,12 +2,12 @@ import React from 'react';
 import ActivityRow from './ActivityRow';
 
 const RecentActivities = props => {
-  var threeLastActivitiesNameLenght;
+  var lstActNameLenght;
 
   const dayAndActivity = () => {
-    const activityNameTable = [];
-    const threeLastActivitiesId = [];
-    const threeLastActivitiesName = [];
+    const actNameTbl = [];
+    const lastActivities = [];
+    const lstActName = [];
     let oldName = '';
     var exist = false;
 
@@ -22,38 +22,42 @@ const RecentActivities = props => {
     props.workouts.map(item => {
       const a = item.activity;
       return item.instances.map(ind => {
-        return activityNameTable.push({ date: ind.date, activity: a });
+        return actNameTbl.push({ date: ind.date, activity: a });
       });
     });
-    activityNameTable.sort(function(a, b) {
+    actNameTbl.sort(function(a, b) {
       return new Date(b.date) - new Date(a.date);
     });
 
-    activityNameTable.map(ind => {
+    actNameTbl.map(ind => {
       if (oldName !== '') {
-        exist = threeLastActivitiesId.includes(ind.activity);
-        if (!exist && threeLastActivitiesId.length <= 2) {
-          threeLastActivitiesId.push(ind.activity);
+        exist = lastActivities.filter(index => index.activity === ind.activity).length > 0; //this activity not listed yet
+        if (!exist) {
+          if (lastActivities.filter(item => item.date === ind.date).length > 0) {
+            lastActivities.push(ind);
+          } else if (lastActivities.length <= 2) {
+            lastActivities.push(ind);
+          }
         }
       } else {
         oldName = ind.activity;
-        threeLastActivitiesId.push(ind.activity);
+        lastActivities.push(ind);
       }
       return 0;
     });
 
-    threeLastActivitiesId.map(ind => {
+    lastActivities.map(ind => {
       props.activities.map(item => {
-        if (item.id === ind) {
-          threeLastActivitiesName.push(item);
+        if (item.id === ind.activity) {
+          lstActName.push(item);
         }
         return 0;
       });
       return 0;
     });
-    threeLastActivitiesNameLenght = threeLastActivitiesName.length;
+    lstActNameLenght = lstActName.length;
 
-    if (!threeLastActivitiesNameLenght) {
+    if (!lstActNameLenght) {
       return (
         <p>
           <b>Have a good day !</b>
@@ -64,14 +68,11 @@ const RecentActivities = props => {
     return (
       <>
         <h1 className="title is-size-4-mobile is-size-3">
-          Your{' '}
-          <span style={{ fontSize: 'larger', color: '#ff2457' }}>
-            {threeLastActivitiesNameLenght}
-          </span>{' '}
-          most recent activities
+          Your <span style={{ fontSize: 'larger', color: '#ff2457' }}>{lstActNameLenght}</span> most
+          recent activities
         </h1>
 
-        {threeLastActivitiesName.map(item => (
+        {lstActName.map(item => (
           <ActivityRow activity={item} key={item.name} />
         ))}
       </>
