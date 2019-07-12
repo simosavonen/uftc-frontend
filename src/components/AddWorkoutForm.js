@@ -61,7 +61,22 @@ const AddWorkoutForm = props => {
   return (
     <div>
       <form onSubmit={submit}>
-        <label className="label">Date</label>
+        <label className="label">Suorituskertoja (kpl):</label>
+        <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
+          +
+        </button>
+        <input
+          className="input"
+          type="number"
+          min="1"
+          value={amount}
+          onChange={handleAmountChange}
+          onBlur={dontAllowZero}
+        />
+        <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
+          -
+        </button>
+        <label className="label">Date:</label>
         <input
           className="input"
           value={date}
@@ -70,39 +85,17 @@ const AddWorkoutForm = props => {
           min={props.challenge && props.challenge.startDate.substr(0, 10)}
           max={today}
         />
-        <div className="section columns is-centered is-mobile">
-          <div className="column has-text-right">
-            <button className="button is-danger is-large" onClick={handleLessClick}>
-              -
-            </button>
-          </div>
-          <div className="column">
-            <label className="label">Suorituskertoja (kpl):</label>
-            <input
-              className="input"
-              type="number"
-              min="1"
-              value={amount}
-              onChange={handleAmountChange}
-              onBlur={dontAllowZero}
-            />
-          </div>
-          <div className="column">
-            <button className="button is-success is-large" onClick={handleMoreClick}>
-              +
-            </button>
-          </div>
-        </div>
         <p>
-          <button className="button">Save</button>
+          <button className="button is-success is-fullwidth">Save</button>
+          <br />
           <button
-            className="button is-danger"
+            className="button is-danger is-fullwidth"
             onClick={event => {
               event.preventDefault();
               props.history.goBack();
             }}
           >
-            Cancel
+            Back
           </button>
         </p>
       </form>
