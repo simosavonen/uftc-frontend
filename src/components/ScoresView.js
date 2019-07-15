@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import posed, { PoseGroup } from 'react-pose';
-import ApexChart from './ApexChart';
-
+import WorkoutChart from './WorkoutChart';
+import WeeklyScores from './WeeklyScores';
 import workoutService from '../services/workouts';
 import scoreService from '../services/scores';
 
@@ -60,7 +60,7 @@ const ScoresView = props => {
               })
           };
         });
-      console.log('filtered', filtered);
+      //console.log('filtered', filtered);
       setChartData(filtered);
     }
   }, [showUser, workouts]);
@@ -102,7 +102,7 @@ const ScoresView = props => {
               </button>
             </div>
             <div className="column is-7 is-hidden-mobile">
-              <ApexChart chartData={chartData} />
+              <WorkoutChart chartData={chartData} />
             </div>
           </div>
         </UserScores>
@@ -160,6 +160,9 @@ const ScoresView = props => {
           <p>Average: {total / scores.length}</p>
         </div>
       </ScoresTable>
+      <div key="weeklyscores" className="section container">
+        <WeeklyScores />
+      </div>
     </PoseGroup>
   );
 };

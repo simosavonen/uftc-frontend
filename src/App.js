@@ -23,6 +23,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const App = props => {
   const [challenges, setChallenges] = useState([]);
   const [workouts, setWorkouts] = useState([]);
+  const [activities, setActivities] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
@@ -34,6 +35,15 @@ const App = props => {
       })
       .catch(error => {
         console.log('getChallenges', error.message);
+      });
+
+    activityService
+      .get()
+      .then(response => {
+        setActivities(response.data);
+      })
+      .catch(error => {
+        console.log('getActivities', error.message);
       });
 
     const loggedUserJSON = localStorage.getItem('loggedUser');
@@ -124,7 +134,6 @@ const App = props => {
   };
 
   const activityById = id => {
-    const activities = challenges.length ? challenges[0].activities : [];
     for (let a of activities) {
       if (a.id.substr(0, 8) === id) {
         return a;
@@ -142,7 +151,9 @@ const App = props => {
           <Route
             exact
             path="/activities"
-            render={() => <ActivitiesView challenges={challenges} workouts={workouts} />}
+            render={() => (
+              <ActivitiesView challenges={challenges} workouts={workouts} activities={activities} />
+            )}
           />
           <Route
             exact

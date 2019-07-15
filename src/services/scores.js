@@ -7,4 +7,8 @@ const get = () => {
   return axios.get(baseUrl);
 };
 
-export default { get };
+const getWeekly = () => {
+  return axios.get(baseUrl + '/weekly');
+};
+
+export default { get, getWeekly };
