@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "bulma": "^0.7.5",
+    "faker": "^4.1.0",
     "node-sass": "^4.12.0"
   }
 }

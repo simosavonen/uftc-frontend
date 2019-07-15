@@ -4,10 +4,8 @@ import WeeklyProgress from './WeeklyProgress';
 import RecentActivities from './RecentActivities';
 import ActivityMenu from './ActivityMenu';
 
-const ActivitiesView = ({ challenges, workouts }) => {
+const ActivitiesView = ({ challenges, activities, workouts }) => {
   if (challenges.length === 0) return null;
-
-  const activities = challenges.length ? challenges[0].activities : [];
 
   return (
     <div>

@@ -29,7 +29,7 @@ const sampleData = [
   }
 ];
 
-const ApexChart = ({ chartData = sampleData }) => {
+const WorkoutChart = ({ chartData = sampleData }) => {
   // fixes an issue with a series remaining toggled off
   // when we hide or unhide the div containing the chart
   useEffect(() => {
@@ -86,4 +86,4 @@ const ApexChart = ({ chartData = sampleData }) => {
   return <Chart options={options} series={chartData} />;
 };
 
-export default ApexChart;
+export default WorkoutChart;
