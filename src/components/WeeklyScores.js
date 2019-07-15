@@ -52,7 +52,7 @@ const WeeklyScores = () => {
               x: d.name,
               y: d.data.reduce((sum, item) => sum + item, 0)
             }))
-            .sort((a, b) => (a.y > b.y ? 1 : a.y < b.y ? -1 : 0))
+            .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
         }
       ];
       console.log('total points', filtered);
@@ -66,7 +66,7 @@ const WeeklyScores = () => {
               x: d.name,
               y: d.data[weekFilter - 1]
             }))
-            .sort((a, b) => (a.y > b.y ? 1 : a.y < b.y ? -1 : 0))
+            .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
         }
       ];
       console.log('filtered by week', filtered);
@@ -78,6 +78,17 @@ const WeeklyScores = () => {
     dataLabels: {
       enabled: false
     },
+    colors: [
+      function({ value, seriesIndex, w }) {
+        if (value > 7499) {
+          return '#ff2457';
+        } else if (value > 749) {
+          return '#248aff';
+        } else {
+          return '#57ff24';
+        }
+      }
+    ],
     annotations: {
       yaxis: [
         {
