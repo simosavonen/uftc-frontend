@@ -171,7 +171,10 @@ const App = props => {
               />
             )}
           />
-          <Route path="/leaderboard" render={() => <ScoresView token={token} />} />
+          <Route
+            path="/leaderboard"
+            render={() => <ScoresView token={token} activities={activities} />}
+          />
           <Route
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={addChallenge} />}

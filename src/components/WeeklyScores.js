@@ -55,7 +55,7 @@ const WeeklyScores = () => {
             .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
         }
       ];
-      console.log('total points', filtered);
+      //console.log('total points', filtered);
       setFilteredData(filtered);
     } else {
       filtered = [
@@ -69,7 +69,7 @@ const WeeklyScores = () => {
             .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
         }
       ];
-      console.log('filtered by week', filtered);
+      //console.log('filtered by week', filtered);
       setFilteredData(filtered);
     }
   }, [weekFilter, chartData]);

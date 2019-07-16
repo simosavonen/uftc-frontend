@@ -74,9 +74,7 @@ const ScoresView = props => {
           <div className="columns is-centered">
             <div className="column is-5">
               <h4 className="title is-size-5-mobile is-size-4">{showUser.name}</h4>
-              <h5 className="subtitle is-size-6-mobile is-size-5">
-                points received from activities
-              </h5>
+              <h5 className="subtitle is-size-6-mobile is-size-5">workouts by activity</h5>
               <table className="table is-fullwidth is-narrow is-striped is-size-6-widescreen is-size-5-fullhd">
                 <thead>
                   <tr>
@@ -88,13 +86,19 @@ const ScoresView = props => {
                 <tbody>
                   {workouts
                     .filter(w => w.user === showUser.id)
-                    .map(w => (
-                      <tr key={w.id}>
-                        <td>{w.activity.name}</td>
-                        <td className="has-text-centered">{w.totalAmount}</td>
-                        <td className="has-text-centered">{w.totalPoints}</td>
-                      </tr>
-                    ))}
+                    .map(w => {
+                      const totalAmount = w.instances.reduce((sum, i) => sum + i.amount, 0);
+                      const points = props.activities.find(a => {
+                        return a.id === w.activity.id;
+                      }).points;
+                      return (
+                        <tr key={w.id}>
+                          <td>{w.activity.name}</td>
+                          <td className="has-text-centered">{totalAmount}</td>
+                          <td className="has-text-centered">{totalAmount * points}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
               <button onClick={() => setShowUser(null)} className="button is-outlined is-info">
