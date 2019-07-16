@@ -96,6 +96,10 @@ const App = props => {
       });
   };
 
+  const updateWorkout = () => {
+    return null;
+  };
+
   const login = userDetails => {
     userService
       .login(userDetails)
@@ -163,6 +167,7 @@ const App = props => {
                 activity={activityById(match.params.id)}
                 addWorkout={addWorkout}
                 challenge={challenges[0]}
+                workouts={workouts}
               />
             )}
           />

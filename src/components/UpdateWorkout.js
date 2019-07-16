@@ -1,24 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 //import ActivityRow from './ActivityRow';
 
 const UpdateWorkout = props => {
+  const [workoutSelected, setWorkoutSelected] = useState(null);
   let oneTypeActLenght;
 
-  console.log('workout', props.updateWorkout);
+  console.log('workouts', props.workouts);
   console.log('activity', props.activity);
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
 
-    if (props.updateWorkout.length === 0 || props.activity.length === 0) {
-      return (
-        <p>
-          <b>It's nice to have good sporting day !</b>
-        </p>
-      );
-    }
+    if (!props.workouts) return 'workouts oli null tai undefined';
 
-    props.updateWorkout.map(item => {
+    props.workouts.map(item => {
       const a = item.activity;
       return item.instances.map(ind => {
         return actNameTbl.push({ date: ind.date, activity: a, amount: ind.amount });
@@ -38,7 +33,7 @@ const UpdateWorkout = props => {
     }
 
     actNameTbl.map(ind => {
-      if (ind.activity === props.activity) {
+      if (ind.activity === props.activity.id) {
         oneTypeAct.push(ind);
       }
       return 0;
@@ -59,13 +54,16 @@ const UpdateWorkout = props => {
         <h1 className="title is-size-4-mobile is-size-3">Your activities</h1>
         <ul>
           {oneTypeAct.map(item => (
-            <li key={item.activity + item.date}>
+            <li key={item.date} onClick={() => setWorkoutSelected(item.activity)}>
               {item.date.substr(0, 10)}
               {' \u00b7 '}
               <span style={{ fontSize: 'larger', color: '#ff2457' }}>{item.amount}</span>
             </li>
           ))}
         </ul>
+        {workoutSelected && (
+          <p onClick={() => setWorkoutSelected(null)}>klikkasit suoritusta, tähän tulee formi</p>
+        )}
       </>
     );
   };

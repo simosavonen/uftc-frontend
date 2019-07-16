@@ -13,6 +13,7 @@ const placeholder = {
 };
 
 const WorkoutView = ({ activity = placeholder, addWorkout, challenge, workouts }) => {
+  console.log('ennen kuin annetaan propsina', workouts);
   return (
     <>
       <div className="section columns is-centered">
@@ -23,7 +24,7 @@ const WorkoutView = ({ activity = placeholder, addWorkout, challenge, workouts }
       </div>
       <section className="section columns is-centered">
         <div className="column is-6 ">
-          <UpdateWorkout updateWorkout={workouts} activity={activity.id} />
+          <UpdateWorkout workouts={workouts} activity={activity} />
           <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
         </div>
       </section>
