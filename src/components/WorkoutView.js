@@ -1,5 +1,6 @@
 import React from 'react';
 import AddWorkoutForm from './AddWorkoutForm';
+import UpdateWorkout from './UpdateWorkout';
 
 const placeholder = {
   name: 'loading...',
@@ -11,17 +12,18 @@ const placeholder = {
   id: '12341234123412341234'
 };
 
-const WorkoutView = ({ activity = placeholder, addWorkout, challenge }) => {
+const WorkoutView = ({ activity = placeholder, addWorkout, challenge, workouts }) => {
   return (
     <>
-      <div className="section columns is-centered is-6">
+      <div className="section columns is-centered">
         {/* tähän yleistä tietoa  urheilulajista */}
         <div className="column is-6">
-          <h4 className="title is-4">{activity.name}</h4>
+          <h4 className="title ">{activity.name}</h4>
         </div>
       </div>
       <section className="section columns is-centered">
         <div className="column is-6 ">
+          <UpdateWorkout updateWorkout={workouts} activity={activity.id} />
           <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
         </div>
       </section>
