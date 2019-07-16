@@ -14,7 +14,7 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
           <ChallengeTitle challenge={challenges[0]} />
         </div>
         <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <WeeklyProgress workouts={workouts} />
+          <WeeklyProgress workouts={workouts} activities={activities} />
         </div>
       </div>
       <section className="container has-text-centered">
