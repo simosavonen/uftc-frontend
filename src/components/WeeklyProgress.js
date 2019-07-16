@@ -9,7 +9,7 @@ const WeeklyProgress = ({ workouts, activities }) => {
   const lastSunday = moment().isoWeekday(7 - 7);
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);
-  console.log('workouts in WeeklyProgress.js', workouts);
+
   workouts.map(w => {
     const points = activities.find(a => {
       return a.id === w.activity;
