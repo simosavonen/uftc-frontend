@@ -72,9 +72,22 @@ const ScoresView = props => {
       {showUser && (
         <UserScores key="userscores" className="section container">
           <div className="columns">
-            <div className="column is-5">
-              <h4 className="title is-size-5-mobile is-size-4">{showUser.name}</h4>
-              <h5 className="subtitle is-size-6-mobile is-size-5">workouts by activity</h5>
+            <div className="column">
+              <div className="columns is-mobile">
+                <div className="column">
+                  <h4 className="title is-size-5-mobile is-size-4">{showUser.name}</h4>
+                  <h5 className="subtitle is-size-6-mobile is-size-5">workouts by activity</h5>
+                </div>
+                <div className="column">
+                  <button
+                    onClick={() => setShowUser(null)}
+                    className="button is-pulled-right is-outlined is-info"
+                  >
+                    hide
+                  </button>
+                </div>
+              </div>
+
               <table className="table is-fullwidth is-hoverable is-size-5-widescreen is-size-4-fullhd">
                 <thead>
                   <tr>
@@ -101,13 +114,12 @@ const ScoresView = props => {
                     })}
                 </tbody>
               </table>
-              <button onClick={() => setShowUser(null)} className="button is-outlined is-info">
-                hide
-              </button>
             </div>
           </div>
-          <div className="column is-7 is-hidden-mobile">
-            <WorkoutChart chartData={chartData} />
+          <div className="columns">
+            <div className="column">
+              <WorkoutChart chartData={chartData} />
+            </div>
           </div>
         </UserScores>
       )}
