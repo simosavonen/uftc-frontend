@@ -6,6 +6,7 @@ import userService from './services/user';
 import workoutService from './services/workouts';
 import challengeService from './services/challenges';
 import activityService from './services/activities';
+import achievementService from './services/achievements';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
@@ -24,6 +25,7 @@ const App = props => {
   const [challenges, setChallenges] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [achievements, setAchievements] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
@@ -46,6 +48,15 @@ const App = props => {
         console.log('getActivities', error.message);
       });
 
+    achievementService
+      .get()
+      .then(response => {
+        setAchievements(response.data);
+      })
+      .catch(error => {
+        console.log('getActivities', error.message);
+      });
+
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
@@ -60,7 +71,7 @@ const App = props => {
         .get(token)
         .then(result => {
           setWorkouts(result.data);
-          //console.log(result.data);
+          console.log('got workouts', result.data, new Date());
         })
         .catch(error => console.log('workouts', error.message));
     }

@@ -1,6 +1,7 @@
 const host = 'http://localhost:3001';
 
 const apiUrls = {
+  achievements: host + '/api/achievements',
   activities: host + '/api/activities',
   challenges: host + '/api/challenges',
   scores: host + '/api/scores',
