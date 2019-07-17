@@ -19,7 +19,6 @@ const WorkoutView = ({
   workouts,
   updateWorkout
 }) => {
-  console.log('ennen kuin annetaan propsina', workouts);
   return (
     <>
       <div className="section columns is-centered">

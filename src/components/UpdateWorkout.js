@@ -1,49 +1,11 @@
 import React, { useState } from 'react';
-//import ActivityRow from './ActivityRow';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
-/*
-const initialList = ['1', '2', '3'];
-const [value, setValue] = useState('');
-  const [list, setList] = useState(initialList);
 
-const handleChange = event => {
-      setValue(event.target.value);
-    };
-    const handleSubmit = event => {
-      if (value) {
-        setList(list.concat(value));
-      }
-      setValue('');
-      event.preventDefault();
-    };
-
-        <ul>
-          {list.map(item => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={value} onChange={handleChange} />
-          <button type="submit">clicked</button>
-        </form>
-const Jotain = () => {
-      console.log('Jotain');
-      return (
-        <>
-          <UpdateWorkoutForm workout={props.workouts} activity={props.activity} />
-        </>
-      );
-    };
-
-*/
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
 
   let oneTypeActLenght;
 
-  console.log('update workouts', props.workouts);
-  console.log('update activity', props.activity);
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
@@ -93,47 +55,9 @@ const UpdateWorkout = props => {
       );
     }
 
-    /*
-    const setWorkoutSelected = (activity, amount, date) => {
-      console.log('activity', activity);
-      if (activity) {
-        console.log('if return');
-        console.log('amount', amount);
-        console.log('date', date);
-        //workoutSelected = activity;
-        //setWorkoutSelected(activity);
-        console.log('workoutselected', workoutSelected);
-        /*
-        return (
-          <div>
-            <UpdateWorkoutForm
-              workout={props.workouts}
-              activity={activity}
-              amount={amount}
-              date={date}
-            />
-          </div>
-        );
-
-        //return <UpdateWorkoutForm {...workoutSelected} />;
-
-          return (
-          <p>
-            {amount} {activity} {date}
-          </p>
-        );
-      } else {
-        console.log('else return');
-        return 'activity oli null tai undefined';
-      }
-    };
-*/
     const updateCall = () => {
-      console.log('workoutselected updatecall', workoutSelected);
       if (workoutSelected) {
-        console.log('workoutselected updatecall');
         return <UpdateWorkoutForm workout={workoutSelected} updateWorkout={props.updateWorkout} />;
-        // return 0;
       }
     };
 

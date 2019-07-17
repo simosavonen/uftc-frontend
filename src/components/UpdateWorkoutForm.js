@@ -3,13 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
-  //const today = new Date().toISOString().substring(0, 10);
   let modDate = props.workout.date.substring(0, 10);
-  //const [date, setDate] = useState(today);
 
-  //console.log('updateworkoutform ', props.workout, props.activity, props.amount);
-  console.log('updateworkoutform ', props.workout);
-  console.log('amount', amount);
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);
@@ -34,7 +29,6 @@ const UpdateWorkoutForm = props => {
 
   const dontAllowZero = event => {
     event.preventDefault();
-
     if (amount === 0) setAmount(1);
   };
 
@@ -51,7 +45,6 @@ const UpdateWorkoutForm = props => {
       }
     };
     props.updateWorkout(workout);
-    console.log('updateworkout', workout);
   };
 
   return (
@@ -93,4 +86,3 @@ const UpdateWorkoutForm = props => {
 };
 
 export default withRouter(UpdateWorkoutForm);
-//export default UpdateWorkoutForm;
