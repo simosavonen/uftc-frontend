@@ -190,7 +190,12 @@ const App = props => {
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={addChallenge} />}
           />
-          <Route path="/badges" render={() => <BadgesView />} />
+          <Route
+            path="/badges"
+            render={() => (
+              <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
+            )}
+          />
           <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
