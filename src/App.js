@@ -107,6 +107,7 @@ const App = props => {
       });
   };
 
+  // eslint-disable-next-line
   const updateWorkout = () => {
     return null;
   };

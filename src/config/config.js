@@ -1,4 +1,4 @@
-const host = 'http://localhost:3001';
+const host = 'http://' + window.location.hostname + ':3001';
 
 const apiUrls = {
   achievements: host + '/api/achievements',
