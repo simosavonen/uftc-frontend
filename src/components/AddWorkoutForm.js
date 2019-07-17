@@ -54,7 +54,7 @@ const AddWorkoutForm = props => {
         </button>
         <input
           className="input"
-          type="number"
+          type="text"
           min="1"
           value={amount}
           onChange={handleAmountChange}
