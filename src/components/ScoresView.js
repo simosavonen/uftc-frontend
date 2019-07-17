@@ -71,11 +71,11 @@ const ScoresView = props => {
     <PoseGroup>
       {showUser && (
         <UserScores key="userscores" className="section container">
-          <div className="columns is-centered">
+          <div className="columns">
             <div className="column is-5">
               <h4 className="title is-size-5-mobile is-size-4">{showUser.name}</h4>
               <h5 className="subtitle is-size-6-mobile is-size-5">workouts by activity</h5>
-              <table className="table is-fullwidth is-narrow is-striped is-size-6-widescreen is-size-5-fullhd">
+              <table className="table is-fullwidth is-hoverable is-size-5-widescreen is-size-4-fullhd">
                 <thead>
                   <tr>
                     <th>Activity</th>
@@ -105,9 +105,9 @@ const ScoresView = props => {
                 hide
               </button>
             </div>
-            <div className="column is-7 is-hidden-mobile">
-              <WorkoutChart chartData={chartData} />
-            </div>
+          </div>
+          <div className="column is-7 is-hidden-mobile">
+            <WorkoutChart chartData={chartData} />
           </div>
         </UserScores>
       )}
