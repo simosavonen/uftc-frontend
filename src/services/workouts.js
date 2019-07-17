@@ -21,5 +21,12 @@ const add = (workout, token) => {
   setToken(token);
   return axios.post(baseUrl, workout);
 };
+//to={`/activities/${activity.id.substr(0, 8)}`}
+const update = (workout, token) => {
+  console.log('workouts update', baseUrl + '/' + workout.workoutid);
+  setToken(token);
+  return axios.put(baseUrl + '/' + workout.workoutid, workout);
+  //console.log('workouts update', baseUrl + '/' + workout.instance.id);
+};
 
-export default { get, getAll, add };
+export default { get, getAll, add, update };

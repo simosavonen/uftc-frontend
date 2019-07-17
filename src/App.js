@@ -96,8 +96,26 @@ const App = props => {
       });
   };
 
-  const updateWorkout = () => {
-    return null;
+  const updateWorkout = workout => {
+    console.log('app updateworkout', workout);
+    //console.log('härö');
+    //const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
+
+    workoutService
+      .update(workout, token)
+      .then(response => {
+        //console.log('response.data', response.data);
+        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
+        setWorkouts(workoutsWithNew);
+        toast.success('Workout updated.');
+      })
+      .catch(error => {
+        console.log('updateWorkout', error.message);
+      });
+
+    //console.log('app updateworkout challenge', workoutWithChallengeId);
+
+    //return null;
   };
 
   const login = userDetails => {
@@ -168,6 +186,7 @@ const App = props => {
                 addWorkout={addWorkout}
                 challenge={challenges[0]}
                 workouts={workouts}
+                updateWorkout={updateWorkout}
               />
             )}
           />
