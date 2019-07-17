@@ -17,8 +17,17 @@ const Footer = props => {
           <p>We Need This</p>
         </div>
         <div className="column is-4 has-text-centered">
-          admin tools
-          <p>link</p>
+          Admin tools:
+          <p>
+          <a href="http://localhost:3000/addchallenge" target="_blank" rel="noopener noreferrer">
+            http://localhost:3000/addchallenge
+          </a>
+          </p>
+          <p>
+          <a href="http://localhost:3000/addactivity" target="_blank" rel="noopener noreferrer">
+            http://localhost:3000/addactivity
+          </a>
+          </p>         
           <p>link</p>
         </div>
       </div>
