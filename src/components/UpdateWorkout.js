@@ -71,7 +71,13 @@ const UpdateWorkout = props => {
 
     const updateCall = () => {
       if (workoutSelected) {
-        return <UpdateWorkoutForm workout={workoutSelected} updateWorkout={props.updateWorkout} />;
+        return (
+          <UpdateWorkoutForm
+            key={workoutSelected.date}
+            workout={workoutSelected}
+            updateWorkout={props.updateWorkout}
+          />
+        );
       }
     };
 
@@ -85,36 +91,39 @@ const UpdateWorkout = props => {
             {showActivities ? 'Hide activities' : 'View activities'}
           </button>
         </div>
-        <ul>
-          {oneTypeAct.map(item => (
-            <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
-              <span
-                style={{
-                  fontFamily: 'verdana',
-                  fontSize: 'larger',
-                  fontWeight: '700',
-                  color: '#0f0f0f'
-                }}
-              >
-                {moment(item.date).format('ddd MMM Do')}
-              </span>
-              {' \u00b7 '}
-              <span
-                style={{
-                  fontFamily: 'verdana',
-                  fontSize: 'larger',
-                  fontWeight: '700',
-                  color: '#ff2457'
-                }}
-              >
-                {item.amount}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div>{updateCall()}</div>
-        {workoutSelected && <p onClick={() => setWorkoutSelected(null)}> </p>}
+        {showActivities && (
+          <div>
+            <ul>
+              {oneTypeAct.map(item => (
+                <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#0f0f0f'
+                    }}
+                  >
+                    {moment(item.date).format('ddd MMM Do')}
+                  </span>
+                  {' \u00b7 '}
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#ff2457'
+                    }}
+                  >
+                    {item.amount}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div>{updateCall()}</div>
+            {workoutSelected && <p onClick={() => setWorkoutSelected(null)}> </p>}
+          </div>
+        )}
       </>
     );
   };
