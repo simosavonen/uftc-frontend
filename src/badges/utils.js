@@ -1,7 +1,5 @@
 const checkRequirement = (achievement, score) => {
   const result = score >= achievement.requirement;
-  console.log(achievement, score, result);
-
   return result;
 };
 

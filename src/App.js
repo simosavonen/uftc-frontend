@@ -71,7 +71,6 @@ const App = props => {
         .get(token)
         .then(result => {
           setWorkouts(result.data);
-          console.log('got workouts', result.data, new Date());
         })
         .catch(error => console.log('workouts', error.message));
     }

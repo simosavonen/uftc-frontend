@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import React from 'react';
 import { checkAchievements } from '../badges/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
