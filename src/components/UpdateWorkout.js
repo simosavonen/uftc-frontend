@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
+  const [showActivities, setshowActivities] = useState(false);
 
   let oneTypeActLenght;
 
@@ -12,6 +14,18 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
+    if (!showActivities) {
+      return (
+        <div>
+          <button
+            className="button is-dark is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
+        </div>
+      );
+    }
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -63,16 +77,42 @@ const UpdateWorkout = props => {
 
     return (
       <>
-        <h1 className="title is-size-4-mobile is-size-3">Your activities</h1>
+        <div>
+          <button
+            className="button is-light is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
+        </div>
         <ul>
           {oneTypeAct.map(item => (
             <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
-              {item.date.substr(0, 10)}
+              <span
+                style={{
+                  fontFamily: 'verdana',
+                  fontSize: 'larger',
+                  fontWeight: '700',
+                  color: '#0f0f0f'
+                }}
+              >
+                {moment(item.date).format('ddd MMM Do')}
+              </span>
               {' \u00b7 '}
-              <span style={{ fontSize: 'larger', color: '#ff2457' }}>{item.amount}</span>
+              <span
+                style={{
+                  fontFamily: 'verdana',
+                  fontSize: 'larger',
+                  fontWeight: '700',
+                  color: '#ff2457'
+                }}
+              >
+                {item.amount}
+              </span>
             </li>
           ))}
         </ul>
+
         <div>{updateCall()}</div>
         {workoutSelected && <p onClick={() => setWorkoutSelected(null)}> </p>}
       </>
