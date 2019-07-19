@@ -48,7 +48,12 @@ const PasswordResetForm = ({ resetToken, history }) => {
           <div className="field-body">
             <div className="field">
               <p className="control">
-                <input className="input is-static" type="email" defaultValue={email} />
+                <input
+                  className="input is-static"
+                  type="email"
+                  value={email}
+                  autoComplete={email}
+                />
               </p>
             </div>
           </div>
