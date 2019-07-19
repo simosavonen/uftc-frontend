@@ -71,7 +71,6 @@ const PasswordResetForm = ({ resetToken, history }) => {
                   type="password"
                   placeholder="new password"
                   value={password}
-                  autoComplete=""
                   onChange={({ target }) => setPassword(target.value)}
                 />
               </p>
