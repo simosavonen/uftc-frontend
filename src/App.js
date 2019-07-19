@@ -6,11 +6,13 @@ import userService from './services/user';
 import workoutService from './services/workouts';
 import challengeService from './services/challenges';
 import activityService from './services/activities';
+import achievementService from './services/achievements';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
+import AddAchievementForm from './components/AddAchievementForm';
 import ScoresView from './components/ScoresView';
 import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
@@ -22,6 +24,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
+  const [achievements, setAchievements] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [activities, setActivities] = useState([]);
   const [user, setUser] = useState(null);
@@ -74,6 +77,17 @@ const App = props => {
       })
       .catch(error => {
         console.log('addChallenge', error.message);
+      });
+  };
+
+  const addAchievement = achievement => {
+    achievementService
+      .add(achievement)
+      .then(response => {
+        setAchievements(achievements.concat(response.data));
+      })
+      .catch(error => {
+        console.log('addAchievement', error.message);
       });
   };
 
@@ -181,6 +195,10 @@ const App = props => {
             render={() => <AddChallengeForm addChallenge={addChallenge} />}
           />
           <Route path="/badges" render={() => <BadgesView />} />
+          <Route
+            path="/addachievement"
+            render={() => <AddAchievementForm addAchievement={addAchievement} />}
+          />
           <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
