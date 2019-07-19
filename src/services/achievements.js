@@ -3,12 +3,18 @@ import { apiUrls } from '../config/config';
 
 const baseUrl = apiUrls.achievements;
 
-const setToken = newToken => {
+/*const setToken = newToken => {
   axios.defaults.headers.common['Authorization'] = newToken;
 };
+*/
 
 const get = () => {
   return axios.get(baseUrl);
+};
+
+const add = achievement => {
+  //setToken(token);
+  return axios.post(baseUrl, achievement);
 };
 
 const getByActivity = activityId => {
@@ -21,11 +27,6 @@ const getDailyToday = () => {
 
 const getDailyByDate = date => {
   return axios.get(baseUrl + '/daily/' + date);
-};
-
-const add = (achievement, token) => {
-  setToken(token);
-  return axios.post(baseUrl, achievement);
 };
 
 export default { get, getByActivity, getDailyToday, getDailyByDate, add };

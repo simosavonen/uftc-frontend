@@ -12,6 +12,7 @@ import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
+import AddAchievementForm from './components/AddAchievementForm';
 import ScoresView from './components/ScoresView';
 import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
@@ -25,9 +26,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = props => {
   const [challenges, setChallenges] = useState([]);
+  const [achievements, setAchievements] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [achievements, setAchievements] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
@@ -80,12 +81,23 @@ const App = props => {
 
   const addChallenge = challenge => {
     challengeService
-      .add(challenge)
+      .add(challenge, token)
       .then(response => {
         setChallenges(challenges.concat(response.data));
       })
       .catch(error => {
         console.log('addChallenge', error.message);
+      });
+  };
+
+  const addAchievement = achievement => {
+    achievementService
+      .add(achievement)
+      .then(response => {
+        setAchievements(achievements.concat(response.data));
+      })
+      .catch(error => {
+        console.log('addAchievement', error.message);
       });
   };
 
@@ -204,6 +216,10 @@ const App = props => {
           <Route
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={addChallenge} />}
+          />
+          <Route
+            path="/addachievement"
+            render={() => <AddAchievementForm addAchievement={addAchievement} />}
           />
           <Route
             path="/badges"
