@@ -18,6 +18,8 @@ import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
+import PasswordResetForm from './components/PasswordResetForm';
+import RequestResetEmailForm from './components/RequestResetEmailForm';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -49,6 +51,15 @@ const App = props => {
         console.log('getActivities', error.message);
       });
 
+    achievementService
+      .get()
+      .then(response => {
+        setAchievements(response.data);
+      })
+      .catch(error => {
+        console.log('getActivities', error.message);
+      });
+
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
@@ -63,7 +74,6 @@ const App = props => {
         .get(token)
         .then(result => {
           setWorkouts(result.data);
-          //console.log(result.data);
         })
         .catch(error => console.log('workouts', error.message));
     }
@@ -71,7 +81,7 @@ const App = props => {
 
   const addChallenge = challenge => {
     challengeService
-      .add(challenge)
+      .add(challenge, token)
       .then(response => {
         setChallenges(challenges.concat(response.data));
       })
@@ -110,9 +120,17 @@ const App = props => {
       });
   };
 
-  // eslint-disable-next-line
-  const updateWorkout = () => {
-    return null;
+  const updateWorkout = workout => {
+    workoutService
+      .update(workout, token)
+      .then(response => {
+        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
+        setWorkouts(workoutsWithNew);
+        toast.success('Workout updated.');
+      })
+      .catch(error => {
+        console.log('updateWorkout', error.message);
+      });
   };
 
   const login = userDetails => {
@@ -152,6 +170,10 @@ const App = props => {
     return localStorage.getItem('loggedUser') !== null;
   };
 
+  const isResettingPassword = () => {
+    return props.location.pathname.startsWith('/passwordreset');
+  };
+
   const activityById = id => {
     for (let a of activities) {
       if (a.id.substr(0, 8) === id) {
@@ -162,7 +184,7 @@ const App = props => {
 
   return (
     <div className="site">
-      {!isAuthenticated() && <Redirect to="/login" />}
+      {!isAuthenticated() && !isResettingPassword() && <Redirect to="/login" />}
       <Header user={user} logout={logout} />
       <div className="main">
         <Switch>
@@ -183,6 +205,7 @@ const App = props => {
                 addWorkout={addWorkout}
                 challenge={challenges[0]}
                 workouts={workouts}
+                updateWorkout={updateWorkout}
               />
             )}
           />
@@ -194,12 +217,23 @@ const App = props => {
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={addChallenge} />}
           />
-          <Route path="/badges" render={() => <BadgesView />} />
           <Route
             path="/addachievement"
             render={() => <AddAchievementForm addAchievement={addAchievement} />}
           />
+          <Route
+            path="/badges"
+            render={() => (
+              <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
+            )}
+          />
           <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
+          <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
+          <Route
+            exact
+            path="/passwordreset/:token"
+            render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
+          />
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />

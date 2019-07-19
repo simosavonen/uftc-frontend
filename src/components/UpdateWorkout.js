@@ -1,22 +1,42 @@
 import React, { useState } from 'react';
-//import ActivityRow from './ActivityRow';
+import moment from 'moment';
+import UpdateWorkoutForm from './UpdateWorkoutForm';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
+  const [showActivities, setshowActivities] = useState(false);
+
   let oneTypeActLenght;
 
-  console.log('workouts', props.workouts);
-  console.log('activity', props.activity);
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
+    if (!showActivities) {
+      return (
+        <div>
+          <button
+            className="button is-dark is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
+        </div>
+      );
+    }
     props.workouts.map(item => {
       const a = item.activity;
+      const _workoutid = item.id;
       return item.instances.map(ind => {
-        return actNameTbl.push({ date: ind.date, activity: a, amount: ind.amount });
+        return actNameTbl.push({
+          date: ind.date,
+          activity: a,
+          workoutid: _workoutid,
+          amount: ind.amount,
+          _id: ind._id
+        });
       });
     });
 
@@ -49,20 +69,60 @@ const UpdateWorkout = props => {
       );
     }
 
+    const updateCall = () => {
+      if (workoutSelected) {
+        return (
+          <UpdateWorkoutForm
+            key={workoutSelected.date}
+            workout={workoutSelected}
+            updateWorkout={props.updateWorkout}
+          />
+        );
+      }
+    };
+
     return (
       <>
-        <h1 className="title is-size-4-mobile is-size-3">Your activities</h1>
-        <ul>
-          {oneTypeAct.map(item => (
-            <li key={item.date} onClick={() => setWorkoutSelected(item.activity)}>
-              {item.date.substr(0, 10)}
-              {' \u00b7 '}
-              <span style={{ fontSize: 'larger', color: '#ff2457' }}>{item.amount}</span>
-            </li>
-          ))}
-        </ul>
-        {workoutSelected && (
-          <p onClick={() => setWorkoutSelected(null)}>klikkasit suoritusta, tähän tulee formi</p>
+        <div>
+          <button
+            className="button is-light is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
+        </div>
+        {showActivities && (
+          <div>
+            <ul>
+              {oneTypeAct.map(item => (
+                <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#0f0f0f'
+                    }}
+                  >
+                    {moment(item.date).format('ddd MMM Do')}
+                  </span>
+                  {' \u00b7 '}
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#ff2457'
+                    }}
+                  >
+                    {item.amount}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div>{updateCall()}</div>
+            {workoutSelected && <p onClick={() => setWorkoutSelected(null)}> </p>}
+          </div>
         )}
       </>
     );
