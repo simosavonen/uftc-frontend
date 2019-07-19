@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import kettlebeach from '../media/kettlebeach.mp4';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
@@ -92,10 +93,13 @@ const LoginForm = props => {
           </div>
           <div className="column is-6-tablet is-5-desktop is-4-widescreen is-4-fullhd">
             <form className="box" onSubmit={submit}>
-              <h1 className="title is-4">Welcome to the UFTC</h1>
-              <h2 className="subtitle is-5">
+              <h1 className="title is-4 is-marginless">Welcome to the UFTC</h1>
+              <h2 className="subtitle is-5 is-marginless">
                 {isNewUser ? 'A new challenger appears' : 'Challenger, please log in'}
               </h2>
+              <p>
+                temp link to <Link to="/passwordreset">password reset</Link>
+              </p>
               <div className="field">
                 <label className="label">Email</label>
                 <div className="control has-icons-left">
