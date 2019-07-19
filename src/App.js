@@ -108,9 +108,17 @@ const App = props => {
       });
   };
 
-  // eslint-disable-next-line
-  const updateWorkout = () => {
-    return null;
+  const updateWorkout = workout => {
+    workoutService
+      .update(workout, token)
+      .then(response => {
+        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
+        setWorkouts(workoutsWithNew);
+        toast.success('Workout updated.');
+      })
+      .catch(error => {
+        console.log('updateWorkout', error.message);
+      });
   };
 
   const login = userDetails => {
@@ -185,6 +193,7 @@ const App = props => {
                 addWorkout={addWorkout}
                 challenge={challenges[0]}
                 workouts={workouts}
+                updateWorkout={updateWorkout}
               />
             )}
           />
