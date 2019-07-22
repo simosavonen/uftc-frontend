@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Footer = props => {
-  if (!props.user) return null;
-
+const Footer = () => {
   return (
     <div className="footer is-hidden-mobile is-size-6-tablet">
       <div className="columns is-mobile is-centered">
@@ -19,15 +17,15 @@ const Footer = props => {
         <div className="column is-4 has-text-centered">
           Admin tools:
           <p>
-          <a href="http://localhost:3000/addchallenge" target="_blank" rel="noopener noreferrer">
-            http://localhost:3000/addchallenge
-          </a>
+            <a href="http://localhost:3000/addchallenge" target="_blank" rel="noopener noreferrer">
+              add challenge
+            </a>
           </p>
           <p>
-          <a href="http://localhost:3000/addactivity" target="_blank" rel="noopener noreferrer">
-            http://localhost:3000/addactivity
-          </a>
-          </p>         
+            <a href="http://localhost:3000/addactivity" target="_blank" rel="noopener noreferrer">
+              add activity
+            </a>
+          </p>
           <p>link</p>
         </div>
       </div>

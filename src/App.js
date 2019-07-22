@@ -20,6 +20,7 @@ import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
 import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
+import StyleGuide from './components/StyleGuide';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -29,7 +30,6 @@ const App = props => {
   const [achievements, setAchievements] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -63,7 +63,6 @@ const App = props => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      setUser(user);
       setToken(user.token);
     }
   }, []);
@@ -137,7 +136,6 @@ const App = props => {
     userService
       .login(userDetails)
       .then(response => {
-        setUser(response.data);
         setToken(response.data.token);
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
@@ -160,7 +158,6 @@ const App = props => {
   };
 
   const logout = () => {
-    setUser(null);
     setToken(null);
     setWorkouts([]);
     localStorage.removeItem('loggedUser');
@@ -182,11 +179,21 @@ const App = props => {
     }
   };
 
+  // todo: more than 1 background image?
+  const background = () => {
+    return props.location.pathname.startsWith('/login') ? 'kettlebeach' : '';
+  };
+
+  // todo: add other colors
+  const gradient = () => {
+    return props.location.pathname.startsWith('/login') ? '' : 'blue-gradient';
+  };
+
   return (
-    <div className="site">
-      {!isAuthenticated() && !isResettingPassword() && <Redirect to="/login" />}
-      <Header user={user} logout={logout} />
-      <div className="main">
+    <div className={`site ${background()}`}>
+      <div className={`main ${gradient()}`}>
+        {!isAuthenticated() && !isResettingPassword() && <Redirect to="/login" />}
+        {isAuthenticated() && <Header logout={logout} />}
         <Switch>
           <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
           <Route
@@ -234,11 +241,12 @@ const App = props => {
             path="/passwordreset/:token"
             render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
           />
+          <Route exact path="/styleguide" render={() => <StyleGuide />} />
           <Route exact path="/" render={() => <FrontPage />} />
         </Switch>
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
+        {isAuthenticated() && <Footer />}
       </div>
-      <Footer user={user} />
     </div>
   );
 };
