@@ -72,11 +72,16 @@ const UpdateWorkout = props => {
     const updateCall = () => {
       if (workoutSelected) {
         return (
-          <UpdateWorkoutForm
-            key={workoutSelected.date}
-            workout={workoutSelected}
-            updateWorkout={props.updateWorkout}
-          />
+          <div className="modal is-active">
+            <div className="modal-background" />
+            <div className="modal-content">
+              <UpdateWorkoutForm
+                key={workoutSelected.date}
+                workout={workoutSelected}
+                updateWorkout={props.updateWorkout}
+              />
+            </div>
+          </div>
         );
       }
     };
