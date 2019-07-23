@@ -50,7 +50,7 @@ const UpdateWorkoutForm = props => {
   return (
     <div>
       <form onSubmit={submit}>
-        <label className="label">Suorituskertoja (kpl):</label>
+        <label className="label has-text-white">Suorituskertoja (kpl):</label>
         <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
           +
         </button>
