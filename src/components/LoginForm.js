@@ -34,7 +34,8 @@ const LoginForm = props => {
     const userDetails = {
       email,
       password,
-      name
+      name,
+      location
     };
     isNewUser ? props.register(userDetails) : props.login(userDetails);
   };

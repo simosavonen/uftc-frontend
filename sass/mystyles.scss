@@ -22,6 +22,7 @@ $warning: $yellowsnow;
 
 // Update some of Bulma's component variables
 $navbar-background-color: #ffffff00; // navbar background transparent
+$footer-background-color: #00000020; // footer semi transparent
 
 // Import all or just the modules you ended up using.
 @import '../node_modules/bulma/sass/utilities/_all.sass';
