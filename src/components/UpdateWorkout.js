@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
+//import { isModuleDeclaration } from '@babel/types';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
@@ -11,6 +12,7 @@ const UpdateWorkout = props => {
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
+    let nameTbl;
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
@@ -68,11 +70,46 @@ const UpdateWorkout = props => {
         </p>
       );
     }
+    /*
+    $('.modal-button').click(function() {
+      var target = $(this).data('target');
+      $('html').addClass('is-clipped');
+      $(target).addClass('is-active');
+    });
+
+    $('.modal-close').click(function() {
+      $('html').removeClass('is-clipped');
+      $(this)
+        .parent()
+        .removeClass('is-active');
+    });
+*/
+    //this.removeClass('is-active');
+    // this.removeClass('is-clipped');
+    //nameTbl.classList.remove('is-active');
+    //nameTbl.classList.toggle('is-active');
+    //nameTbl.classList.toggle('is-active');
+    //nameTbl.classList.toggle('modal');
+    //console.log('name exist');
+    //console.log('name not exist');
+    //{showornot()}
+    function showornot() {
+      if (nameTbl) {
+        //if (nameTbl.classList.contains('modal')) {
+        nameTbl.classList.toggle('is-active');
+
+        //} else {
+
+        //}
+      }
+    }
 
     const updateCall = () => {
+      console.log('updateCall');
       if (workoutSelected) {
+        console.log('updateCall workoutSelected', workoutSelected);
         return (
-          <div className="modal is-active">
+          <div key={workoutSelected.date} className="modal is-active">
             <div className="modal-background" />
             <div className="modal-content">
               <UpdateWorkoutForm
@@ -81,6 +118,22 @@ const UpdateWorkout = props => {
                 updateWorkout={props.updateWorkout}
               />
             </div>
+            <button
+              className="modal-close is-large"
+              aria-label="close"
+              onClick={() => {
+                nameTbl = document.querySelector('.modal');
+                //if (nameTbl.classList.contains('modal')) {
+                //nameTbl.classList.remove('modal');
+                //} else {
+                //nameTbl.classList.add('modal');
+                //}
+                nameTbl.classList.toggle('is-active');
+                //nameTbl.classList.toggle('modal');
+                //closeModal;
+                console.log('modal', nameTbl);
+              }}
+            />
           </div>
         );
       }
