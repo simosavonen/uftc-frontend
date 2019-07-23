@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import kettlebeach from '../media/kettlebeach.mp4';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
+import { ReactComponent as AmbientiaLogo } from '../logos/Ambientia_logo_RED_RGB.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [verify, setVerify] = useState('');
   const [name, setName] = useState('');
+  const [location, setLocation] = useState('Please select one');
   const [isNewUser, setIsNewUser] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    let invalidFields = 0;
+
+    // eslint-disable-next-line
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    !email.match(re) && (invalidFields += 1);
+
+    password.length < 8 && (invalidFields += 1);
+
+    if (isNewUser) {
+      location === 'Please select one' && (invalidFields += 1);
+      name.length < 3 && (invalidFields += 1);
+    }
+
+    setIsValid(invalidFields === 0);
+  }, [email, password, name, location, isNewUser]);
 
   const submit = event => {
     event.preventDefault();
@@ -24,24 +42,29 @@ const LoginForm = props => {
   // show these if we're registering a new user
   const registerFields = (
     <>
-      <div className="field">
-        <label className="label">Enter the password again</label>
-        <div className="control has-icons-left">
-          <input
-            className="input"
-            type="password"
-            value={verify}
-            onChange={({ target }) => setVerify(target.value)}
-            required
-          />
-          <span className="icon is-small is-left">
-            <FontAwesomeIcon icon="lock" />
-          </span>
+      <div className="field" style={{ width: '100%' }}>
+        <label className="label has-text-white">Location</label>
+        <div className="control has-icons-left is-expanded">
+          <div className="select is-fullwidth">
+            <select value={location} onChange={({ target }) => setLocation(target.value)}>
+              <option disabled>Please select one</option>
+              <option>Hämeenlinna</option>
+              <option>Helsinki</option>
+              <option>Joensuu</option>
+              <option>Tampere</option>
+              <option>Turku</option>
+              <option>Tallinn</option>
+              <option>Tartu</option>
+            </select>
+          </div>
+          <div className="icon is-small is-left">
+            <FontAwesomeIcon icon="map-marker-alt" />
+          </div>
         </div>
       </div>
 
-      <div className="field">
-        <label className="label">Display name</label>
+      <div className="field" style={{ width: '100%' }}>
+        <label className="label has-text-white">Display name</label>
         <div className="control has-icons-left">
           <input
             className="input"
@@ -55,69 +78,59 @@ const LoginForm = props => {
             <FontAwesomeIcon icon="user" />
           </span>
         </div>
-        <p className="help">surnames will be abbreviated</p>
+        <p className="help has-text-white has-text-right">surnames will be abbreviated</p>
       </div>
     </>
   );
 
   return (
-    <>
-      <video autoPlay muted loop id="myVideo">
-        <source src={kettlebeach} type="video/mp4" />
-      </video>
-      <section className="hero is-fullheight">
-        <div className="hero-head loginHeader columns is-centered is-mobile has-text-white-ter is-size-4">
-          <div className="column">
-            <Logo width={80} height={40} />
-          </div>
-          <div className="column" />
-          <div className="column has-text-right">15 / 70</div>
-        </div>
-        <div className="hero-body columns is-centered is-mobile">
-          <div
-            className="column has-text-white-bis is-hidden-mobile is-5-tablet is-5-desktop is-5-widescreen is-5-fullhd"
-            style={{ fontSize: '3.1vw' }}
+    <section className="is-fullheight">
+      <div className="columns is-centered is-fullheight is-marginless">
+        <div className="column is-4 is-hidden-mobile" />
+        <div className="column is-5 blue-white-gradient is-fullheight is-paddingless">
+          <form
+            className="is-fullheight"
+            onSubmit={submit}
+            style={{
+              padding: 'calc(0.5em + 1vh) calc(1em + 3vw)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
           >
-            <p>
-              <span className="boxedLetter">U</span>ltimate
-            </p>
-            <p>
-              <span className="boxedLetter">F</span>unctional
-            </p>
-            <p>
-              <span className="boxedLetter">T</span>raining
-            </p>
-            <p>
-              <span className="boxedLetter">C</span>hallenge
-            </p>
-          </div>
-          <div className="column is-6-tablet is-5-desktop is-4-widescreen is-4-fullhd">
-            <form className="box" onSubmit={submit}>
-              <h1 className="title is-4 is-marginless">Welcome to the UFTC</h1>
-              <h2 className="subtitle is-5 is-marginless">
-                {isNewUser ? 'A new challenger appears' : 'Challenger, please log in'}
-              </h2>
-              <p>
-                temp link to <Link to="/passwordreset">password reset</Link>
-              </p>
-              <div className="field">
-                <label className="label">Email</label>
-                <div className="control has-icons-left">
+            <div
+              id="top"
+              className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
+            >
+              <Logo height="70%" />
+              <h1
+                className="is-size-6-mobile is-size-5 has-text-white has-text-weight-bold"
+                style={{ marginTop: '0.5vh' }}
+              >
+                Ultimate Functional Training Challenge
+              </h1>
+            </div>
+
+            <div id="middle" style={{ width: '100%' }}>
+              <div className="field" style={{ width: '100%' }}>
+                <label className="label has-text-white">Email</label>
+                <div className="control is-expanded has-icons-left">
                   <input
                     className="input"
                     type="email"
                     placeholder="first.last@ambientia.fi"
                     value={email}
-                    onChange={({ target }) => setEmail(target.value)}
+                    onChange={({ target }) => setEmail(target.value.toLowerCase())}
                     required
                   />
                   <span className="icon is-small is-left">
-                    <FontAwesomeIcon icon="at" />
+                    <FontAwesomeIcon icon="envelope" />
                   </span>
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Password</label>
+
+              <div className="field" style={{ width: '100%' }}>
+                <label className="label has-text-white">Password</label>
                 <div className="control has-icons-left">
                   <input
                     className="input"
@@ -130,46 +143,44 @@ const LoginForm = props => {
                     <FontAwesomeIcon icon="lock" />
                   </span>
                 </div>
+                <Link to="/passwordreset" className="help has-text-white has-text-right">
+                  forgot your password?
+                </Link>
               </div>
 
               {isNewUser && registerFields}
 
-              <div className="field">
-                <button className="button is-info is-outlined">
-                  {isNewUser ? 'Create an account' : 'Log in'}
-                </button>
-                <button
-                  className="button is-text is-pulled-right"
-                  onClick={event => {
-                    event.preventDefault();
-                    setIsNewUser(!isNewUser);
-                  }}
-                >
-                  {isNewUser ? 'cancel' : 'create an account'}
-                </button>
+              <div className="field is-grouped">
+                <div className="control is-expanded">
+                  <button
+                    className={`button is-fullwidth has-text-weight-bold ${isValid &&
+                      'is-success'}`}
+                    disabled={!isValid}
+                    title={isValid ? '' : 'Check the form fields'}
+                  >
+                    {isNewUser ? 'Create an account' : 'Log in'}
+                  </button>
+                </div>
+                <div className="control">
+                  <button
+                    className="button is-text has-text-weight-bold"
+                    onClick={event => {
+                      event.preventDefault();
+                      setIsNewUser(!isNewUser);
+                    }}
+                  >
+                    {isNewUser ? 'cancel' : 'create an account'}
+                  </button>
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
+            <div id="bottom" style={{ height: 'calc(20px + 3vh)', margin: '2vh 0 6vh 0' }}>
+              <AmbientiaLogo />
+            </div>
+          </form>
         </div>
-        <div className="hero-foot footer has-text-white-ter">
-          <div className="columns is-centered is-mobile">
-            <div className="column has-text-centered">
-              Capstone Project
-              <p>University of Turku</p>
-            </div>
-            <div className="column has-text-centered is-hidden-mobile">
-              Middle Thingy
-              <p>Just In Case</p>
-            </div>
-            <div className="column has-text-centered">
-              admin tools
-              <p>link</p>
-              <p>link</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

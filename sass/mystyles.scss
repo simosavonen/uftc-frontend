@@ -1,40 +1,27 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Raleway:700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700&display=swap');
 
-// Set your brand colors
-$ambientia: #ff2457;
-$ambientia-lighter: #ff245760;
-$ambientia-hover: #ff245733;
-$blue: #248aff;
-$blue-lighter: #248aff70;
-$brown: #626674;
-$beige-light: #f2f2f2;
-$beige-lighter: #fefefe;
-$darken: rgba(0, 0, 0, 0.1);
+// colors from https://www.sessions.edu/color-calculator/
+// based on the ambientia red 'raspberry'
+$raspberry: #ff2457;
+$cyanide: #24ff99;
+$bluesky: #248aff;
+$grass: #57ff24; // bad contrast with white text
+$yellowsnow: #ffe524;
+$orangejuice: #ff7824;
+$purplerain: #ff24c5;
 
 // Update Bulma's global variables
 $family-sans-serif: 'Raleway', sans-serif;
-$grey-dark: $brown;
-$grey-light: $beige-light;
-$info: $ambientia;
-$primary: $blue;
+$primary: $cyanide;
+$link: $bluesky;
+$danger: $raspberry;
+$warning: $yellowsnow;
 
 // Update some of Bulma's component variables
-$body-background-color: $beige-lighter;
-$navbar-breakpoint: 700px;
-$navbar-height: 4.5rem;
-$navbar-background-color: $ambientia;
-$navbar-item-hover-background-color: $darken;
-$navbar-item-color: #ffffff;
-$navbar-item-hover-color: $beige-lighter;
-$table-row-hover-background-color: $ambientia-hover;
-$table-cell-border: 1px solid $ambientia-lighter;
-$progress-bar-background-color: $ambientia-lighter;
-$footer-background-color: #00000020;
-$footer-padding: 2rem 2rem 2rem;
-$box-background-color: #f2f2f24b;
+$navbar-background-color: #ffffff00; // navbar background transparent
 
 // Import all or just the modules you ended up using.
 @import '../node_modules/bulma/sass/utilities/_all.sass';

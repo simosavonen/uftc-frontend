@@ -1,51 +1,31 @@
+.kettlebeach {
+  background: url('./images/kettlebell_bg.png');
+  background-size: cover;
+  background-position: 70% 50%;
+}
+
+.blue-gradient {
+  background: linear-gradient(344deg, rgba(36, 138, 255, 0.6) 0%, rgba(18, 69, 128, 0.6) 100%);
+}
+
+.blue-white-gradient {
+  background: linear-gradient(11deg, rgba(36, 138, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+.is-fullheight {
+  min-height: 100vh;
+}
+
 .is-clickable {
   cursor: pointer;
 }
 
-.menuBox:hover {
-  background-color: #ff2457;
-  color: #f2f2f2;
+.logobox-big {
+  height: calc(90px + 6vw);
+  margin: 10vh 0 1vh 0;
 }
 
-.site {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-.main {
-  flex: 1;
-}
-
-.boxedLetter {
-  padding: 0.1vw;
-  margin: 0.5vw 0.1vw;
-  width: 4vw;
-  max-width: 100px;
-  text-align: center;
-  display: inline-block;
-  font-size: 150%;
-  color: #ff2457;
-}
-
-.loginHeader {
-  padding: 1rem 2rem 0rem 2rem !important;
-}
-
-#myVideo {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  overflow: hidden;
-  object-fit: cover;
-  object-position: 35% 50%;
-  z-index: -100;
-}
-
-.menurow-even {
-  background-color: #0898cc;
-}
-.menurow-odd {
-  background-color: #1088b3;
+.logobox-small {
+  height: calc(50px + 6vw);
+  margin: 2vh 0 2vh 0;
 }
