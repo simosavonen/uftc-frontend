@@ -28,6 +28,7 @@ const RequestResetEmailForm = props => {
         }
       })
       .catch(error => {
+        setIsWaiting(false);
         toast.error('Unknown email.');
         console.log('requestResetEmail', error.message);
       });
