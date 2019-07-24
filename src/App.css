@@ -29,3 +29,11 @@
   height: calc(50px + 6vw);
   margin: 2vh 0 2vh 0;
 }
+
+.menurow-even {
+  background-color: #0898cc;
+}
+.menurow-odd {
+  background-color: #1088b3;
+}
+
