@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import ApexCharts from 'apexcharts';
+import { isMobile } from 'react-device-detect';
 
 const sampleData = [
   {
@@ -45,7 +46,8 @@ const WorkoutChart = ({ chartData = sampleData }) => {
       type: 'datetime'
     },
     stroke: {
-      curve: 'smooth'
+      curve: 'smooth',
+      width: 4
     },
     markers: {
       size: 5
@@ -83,7 +85,12 @@ const WorkoutChart = ({ chartData = sampleData }) => {
     }
   };
 
-  return <Chart options={options} series={chartData} />;
+  if (isMobile) {
+    options.stroke = { curve: 'smooth', width: 2 };
+    options.markers = { size: 3 };
+  }
+
+  return <Chart height={isMobile ? 300 : 'auto'} options={options} series={chartData} />;
 };
 
 export default WorkoutChart;

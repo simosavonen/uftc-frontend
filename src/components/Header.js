@@ -6,7 +6,7 @@ const Header = props => {
   const [burgerActive, setBurgerActive] = useState(false);
 
   return (
-    <nav className="navbar has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-desktop">
+    <nav className="navbar has-text-weight-bold is-transparent is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           <Logo width={100} height={40} />
@@ -26,20 +26,32 @@ const Header = props => {
       </div>
       <div id="navMenu" className={`navbar-menu ${burgerActive && 'is-active'}`}>
         <div className="navbar-start">
-          <NavLink className="navbar-item" to="/activities" activeClassName="is-active">
+          <NavLink
+            className="navbar-item has-text-white"
+            to="/activities"
+            activeClassName="is-active has-text-dark"
+          >
             activities
           </NavLink>
-          <NavLink className="navbar-item" to="/badges" activeClassName="is-active">
+          <NavLink
+            className="navbar-item has-text-white"
+            to="/badges"
+            activeClassName="is-active has-text-dark"
+          >
             badges
           </NavLink>
-          <NavLink className="navbar-item" to="/leaderboard" activeClassName="is-active">
+          <NavLink
+            className="navbar-item has-text-white"
+            to="/leaderboard"
+            activeClassName="is-active has-text-dark"
+          >
             leaderboard
           </NavLink>
         </div>
         <div className="navbar-end">
           <Link
             to="/"
-            className="navbar-item"
+            className="navbar-item has-text-white"
             onClick={() => {
               setBurgerActive(false);
               props.logout();
