@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UpdateWorkout = props => {
@@ -32,20 +32,6 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
-    /*
-    if (!showActivities) {
-      return (
-        <div>
-          <button
-            className="button is-dark is-large is-fullwidth"
-            onClick={() => setshowActivities(!showActivities)}
-          >
-            {showActivities ? 'Hide activities' : 'View activities'}
-          </button>
-        </div>
-      );
-    }
-*/
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -90,9 +76,7 @@ const UpdateWorkout = props => {
     }
 
     const updateCall = () => {
-      console.log('updateCall');
       if (workoutSelected) {
-        console.log('updateCall workoutSelected', workoutSelected);
         return (
           <div key={workoutSelected.date} className="modal is-active">
             <div className="modal-background" />
@@ -114,7 +98,6 @@ const UpdateWorkout = props => {
                     setWorkoutSelected(null);
                   }
                 }
-                console.log('modal', nameTbl);
               }}
             />
           </div>
@@ -124,16 +107,6 @@ const UpdateWorkout = props => {
 
     return (
       <>
-        {/*
-        <div>
-          <button
-            className="button is-light is-large is-fullwidth"
-            onClick={() => setshowActivities(!showActivities)}
-          >
-            {showActivities ? 'Hide activities' : 'View activities'}
-          </button>
-        </div>
-        */}
         <div
           className={`columns is-centered is-mobile has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop `}
           style={{ padding: '1vw', margin: '1vw 4vw' }}
@@ -141,7 +114,7 @@ const UpdateWorkout = props => {
         >
           <div className="column is-11">
             {' '}
-            {showActivities ? 'Hide activities' : 'View activities'}{' '}
+            {showActivities ? 'Hide activities' : 'Your history'}{' '}
           </div>
 
           <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
