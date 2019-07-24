@@ -33,11 +33,15 @@ const LoginForm = props => {
     event.preventDefault();
     const userDetails = {
       email,
-      password,
-      name,
-      location
+      password
     };
-    isNewUser ? props.register(userDetails) : props.login(userDetails);
+    if (isNewUser) {
+      userDetails.name = name;
+      userDetails.location = location;
+      props.register(userDetails);
+    } else {
+      props.login(userDetails);
+    }
   };
 
   // show these if we're registering a new user

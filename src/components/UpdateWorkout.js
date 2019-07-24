@@ -108,7 +108,7 @@ const UpdateWorkout = props => {
     return (
       <>
         <div
-          className={`columns is-centered is-mobile has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop `}
+          className={`columns is-centered is-mobile has-background-dark has-text-white`}
           style={{ padding: '1vw', margin: '1vw 4vw' }}
           onClick={handleClick}
         >
