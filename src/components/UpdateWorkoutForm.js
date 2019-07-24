@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
-  let modDate = props.workout.date.substring(0, 10);
+  let modDate = moment(props.workout.date).format('ddd MMM Do');
 
   const handleMoreClick = event => {
     event.preventDefault();
@@ -65,7 +66,7 @@ const UpdateWorkoutForm = props => {
         <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
           -
         </button>
-        <label className="label">Date: {modDate} </label>
+        <label className="label has-text-white">Date: {modDate} </label>
 
         <p>
           <button className="button is-success is-fullwidth">Save</button>

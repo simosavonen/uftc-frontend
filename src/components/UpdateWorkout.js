@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
-//import { isModuleDeclaration } from '@babel/types';
+import posed, { PoseGroup } from 'react-pose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
   const [showActivities, setshowActivities] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  const handleClick = () => {
+    setOpened(!opened);
+    setshowActivities(!showActivities);
+  };
+
+  const Icon = posed.div({
+    up: {
+      rotate: '0deg'
+    },
+    down: {
+      rotate: '180deg'
+    }
+  });
 
   let oneTypeActLenght;
 
@@ -16,6 +32,7 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
+    /*
     if (!showActivities) {
       return (
         <div>
@@ -28,6 +45,7 @@ const UpdateWorkout = props => {
         </div>
       );
     }
+*/
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -70,39 +88,6 @@ const UpdateWorkout = props => {
         </p>
       );
     }
-    /*
-    $('.modal-button').click(function() {
-      var target = $(this).data('target');
-      $('html').addClass('is-clipped');
-      $(target).addClass('is-active');
-    });
-
-    $('.modal-close').click(function() {
-      $('html').removeClass('is-clipped');
-      $(this)
-        .parent()
-        .removeClass('is-active');
-    });
-*/
-    //this.removeClass('is-active');
-    // this.removeClass('is-clipped');
-    //nameTbl.classList.remove('is-active');
-    //nameTbl.classList.toggle('is-active');
-    //nameTbl.classList.toggle('is-active');
-    //nameTbl.classList.toggle('modal');
-    //console.log('name exist');
-    //console.log('name not exist');
-    //{showornot()}
-    function showornot() {
-      if (nameTbl) {
-        //if (nameTbl.classList.contains('modal')) {
-        nameTbl.classList.toggle('is-active');
-
-        //} else {
-
-        //}
-      }
-    }
 
     const updateCall = () => {
       console.log('updateCall');
@@ -123,14 +108,12 @@ const UpdateWorkout = props => {
               aria-label="close"
               onClick={() => {
                 nameTbl = document.querySelector('.modal');
-                //if (nameTbl.classList.contains('modal')) {
-                //nameTbl.classList.remove('modal');
-                //} else {
-                //nameTbl.classList.add('modal');
-                //}
-                nameTbl.classList.toggle('is-active');
-                //nameTbl.classList.toggle('modal');
-                //closeModal;
+                if (nameTbl) {
+                  nameTbl.classList.remove('is-active');
+                  if (workoutSelected) {
+                    setWorkoutSelected(null);
+                  }
+                }
                 console.log('modal', nameTbl);
               }}
             />
@@ -141,6 +124,7 @@ const UpdateWorkout = props => {
 
     return (
       <>
+        {/*
         <div>
           <button
             className="button is-light is-large is-fullwidth"
@@ -149,6 +133,22 @@ const UpdateWorkout = props => {
             {showActivities ? 'Hide activities' : 'View activities'}
           </button>
         </div>
+        */}
+        <div
+          className={`columns is-centered is-mobile has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop `}
+          style={{ padding: '1vw', margin: '1vw 4vw' }}
+          onClick={handleClick}
+        >
+          <div className="column is-11">
+            {' '}
+            {showActivities ? 'Hide activities' : 'View activities'}{' '}
+          </div>
+
+          <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
+            <FontAwesomeIcon icon="angle-up" />
+          </Icon>
+        </div>
+
         {showActivities && (
           <div>
             <ul>
