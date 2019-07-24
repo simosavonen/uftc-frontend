@@ -49,9 +49,9 @@ const UpdateWorkoutForm = props => {
   };
 
   return (
-    <div>
+    <div className="box">
       <form onSubmit={submit}>
-        <label className="label has-text-white">Suorituskertoja (kpl):</label>
+        <label className="label">Suorituskertoja (kpl):</label>
         <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
           +
         </button>
@@ -66,7 +66,7 @@ const UpdateWorkoutForm = props => {
         <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
           -
         </button>
-        <label className="label has-text-white">Date: {modDate} </label>
+        <label className="label">Date: {modDate} </label>
 
         <p>
           <button className="button is-success is-fullwidth">Save</button>
