@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WorkoutChart from './WorkoutChart';
 import WeeklyScores from './WeeklyScores';
@@ -25,7 +26,6 @@ const ScoresView = props => {
     scoreService
       .getWeekly()
       .then(result => {
-        //console.log('weeklyData', result.data);
         setWeeklyData(result.data);
       })
       .catch(error => console.log('weeklyData', error.message));
@@ -33,16 +33,16 @@ const ScoresView = props => {
 
   useEffect(() => {
     if (showUser) {
-      let filtered = workouts.filter(w => w.user.toString() === showUser);
+      let usersWorkouts = workouts.filter(w => w.user.toString() === showUser);
 
-      if (filtered.length === 0) {
+      if (usersWorkouts.length === 0) {
         workoutService.getWorkoutsByUser(showUser).then(result => {
           setWorkouts(workouts.concat(result.data));
         });
-        filtered = workouts.filter(w => w.user.toString() === showUser);
+        usersWorkouts = workouts.filter(w => w.user.toString() === showUser);
       }
 
-      filtered = filtered.map(i => {
+      usersWorkouts = usersWorkouts.map(i => {
         return {
           name: i.activity.name,
           data: i.instances
@@ -54,8 +54,7 @@ const ScoresView = props => {
             })
         };
       });
-      //console.log('filtered', filtered);
-      setChartData(filtered);
+      setChartData(usersWorkouts);
     }
   }, [showUser, workouts]);
 
@@ -97,7 +96,10 @@ const ScoresView = props => {
             className="button is-outlined is-small is-pulled-right"
             onClick={() => setShowFilterButtons(!showFilterButtons)}
           >
-            {showFilterButtons ? 'hide filters' : 'show filters'}
+            <span className="icon">
+              <FontAwesomeIcon icon="filter" />
+            </span>
+            <span>{showFilterButtons ? 'hide filters' : 'show filters'}</span>
           </button>
         </h1>
         {showFilterButtons && (
