@@ -191,13 +191,15 @@ const App = props => {
       case '/login':
         return '';
       case '/leaderboard':
-      case '/activities':
       case '/badges':
       case '/':
       default:
         // the reset token is added to this, so startsWith()
         if (path.startsWith('/passwordreset')) {
           return 'blue-gradient';
+        }
+        if (path.startsWith('/activities')) {
+          return 'dark-cyan-gradient';
         }
         return 'red-white-short-gradient';
     }

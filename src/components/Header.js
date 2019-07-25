@@ -9,11 +9,10 @@ const Header = props => {
     <nav className="navbar has-text-weight-bold is-transparent is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
-          <Logo width={100} height={40} />
+          <Logo width={100} height={35} />
         </Link>
-        <button
-          className={`navbar-burger burger button is-info is-shadowless ${burgerActive &&
-            'is-active'}`}
+        <div
+          className={`navbar-burger burger has-text-white ${burgerActive && 'is-active'}`}
           aria-label="menu"
           aria-expanded="false"
           data-target="navMenu"
@@ -22,7 +21,7 @@ const Header = props => {
           <span aria-hidden="true" />
           <span aria-hidden="true" />
           <span aria-hidden="true" />
-        </button>
+        </div>
       </div>
       <div id="navMenu" className={`navbar-menu ${burgerActive && 'is-active'}`}>
         <div className="navbar-start">
