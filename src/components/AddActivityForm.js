@@ -7,6 +7,7 @@ const AddActivityForm = props => {
   const [unit, setUnit] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
+  const [icon, setIcon] = useState('');
 
   const submit = event => {
     event.preventDefault();
@@ -16,7 +17,8 @@ const AddActivityForm = props => {
       type,
       unit,
       description,
-      url
+      url,
+      icon
     };
     props.addActivity(newActivity);
   };
@@ -55,6 +57,10 @@ const AddActivityForm = props => {
         <p>
           <label htmlFor="url">Url:</label>
           <input id="url" onChange={({ target }) => setUrl(target.value)} value={url} />
+        </p>
+        <p>
+          <label htmlFor="icon">Icon:</label>
+          <input id="icon" onChange={({ target }) => setIcon(target.value)} value={icon} />
         </p>
         <button type="submit">Add new activity</button>
       </form>
