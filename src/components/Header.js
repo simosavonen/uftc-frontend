@@ -28,21 +28,21 @@ const Header = props => {
           <NavLink
             className="navbar-item has-text-white"
             to="/activities"
-            activeClassName="is-active has-text-dark"
+            activeClassName="is-active has-text-grey-light"
           >
             activities
           </NavLink>
           <NavLink
             className="navbar-item has-text-white"
             to="/badges"
-            activeClassName="is-active has-text-dark"
+            activeClassName="is-active has-text-grey-light"
           >
             badges
           </NavLink>
           <NavLink
             className="navbar-item has-text-white"
             to="/leaderboard"
-            activeClassName="is-active has-text-dark"
+            activeClassName="is-active has-text-grey-light"
           >
             leaderboard
           </NavLink>
