@@ -4,110 +4,59 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import userService from './services/user';
 import workoutService from './services/workouts';
-import challengeService from './services/challenges';
-import activityService from './services/activities';
-import achievementService from './services/achievements';
+import { useResource } from './services/useResource';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
-import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
 import AddAchievementForm from './components/AddAchievementForm';
-import ScoresView from './components/ScoresView';
-import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
 import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
+import { apiUrls } from './config/config';
+
+import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = props => {
-  const [challenges, setChallenges] = useState([]);
-  const [achievements, setAchievements] = useState([]);
   const [workouts, setWorkouts] = useState([]);
-  const [activities, setActivities] = useState([]);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [challenges, challengeService] = useResource(apiUrls.challenges);
+  const [activities, activityService] = useResource(apiUrls.activities);
+  const [achievements, achievementService] = useResource(apiUrls.achievements);
 
   useEffect(() => {
-    challengeService
-      .get()
-      .then(response => {
-        setChallenges(response.data);
-      })
-      .catch(error => {
-        console.log('getChallenges', error.message);
-      });
-
-    activityService
-      .get()
-      .then(response => {
-        setActivities(response.data);
-      })
-      .catch(error => {
-        console.log('getActivities', error.message);
-      });
-
-    achievementService
-      .get()
-      .then(response => {
-        setAchievements(response.data);
-      })
-      .catch(error => {
-        console.log('getActivities', error.message);
-      });
-
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      setToken(user.token);
+      setUser(user);
+
+      // set the axios global default token
+      userService.setToken(user.token);
     }
   }, []);
 
   useEffect(() => {
-    if (token) {
+    if (user) {
       workoutService
-        .get(token)
+        .getWorkoutsByUser(user.id)
         .then(result => {
           setWorkouts(result.data);
+          //console.log('workouts', result.data);
         })
         .catch(error => console.log('workouts', error.message));
     }
-  }, [token]);
-
-  const addChallenge = challenge => {
-    challengeService
-      .add(challenge, token)
-      .then(response => {
-        setChallenges(challenges.concat(response.data));
-      })
-      .catch(error => {
-        console.log('addChallenge', error.message);
-      });
-  };
-
-  const addAchievement = achievement => {
-    achievementService
-      .add(achievement)
-      .then(response => {
-        setAchievements(achievements.concat(response.data));
-      })
-      .catch(error => {
-        console.log('addAchievement', error.message);
-      });
-  };
-
-  const addActivity = activity => {
-    activityService.add(activity).catch(error => console.log('addActivity', error.message));
-  };
+  }, [user]);
 
   const addWorkout = workout => {
     const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
     workoutService
-      .add(workoutWithChallengeId, token)
+      .add(workoutWithChallengeId)
       .then(response => {
         //console.log('response.data', response.data);
         const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
@@ -121,7 +70,7 @@ const App = props => {
 
   const updateWorkout = workout => {
     workoutService
-      .update(workout, token)
+      .update(workout)
       .then(response => {
         const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
         setWorkouts(workoutsWithNew);
@@ -136,7 +85,10 @@ const App = props => {
     userService
       .login(userDetails)
       .then(response => {
-        setToken(response.data.token);
+        setUser(response.data);
+        // set the axios global default token
+        userService.setToken(response.data.token);
+
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
       })
@@ -158,7 +110,7 @@ const App = props => {
   };
 
   const logout = () => {
-    setToken(null);
+    setUser(null);
     setWorkouts([]);
     localStorage.removeItem('loggedUser');
   };
@@ -186,7 +138,23 @@ const App = props => {
 
   // todo: add other colors
   const gradient = () => {
-    return props.location.pathname.startsWith('/login') ? '' : 'blue-gradient';
+    const path = props.location.pathname;
+    switch (path) {
+      case '/login':
+        return '';
+      case '/leaderboard':
+      case '/badges':
+      case '/':
+      default:
+        // the reset token is added to this, so startsWith()
+        if (path.startsWith('/passwordreset')) {
+          return 'blue-gradient';
+        }
+        // if (path.startsWith('/activities')) {
+        //   return 'dark-cyan-gradient';
+        // }
+        return 'red-white-short-gradient';
+    }
   };
 
   return (
@@ -216,17 +184,14 @@ const App = props => {
               />
             )}
           />
-          <Route
-            path="/leaderboard"
-            render={() => <ScoresView token={token} activities={activities} />}
-          />
+          <Route path="/leaderboard" render={() => <LeaderBoardView activities={activities} />} />
           <Route
             path="/addchallenge"
-            render={() => <AddChallengeForm addChallenge={addChallenge} />}
+            render={() => <AddChallengeForm addChallenge={challengeService.add} />}
           />
           <Route
             path="/addachievement"
-            render={() => <AddAchievementForm addAchievement={addAchievement} />}
+            render={() => <AddAchievementForm addAchievement={achievementService.add} />}
           />
           <Route
             path="/badges"
@@ -234,7 +199,10 @@ const App = props => {
               <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
             )}
           />
-          <Route path="/addactivity" render={() => <AddActivityForm addActivity={addActivity} />} />
+          <Route
+            path="/addactivity"
+            render={() => <AddActivityForm addActivity={activityService.add} />}
+          />
           <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
           <Route
             exact

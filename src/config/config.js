@@ -7,7 +7,7 @@ const apiUrls = {
   scores: host + '/api/scores',
   users: host + '/api/users',
   workouts: host + '/api/workouts',
-  forgotpassword: host + '/api/forgotpassword'
+  forgotpassword: host + '/api/passwords'
 };
 
 export { apiUrls };

@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
+import posed from 'react-pose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
   const [showActivities, setshowActivities] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  const handleClick = () => {
+    setOpened(!opened);
+    setshowActivities(!showActivities);
+  };
+
+  const Icon = posed.div({
+    up: {
+      rotate: '0deg'
+    },
+    down: {
+      rotate: '180deg'
+    }
+  });
 
   let oneTypeActLenght;
 
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
+    let nameTbl;
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
-    if (!showActivities) {
-      return (
-        <div>
-          <button
-            className="button is-dark is-large is-fullwidth"
-            onClick={() => setshowActivities(!showActivities)}
-          >
-            {showActivities ? 'Hide activities' : 'View activities'}
-          </button>
-        </div>
-      );
-    }
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -72,7 +78,7 @@ const UpdateWorkout = props => {
     const updateCall = () => {
       if (workoutSelected) {
         return (
-          <div className="modal is-active">
+          <div key={workoutSelected.date} className="modal is-active">
             <div className="modal-background" />
             <div className="modal-content">
               <UpdateWorkoutForm
@@ -81,6 +87,19 @@ const UpdateWorkout = props => {
                 updateWorkout={props.updateWorkout}
               />
             </div>
+            <button
+              className="modal-close is-large"
+              aria-label="close"
+              onClick={() => {
+                nameTbl = document.querySelector('.modal');
+                if (nameTbl) {
+                  nameTbl.classList.remove('is-active');
+                  if (workoutSelected) {
+                    setWorkoutSelected(null);
+                  }
+                }
+              }}
+            />
           </div>
         );
       }
@@ -88,14 +107,21 @@ const UpdateWorkout = props => {
 
     return (
       <>
-        <div>
-          <button
-            className="button is-light is-large is-fullwidth"
-            onClick={() => setshowActivities(!showActivities)}
-          >
-            {showActivities ? 'Hide activities' : 'View activities'}
-          </button>
+        <div
+          className={`columns is-centered is-mobile has-background-dark has-text-white`}
+          style={{ padding: '1vw', margin: '1vw 4vw' }}
+          onClick={handleClick}
+        >
+          <div className="column is-11">
+            {' '}
+            {showActivities ? 'Hide activities' : 'Your history'}{' '}
+          </div>
+
+          <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
+            <FontAwesomeIcon icon="angle-up" />
+          </Icon>
         </div>
+
         {showActivities && (
           <div>
             <ul>
