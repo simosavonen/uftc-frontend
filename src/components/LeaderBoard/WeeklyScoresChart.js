@@ -29,7 +29,7 @@ const generateSampleData = (size, weeks) => {
   return sampleData;
 };
 
-const WeeklyScores = ({ weekFilter, weeklyData }) => {
+const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
@@ -110,4 +110,4 @@ const WeeklyScores = ({ weekFilter, weeklyData }) => {
   return <Chart type="bar" height="300" options={options} series={filteredData} />;
 };
 
-export default WeeklyScores;
+export default WeeklyScoresChart;
