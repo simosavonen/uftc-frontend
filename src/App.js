@@ -87,7 +87,7 @@ const App = props => {
       .then(response => {
         setUser(response.data);
         // set the axios global default token
-        userService.setToken(user.token);
+        userService.setToken(response.data.token);
 
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
