@@ -8,6 +8,7 @@ const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
   const [showActivities, setshowActivities] = useState(false);
   const [opened, setOpened] = useState(false);
+  //const [renderKey, setRenderKey] = useState(false);
 
   const handleClick = () => {
     setOpened(!opened);
@@ -41,6 +42,9 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
+    console.log('day  showActivities', showActivities);
+    console.log('day  workoutSelected', workoutSelected);
+    console.log('day  opened', opened);
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -84,10 +88,18 @@ const UpdateWorkout = props => {
       );
     }
 
+    const renderKey = () => {
+      return `${new Date().getTime()}`;
+    };
+
     const updateCall = () => {
+      console.log('updatecall r', renderKey());
+      console.log('updatecall w', workoutSelected);
       if (workoutSelected) {
+        console.log('upd w', workoutSelected);
+        //setRenderKey(!renderKey);
         return (
-          <div key={workoutSelected.date} className="modal is-active">
+          <div key={workoutSelected.date + renderKey()} className="modal is-active">
             <div className="modal-background" />
             <div className="modal-content">
               <UpdateWorkoutForm
