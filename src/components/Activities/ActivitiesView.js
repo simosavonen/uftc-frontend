@@ -7,6 +7,9 @@ import ActivityMenu from './ActivityMenu';
 const ActivitiesView = ({ challenges, activities, workouts }) => {
   if (challenges.length === 0) return null;
 
+  //console.log('Activitiesview: props.workouts', workouts);
+  //console.log('Activitiesview: props.activities', activities);
+
   return (
     <div>
       <div className="section columns is-centered">

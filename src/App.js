@@ -8,10 +8,8 @@ import { useResource } from './services/useResource';
 import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
-import ActivitiesView from './components/ActivitiesView';
 import AddActivityForm from './components/AddActivityForm';
 import AddAchievementForm from './components/AddAchievementForm';
-import ScoresView from './components/ScoresView';
 import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
@@ -21,12 +19,14 @@ import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import { apiUrls } from './config/config';
 
+import { ActivitiesView, LeaderBoardView } from './components';
+
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = props => {
   const [workouts, setWorkouts] = useState([]);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
   const [challenges, challengeService] = useResource(apiUrls.challenges);
   const [activities, activityService] = useResource(apiUrls.activities);
   const [achievements, achievementService] = useResource(apiUrls.achievements);
@@ -35,25 +35,29 @@ const App = props => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      setToken(user.token);
+      setUser(user);
+
+      // set the axios global default token
+      userService.setToken(user.token);
     }
   }, []);
 
   useEffect(() => {
-    if (token) {
+    if (user) {
       workoutService
-        .get(token)
+        .getWorkoutsByUser(user.id)
         .then(result => {
           setWorkouts(result.data);
+          //console.log('workouts', result.data);
         })
         .catch(error => console.log('workouts', error.message));
     }
-  }, [token]);
+  }, [user]);
 
   const addWorkout = workout => {
     const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
     workoutService
-      .add(workoutWithChallengeId, token)
+      .add(workoutWithChallengeId)
       .then(response => {
         //console.log('response.data', response.data);
         const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
@@ -67,7 +71,7 @@ const App = props => {
 
   const updateWorkout = workout => {
     workoutService
-      .update(workout, token)
+      .update(workout)
       .then(response => {
         const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
         setWorkouts(workoutsWithNew);
@@ -82,7 +86,10 @@ const App = props => {
     userService
       .login(userDetails)
       .then(response => {
-        setToken(response.data.token);
+        setUser(response.data);
+        // set the axios global default token
+        userService.setToken(user.token);
+
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
       })
@@ -104,7 +111,7 @@ const App = props => {
   };
 
   const logout = () => {
-    setToken(null);
+    setUser(null);
     setWorkouts([]);
     localStorage.removeItem('loggedUser');
   };
@@ -144,9 +151,9 @@ const App = props => {
         if (path.startsWith('/passwordreset')) {
           return 'blue-gradient';
         }
-        if (path.startsWith('/activities')) {
-          return 'dark-cyan-gradient';
-        }
+        // if (path.startsWith('/activities')) {
+        //   return 'dark-cyan-gradient';
+        // }
         return 'red-white-short-gradient';
     }
   };
@@ -178,10 +185,7 @@ const App = props => {
               />
             )}
           />
-          <Route
-            path="/leaderboard"
-            render={() => <ScoresView token={token} activities={activities} />}
-          />
+          <Route path="/leaderboard" render={() => <LeaderBoardView activities={activities} />} />
           <Route
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={challengeService.add} />}

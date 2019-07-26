@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useResource = baseUrl => {
   const [data, setData] = useState([]);
-  console.log('useResource', baseUrl);
+  //console.log('useResource', baseUrl);
 
   useEffect(() => {
     const fetchData = async url => {

@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WorkoutChart from './WorkoutChart';
 import WeeklyScores from './WeeklyScores';
-import workoutService from '../services/workouts';
-import scoreService from '../services/scores';
+import workoutService from '../../services/workouts';
+import scoreService from '../../services/scores';
 
 // ugh, hardcoded
 const locations = ['Hämeenlinna', 'Helsinki', 'Joensuu', 'Tampere', 'Turku', 'Tallinn', 'Tartu'];
 const series = ['Defaults', 'Pros'];
 
-const ScoresView = props => {
+const LeaderBoardView = props => {
   const [showUser, setShowUser] = useState('');
   const [workouts, setWorkouts] = useState([]);
 
@@ -285,4 +285,4 @@ const ScoresView = props => {
   );
 };
 
-export default ScoresView;
+export default LeaderBoardView;
