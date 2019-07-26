@@ -10,7 +10,6 @@ import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import AddActivityForm from './components/AddActivityForm';
 import AddAchievementForm from './components/AddAchievementForm';
-import WorkoutView from './components/WorkoutView';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
@@ -19,7 +18,7 @@ import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import { apiUrls } from './config/config';
 
-import { ActivitiesView, LeaderBoardView } from './components';
+import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
