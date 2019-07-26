@@ -13,8 +13,8 @@ const UpdateWorkoutForm = props => {
 
   const handleLessClick = event => {
     event.preventDefault();
-    if (amount < 2) {
-      setAmount(1);
+    if (amount < 1) {
+      setAmount(0);
     } else {
       setAmount(+amount - 1);
     }
@@ -28,9 +28,9 @@ const UpdateWorkoutForm = props => {
     setAmount(theValue);
   };
 
-  const dontAllowZero = event => {
+  const AllowZero = event => {
     event.preventDefault();
-    if (amount === 0) setAmount(1);
+    if (amount <= 0) setAmount(0);
   };
 
   const submit = event => {
@@ -61,7 +61,7 @@ const UpdateWorkoutForm = props => {
           min="1"
           value={amount}
           onChange={handleAmountChange}
-          onBlur={dontAllowZero}
+          onBlur={AllowZero}
         />
         <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
           -
@@ -75,7 +75,10 @@ const UpdateWorkoutForm = props => {
             className="button is-danger is-fullwidth"
             onClick={event => {
               event.preventDefault();
-              props.history.goBack();
+              let modalWnd = document.querySelector('.modal');
+              if (modalWnd) {
+                modalWnd.classList.remove('is-active');
+              }
             }}
           >
             Back

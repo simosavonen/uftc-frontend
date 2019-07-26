@@ -12,6 +12,15 @@ const UpdateWorkout = props => {
   const handleClick = () => {
     setOpened(!opened);
     setshowActivities(!showActivities);
+    console.log('showActivities', showActivities);
+    console.log('workoutSelected', workoutSelected);
+    if (!showActivities) {
+      if (workoutSelected) {
+        setWorkoutSelected(null);
+      }
+    }
+    console.log('showActivities after', showActivities);
+    console.log('workoutSelected after', workoutSelected);
   };
 
   const Icon = posed.div({
@@ -112,10 +121,7 @@ const UpdateWorkout = props => {
           style={{ padding: '1vw', margin: '1vw 4vw' }}
           onClick={handleClick}
         >
-          <div className="column is-11">
-            {' '}
-            {showActivities ? 'Hide activities' : 'Your history'}{' '}
-          </div>
+          <div className="column is-11">{showActivities ? 'Hide activities' : 'Your history'}</div>
 
           <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
             <FontAwesomeIcon icon="angle-up" />
