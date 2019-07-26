@@ -4,30 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Badge = ({ achievement, activity }) => {
   return (
-    <div className="box">
+    <div className="box blue-white-gradient">
       <article className="media">
         <p className="media-left">
-          <FontAwesomeIcon
-            icon={achievement.fontAwesomeIcon}
-            size="2x"
-            color={achievement.iconColor}
-            style={{ width: '70px' }}
-          />
+          <span className="fa-layers fa-fw" style={{ width: '70px', height: '70px' }}>
+            <FontAwesomeIcon icon={'circle'} size="3x" color={'white'} />
+            <FontAwesomeIcon
+              icon={achievement.fontAwesomeIcon}
+              size="2x"
+              color={achievement.iconColor}
+            />
+          </span>
         </p>
         <div className="media-content">
-          <div className="content">
-            <p>
-              <strong>{achievement.name}</strong>
-              <br />
-              <small>
-                Get {achievement.requirement} points from {activity.name}.
-              </small>
-              <br />
-              <small className="has-text-primary">
-                Reward: {achievement.pointsReward} extra points
-              </small>
-            </p>
-          </div>
+          <p className="content">
+            <strong>{achievement.name}</strong>
+            <br />
+            Get {achievement.requirement} points from {activity.name}.
+            <br />
+            <span className="has-text-danger">Reward: {achievement.pointsReward} extra points</span>
+          </p>
         </div>
       </article>
     </div>
@@ -47,12 +43,12 @@ const BadgesView = props => {
 
   return (
     <div>
-      <h1 className="title is-4">
+      <h1 className="title is-4 is-marginless">
         <FontAwesomeIcon icon="medal" size="2x" />
         Your badges
       </h1>
 
-      <div className="is-size-5-mobile is-size-6-tablet">{badges}</div>
+      <div className="section is-size-6-mobile is-size-6-tablet">{badges}</div>
     </div>
   );
 };
