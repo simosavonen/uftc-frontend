@@ -6,6 +6,7 @@ const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
   let modDate = moment(props.workout.date).format('ddd MMM Do');
 
+  console.log('updateworkoutform', props.workout);
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);

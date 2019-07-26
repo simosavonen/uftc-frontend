@@ -13,8 +13,7 @@ const UpdateWorkout = props => {
   const handleClick = () => {
     setOpened(!opened);
     setshowActivities(!showActivities);
-    console.log('showActivities', showActivities);
-    console.log('workoutSelected', workoutSelected);
+
     if (!showActivities) {
       if (workoutSelected) {
         setWorkoutSelected(null);
@@ -42,9 +41,9 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
-    console.log('day  showActivities', showActivities);
-    console.log('day  workoutSelected', workoutSelected);
-    console.log('day  opened', opened);
+    //console.log('day  showActivities', showActivities);
+    console.log('day  props workout', props.workouts);
+    //console.log('day  opened', opened);
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -90,11 +89,12 @@ const UpdateWorkout = props => {
 
     const renderKey = () => {
       return `${new Date().getTime()}`;
+      //return `${0}`;
     };
 
     const updateCall = () => {
-      console.log('updatecall r', renderKey());
-      console.log('updatecall w', workoutSelected);
+      // console.log('updatecall r', renderKey());
+      // console.log('updatecall w', workoutSelected);
       if (workoutSelected) {
         console.log('upd w', workoutSelected);
         //setRenderKey(!renderKey);
