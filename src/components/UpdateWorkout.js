@@ -9,6 +9,7 @@ const UpdateWorkout = props => {
   const [showActivities, setshowActivities] = useState(false);
   const [opened, setOpened] = useState(false);
   //const [renderKey, setRenderKey] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
     setOpened(!opened);
@@ -17,6 +18,7 @@ const UpdateWorkout = props => {
     if (!showActivities) {
       if (workoutSelected) {
         setWorkoutSelected(null);
+        setShowModal(false);
       }
     }
     console.log('showActivities after', showActivities);
@@ -98,8 +100,12 @@ const UpdateWorkout = props => {
       if (workoutSelected) {
         console.log('upd w ', workoutSelected);
         //setRenderKey(!renderKey);
+        //setShowModal(true);
         return (
-          <div key={workoutSelected.date + renderKey()} className="modal is-active">
+          <div
+            key={workoutSelected.date + renderKey()}
+            className={`modal ${showModal && 'is-active'}`}
+          >
             <div className="modal-background" />
             <div className="modal-content">
               <UpdateWorkoutForm
@@ -112,13 +118,14 @@ const UpdateWorkout = props => {
               className="modal-close is-large"
               aria-label="close"
               onClick={() => {
-                nameTbl = document.querySelector('.modal');
-                if (nameTbl) {
-                  nameTbl.classList.remove('is-active');
-                  if (workoutSelected) {
-                    setWorkoutSelected(null);
-                  }
+                // nameTbl = document.querySelector('.modal');
+                //if (nameTbl) {
+                //  nameTbl.classList.remove('is-active');
+                if (workoutSelected) {
+                  setWorkoutSelected(null);
                 }
+                // }
+                setShowModal(false);
               }}
             />
           </div>
@@ -148,6 +155,7 @@ const UpdateWorkout = props => {
                   key={item.date + item.amount}
                   onClick={() => {
                     setWorkoutSelected(item);
+                    setShowModal(true);
                     console.log('item', item);
                   }}
                 >
