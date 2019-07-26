@@ -94,9 +94,9 @@ const UpdateWorkout = props => {
 
     const updateCall = () => {
       // console.log('updatecall r', renderKey());
-      // console.log('updatecall w', workoutSelected);
+      console.log('showActivities ', showActivities);
       if (workoutSelected) {
-        console.log('upd w', workoutSelected);
+        console.log('upd w ', workoutSelected);
         //setRenderKey(!renderKey);
         return (
           <div key={workoutSelected.date + renderKey()} className="modal is-active">
@@ -144,7 +144,13 @@ const UpdateWorkout = props => {
           <div>
             <ul>
               {oneTypeAct.map(item => (
-                <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
+                <li
+                  key={item.date + item.amount}
+                  onClick={() => {
+                    setWorkoutSelected(item);
+                    console.log('item', item);
+                  }}
+                >
                   <span
                     style={{
                       fontFamily: 'verdana',
