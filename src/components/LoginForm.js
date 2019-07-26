@@ -33,11 +33,15 @@ const LoginForm = props => {
     event.preventDefault();
     const userDetails = {
       email,
-      password,
-      name,
-      location
+      password
     };
-    isNewUser ? props.register(userDetails) : props.login(userDetails);
+    if (isNewUser) {
+      userDetails.name = name;
+      userDetails.location = location;
+      props.register(userDetails);
+    } else {
+      props.login(userDetails);
+    }
   };
 
   // show these if we're registering a new user
@@ -105,7 +109,7 @@ const LoginForm = props => {
             >
               <Logo height="70%" />
               <h1
-                className="is-size-6-mobile is-size-5 has-text-white has-text-weight-bold"
+                className="is-size-6-mobile is-size-6-tablet is-size-5 has-text-white has-text-weight-bold"
                 style={{ marginTop: '0.5vh' }}
               >
                 Ultimate Functional Training Challenge
@@ -144,7 +148,10 @@ const LoginForm = props => {
                     <FontAwesomeIcon icon="lock" />
                   </span>
                 </div>
-                <Link to="/passwordreset" className="help has-text-white has-text-right">
+                <Link
+                  to="/passwordreset"
+                  className={`help has-text-white has-text-right ${isNewUser && 'is-hidden'}`}
+                >
                   forgot your password?
                 </Link>
               </div>

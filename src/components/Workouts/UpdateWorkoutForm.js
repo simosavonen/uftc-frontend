@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
-  let modDate = props.workout.date.substring(0, 10);
+  let modDate = moment(props.workout.date).format('ddd MMM Do');
 
   const handleMoreClick = event => {
     event.preventDefault();
@@ -48,9 +49,9 @@ const UpdateWorkoutForm = props => {
   };
 
   return (
-    <div>
+    <div className="box">
       <form onSubmit={submit}>
-        <label className="label has-text-white">Suorituskertoja (kpl):</label>
+        <label className="label">Suorituskertoja (kpl):</label>
         <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
           +
         </button>
