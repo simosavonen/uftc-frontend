@@ -3,6 +3,10 @@ import { apiUrls } from '../config/config';
 
 const baseUrl = apiUrls.workouts;
 
+const get = () => {
+  return axios.get(baseUrl);
+};
+
 const getWorkoutsByUser = id => {
   return axios.get(baseUrl + `/${id}`);
 };
@@ -15,4 +19,4 @@ const update = workout => {
   return axios.put(baseUrl + '/' + workout.workoutid, workout);
 };
 
-export default { getWorkoutsByUser, add, update };
+export default { get, getWorkoutsByUser, add, update };
