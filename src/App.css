@@ -53,3 +53,15 @@
 .menurow-odd {
   background-color: #1088b3;
 }
+
+.react-calendar {
+  width: 100%;
+  border: 1px solid #ff2457;
+  font-family: 'Raleway';
+}
+
+.highlighted-calendar-day {
+  color: #ff2457;
+  font-weight: 700;
+  font-size: larger;
+}
