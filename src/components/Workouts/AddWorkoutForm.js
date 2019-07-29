@@ -69,9 +69,8 @@ const AddWorkoutForm = props => {
     if (view === 'month') {
       return !!dates.find(d => {
         // toISOString converted dates in local timezone to tomorrow
-        const corrected = new Date(date);
-        corrected.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-        return d.toISOString().substr(0, 10) === corrected.toISOString().substr(0, 10);
+        const dateString = moment(date).format('YYYY-MM-DD');
+        return d.toISOString().substr(0, 10) === dateString;
       })
         ? 'highlighted-calendar-day'
         : '';
