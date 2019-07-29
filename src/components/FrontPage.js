@@ -36,25 +36,26 @@ const BraceLeft = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }
 const BraceRight = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7d;</span>;
 
 const FrontPage = props => {
-  console.log(props.challenges);
   const challengeNames = Array.from(new Set(props.challenges.map(c => c.name)));
   console.log(challengeNames);
 
   const challengeSelections = challenges =>
     challenges.map(c => (
-      <div className="column is-3">
-        <Ikonipallo sarja={c} iconName="stopwatch" bgColor="#ff2457" key={c.id} />
+      <div className="column is-3" key={c.id}>
+        <Ikonipallo sarja={c} iconName="stopwatch" bgColor="#ff2457" />
       </div>
     ));
   const challengeDescriptions = challenges =>
     challenges.map(c => (
-      <div className="column is-3 has-text-centered">Description text here.</div>
+      <div className="column is-3 has-text-centered" key={c.id}>
+        Description text here.
+      </div>
     ));
 
   return (
     <div>
       {challengeNames.map(challengeName => (
-        <div>
+        <div key={challengeName}>
           <section className="section has-text-centered">
             <h1 className="title is-2">
               <BraceLeft /> {challengeName} <BraceRight />
