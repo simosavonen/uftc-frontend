@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
   let modDate = moment(props.workout.date).format('ddd MMM Do');
+
+  useEffect(() => {
+    if (props.workout) {
+      setAmount(props.workout.amount);
+    }
+  }, [props.workout]);
 
   //  console.log('updateworkoutform', props.workout);
   const handleMoreClick = event => {

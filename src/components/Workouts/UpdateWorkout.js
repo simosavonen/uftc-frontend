@@ -154,7 +154,7 @@ const UpdateWorkout = props => {
                   onClick={() => {
                     setWorkoutSelected(item);
                     setShowModal(true);
-                    //                    console.log('item', item);
+                    // console.log('item', item);
                   }}
                 >
                   <span
@@ -182,7 +182,6 @@ const UpdateWorkout = props => {
               ))}
             </ul>
             <div>{updateCall()}</div>
-            {workoutSelected && <p onClick={() => setWorkoutSelected(null)}> </p>}
           </div>
         )}
       </>
