@@ -54,7 +54,7 @@ const App = props => {
     }
   }, [user]);
 
-  const UpdateUser = user => {
+  const updateUser = user => {
     userService.update(user);
   };
 
@@ -208,9 +208,8 @@ const App = props => {
             path="/addactivity"
             render={() => <AddActivityForm addActivity={activityService.add} />}
           />
-          {isAuthenticated() && (
-            <Route path="/updateuser" render={() => <UpdateUserForm UpdateUser={UpdateUser} />} />
-          )}
+          <Route path="/updateuser" render={() => <UpdateUserForm updateUser={updateUser} />} />
+
           <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
           <Route
             exact

@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import userService from '../services/user';
 
 const UpdateUserForm = props => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [location, setLocation] = useState('Please select one');
   const [activeChallenge, setActiveChallenge] = useState('');
 
-  if (name === '') {
+  useEffect(() => {
     userService.get().then(result => {
       setName(result.data.name);
       setEmail(result.data.email);
       setLocation(result.data.location);
       setActiveChallenge(result.data.activeChallenge);
     });
-  }
+  }, []);
+
   const submit = event => {
     event.preventDefault();
-    const updateUser = {
+    const userDetails = {
       name,
       email,
-      password,
       location,
       activeChallenge
     };
-    props.UpdateUser(updateUser);
+    props.updateUser(userDetails);
   };
 
   return (
@@ -48,12 +47,6 @@ const UpdateUserForm = props => {
             value={email}
             style={{ width: '200px' }}
           />
-        </p>
-        <p>
-          <label htmlFor="password">Password: Change password via the link:</label>
-          <a href="http://localhost:3000/passwordreset" target="_blank" rel="noopener noreferrer">
-            Password reset
-          </a>
         </p>
         <p>
           <label htmlFor="location">Location:</label>
