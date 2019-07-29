@@ -208,7 +208,10 @@ const App = props => {
             path="/addactivity"
             render={() => <AddActivityForm addActivity={activityService.add} />}
           />
-          <Route path="/updateuser" render={() => <UpdateUserForm updateUser={updateUser} />} />
+          <Route
+            path="/updateuser"
+            render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
+          />
 
           <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
           <Route

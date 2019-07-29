@@ -8,13 +8,16 @@ const UpdateUserForm = props => {
   const [activeChallenge, setActiveChallenge] = useState('');
 
   useEffect(() => {
-    userService.get().then(result => {
-      setName(result.data.name);
-      setEmail(result.data.email);
-      setLocation(result.data.location);
-      setActiveChallenge(result.data.activeChallenge);
-    });
-  }, []);
+    if (props.user) {
+      userService.setToken(props.user.token);
+      userService.get().then(result => {
+        setName(result.data.name);
+        setEmail(result.data.email);
+        setLocation(result.data.location);
+        setActiveChallenge(result.data.activeChallenge);
+      });
+    }
+  }, [props.user]);
 
   const submit = event => {
     event.preventDefault();
