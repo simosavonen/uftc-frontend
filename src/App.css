@@ -39,7 +39,7 @@
 
 .logobox-big {
   height: calc(70px + 6vw);
-  margin: 6vh 0 1vh 0;
+  margin: 6vh 0 6vh 0;
 }
 
 .logobox-small {
@@ -53,4 +53,3 @@
 .menurow-odd {
   background-color: #1088b3;
 }
-
