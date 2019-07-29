@@ -20,7 +20,7 @@ const checkAchievements = (workouts, activities, achievements) => {
         return checkRequirement(
           ach,
           activityScore(
-            workouts.find(w => w.activity.id === ach.activity),
+            workouts.find(w => w.activity === ach.activity),
             activities.find(a => a.id === ach.activity)
           )
         );

@@ -89,11 +89,6 @@ const UpdateWorkout = props => {
       );
     }
 
-    const renderKey = () => {
-      return `${new Date().getTime()}`;
-      //return `${0}`;
-    };
-
     const updateCall = () => {
       // console.log('updatecall r', renderKey());
       console.log('showActivities ', showActivities);
