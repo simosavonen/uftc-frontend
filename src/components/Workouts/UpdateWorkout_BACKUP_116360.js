@@ -21,8 +21,8 @@ const UpdateWorkout = props => {
         setShowModal(false);
       }
     }
-    //    console.log('showActivities after', showActivities);
-    //    console.log('workoutSelected after', workoutSelected);
+    console.log('showActivities after', showActivities);
+    console.log('workoutSelected after', workoutSelected);
   };
 
   const Icon = posed.div({
@@ -43,9 +43,9 @@ const UpdateWorkout = props => {
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
-    //    console.log('day  showActivities', showActivities);
-    //    console.log('day  props workout', props.workouts);
-    //    console.log('day  opened', opened);
+    //console.log('day  showActivities', showActivities);
+    console.log('day  props workout', props.workouts);
+    //console.log('day  opened', opened);
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -88,28 +88,24 @@ const UpdateWorkout = props => {
         </p>
       );
     }
-    /*
+
     const renderKey = () => {
       return `${new Date().getTime()}`;
       //return `${0}`;
     };
-*/
+
     const updateCall = () => {
       // console.log('updatecall r', renderKey());
-      //  console.log('showActivities ', showActivities);
+      console.log('showActivities ', showActivities);
       if (workoutSelected) {
-        //  console.log('upd w ', workoutSelected);
+        console.log('upd w ', workoutSelected);
         //setRenderKey(!renderKey);
         //setShowModal(true);
         return (
           <div className={`modal ${showModal && 'is-active'}`}>
             <div className="modal-background" />
             <div className="modal-content">
-              <UpdateWorkoutForm
-                workout={workoutSelected}
-                updateWorkout={props.updateWorkout}
-                setShowModal={setShowModal}
-              />
+              <UpdateWorkoutForm workout={workoutSelected} updateWorkout={props.updateWorkout} />
             </div>
             <button
               className="modal-close is-large"
@@ -150,11 +146,10 @@ const UpdateWorkout = props => {
               {oneTypeAct.map(item => (
                 <li
                   key={item.date + item.amount}
-                  className="is-clickable hover-effect-dark"
                   onClick={() => {
                     setWorkoutSelected(item);
                     setShowModal(true);
-                    //                    console.log('item', item);
+                    console.log('item', item);
                   }}
                 >
                   <span

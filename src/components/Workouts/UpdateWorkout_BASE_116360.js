@@ -1,51 +1,31 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
-import posed from 'react-pose';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
   const [showActivities, setshowActivities] = useState(false);
-  const [opened, setOpened] = useState(false);
-  //const [renderKey, setRenderKey] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
-  const handleClick = () => {
-    setOpened(!opened);
-    setshowActivities(!showActivities);
-
-    if (!showActivities) {
-      if (workoutSelected) {
-        setWorkoutSelected(null);
-        setShowModal(false);
-      }
-    }
-    //    console.log('showActivities after', showActivities);
-    //    console.log('workoutSelected after', workoutSelected);
-  };
-
-  const Icon = posed.div({
-    up: {
-      rotate: '0deg'
-    },
-    down: {
-      rotate: '180deg'
-    }
-  });
 
   let oneTypeActLenght;
 
   const dayAndActivity = () => {
     const actNameTbl = [];
     let oneTypeAct = [];
-    //let nameTbl;
 
     if (!props.workouts) return 'workouts oli null tai undefined';
 
-    //    console.log('day  showActivities', showActivities);
-    //    console.log('day  props workout', props.workouts);
-    //    console.log('day  opened', opened);
+    if (!showActivities) {
+      return (
+        <div>
+          <button
+            className="button is-dark is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
+        </div>
+      );
+    }
     props.workouts.map(item => {
       const a = item.activity;
       const _workoutid = item.id;
@@ -88,43 +68,19 @@ const UpdateWorkout = props => {
         </p>
       );
     }
-    /*
-    const renderKey = () => {
-      return `${new Date().getTime()}`;
-      //return `${0}`;
-    };
-*/
+
     const updateCall = () => {
-      // console.log('updatecall r', renderKey());
-      //  console.log('showActivities ', showActivities);
       if (workoutSelected) {
-        //  console.log('upd w ', workoutSelected);
-        //setRenderKey(!renderKey);
-        //setShowModal(true);
         return (
-          <div className={`modal ${showModal && 'is-active'}`}>
+          <div className="modal is-active">
             <div className="modal-background" />
             <div className="modal-content">
               <UpdateWorkoutForm
+                key={workoutSelected.date}
                 workout={workoutSelected}
                 updateWorkout={props.updateWorkout}
-                setShowModal={setShowModal}
               />
             </div>
-            <button
-              className="modal-close is-large"
-              aria-label="close"
-              onClick={() => {
-                // nameTbl = document.querySelector('.modal');
-                //if (nameTbl) {
-                //  nameTbl.classList.remove('is-active');
-                if (workoutSelected) {
-                  setWorkoutSelected(null);
-                }
-                // }
-                setShowModal(false);
-              }}
-            />
           </div>
         );
       }
@@ -132,31 +88,19 @@ const UpdateWorkout = props => {
 
     return (
       <>
-        <div
-          className={`columns is-centered is-mobile has-background-dark has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop `}
-          style={{ padding: '1vw', margin: '1vw 4vw' }}
-          onClick={handleClick}
-        >
-          <div className="column is-11">{showActivities ? 'Hide activities' : 'Your history'}</div>
-
-          <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
-            <FontAwesomeIcon icon="angle-up" />
-          </Icon>
+        <div>
+          <button
+            className="button is-light is-large is-fullwidth"
+            onClick={() => setshowActivities(!showActivities)}
+          >
+            {showActivities ? 'Hide activities' : 'View activities'}
+          </button>
         </div>
-
         {showActivities && (
           <div>
             <ul>
               {oneTypeAct.map(item => (
-                <li
-                  key={item.date + item.amount}
-                  className="is-clickable hover-effect-dark"
-                  onClick={() => {
-                    setWorkoutSelected(item);
-                    setShowModal(true);
-                    //                    console.log('item', item);
-                  }}
-                >
+                <li key={item.date + item.amount} onClick={() => setWorkoutSelected(item)}>
                   <span
                     style={{
                       fontFamily: 'verdana',
