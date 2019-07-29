@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-const WeeklyProgress = ({ workouts }) => {
+const WeeklyProgress = ({ workouts, activities }) => {
   let lastWeek = 0;
   let thisWeek = 0;
 
@@ -11,12 +11,15 @@ const WeeklyProgress = ({ workouts }) => {
   const sunday = moment().isoWeekday(7);
 
   workouts.map(w => {
+    const points = activities.find(a => {
+      return a.id === w.activity;
+    }).points;
     return w.instances.map(i => {
       if (lastMonday.isSameOrBefore(i.date, 'day') && lastSunday.isSameOrAfter(i.date, 'day')) {
-        lastWeek += i.amount * w.activity.points;
+        lastWeek += i.amount * points;
       }
       if (monday.isSameOrBefore(i.date, 'day') && sunday.isSameOrAfter(i.date, 'day')) {
-        thisWeek += i.amount * w.activity.points;
+        thisWeek += i.amount * points;
       }
       return null;
     });

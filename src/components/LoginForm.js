@@ -107,7 +107,7 @@ const LoginForm = props => {
               id="top"
               className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
             >
-              <Logo height="70%" />
+              <Logo height="80%" />
               <h1
                 className="is-size-6-mobile is-size-6-tablet is-size-5 has-text-white has-text-weight-bold"
                 style={{ marginTop: '0.5vh' }}
@@ -182,8 +182,11 @@ const LoginForm = props => {
                 </div>
               </div>
             </div>
-            <div id="bottom" style={{ height: 'calc(20px + 3vh)', margin: '2vh 0 6vh 0' }}>
-              <AmbientiaLogo />
+            <div
+              id="bottom"
+              className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
+            >
+              <AmbientiaLogo width="70%" />
             </div>
           </form>
         </div>
