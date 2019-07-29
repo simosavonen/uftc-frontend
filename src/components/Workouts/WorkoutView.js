@@ -29,7 +29,12 @@ const WorkoutView = ({
       </div>
       <section className="section columns is-centered">
         <div className="column is-6 ">
-          <AddWorkoutForm addWorkout={addWorkout} activity={activity} challenge={challenge} />
+          <AddWorkoutForm
+            addWorkout={addWorkout}
+            activity={activity}
+            challenge={challenge}
+            workouts={workouts}
+          />
         </div>
       </section>
 

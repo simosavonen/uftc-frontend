@@ -1,6 +1,7 @@
 import React from 'react';
 import ChallengeTitle from './ChallengeTitle';
-import WeeklyProgress from './WeeklyProgress';
+//import WeeklyProgress from './WeeklyProgress';
+import CircleProgress from './CircleProgress';
 import RecentActivities from './RecentActivities';
 import ActivityMenu from './ActivityMenu';
 
@@ -17,7 +18,7 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
           <ChallengeTitle challenge={challenges[0]} />
         </div>
         <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <WeeklyProgress workouts={workouts} activities={activities} />
+          <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
         </div>
       </div>
       <section className="container has-text-centered">
