@@ -44,7 +44,7 @@ const App = props => {
   useEffect(() => {
     if (user) {
       workoutService
-        .getWorkoutsByUser(user.id)
+        .get()
         .then(result => {
           setWorkouts(result.data);
           //console.log('workouts', result.data);
@@ -184,7 +184,7 @@ const App = props => {
               />
             )}
           />
-          <Route path="/leaderboard" render={() => <LeaderBoardView activities={activities} />} />
+          <Route path="/leaderboard" render={() => <LeaderBoardView />} />
           <Route
             path="/addchallenge"
             render={() => <AddChallengeForm addChallenge={challengeService.add} />}

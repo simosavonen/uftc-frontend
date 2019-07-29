@@ -30,7 +30,7 @@ const sampleData = [
   }
 ];
 
-const WorkoutChart = ({ chartData = sampleData }) => {
+const WorkoutsChart = ({ chartData = sampleData }) => {
   // fixes an issue with a series remaining toggled off
   // when we hide or unhide the div containing the chart
   useEffect(() => {
@@ -93,4 +93,4 @@ const WorkoutChart = ({ chartData = sampleData }) => {
   return <Chart height={isMobile ? 300 : 'auto'} options={options} series={chartData} />;
 };
 
-export default WorkoutChart;
+export default WorkoutsChart;

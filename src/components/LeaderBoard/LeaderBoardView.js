@@ -48,7 +48,6 @@ const LeaderBoardView = () => {
       <div className="container">
         <h1 className="title is-size-5-mobile is-size-4-tablet is-size-3-widescreen">
           {weekFilter === 0 ? 'Total scores' : `Scores for week #${weekFilter}`}
-
           <button
             className="button is-outlined is-small is-pulled-right"
             onClick={() => setShowFilterButtons(!showFilterButtons)}
@@ -59,6 +58,7 @@ const LeaderBoardView = () => {
             <span>{showFilterButtons ? 'hide filters' : 'show filters'}</span>
           </button>
         </h1>
+
         {showFilterButtons && (
           <div className="notification is-clearfix">
             <div className="buttons is-pulled-left">
@@ -85,6 +85,7 @@ const LeaderBoardView = () => {
             </div>
           </div>
         )}
+
         <WeeklyScoresChart
           weekFilter={weekFilter}
           weeklyData={weeklyData
@@ -92,6 +93,7 @@ const LeaderBoardView = () => {
             .filter(s => seriesFilters.includes(s.seriesTitle))}
         />
       </div>
+
       <div className="container buttons is-hidden-tablet">
         {weeklyData.length !== 0 &&
           weeklyData[0].data.map((row, idx) => (
@@ -110,6 +112,7 @@ const LeaderBoardView = () => {
           Total
         </button>
       </div>
+
       <div className="container">
         <WeeklyScoresTable
           weeklyData={weeklyData}

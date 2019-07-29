@@ -22,7 +22,7 @@ const RecentActivities = props => {
     props.workouts.map(item => {
       const a = item.activity;
       return item.instances.map(ind => {
-        return actNameTbl.push({ date: ind.date, activity: a.id });
+        return actNameTbl.push({ date: ind.date, activity: a });
       });
     });
     actNameTbl.sort(function(a, b) {
