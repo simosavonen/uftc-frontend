@@ -42,13 +42,13 @@ const FrontPage = props => {
   const challengeSelections = challenges =>
     challenges.map(c => (
       <div className="column is-3" key={c.id}>
-        <Ikonipallo sarja={c} iconName="stopwatch" bgColor="#ff2457" />
+        <Ikonipallo sarja={c} iconName={c.icon || 'stopwatch'} bgColor="#ff2457" />
       </div>
     ));
   const challengeDescriptions = challenges =>
     challenges.map(c => (
       <div className="column is-3 has-text-centered" key={c.id}>
-        Description text here.
+        {c.description || ''}
       </div>
     ));
 
