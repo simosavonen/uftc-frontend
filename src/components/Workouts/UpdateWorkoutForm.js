@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
   let modDate = moment(props.workout.date).format('ddd MMM Do');
 
+  useEffect(() => {
+    if (props.workout) {
+      setAmount(props.workout.amount);
+    }
+  }, [props.workout]);
+
+  //  console.log('updateworkoutform', props.workout);
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);
@@ -13,8 +19,8 @@ const UpdateWorkoutForm = props => {
 
   const handleLessClick = event => {
     event.preventDefault();
-    if (amount < 2) {
-      setAmount(1);
+    if (amount < 1) {
+      setAmount(0);
     } else {
       setAmount(+amount - 1);
     }
@@ -28,9 +34,9 @@ const UpdateWorkoutForm = props => {
     setAmount(theValue);
   };
 
-  const dontAllowZero = event => {
+  const AllowZero = event => {
     event.preventDefault();
-    if (amount === 0) setAmount(1);
+    if (amount <= 0) setAmount(0);
   };
 
   const submit = event => {
@@ -61,12 +67,12 @@ const UpdateWorkoutForm = props => {
           min="1"
           value={amount}
           onChange={handleAmountChange}
-          onBlur={dontAllowZero}
+          onBlur={AllowZero}
         />
         <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
           -
         </button>
-        <label className="label">Date: {modDate} </label>
+        <label className="label has-text-white">Date: {modDate} </label>
 
         <p>
           <button className="button is-success is-fullwidth">Save</button>
@@ -75,7 +81,11 @@ const UpdateWorkoutForm = props => {
             className="button is-danger is-fullwidth"
             onClick={event => {
               event.preventDefault();
-              props.history.goBack();
+              props.setShowModal(false);
+              let modalWnd = document.querySelector('.modal');
+              if (modalWnd) {
+                modalWnd.classList.remove('is-active');
+              }
             }}
           >
             Back
@@ -86,4 +96,4 @@ const UpdateWorkoutForm = props => {
   );
 };
 
-export default withRouter(UpdateWorkoutForm);
+export default UpdateWorkoutForm;

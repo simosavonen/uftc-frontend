@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import Calendar from 'react-calendar';
+import moment from 'moment';
 
 const AddWorkoutForm = props => {
   const [amount, setAmount] = useState(1);
-  const today = new Date().toISOString().substring(0, 10);
-  const [date, setDate] = useState(today);
+  const [date, setDate] = useState(new Date());
+  const [dates, setDates] = useState([]); // for highlighting in the date picker
+
+  useEffect(() => {
+    if (props.workouts && props.activity) {
+      const filtered = props.workouts.filter(w => w.activity === props.activity.id);
+      if (filtered.length) {
+        const workoutList = filtered[0].instances.map(i => new Date(i.date));
+        setDates(workoutList);
+      }
+    }
+  }, [props.workouts, props.activity]);
 
   const handleMoreClick = event => {
     event.preventDefault();
@@ -28,6 +40,11 @@ const AddWorkoutForm = props => {
     setAmount(theValue);
   };
 
+  const handleDateChange = d => {
+    console.log('date', d.toString());
+    setDate(d);
+  };
+
   const dontAllowZero = event => {
     event.preventDefault();
 
@@ -37,12 +54,27 @@ const AddWorkoutForm = props => {
   const submit = event => {
     event.preventDefault();
 
+    // toISOString causes problems
+    const dateString = moment(date).format('YYYY-MM-DD');
+
     const workout = {
       amount: amount,
-      date: date,
+      date: dateString,
       activity: props.activity.id
     };
     props.addWorkout(workout);
+  };
+
+  const highlight = ({ date, view }) => {
+    if (view === 'month') {
+      return !!dates.find(d => {
+        // toISOString converted dates in local timezone to tomorrow
+        const dateString = moment(date).format('YYYY-MM-DD');
+        return d.toISOString().substr(0, 10) === dateString;
+      })
+        ? 'highlighted-calendar-day'
+        : '';
+    }
   };
 
   return (
@@ -64,13 +96,11 @@ const AddWorkoutForm = props => {
           -
         </button>
         <label className="label">Date:</label>
-        <input
-          className="input"
+        <Calendar
+          onChange={handleDateChange}
           value={date}
-          onChange={({ target }) => setDate(target.value)}
-          type="date"
-          min={props.challenge && props.challenge.startDate.substr(0, 10)}
-          max={today}
+          maxDate={new Date()}
+          tileClassName={highlight}
         />
         <p>
           <button className="button is-success is-fullwidth">Save</button>
