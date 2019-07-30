@@ -43,7 +43,7 @@ const UpdateWorkoutForm = props => {
     event.preventDefault();
 
     const workout = {
-      workoutid: props.workout.workoutid,
+      id: props.workout.workoutid,
       activity: props.workout.activity,
       instance: {
         id: props.workout._id,

@@ -16,7 +16,7 @@ const add = workout => {
 };
 
 const update = workout => {
-  return axios.put(baseUrl + '/' + workout.workoutid, workout);
+  return axios.put(baseUrl + '/' + workout.id, workout);
 };
 
 export default { get, getWorkoutsByUser, add, update };
