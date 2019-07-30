@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import userService from '../services/user';
 
 const UpdateUserForm = props => {
+  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('Please select one');
@@ -11,6 +12,7 @@ const UpdateUserForm = props => {
     if (props.user) {
       userService.setToken(props.user.token);
       userService.get().then(result => {
+        setId(result.data.id);
         setName(result.data.name);
         setEmail(result.data.email);
         setLocation(result.data.location);
@@ -22,6 +24,7 @@ const UpdateUserForm = props => {
   const submit = event => {
     event.preventDefault();
     const userDetails = {
+      id,
       name,
       email,
       location,

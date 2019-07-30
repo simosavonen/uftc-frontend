@@ -20,9 +20,7 @@ const get = () => {
 };
 
 const update = userDetails => {
-  console.log('userDetails ', userDetails);
-  return 1;
-  //return axios.put(baseUrl + '/' + userDetails.userDetailsid, userDetails);
+  return axios.put(baseUrl + '/' + userDetails.id, userDetails);
 };
 
 export default { login, register, get, update, setToken };
