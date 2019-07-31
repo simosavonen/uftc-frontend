@@ -1,10 +1,10 @@
 describe('Login app', function() {
   before(function() {
-    cy.request({
+    /*cy.request({
       method: 'GET',
       url: 'http://localhost:3001/api/reset',
       failsOnStatusCode: false
-    }).then(res => cy.log(res));
+    }).then(res => cy.log(res)); */
     cy.visit('http://localhost:3000');
   });
 
