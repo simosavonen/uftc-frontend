@@ -9,6 +9,7 @@ import Header from './components/Header';
 import AddChallengeForm from './components/AddChallengeForm';
 import LoginForm from './components/LoginForm';
 import AddActivityForm from './components/AddActivityForm';
+import UpdateUserForm from './components/UpdateUserForm';
 import AddAchievementForm from './components/AddAchievementForm';
 import BadgesView from './components/BadgesView';
 import FrontPage from './components/FrontPage';
@@ -52,6 +53,10 @@ const App = props => {
         .catch(error => console.log('workouts', error.message));
     }
   }, [user]);
+
+  const updateUser = user => {
+    userService.update(user);
+  };
 
   const addWorkout = workout => {
     const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
@@ -203,6 +208,11 @@ const App = props => {
             path="/addactivity"
             render={() => <AddActivityForm addActivity={activityService.add} />}
           />
+          <Route
+            path="/updateuser"
+            render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
+          />
+
           <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
           <Route
             exact

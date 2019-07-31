@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -17,16 +18,14 @@ const Footer = () => {
         <div className="column is-4 has-text-centered">
           Admin tools:
           <p>
-            <a href="http://localhost:3000/addchallenge" target="_blank" rel="noopener noreferrer">
-              add challenge
-            </a>
+            <Link to="/addchallenge">add challenge</Link>
           </p>
           <p>
-            <a href="http://localhost:3000/addactivity" target="_blank" rel="noopener noreferrer">
-              add activity
-            </a>
+            <Link to="/addactivity">add activity</Link>
           </p>
-          <p>link</p>
+          <p>
+            <Link to="/updateuser">update user</Link>
+          </p>
         </div>
       </div>
     </div>

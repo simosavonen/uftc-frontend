@@ -15,4 +15,12 @@ const register = userDetails => {
   return axios.post(baseUrl + '/register', userDetails);
 };
 
-export default { login, register, setToken };
+const get = () => {
+  return axios.get(baseUrl);
+};
+
+const update = userDetails => {
+  return axios.put(baseUrl + '/' + userDetails.id, userDetails);
+};
+
+export default { login, register, get, update, setToken };
