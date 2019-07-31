@@ -220,7 +220,11 @@ const App = props => {
             render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
           />
           <Route exact path="/styleguide" render={() => <StyleGuide />} />
-          <Route exact path="/" render={() => <FrontPage challenges={challenges} />} />
+          <Route
+            exact
+            path="/"
+            render={() => <FrontPage challenges={challenges} updateUser={updateUser} user={user} />}
+          />
         </Switch>
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
         {isAuthenticated() && <Footer />}

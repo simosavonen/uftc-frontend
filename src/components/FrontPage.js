@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 
 const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor }) => {
-  const styles = {
+  const [selected, setSelected] = useState(false);
+  //console.log(selected, sarja.seriesTitle);
+
+  let styles = {
     backgroundColor: bgColor,
-    width: '16vw',
+    width: '33vw',
     minWidth: '110px',
-    height: '16vw',
+    maxWidth: '200px',
+    height: '33vw',
     minHeight: '110px',
-    borderRadius: '16vw',
+    maxHeight: '200px',
+    borderRadius: '33vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 'auto'
   };
+  if (selected) {
+    styles = { ...styles, borderStyle: 'solid', borderColor: 'black', borderWidth: '6px' };
+  }
 
   return (
     <div
       style={styles}
       className="has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
-      onClick={() => console.log('klikkasit', sarja)}
+      onClick={() => {
+        console.log('klikkasit', sarja);
+        setSelected(!selected);
+      }}
     >
       <FontAwesomeIcon icon={iconName} size="2x" />
       <p>{sarja.seriesTitle}</p>
@@ -36,41 +48,51 @@ const BraceLeft = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }
 const BraceRight = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7d;</span>;
 
 const FrontPage = props => {
-  const challengeNames = Array.from(new Set(props.challenges.map(c => c.name)));
-  console.log(challengeNames);
+  const today = moment();
+  const challengesToShow = props.challenges.filter(c =>
+    moment(c.releaseDate).isSameOrBefore(today, 'day')
+  );
+  const challengeNames = Array.from(new Set(challengesToShow.map(c => c.name)));
+  //console.log(challengeNames);
+  //console.log(props.challenges);
+
+  //console.log(today);
+  //console.log(challengesToShow);
+
+  //console.log(props.user);
 
   const challengeSelections = challenges =>
     challenges.map(c => (
-      <div className="column is-3" key={c.id}>
+      <div className="column is-4 has-text-centered " key={c.id}>
         <Ikonipallo sarja={c} iconName={c.icon || 'stopwatch'} bgColor="#ff2457" />
-      </div>
-    ));
-  const challengeDescriptions = challenges =>
-    challenges.map(c => (
-      <div className="column is-3 has-text-centered" key={c.id}>
-        {c.description || ''}
+        <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
+        <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
+          {props.user.activeChallenge === c.id && (
+            <>
+              <div className="ambientia-block" />
+              <div> Your challenge</div>
+            </>
+          )}
+        </div>
       </div>
     ));
 
   return (
-    <div>
+    <>
       {challengeNames.map(challengeName => (
-        <div key={challengeName}>
-          <section className="section has-text-centered">
+        <section className="section" key={challengeName}>
+          <div className="section has-text-centered">
             <h1 className="title is-2">
               <BraceLeft /> {challengeName} <BraceRight />
             </h1>
             <h2 className="title is-3">Valitse sarja</h2>
-          </section>
-          <section className="columns is-mobile is-centered is-vcentered">
-            {challengeSelections(props.challenges.filter(c => c.name === challengeName))}
-          </section>
-          <section className="columns is-mobile is-centered is-size-6-mobile is-size-5-tablet is-size-4">
-            {challengeDescriptions(props.challenges.filter(c => c.name === challengeName))}
-          </section>
-        </div>
+          </div>
+          <div className="columns is-centered">
+            {challengeSelections(challengesToShow.filter(c => c.name === challengeName))}
+          </div>
+        </section>
       ))}
-    </div>
+    </>
   );
 };
 
