@@ -28,4 +28,8 @@ const checkAchievements = (workouts, activities, achievements) => {
   } else return [];
 };
 
-export { checkAchievements };
+const badgeRewardsTotal = achievements => {
+  return achievements.reduce((sum, a) => (sum = sum + a.pointsReward), 0);
+};
+
+export { checkAchievements, badgeRewardsTotal };

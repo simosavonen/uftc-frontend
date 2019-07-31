@@ -1,5 +1,5 @@
 import React from 'react';
-import { checkAchievements } from '../badges/utils';
+import { checkAchievements, badgeRewardsTotal } from '../badges/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Badge = ({ achievement, activity }) => {
@@ -43,11 +43,13 @@ const BadgesView = props => {
 
   return (
     <div>
-      <h1 className="title is-4 is-marginless">
-        <FontAwesomeIcon icon="medal" size="2x" />
-        Your badges
-      </h1>
-
+      <section className="section">
+        <h1 className="title is-4">
+          <FontAwesomeIcon icon="medal" size="2x" />
+          Your badges
+        </h1>
+        <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myAchievements)}`}</h2>
+      </section>
       <div className="section is-size-6-mobile is-size-6-tablet">{badges}</div>
     </div>
   );
