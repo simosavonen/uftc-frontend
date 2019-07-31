@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss src/bulma-custom.css"
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss src/bulma-custom.css",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "bulma": "^0.7.5",
+    "cypress": "^3.4.1",
     "faker": "^4.1.0",
     "node-sass": "^4.12.0"
   }

@@ -124,6 +124,7 @@ const LoginForm = props => {
                     className="input"
                     type="email"
                     placeholder="first.last@ambientia.fi"
+                    id="Email"
                     value={email}
                     onChange={({ target }) => setEmail(target.value.toLowerCase())}
                     required
@@ -140,6 +141,7 @@ const LoginForm = props => {
                   <input
                     className="input"
                     type="password"
+                    id="Password"
                     value={password}
                     onChange={({ target }) => setPassword(target.value)}
                     required
