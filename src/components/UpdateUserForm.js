@@ -67,9 +67,6 @@ const UpdateUserForm = props => {
             <option>Tartu</option>
           </select>
         </p>
-        <p>
-          <label htmlFor="activeChallenge">Active Challenge: Cannot be updated here.</label>
-        </p>
         <button type="submit">Update user data</button>
       </form>
     </section>
