@@ -6,7 +6,6 @@ const UpdateUserForm = props => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('Please select one');
-  const [activeChallenge, setActiveChallenge] = useState('');
 
   useEffect(() => {
     if (props.user) {
@@ -16,7 +15,6 @@ const UpdateUserForm = props => {
         setName(result.data.name);
         setEmail(result.data.email);
         setLocation(result.data.location);
-        setActiveChallenge(result.data.activeChallenge);
       });
     }
   }, [props.user]);
@@ -27,8 +25,7 @@ const UpdateUserForm = props => {
       id,
       name,
       email,
-      location,
-      activeChallenge
+      location
     };
     props.updateUser(userDetails);
   };
