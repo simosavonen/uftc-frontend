@@ -51,7 +51,11 @@ const LoginForm = props => {
         <label className="label has-text-white">Location</label>
         <div className="control has-icons-left is-expanded">
           <div className="select is-fullwidth">
-            <select value={location} onChange={({ target }) => setLocation(target.value)}>
+            <select
+              value={location}
+              id="Location"
+              onChange={({ target }) => setLocation(target.value)}
+            >
               <option disabled>Please select one</option>
               <option>Hämeenlinna</option>
               <option>Helsinki</option>
@@ -76,6 +80,7 @@ const LoginForm = props => {
             type="text"
             value={name}
             placeholder="full name or nickname"
+            id="Fullname"
             onChange={({ target }) => setName(target.value)}
             required
           />
@@ -166,6 +171,7 @@ const LoginForm = props => {
                     className={`button is-fullwidth has-text-weight-bold ${isValid &&
                       'is-success'}`}
                     disabled={!isValid}
+                    id="Create"
                     title={isValid ? '' : 'Check the form fields'}
                   >
                     {isNewUser ? 'Create an account' : 'Log in'}
