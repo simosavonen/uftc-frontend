@@ -1,5 +1,3 @@
-import { isContext } from 'vm';
-
 describe('Login app', function() {
   context('720p resolution', function() {
     beforeEach(function() {
