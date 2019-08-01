@@ -1,10 +1,8 @@
-import { isContext } from 'vm';
-
 describe('Login app', function() {
   context('720p resolution', function() {
     beforeEach(function() {
       cy.viewport(1280, 720);
-      cy.request('POST', 'http://localhost:3001/api/testing/reset');
+      cy.request('GET', 'http://localhost:3001/api/testing/reset');
       cy.visit('http://localhost:3000');
       cy.contains('create an account').click();
       cy.get('#Email').type('random.person@ambientia.fi');
@@ -12,13 +10,13 @@ describe('Login app', function() {
       cy.get('select').select('Hämeenlinna');
       cy.get('#Fullname').type('Random Person');
 
-      //cy.contains('Create an account').click();
       cy.get('#Create', { timeout: 10000 })
         .should('be.visible')
         .and('contain', 'Create an account')
         .click();
       cy.visit('http://localhost:3000');
     });
+    //cy.contains('Create an account').click();
     /*
     it('displays full header', function() {
       cy.get('nav .desktop-menu').should('be.visible');
