@@ -29,6 +29,14 @@ const LoginForm = props => {
     setIsValid(invalidFields === 0);
   }, [email, password, name, location, isNewUser]);
 
+  const formatEmail = value => {
+    const formatted = value
+      .replace(/ä/g, 'a')
+      .replace(/ö/g, 'o')
+      .replace(/å/g, 'a');
+    setEmail(formatted);
+  };
+
   const submit = event => {
     event.preventDefault();
     const userDetails = {
@@ -125,7 +133,7 @@ const LoginForm = props => {
                     type="email"
                     placeholder="first.last@ambientia.fi"
                     value={email}
-                    onChange={({ target }) => setEmail(target.value.toLowerCase())}
+                    onChange={({ target }) => formatEmail(target.value.toLowerCase())}
                     required
                   />
                   <span className="icon is-small is-left">

@@ -145,20 +145,12 @@ const App = props => {
   const gradient = () => {
     const path = props.location.pathname;
     switch (path) {
-      case '/login':
-        return '';
-      case '/leaderboard':
-      case '/badges':
-      case '/':
       default:
         // the reset token is added to this, so startsWith()
         if (path.startsWith('/passwordreset')) {
           return 'blue-gradient';
         }
-        // if (path.startsWith('/activities')) {
-        //   return 'dark-cyan-gradient';
-        // }
-        return 'red-white-short-gradient';
+        return '';
     }
   };
 

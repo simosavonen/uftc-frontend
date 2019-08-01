@@ -12,6 +12,7 @@ $grass: #57ff24; // bad contrast with white text
 $yellowsnow: #ffe524;
 $orangejuice: #ff7824;
 $purplerain: #ff24c5;
+$darken: rgba(0, 0, 0, 0.1);
 
 // Update Bulma's global variables
 $family-sans-serif: 'Raleway', sans-serif;
@@ -22,6 +23,12 @@ $warning: $yellowsnow;
 
 // Update some of Bulma's component variables
 $navbar-background-color: #ffffff00; // navbar background transparent
+$navbar-breakpoint: 700px;
+$navbar-height: 4.5rem;
+$navbar-background-color: $raspberry;
+$navbar-item-hover-background-color: $darken;
+$navbar-item-color: #ffffff;
+
 $footer-background-color: #00000020; // footer semi transparent
 
 // Import all or just the modules you ended up using.
