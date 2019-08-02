@@ -50,10 +50,10 @@ describe('UTFC Create Users', function() {
 
     it('create user vakava', function() {
       cy.contains('create an account').click();
-      cy.get('#Email').type('vakava.mielinen@ambientia.fi');
+      cy.get('#Email').type('vakava.mielinen-murheilija@ambientia.fi');
       cy.get('#Password').type('salasana');
       cy.get('select').select('Tampere');
-      cy.get('#Fullname').type('Vakava Mielinen');
+      cy.get('#Fullname').type('Vakava Mielinen-Murheilija');
 
       cy.get('#Create', { timeout: 10000 })
         .should('be.visible')
@@ -95,7 +95,7 @@ describe('UTFC Create Users', function() {
       cy.get('#Email').type('nimeton.nimellinen@ambientia.fi');
       cy.get('#Password').type('salasana');
       cy.get('select').select('Tartu');
-      cy.get('#Fullname').type('Nimetön Nimellinen');
+      cy.get('#Fullname').type('nimeton');
 
       cy.get('#Create', { timeout: 10000 })
         .should('be.visible')
@@ -130,7 +130,7 @@ describe('UTFC Create Users', function() {
 
     it('user vakava can login', function() {
       cy.get('#Password').type('salasana');
-      cy.get('#Email').type('vakava.mielinen@ambientia.fi');
+      cy.get('#Email').type('vakava.mielinen-murheilija@ambientia.fi');
       cy.contains('Log in').click();
       cy.contains('log out');
       cy.contains('log out').click();
