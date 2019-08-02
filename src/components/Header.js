@@ -6,7 +6,7 @@ const Header = props => {
   const [burgerActive, setBurgerActive] = useState(false);
 
   return (
-    <nav className="navbar has-text-weight-bold is-transparent is-size-5-mobile is-size-5-tablet is-size-4-desktop">
+    <nav className="navbar has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           <Logo width={100} height={35} />
@@ -28,21 +28,21 @@ const Header = props => {
           <NavLink
             className="navbar-item has-text-white"
             to="/activities"
-            activeClassName="is-active has-text-grey-light"
+            activeClassName="is-active has-text-dark"
           >
             activities
           </NavLink>
           <NavLink
             className="navbar-item has-text-white"
             to="/badges"
-            activeClassName="is-active has-text-grey-light"
+            activeClassName="is-active has-text-dark"
           >
             badges
           </NavLink>
           <NavLink
             className="navbar-item has-text-white"
             to="/leaderboard"
-            activeClassName="is-active has-text-grey-light"
+            activeClassName="is-active has-text-dark"
           >
             leaderboard
           </NavLink>
