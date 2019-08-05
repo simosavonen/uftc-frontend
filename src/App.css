@@ -65,3 +65,11 @@
   font-weight: 700;
   font-size: larger;
 }
+
+.ambientia-block {
+  content: '';
+  height: 7px;
+  width: 33px;
+  background: #ff2457;
+  margin: 0.75em auto 0.5em;
+}
