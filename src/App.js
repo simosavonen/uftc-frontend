@@ -165,7 +165,12 @@ const App = props => {
             exact
             path="/activities"
             render={() => (
-              <ActivitiesView challenges={challenges} workouts={workouts} activities={activities} />
+              <ActivitiesView
+                challenges={challenges}
+                workouts={workouts}
+                activities={activities}
+                user={user}
+              />
             )}
           />
           <Route
