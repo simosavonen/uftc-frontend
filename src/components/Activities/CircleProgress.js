@@ -1,34 +1,96 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import moment from 'moment';
 
 const CircleProgress = ({ workouts, activities, challenge }) => {
+  if (!workouts.length || !activities.length) return <div>Loading...</div>;
+
+  const monday = moment().isoWeekday(1);
+  const sunday = moment().isoWeekday(7);
+  const today = moment();
+  const values = [0, 0, 0]; // challenge, weekly, daily
+
+  for (const workout of workouts) {
+    const points = activities.find(act => {
+      return act.id === workout.activity;
+    }).points;
+    for (const instance of workout.instances) {
+      const result = instance.amount * points;
+      if (
+        monday.isSameOrBefore(instance.date, 'day') &&
+        sunday.isSameOrAfter(instance.date, 'day')
+      ) {
+        values[1] += result;
+      }
+      if (today.isSame(instance.date, 'day')) {
+        values[2] += result;
+      }
+      values[0] += result;
+    }
+  }
+
+  const series = [
+    Math.floor((100 * values[0]) / 7500),
+    Math.floor((100 * values[1]) / 750),
+    Math.floor((100 * values[2]) / (750 / 7))
+  ];
+
   const options = {
     plotOptions: {
       radialBar: {
-        startAngle: -90,
-        endAngle: 90,
+        offsetY: -15,
+        offsetX: -120,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 0,
+          size: '25%',
+          background: 'transparent'
+        },
         dataLabels: {
           name: {
-            fontSize: '22px',
-            offsetY: -25
+            show: false
           },
           value: {
-            fontSize: '16px',
-            offsetY: -15
+            show: true,
+            fontSize: '28px',
+            offsetY: 10
           }
         }
       }
     },
-    labels: ['Challenge', 'Weekly', 'Daily']
+    colors: ['#1ab7ea', '#0084ff', '#39539E'],
+    labels: ['Challenge', 'Weekly', 'Daily'],
+    legend: {
+      show: true,
+      fontFamily: 'Raleway',
+      floating: false,
+      fontSize: '20px',
+      position: 'left',
+      offsetX: 30,
+      offsetY: 17,
+      labels: {
+        useSeriesColors: true
+      },
+      markers: {
+        width: 0,
+        height: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ':  ' + values[opts.seriesIndex];
+      },
+      itemMargin: {
+        horizontal: 4
+      },
+      onItemClick: {
+        toggleDataSeries: false
+      }
+    }
   };
 
-  const series = [15, 66, 85];
   return (
-    <div>
-      <Chart options={options} height={350} type={'radialBar'} series={series} />
-      <p>Challenge 300 / 7500</p>
-      <p>Weekly 620 / 750</p>
-      <p>Daily 72 / 110</p>
+    <div className="has-text-right is-flex" style={{ justifyContent: 'center' }}>
+      <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
     </div>
   );
 };
