@@ -6,9 +6,9 @@ const useResource = baseUrl => {
   //console.log('useResource', baseUrl);
 
   const fetchData = async baseUrl => {
-    console.log('fetchData', baseUrl);
+    // console.log('fetchData', baseUrl);
     const response = await axios.get(baseUrl);
-    console.log('set fetched data', response.data);
+    // console.log('set fetched data', response.data);
     setData(response.data);
   };
 

@@ -10,12 +10,14 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
 
   return (
     <>
-      <section className="section columns is-centered">
-        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <ChallengeTitle challenge={challenges[0]} />
-        </div>
-        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
+      <section className="section">
+        <div className="columns is-centered">
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <ChallengeTitle challenge={challenges[0]} />
+          </div>
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
+          </div>
         </div>
       </section>
 

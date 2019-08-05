@@ -72,7 +72,7 @@ const UpdateWorkoutForm = props => {
         <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
           -
         </button>
-        <label className="label has-text-white">Date: {modDate} </label>
+        <label className="label has-text-black">Date: {modDate} </label>
 
         <p>
           <button className="button is-success is-fullwidth">Save</button>
