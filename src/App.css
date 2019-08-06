@@ -73,3 +73,17 @@
   background: #ff2457;
   margin: 0.75em auto 0.5em;
 }
+
+.series-button {
+  background-color: #ff2457;
+}
+
+.series-button-hoverable {
+  background-color: #ff2457;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.series-button-hoverable:hover {
+  background-color: #d61a3c;
+}
