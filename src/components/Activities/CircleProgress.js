@@ -3,7 +3,8 @@ import Chart from 'react-apexcharts';
 import moment from 'moment';
 
 const CircleProgress = ({ workouts, activities, challenge }) => {
-  if (!workouts.length || !activities.length) return <div>Loading...</div>;
+  if (!activities.length) return <div>No activities found.</div>;
+  if (!workouts.length) return <div>No workouts found.</div>;
 
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);
@@ -29,6 +30,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     }
   }
 
+  // hardcoded 750 and 7500 should come from props.challenge
   const series = [
     Math.floor((100 * values[0]) / 7500),
     Math.floor((100 * values[1]) / 750),
@@ -39,7 +41,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     plotOptions: {
       radialBar: {
         offsetY: -15,
-        offsetX: -120,
+        offsetX: 0,
         startAngle: 0,
         endAngle: 270,
         hollow: {
@@ -63,8 +65,8 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     labels: ['Challenge', 'Weekly', 'Daily'],
     legend: {
       show: true,
+      floating: true,
       fontFamily: 'Raleway',
-      floating: false,
       fontSize: '20px',
       position: 'left',
       offsetX: 30,
@@ -89,7 +91,10 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
   };
 
   return (
-    <div className="has-text-right is-flex" style={{ justifyContent: 'center' }}>
+    <div
+      className="has-text-right is-flex is-marginless is-paddingless"
+      style={{ justifyContent: 'center' }}
+    >
       <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
     </div>
   );
