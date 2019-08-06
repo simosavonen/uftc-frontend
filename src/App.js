@@ -54,8 +54,12 @@ const App = props => {
     }
   }, [user]);
 
-  const updateUser = user => {
-    userService.update(user);
+  const updateUser = updatedUser => {
+    userService.update(updatedUser).then(response => {
+      const newUserState = { token: user.token, ...response.data };
+      setUser(newUserState);
+      localStorage.setItem('loggedUser', JSON.stringify(newUserState));
+    });
   };
 
   const addWorkout = workout => {

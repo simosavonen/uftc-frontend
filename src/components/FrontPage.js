@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 
-const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor, handleClick, selected }) => {
+const Ikonipallo = ({
+  sarja,
+  osallistujia,
+  iconName,
+  bgColor,
+  handleClick,
+  selected,
+  activeChallenge
+}) => {
   let styles = {
-    backgroundColor: bgColor,
     width: '33vw',
     minWidth: '110px',
     maxWidth: '200px',
@@ -18,7 +25,7 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor, handleClick, selec
     justifyContent: 'center',
     margin: 'auto'
   };
-  if (selected) {
+  if (selected && !activeChallenge) {
     styles = {
       ...styles,
       borderStyle: 'solid',
@@ -26,11 +33,17 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor, handleClick, selec
       borderWidth: '6px'
     };
   }
+  const bulmaClass =
+    'has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
+  let customClass = 'series-button-hoverable';
+  if (activeChallenge) customClass = 'series-button';
+  const className = bulmaClass + ' ' + customClass;
+  console.log(className);
 
   return (
     <div
       style={styles}
-      className="has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
+      className={className}
       onClick={() => {
         console.log('klikkasit', sarja);
         handleClick();
@@ -51,9 +64,13 @@ const BraceRight = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' 
 
 const FrontPage = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
+  let hasActiveChallenge = false;
+  if (props.user && props.user.activeChallenge) {
+    hasActiveChallenge = true;
+  }
 
   const handleClickOnBall = seriesId => () => {
-    if (props.user && !props.user.activeChallenge) return setSelectedSeries(seriesId);
+    if (!hasActiveChallenge) return setSelectedSeries(seriesId);
   };
 
   const saveSelection = () => {
@@ -98,6 +115,7 @@ const FrontPage = props => {
           bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
           selected={c.id === selectedSeries}
+          activeChallenge={hasActiveChallenge}
         />
         <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
