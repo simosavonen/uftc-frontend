@@ -91,10 +91,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
   };
 
   return (
-    <div
-      className="has-text-right is-flex is-marginless is-paddingless"
-      style={{ justifyContent: 'center' }}
-    >
+    <div className="has-text-right is-flex" style={{ justifyContent: 'center' }}>
       <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
     </div>
   );

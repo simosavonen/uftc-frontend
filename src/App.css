@@ -33,6 +33,10 @@
   color: #ffffff !important;
 }
 
+.hover-effect-grey:hover {
+  background-color: #00000020;
+}
+
 .hover-effect-green:hover {
   background-color: #24ff9980;
 }
@@ -72,4 +76,9 @@
   width: 33px;
   background: #ff2457;
   margin: 0.75em auto 0.5em;
+}
+
+.hover-svg-red:hover path,
+.hover-svg-red:hover circle {
+  fill: #ff2457;
 }
