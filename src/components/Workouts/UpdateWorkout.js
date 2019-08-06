@@ -89,7 +89,7 @@ const UpdateWorkout = props => {
 
   oneTypeActLenght = oneTypeAct.length;
 
-  if (!oneTypeActLenght) {
+  if (oneTypeActLenght === 0) {
     return (
       <p>
         <b>Hi there, you can make good exercise!</b>
