@@ -6,7 +6,10 @@ const AddChallengeForm = props => {
   const [endDate, setEndDate] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
   const [deadLine, setDeadLine] = useState('');
-  const [pointsLimit, setPointsLimit] = useState(0);
+  const [pointsGoal, setPointsLimit] = useState(0);
+  const [seriesTitle, setSeriesTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [icon, setIcon] = useState('');
 
   const submit = event => {
     event.preventDefault();
@@ -16,7 +19,10 @@ const AddChallengeForm = props => {
       endDate,
       releaseDate,
       deadLine,
-      pointsLimit
+      pointsGoal,
+      seriesTitle,
+      description,
+      icon
     };
     props.addChallenge(newChallenge);
   };
@@ -69,8 +75,28 @@ const AddChallengeForm = props => {
             id="pointsLimit"
             type="number"
             onChange={({ target }) => setPointsLimit(target.value)}
-            value={pointsLimit}
+            value={pointsGoal}
           />
+        </p>
+        <p>
+          <label htmlFor="seriesTitle">Series title:</label>
+          <input
+            id="seriesTitle"
+            onChange={({ target }) => setSeriesTitle(target.value)}
+            value={seriesTitle}
+          />
+        </p>
+        <p>
+          <label htmlFor="description">Description:</label>
+          <input
+            id="description"
+            onChange={({ target }) => setDescription(target.value)}
+            value={description}
+          />
+        </p>
+        <p>
+          <label htmlFor="icon">FontAwesome icon:</label>
+          <input id="icon" onChange={({ target }) => setIcon(target.value)} value={icon} />
         </p>
         <button type="submit">Add new challenge</button>
       </form>

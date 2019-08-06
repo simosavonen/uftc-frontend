@@ -1,4 +1,8 @@
-const host = 'http://' + window.location.hostname + ':3001';
+let host = '';
+
+if (process.env.NODE_ENV === 'development') {
+  host = 'http://' + window.location.hostname + ':3001';
+}
 
 const apiUrls = {
   activities: host + '/api/activities',
