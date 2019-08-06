@@ -62,13 +62,14 @@ const App = props => {
     workoutService
       .add(workout)
       .then(response => {
-        //console.log('response.data', response.data);
-        if (!workouts.length) {
-          setWorkouts([response.data]);
+        console.log('response.data', response.data);
+        if (workouts.length === 0 || workouts.filter(w => w.id === response.data.id).length === 0) {
+          setWorkouts([...workouts, response.data]);
         } else {
           const workoutsWithNew = workouts.map(w =>
             w.id !== response.data.id ? w : response.data
           );
+          console.log(workoutsWithNew, workoutsWithNew);
           setWorkouts(workoutsWithNew);
         }
         toast.success('Workout saved.');
