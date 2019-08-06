@@ -16,8 +16,10 @@ const Ikonipallo = ({ sarja, osallistujia, iconName, bgColor, handleClick, selec
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 'auto'
+    margin: 'auto',
+    cursor: 'pointer'
   };
+  // todo: hover
   if (selected) {
     styles = {
       ...styles,
