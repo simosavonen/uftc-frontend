@@ -4,7 +4,7 @@ const AccordionItem = posed.div({
   enter: {
     y: 0,
     opacity: 1,
-    delay: 300,
+    delay: 100,
     transition: {
       y: { type: 'spring', stiffness: 500, damping: 15 },
       default: { duration: 200 }
@@ -13,7 +13,7 @@ const AccordionItem = posed.div({
   exit: {
     y: -30,
     opacity: 0,
-    transition: { duration: 150 }
+    transition: { duration: 100 }
   }
 });
 
