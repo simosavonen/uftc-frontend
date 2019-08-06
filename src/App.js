@@ -59,13 +59,18 @@ const App = props => {
   };
 
   const addWorkout = workout => {
-    const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
     workoutService
-      .add(workoutWithChallengeId)
+      .add(workout)
       .then(response => {
         //console.log('response.data', response.data);
-        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
-        setWorkouts(workoutsWithNew);
+        if (!workouts.length) {
+          setWorkouts([response.data]);
+        } else {
+          const workoutsWithNew = workouts.map(w =>
+            w.id !== response.data.id ? w : response.data
+          );
+          setWorkouts(workoutsWithNew);
+        }
         toast.success('Workout saved.');
       })
       .catch(error => {
