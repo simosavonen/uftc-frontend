@@ -10,7 +10,7 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
 
   return (
     <>
-      <section className="section">
+      <section className="section is-hidden-mobile">
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <ChallengeTitle challenge={challenges[0]} />
@@ -27,6 +27,17 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
         </div>
         <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
           <ActivityMenu activities={activities} />
+        </div>
+      </section>
+
+      <section className="section is-hidden-tablet">
+        <div className="columns is-centered">
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <ChallengeTitle challenge={challenges[0]} />
+          </div>
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
+          </div>
         </div>
       </section>
     </>
