@@ -105,7 +105,7 @@ const LoginForm = props => {
     <section className="is-fullheight">
       <div className="columns is-centered is-fullheight is-marginless">
         <div className="column is-4 is-hidden-mobile" />
-        <div className="column is-5 blue-white-gradient is-fullheight is-paddingless">
+        <div className="column is-7-tablet is-6-desktop is-5-widescreen blue-white-gradient is-fullheight is-paddingless">
           <form
             className="is-fullheight"
             onSubmit={submit}

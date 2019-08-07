@@ -8,7 +8,7 @@ const ActivityMenu = props => {
 
   return (
     <div>
-      <h1 className="title is-size-4-mobile is-size-3">Select activity</h1>
+      <h1 className="title is-size-4-mobile is-size-3">Select an activity</h1>
       {activityTypes.map((activityType, rowIndex) => (
         <AccordionList
           row={rowIndex}

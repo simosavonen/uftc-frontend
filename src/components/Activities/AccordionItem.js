@@ -1,21 +1,19 @@
 import posed from 'react-pose';
 
 const AccordionItem = posed.div({
-  exit: {
-    height: 0,
-    opacity: 0,
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 100,
     transition: {
-      ease: 'easeInOut',
-      duration: 250
+      y: { type: 'spring', stiffness: 500, damping: 15 },
+      default: { duration: 200 }
     }
   },
-  enter: {
-    height: 'auto',
-    opacity: 1,
-    transition: {
-      ease: 'easeInOut',
-      duration: 300
-    }
+  exit: {
+    y: -30,
+    opacity: 0,
+    transition: { duration: 100 }
   }
 });
 

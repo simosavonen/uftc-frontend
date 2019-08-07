@@ -29,6 +29,14 @@ const generateSampleData = (size, weeks) => {
   return sampleData;
 };
 
+const caseInsensitiveNameSort = (a, b) => {
+  return a.name.toLowerCase() > b.name.toLowerCase()
+    ? 1
+    : a.name.toLowerCase() < b.name.toLowerCase()
+    ? -1
+    : 0;
+};
+
 const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
   const [filteredData, setFilteredData] = useState([]);
 
@@ -38,12 +46,10 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
       filtered = [
         {
           name: 'Total',
-          data: weeklyData
-            .map(d => ({
-              x: d.name,
-              y: d.data.reduce((sum, item) => sum + item, 0)
-            }))
-            .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
+          data: weeklyData.sort(caseInsensitiveNameSort).map(d => ({
+            x: d.name,
+            y: d.data.reduce((sum, item) => sum + item, 0)
+          }))
         }
       ];
       setFilteredData(filtered);
@@ -51,12 +57,10 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
       filtered = [
         {
           name: `Week ${weekFilter}`,
-          data: weeklyData
-            .map(d => ({
-              x: d.name,
-              y: d.data[weekFilter - 1]
-            }))
-            .sort((a, b) => (a.x > b.x ? 1 : a.x < b.x ? -1 : 0))
+          data: weeklyData.sort(caseInsensitiveNameSort).map(d => ({
+            x: d.name,
+            y: d.data[weekFilter - 1]
+          }))
         }
       ];
       setFilteredData(filtered);

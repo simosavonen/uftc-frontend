@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import AccordionItem from './AccordionItem';
-import ActivityRow from './ActivityRow';
+//import ActivityRow from './ActivityRow';
+import ActivityDetails from './ActivityDetails';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AccordionList = props => {
@@ -24,24 +25,24 @@ const AccordionList = props => {
   return (
     <>
       <div
-        className={`columns is-centered is-mobile has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop ${
-          props.row % 2 ? 'menurow-odd' : 'menurow-even'
-        }`}
-        style={{ padding: '1vw', margin: '1vw 4vw' }}
+        className={'columns is-centered is-mobile is-clickable hover-effect-grey'}
+        style={{ marginTop: '1em', marginBottom: '1em' }}
         onClick={handleClick}
       >
-        <div className="column is-11"> {props.type} </div>
+        <div className="column is-8">
+          <p className="title is-5-mobile is-4">{props.type}</p>
+        </div>
 
-        <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
+        <Icon className="column is-2" pose={opened ? 'up' : 'down'}>
           <FontAwesomeIcon icon="angle-up" />
         </Icon>
       </div>
-      <PoseGroup animateOnMount="true">
+      <PoseGroup>
         {props.activities.map(
           a =>
             opened && (
               <AccordionItem key={a.id}>
-                <ActivityRow activity={a} />
+                <ActivityDetails activity={a} />
               </AccordionItem>
             )
         )}

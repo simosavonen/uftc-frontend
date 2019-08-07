@@ -54,18 +54,28 @@ const App = props => {
     }
   }, [user]);
 
-  const updateUser = user => {
-    userService.update(user);
+  const updateUser = updatedUser => {
+    userService.update(updatedUser).then(response => {
+      const newUserState = { token: user.token, ...response.data };
+      setUser(newUserState);
+      localStorage.setItem('loggedUser', JSON.stringify(newUserState));
+    });
   };
 
   const addWorkout = workout => {
-    const workoutWithChallengeId = { ...workout, challenge: challenges[0].id };
     workoutService
-      .add(workoutWithChallengeId)
+      .add(workout)
       .then(response => {
         //console.log('response.data', response.data);
-        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
-        setWorkouts(workoutsWithNew);
+        if (workouts.length === 0 || workouts.filter(w => w.id === response.data.id).length === 0) {
+          setWorkouts([...workouts, response.data]);
+        } else {
+          const workoutsWithNew = workouts.map(w =>
+            w.id !== response.data.id ? w : response.data
+          );
+          //console.log(workoutsWithNew, workoutsWithNew);
+          setWorkouts(workoutsWithNew);
+        }
         toast.success('Workout saved.');
       })
       .catch(error => {

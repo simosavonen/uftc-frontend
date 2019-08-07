@@ -66,7 +66,7 @@ const BadgesView = props => {
     .map(a => <Badge achievement={a} key={a.id} activity={a.activity} />);
 
   return (
-    <div>
+    <div className="container">
       <section className="section">
         <h1 className="title is-4">
           <FontAwesomeIcon icon="medal" size="2x" />

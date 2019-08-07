@@ -1,5 +1,6 @@
 import React from 'react';
-import ActivityRow from './ActivityRow';
+//import ActivityRow from './ActivityRow';
+import ActivityDetails from './ActivityDetails';
 
 const RecentActivities = props => {
   var lstActNameLenght;
@@ -66,16 +67,15 @@ const RecentActivities = props => {
     }
 
     return (
-      <>
+      <div>
         <h1 className="title is-size-4-mobile is-size-3">
-          Your <span style={{ fontSize: 'larger', color: '#ff2457' }}>{lstActNameLenght}</span> most
-          recent activities
+          Your <span style={{ color: '#ff2457' }}>{lstActNameLenght}</span> most recent activities
         </h1>
 
         {lstActName.map(item => (
-          <ActivityRow activity={item} key={item.name} />
+          <ActivityDetails activity={item} key={item.name} />
         ))}
-      </>
+      </div>
     );
   };
 
