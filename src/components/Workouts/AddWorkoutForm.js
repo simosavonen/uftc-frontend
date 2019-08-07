@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 
@@ -78,33 +79,49 @@ const AddWorkoutForm = props => {
   };
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <label className="label">Suorituskertoja (kpl):</label>
-        <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
-          +
-        </button>
-        <input
-          className="input"
-          type="text"
-          min="1"
-          value={amount}
-          onChange={handleAmountChange}
-          onBlur={dontAllowZero}
-        />
-        <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
-          -
-        </button>
-        <label className="label">Date:</label>
+    <form onSubmit={submit}>
+      <div className="field is-grouped">
+        <p className="control">
+          <button className="button is-danger is-medium" onClick={handleLessClick}>
+            <span className="icon is-medium">
+              <FontAwesomeIcon icon="minus" />
+            </span>
+          </button>
+        </p>
+        <p className="control is-expanded">
+          <input
+            className="input is-medium"
+            type="text"
+            min="1"
+            value={amount}
+            onChange={handleAmountChange}
+            onBlur={dontAllowZero}
+          />
+        </p>
+        <p className="control">
+          <button className="button is-success is-medium" onClick={handleMoreClick}>
+            <span className="icon is-medium">
+              <FontAwesomeIcon icon="plus" />
+            </span>
+          </button>
+        </p>
+      </div>
+      <div style={{ margin: '1.5em 0' }}>
         <Calendar
           onChange={handleDateChange}
           value={date}
           maxDate={new Date()}
           tileClassName={highlight}
         />
-        <p>
-          <button className="button is-success is-fullwidth">Save</button>
-          <br />
+      </div>
+
+      <div className="field">
+        <p className="control">
+          <button className="button is-success is-fullwidth is-medium">Save a workout</button>
+        </p>
+      </div>
+      <div className="field">
+        <p className="control">
           <button
             className="button is-danger is-fullwidth"
             onClick={event => {
@@ -112,11 +129,11 @@ const AddWorkoutForm = props => {
               props.history.goBack();
             }}
           >
-            Back
+            Go back
           </button>
         </p>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
