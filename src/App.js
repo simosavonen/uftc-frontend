@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import userService from './services/user';
@@ -18,6 +18,7 @@ import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import { apiUrls } from './config/config';
+import NotFound from './components/NotFound';
 
 import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
 
@@ -147,10 +148,6 @@ const App = props => {
     return localStorage.getItem('loggedUser') !== null;
   };
 
-  const isResettingPassword = () => {
-    return props.location.pathname.startsWith('/passwordreset');
-  };
-
   const activityById = id => {
     for (let a of activities) {
       if (a.id.substr(0, 8) === id) {
@@ -161,7 +158,9 @@ const App = props => {
 
   // todo: more than 1 background image?
   const background = () => {
-    return props.location.pathname.startsWith('/login') ? 'kettlebeach' : '';
+    if (!isAuthenticated()) {
+      return 'kettlebeach';
+    }
   };
 
   // todo: add other colors
@@ -180,10 +179,27 @@ const App = props => {
   return (
     <div className={`site ${background()}`}>
       <div className={`main ${gradient()}`}>
-        {!isAuthenticated() && !isResettingPassword() && <Redirect to="/login" />}
         {isAuthenticated() && <Header logout={logout} />}
         <Switch>
-          <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
+          {!isAuthenticated() && (
+            <Switch>
+              <Route
+                exact
+                path="/login/:secret"
+                render={({ match }) => (
+                  <LoginForm login={login} register={register} secret={match.params.secret} />
+                )}
+              />
+              <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
+              <Route
+                exact
+                path="/passwordreset/:token"
+                render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
+              />
+              <Route path="/" render={() => <LoginForm login={login} register={register} />} />
+            </Switch>
+          )}
+
           <Route
             exact
             path="/activities"
@@ -233,12 +249,6 @@ const App = props => {
             render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
           />
 
-          <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
-          <Route
-            exact
-            path="/passwordreset/:token"
-            render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
-          />
           <Route exact path="/styleguide" render={() => <StyleGuide />} />
           <Route
             exact
@@ -247,6 +257,7 @@ const App = props => {
               <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
             )}
           />
+          <Route path="/" component={NotFound} />
         </Switch>
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
         {isAuthenticated() && <Footer />}
