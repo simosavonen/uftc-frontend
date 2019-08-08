@@ -63,37 +63,50 @@ const App = props => {
   };
 
   const addWorkout = workout => {
-    workoutService
-      .add(workout)
-      .then(response => {
-        //console.log('response.data', response.data);
-        if (workouts.length === 0 || workouts.filter(w => w.id === response.data.id).length === 0) {
-          setWorkouts([...workouts, response.data]);
-        } else {
-          const workoutsWithNew = workouts.map(w =>
-            w.id !== response.data.id ? w : response.data
-          );
-          //console.log(workoutsWithNew, workoutsWithNew);
-          setWorkouts(workoutsWithNew);
-        }
-        toast.success('Workout saved.');
-      })
-      .catch(error => {
-        console.log('addWorkout', error.message);
-      });
+    if (user.activeChallenge) {
+      workoutService
+        .add(workout)
+        .then(response => {
+          //console.log('response.data', response.data);
+          if (
+            workouts.length === 0 ||
+            workouts.filter(w => w.id === response.data.id).length === 0
+          ) {
+            setWorkouts([...workouts, response.data]);
+          } else {
+            const workoutsWithNew = workouts.map(w =>
+              w.id !== response.data.id ? w : response.data
+            );
+            //console.log(workoutsWithNew, workoutsWithNew);
+            setWorkouts(workoutsWithNew);
+          }
+          toast.success('Workout saved.');
+        })
+        .catch(error => {
+          console.log('addWorkout', error.message);
+        });
+    } else {
+      toast.warn('Workout not saved! Please select a challenge first.');
+    }
   };
 
   const updateWorkout = workout => {
-    workoutService
-      .update(workout)
-      .then(response => {
-        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
-        setWorkouts(workoutsWithNew);
-        toast.success('Workout updated.');
-      })
-      .catch(error => {
-        console.log('updateWorkout', error.message);
-      });
+    if (user.activeChallenge) {
+      workoutService
+        .update(workout)
+        .then(response => {
+          const workoutsWithNew = workouts.map(w =>
+            w.id !== response.data.id ? w : response.data
+          );
+          setWorkouts(workoutsWithNew);
+          toast.success('Workout updated.');
+        })
+        .catch(error => {
+          console.log('updateWorkout', error.message);
+        });
+    } else {
+      toast.warn('Workout not saved! Please select a challenge first.');
+    }
   };
 
   const login = userDetails => {
