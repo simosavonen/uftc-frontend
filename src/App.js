@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import slug from 'slug';
 
 import userService from './services/user';
 import workoutService from './services/workouts';
@@ -148,9 +149,9 @@ const App = props => {
     return localStorage.getItem('loggedUser') !== null;
   };
 
-  const activityById = id => {
+  const activityByName = name => {
     for (let a of activities) {
-      if (a.id.substr(0, 8) === id) {
+      if (slug(a.name, { lower: true }) === name) {
         return a;
       }
     }
@@ -214,10 +215,10 @@ const App = props => {
           />
           <Route
             exact
-            path="/activities/:id"
+            path="/activities/:name"
             render={({ match }) => (
               <WorkoutView
-                activity={activityById(match.params.id)}
+                activity={activityByName(match.params.name)}
                 addWorkout={addWorkout}
                 challenge={challenges[0]}
                 workouts={workouts}

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { icon } from './utils';
+import slug from 'slug';
 
 const ActivityDetails = ({ activity }) => {
   return (
-    <Link to={`/activities/${activity.id.substr(0, 8)}`}>
+    <Link to={`/activities/${slug(activity.name, { lower: true })}`}>
       <article
         className="media hover-effect-grey hover-svg-red"
         style={{ padding: '0.2em', marginBottom: '0.5em' }}
