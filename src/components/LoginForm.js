@@ -185,6 +185,8 @@ const LoginForm = props => {
                       event.preventDefault();
                       setIsNewUser(!isNewUser);
                     }}
+                    disabled={props.secret === undefined}
+                    title={'Use the link provided by the organizers'}
                   >
                     {isNewUser ? 'cancel' : 'create an account'}
                   </button>
