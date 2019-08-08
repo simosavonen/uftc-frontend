@@ -38,14 +38,12 @@ const Ikonipallo = ({
   let customClass = 'series-button-hoverable';
   if (activeChallenge) customClass = 'series-button';
   const className = bulmaClass + ' ' + customClass;
-  console.log(className);
 
   return (
     <div
       style={styles}
       className={className}
       onClick={() => {
-        console.log('klikkasit', sarja);
         handleClick();
       }}
     >
@@ -82,7 +80,6 @@ const ChallengeSelectView = props => {
       ...props.user,
       activeChallenge: selectedSeries
     };
-    console.log('Updating user data:', userDetails);
     props.updateUser(userDetails);
   };
 
