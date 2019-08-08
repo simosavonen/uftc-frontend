@@ -58,9 +58,13 @@ const Ikonipallo = ({
   );
 };
 
-const BraceLeft = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7b;</span>;
+const BraceLeft = () => (
+  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>
+);
 
-const BraceRight = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7d;</span>;
+const BraceRight = () => (
+  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
+);
 
 const FrontPage = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
@@ -121,28 +125,28 @@ const FrontPage = props => {
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
           {props.user && props.user.activeChallenge === c.id && showActiveChallenge()}
         </div>
-        <section className="section">
+        <div>
           {props.user &&
             !props.user.activeChallenge &&
             selectedSeries === c.id &&
             showSelectionButton()}
-        </section>
+        </div>
       </div>
     ));
 
   return (
     <>
       <section className="section has-text-centered">
-        <h1 className="title is-1 ">Welcome to UFTC!</h1>
+        <h1 className="title is-3 ">Welcome to UFTC!</h1>
       </section>
       {challengeNames.map(challengeName => (
-        <section className="section" key={challengeName}>
-          <div className="section has-text-centered">
-            <h1 className="title is-2">
-              <BraceLeft /> {challengeName} <BraceRight />
-            </h1>
-            <h2 className="title is-3">Select series</h2>
-          </div>
+        <section className="section has-text-centered " key={challengeName}>
+          <h1 className="is-size-4">
+            <BraceLeft /> {challengeName} <BraceRight />
+          </h1>
+          <br />
+          <h2 className="title is-5">Select series</h2>
+
           <div className="columns is-centered">
             {challengeSelections(challengesToShow.filter(c => c.name === challengeName))}
           </div>
