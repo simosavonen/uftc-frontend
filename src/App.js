@@ -12,7 +12,7 @@ import AddActivityForm from './components/AddActivityForm';
 import UpdateUserForm from './components/UpdateUserForm';
 import AddAchievementForm from './components/AddAchievementForm';
 import BadgesView from './components/BadgesView';
-import FrontPage from './components/FrontPage';
+import ChallengeSelectView from './components/ChallengeSelectView';
 import Footer from './components/Footer';
 import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
@@ -230,7 +230,9 @@ const App = props => {
           <Route
             exact
             path="/"
-            render={() => <FrontPage challenges={challenges} updateUser={updateUser} user={user} />}
+            render={() => (
+              <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
+            )}
           />
         </Switch>
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />

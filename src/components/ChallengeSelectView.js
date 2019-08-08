@@ -66,7 +66,7 @@ const BraceRight = () => (
   <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
 );
 
-const FrontPage = props => {
+const ChallengeSelectView = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
   let hasActiveChallenge = false;
   if (props.user && props.user.activeChallenge) {
@@ -156,4 +156,4 @@ const FrontPage = props => {
   );
 };
 
-export default FrontPage;
+export default ChallengeSelectView;
