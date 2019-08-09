@@ -3,24 +3,13 @@ import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
 import { icon } from '../Activities/utils';
 
-const placeholder = {
-  name: 'loading...',
-  points: 100,
-  type: 'Placeholders',
-  unit: '1 kg',
-  description: 'This is a placeholder object',
-  url: 'http://fake.you.tube/123',
-  id: '12341234123412341234',
-  icon: 'icon.svg'
-};
-
-const WorkoutView = ({
-  activity = placeholder,
-  addWorkout,
-  challenge,
-  workouts,
-  updateWorkout
-}) => {
+const WorkoutView = ({ activity, addWorkout, challenge, workouts, updateWorkout }) => {
+  if (!activity)
+    return (
+      <div className="section container">
+        <h1 className="title">Error: No such activity exists</h1>
+      </div>
+    );
   return (
     <>
       <section className="section">
