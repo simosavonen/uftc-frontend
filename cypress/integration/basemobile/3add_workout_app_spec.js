@@ -13,6 +13,7 @@ describe('Add workout random', function() {
     });
 
     it('random add workout', function() {
+      cy.viewport('iphone-4');
       cy.wait(800);
       cy.contains('activities').click();
       cy.wait(100);

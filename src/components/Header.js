@@ -17,6 +17,7 @@ const Header = props => {
             aria-label="menu"
             aria-expanded="false"
             data-target="navMenu"
+            id="navmenu"
             onClick={() => setBurgerActive(!burgerActive)}
           >
             <span aria-hidden="true" />
