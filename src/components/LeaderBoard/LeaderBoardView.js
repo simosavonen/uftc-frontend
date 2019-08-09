@@ -10,7 +10,7 @@ import scoreService from '../../services/scores';
 const locations = ['Hämeenlinna', 'Helsinki', 'Joensuu', 'Tampere', 'Turku', 'Tallinn', 'Tartu'];
 const series = ['Defaults', 'Pros'];
 
-const LeaderBoardView = () => {
+const LeaderBoardView = ({ challenge }) => {
   const [weeklyData, setWeeklyData] = useState([]);
   const [weekFilter, setWeekFilter] = useState(0);
 
@@ -120,6 +120,7 @@ const LeaderBoardView = () => {
           setWeekFilter={setWeekFilter}
           locationFilters={locationFilters}
           seriesFilters={seriesFilters}
+          challenge={challenge}
         />
       </div>
     </section>

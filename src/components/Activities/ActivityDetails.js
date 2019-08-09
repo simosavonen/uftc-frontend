@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { icon } from './utils';
 import slug from 'slug';
 
-const ActivityDetails = ({ activity }) => {
+const ActivityDetails = ({ activity, challenge }) => {
+  if (!challenge) return null;
   return (
     <Link to={`/activities/${slug(activity.name, { lower: true })}`}>
       <article
@@ -18,7 +19,9 @@ const ActivityDetails = ({ activity }) => {
           </div>
         </div>
         <div className="media-right has-text-right">
-          <h1 className="title is-5 has-text-danger">{activity.points} points</h1>
+          <h1 className="title is-5 has-text-danger">
+            {Math.round(activity.points * challenge.pointBonus * 10) / 10} points
+          </h1>
           <h2 className="subtitle is-6">{activity.unit}</h2>
         </div>
       </article>

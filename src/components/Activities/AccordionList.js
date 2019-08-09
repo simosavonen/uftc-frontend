@@ -42,7 +42,7 @@ const AccordionList = props => {
           a =>
             opened && (
               <AccordionItem key={a.id}>
-                <ActivityDetails activity={a} />
+                <ActivityDetails activity={a} challenge={props.challenge} />
               </AccordionItem>
             )
         )}

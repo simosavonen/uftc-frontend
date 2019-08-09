@@ -19,6 +19,7 @@ const WeeklyScoresTable = ({
   seriesFilters
 }) => {
   const [showUser, setShowUser] = useState('');
+  const [pointBonus, setPointBonus] = useState(1);
   const [workouts, setWorkouts] = useState([]);
   const [chartData, setChartData] = useState([]); // filtered weeklyData for showing in the chart
 
@@ -49,8 +50,9 @@ const WeeklyScoresTable = ({
     }
   }, [showUser, workouts]);
 
-  const toggleShowUser = id => {
+  const toggleShowUser = (id, pointBonus) => {
     showUser === id ? setShowUser('') : setShowUser(id);
+    setPointBonus(pointBonus);
   };
 
   return (
@@ -115,7 +117,7 @@ const WeeklyScoresTable = ({
           .map((score, index) => (
             <React.Fragment key={score.id.toString()}>
               <tr
-                onClick={() => toggleShowUser(score.id.toString())}
+                onClick={() => toggleShowUser(score.id.toString(), score.pointBonus)}
                 className={`is-clickable hover-effect-green ${score.id.toString() === showUser &&
                   'is-selected has-text-dark'}`}
               >
@@ -135,7 +137,11 @@ const WeeklyScoresTable = ({
                   <td colSpan={5 + score.data.length} style={{ padding: '2vw' }}>
                     <div className="columns is-centered">
                       <div className="column is-4">
-                        <WorkoutsTable workouts={workouts} showUser={showUser} />
+                        <WorkoutsTable
+                          workouts={workouts}
+                          showUser={showUser}
+                          pointBonus={pointBonus}
+                        />
                       </div>
                       <div className="column is-8 is-paddingless">
                         <WorkoutsChart chartData={chartData} />

@@ -17,6 +17,7 @@ const ActivityMenu = props => {
             return a.type === activityType;
           })}
           key={activityType}
+          challenge={props.challenge}
         />
       ))}
     </div>

@@ -82,25 +82,31 @@ const AddWorkoutForm = props => {
     <form onSubmit={submit}>
       <div className="field is-grouped">
         <p className="control">
-          <button className="button is-danger is-medium" onClick={handleLessClick}>
-            <span className="icon is-medium">
+          <button className="button is-danger is-large" onClick={handleLessClick}>
+            <span className="icon is-large">
               <FontAwesomeIcon icon="minus" />
             </span>
           </button>
         </p>
-        <p className="control is-expanded">
+        <div className="control is-expanded">
           <input
-            className="input is-medium"
+            className="input"
             type="text"
             min="1"
             value={amount}
             onChange={handleAmountChange}
             onBlur={dontAllowZero}
           />
-        </p>
+          <p className="help is-size-6">
+            {amount} x {props.activity.unit} ={' '}
+            {Math.round(amount * props.activity.points * props.challenge.pointBonus * 10) / 10}{' '}
+            points
+          </p>
+        </div>
+
         <p className="control">
-          <button className="button is-success is-medium" onClick={handleMoreClick}>
-            <span className="icon is-medium">
+          <button className="button is-success is-large" onClick={handleMoreClick}>
+            <span className="icon is-large">
               <FontAwesomeIcon icon="plus" />
             </span>
           </button>
@@ -123,7 +129,7 @@ const AddWorkoutForm = props => {
       <div className="field">
         <p className="control">
           <button
-            className="button is-danger is-fullwidth"
+            className="button is-fullwidth"
             onClick={event => {
               event.preventDefault();
               props.history.goBack();

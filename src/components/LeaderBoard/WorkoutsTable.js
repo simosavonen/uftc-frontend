@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WorkoutsTable = ({ workouts, showUser }) => {
+const WorkoutsTable = ({ workouts, showUser, pointBonus }) => {
   return (
     <table className="table is-fullwidth is-narrow is-size-7-mobile is-size-6-tablet is-size-5-widescreen is-size-4-fullhd">
       <thead>
@@ -20,7 +20,9 @@ const WorkoutsTable = ({ workouts, showUser }) => {
               <tr key={w.id}>
                 <td>{w.activity.name}</td>
                 <td className="has-text-centered">{totalAmount}</td>
-                <td className="has-text-centered">{totalAmount * points}</td>
+                <td className="has-text-centered">
+                  {Math.round(totalAmount * points * pointBonus * 10) / 10}
+                </td>
               </tr>
             );
           })}

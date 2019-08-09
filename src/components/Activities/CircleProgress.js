@@ -2,17 +2,16 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 import moment from 'moment';
 
-const CircleProgress = ({ workouts, activities, challenges, user }) => {
+const CircleProgress = ({ workouts, activities, challenge }) => {
   if (!activities.length) return <div>No activities found.</div>;
   if (!workouts.length) return <div>No workouts found.</div>;
-  if (!challenges.length) return <div>No challenges found.</div>;
 
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);
   const today = moment();
   const values = [0, 0, 0]; // challenge, weekly, daily
 
-  const bonus = challenges.find(c => c.id === user.activeChallenge).pointBonus;
+  const bonus = challenge.pointBonus;
 
   for (const workout of workouts) {
     const points = activities.find(act => {

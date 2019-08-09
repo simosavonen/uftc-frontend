@@ -214,7 +214,7 @@ const App = props => {
             path="/activities"
             render={() => (
               <ActivitiesView
-                challenges={challenges}
+                challenge={challenges.find(c => c.id === user.activeChallenge)}
                 workouts={workouts}
                 activities={activities}
                 user={user}
@@ -228,13 +228,18 @@ const App = props => {
               <WorkoutView
                 activity={activityByName(match.params.name)}
                 addWorkout={addWorkout}
-                challenge={challenges[0]}
+                challenge={challenges.find(c => c.id === user.activeChallenge)}
                 workouts={workouts}
                 updateWorkout={updateWorkout}
               />
             )}
           />
-          <Route path="/leaderboard" render={() => <LeaderBoardView />} />
+          <Route
+            path="/leaderboard"
+            render={() => (
+              <LeaderBoardView challenge={challenges.find(c => c.id === user.activeChallenge)} />
+            )}
+          />
           <Route
             path="/addchallenge"
             render={() => (
