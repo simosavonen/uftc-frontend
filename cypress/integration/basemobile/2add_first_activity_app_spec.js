@@ -1,7 +1,7 @@
 describe('add activity', function() {
-  context('720p resolution', function() {
+  context('iphone-4 resolution', function() {
     before(function() {
-      cy.viewport(1280, 720);
+      cy.viewport('iphone-4');
       cy.visit('http://localhost:3000');
     });
 

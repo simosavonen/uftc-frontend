@@ -41,6 +41,7 @@ describe('add activity', function() {
       cy.get('#icon').type('icon.svg');
       cy.wait(100);
       cy.contains('Add new activity').click();
+      cy.wait(1000);
     });
   });
 });

@@ -2,9 +2,9 @@ describe('Login app', function() {
   before(function() {
     cy.request('GET', 'http://localhost:3001/api/testing/reset');
   });
-  context('720p resolution', function() {
+  context('iphone-4 resolution', function() {
     before(function() {
-      cy.viewport(1280, 720);
+      cy.viewport('iphone-4'); //320,480
       cy.visit('http://localhost:3000');
       cy.contains('create an account').click();
       cy.get('#Email').type('särmä.säätäjä@ambientia.fi');
