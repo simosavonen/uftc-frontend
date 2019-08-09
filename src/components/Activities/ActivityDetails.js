@@ -18,7 +18,7 @@ const ActivityDetails = ({ activity }) => {
           </div>
         </div>
         <div className="media-right has-text-right">
-          <h1 className="title is-5">{activity.points} points</h1>
+          <h1 className="title is-5 has-text-danger">{activity.points} points</h1>
           <h2 className="subtitle is-6">{activity.unit}</h2>
         </div>
       </article>
