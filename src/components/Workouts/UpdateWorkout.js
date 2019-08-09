@@ -114,7 +114,7 @@ const UpdateWorkout = props => {
 
       {showActivities && (
         <div>
-          <ul>
+          <ul id="showactivities">
             {oneTypeAct.map(item => (
               <li
                 key={item.date + item.amount}

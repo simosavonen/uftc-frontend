@@ -58,7 +58,11 @@ const UpdateWorkoutForm = props => {
     <div className="box">
       <form onSubmit={submit}>
         <label className="label">Suorituskertoja (kpl):</label>
-        <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
+        <button
+          className="button is-success is-large is-fullwidth"
+          id="updworplus"
+          onClick={handleMoreClick}
+        >
           +
         </button>
         <input
@@ -69,16 +73,23 @@ const UpdateWorkoutForm = props => {
           onChange={handleAmountChange}
           onBlur={AllowZero}
         />
-        <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
+        <button
+          className="button is-danger is-large is-fullwidth"
+          id="updwormiinus"
+          onClick={handleLessClick}
+        >
           -
         </button>
         <label className="label has-text-black">Date: {modDate} </label>
 
         <p>
-          <button className="button is-success is-fullwidth">Save</button>
+          <button className="button is-success is-fullwidth" id="updworsave">
+            Save
+          </button>
           <br />
           <button
             className="button is-danger is-fullwidth"
+            id="updworback"
             onClick={event => {
               event.preventDefault();
               props.setShowModal(false);

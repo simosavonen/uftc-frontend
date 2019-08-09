@@ -3,7 +3,7 @@ describe('Add workout random', function() {
     before(function() {
       cy.viewport(1280, 720);
       cy.visit('http://localhost:3000');
-      cy.wait(1000);
+      //cy.wait(1000);
     });
 
     it('random log in', function() {
