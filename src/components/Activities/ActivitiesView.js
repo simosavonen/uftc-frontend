@@ -5,7 +5,7 @@ import CircleProgress from './CircleProgress';
 import RecentActivities from './RecentActivities';
 import ActivityMenu from './ActivityMenu';
 
-const ActivitiesView = ({ challenges, activities, workouts }) => {
+const ActivitiesView = ({ challenges, activities, workouts, user }) => {
   if (challenges.length === 0) return null;
 
   return (
@@ -16,7 +16,12 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
             <ChallengeTitle challenge={challenges[0]} />
           </div>
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-            <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
+            <CircleProgress
+              workouts={workouts}
+              activities={activities}
+              challenges={challenges}
+              user={user}
+            />
           </div>
         </div>
       </section>
@@ -36,7 +41,12 @@ const ActivitiesView = ({ challenges, activities, workouts }) => {
             <ChallengeTitle challenge={challenges[0]} />
           </div>
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-            <CircleProgress workouts={workouts} activities={activities} challenge={challenges} />
+            <CircleProgress
+              workouts={workouts}
+              activities={activities}
+              challenges={challenges}
+              user={user}
+            />
           </div>
         </div>
       </section>
