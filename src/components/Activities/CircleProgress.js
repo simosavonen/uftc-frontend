@@ -5,6 +5,7 @@ import moment from 'moment';
 const CircleProgress = ({ workouts, activities, challenge }) => {
   if (!activities.length) return <div>No activities found.</div>;
   if (!workouts.length) return <div>No workouts found.</div>;
+  if (!challenge) return <div>Pick a series first.</div>;
 
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);

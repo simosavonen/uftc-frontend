@@ -10,7 +10,12 @@ const WorkoutView = ({ activity, addWorkout, challenge, workouts, updateWorkout 
         <h1 className="title">Error: No such activity exists</h1>
       </div>
     );
-  if (!challenge) return <div>Loading...</div>;
+  if (!challenge)
+    return (
+      <div className="section container">
+        <h1 className="title">Pick a series first.</h1>
+      </div>
+    );
   return (
     <>
       <section className="section">
