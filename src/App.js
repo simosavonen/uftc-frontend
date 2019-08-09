@@ -229,7 +229,9 @@ const App = props => {
           <Route path="/leaderboard" render={() => <LeaderBoardView />} />
           <Route
             path="/addchallenge"
-            render={() => <AddChallengeForm addChallenge={challengeService.add} />}
+            render={() => (
+              <AddChallengeForm addChallenge={challengeService.add} challenges={challenges} />
+            )}
           />
           <Route
             path="/addachievement"
