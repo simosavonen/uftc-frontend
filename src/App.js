@@ -20,6 +20,7 @@ import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import { apiUrls } from './config/config';
 import NotFound from './components/NotFound';
+import { checkAchievements } from './badges/utils';
 
 import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
 
@@ -66,23 +67,30 @@ const App = props => {
 
   const addWorkout = workout => {
     if (user.activeChallenge) {
+      const myBadgesBefore = checkAchievements(workouts, activities, achievements);
       workoutService
         .add(workout)
         .then(response => {
           //console.log('response.data', response.data);
+          let newWorkouts;
           if (
             workouts.length === 0 ||
             workouts.filter(w => w.id === response.data.id).length === 0
           ) {
-            setWorkouts([...workouts, response.data]);
+            newWorkouts = [...workouts, response.data];
           } else {
             const workoutsWithNew = workouts.map(w =>
               w.id !== response.data.id ? w : response.data
             );
             //console.log(workoutsWithNew, workoutsWithNew);
-            setWorkouts(workoutsWithNew);
+            newWorkouts = workoutsWithNew;
           }
+          setWorkouts(newWorkouts);
           toast.success('Workout saved.');
+          const myBadgesAfter = checkAchievements(newWorkouts, activities, achievements);
+          if (myBadgesAfter.length > myBadgesBefore.length) {
+            toast.success('New badge unlocked!');
+          }
         })
         .catch(error => {
           console.log('addWorkout', error.message);

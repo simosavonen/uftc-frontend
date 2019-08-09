@@ -8,8 +8,8 @@ const Ikonipallo = ({
   iconName,
   bgColor,
   handleClick,
-  selected,
-  activeChallenge
+  isSelected,
+  isActiveChallenge
 }) => {
   let styles = {
     width: '33vw',
@@ -25,7 +25,7 @@ const Ikonipallo = ({
     justifyContent: 'center',
     margin: 'auto'
   };
-  if (selected && !activeChallenge) {
+  if (isSelected && !isActiveChallenge) {
     styles = {
       ...styles,
       borderStyle: 'solid',
@@ -36,7 +36,7 @@ const Ikonipallo = ({
   const bulmaClass =
     'has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
   let customClass = 'series-button-hoverable';
-  if (activeChallenge) customClass = 'series-button';
+  if (isActiveChallenge) customClass = 'series-button';
   const className = bulmaClass + ' ' + customClass;
 
   return (
@@ -66,13 +66,9 @@ const BraceRight = () => (
 
 const ChallengeSelectView = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
-  let hasActiveChallenge = false;
-  if (props.user && props.user.activeChallenge) {
-    hasActiveChallenge = true;
-  }
 
   const handleClickOnBall = seriesId => () => {
-    if (!hasActiveChallenge) return setSelectedSeries(seriesId);
+    return setSelectedSeries(seriesId);
   };
 
   const saveSelection = () => {
@@ -115,8 +111,8 @@ const ChallengeSelectView = props => {
           iconName={c.icon || 'stopwatch'}
           bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
-          selected={c.id === selectedSeries}
-          activeChallenge={hasActiveChallenge}
+          isSelected={c.id === selectedSeries}
+          isActiveChallenge={c.id === props.user.activeChallenge}
         />
         <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
@@ -124,8 +120,8 @@ const ChallengeSelectView = props => {
         </div>
         <div>
           {props.user &&
-            !props.user.activeChallenge &&
             selectedSeries === c.id &&
+            props.user.activeChallenge !== c.id &&
             showSelectionButton()}
         </div>
       </div>
