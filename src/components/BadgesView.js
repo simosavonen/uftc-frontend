@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../badges/utils';
@@ -40,8 +40,15 @@ const BadgesView = props => {
 
   const toggleShowAll = () => setShowAll(!showAll);
 
-  const myBadges = checkAchievements(props.workouts, props.activities, props.achievements);
-  const myDailyBadges = checkDailyChallenges(props.workouts, props.activities, props.achievements);
+  const [myBadges, setMyBadges] = useState([]);
+  useEffect(() => {
+    setMyBadges(checkAchievements(props.workouts, props.activities, props.achievements));
+  }, [props.achievements, props.activities, props.workouts]);
+
+  const [myDailyBadges, setMyDailyBadges] = useState([]);
+  useEffect(() => {
+    setMyDailyBadges(checkDailyChallenges(props.workouts, props.activities, props.achievements));
+  }, [props.achievements, props.activities, props.workouts]);
 
   const badges = myBadges.map(a => (
     <Badge
