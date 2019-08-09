@@ -3,7 +3,6 @@ describe('Add workout random', function() {
     before(function() {
       cy.viewport(1280, 720);
       cy.visit('http://localhost:3000');
-      //cy.wait(1000);
     });
 
     it('random log in', function() {
@@ -20,9 +19,7 @@ describe('Add workout random', function() {
       cy.contains('Lihaskuntoharjoitus', { timeout: 10000 })
         .should('be.visible')
         .click();
-      //cy.contains('Lihaskuntoharjoitus');
       cy.wait(1000);
-
       cy.contains('Pushup - punnerus').click({ force: true }); //cypress näyttä kooksi 0x0
       cy.wait(300);
       cy.contains('+').click();
@@ -32,14 +29,6 @@ describe('Add workout random', function() {
       cy.contains('Back').click();
       cy.wait(300);
       cy.contains('Your 1 most recent activities');
-      /*cy.contains('Pushup - punnerus', { timeout: 10000 })
-        .should('be.visible')
-        .invoke('width')
-        .should('be.greaterThan', 0)
-        .should('be.visible')
-        .invoke('height')
-        .should('be.greaterThan', 0)
-        .click();*/
     });
   });
 });

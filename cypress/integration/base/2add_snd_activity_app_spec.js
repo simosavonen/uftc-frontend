@@ -18,7 +18,6 @@ describe('add activity', function() {
     });
 
     it('add Kahvakuulanosto activity', function() {
-      //cy.contains('add activity').clik();
       cy.wait(500);
       cy.get('#name').clear();
       cy.get('#name').type('Kahvakuulanosto');

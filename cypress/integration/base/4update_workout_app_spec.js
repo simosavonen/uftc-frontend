@@ -3,7 +3,6 @@ describe('update workout', function() {
     before(function() {
       cy.viewport(1280, 720);
       cy.visit('http://localhost:3000');
-      //      cy.wait(1000);
     });
     it('it random login', function() {
       cy.get('#Email').type('random.person@ambientia.fi');
@@ -11,12 +10,10 @@ describe('update workout', function() {
       cy.wait(500);
       cy.contains('Log in').click();
     });
-    //it('random goes activity page', function() {
+
     it('random update workout', function() {
       cy.wait(500);
       cy.contains('activities').click();
-      //});
-
       cy.contains('most recent activities');
       cy.wait(500);
       cy.contains('Pushup - punnerus').click({ force: true });
