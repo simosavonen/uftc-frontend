@@ -7,7 +7,16 @@ import WeeklyScoresTable from './WeeklyScoresTable';
 import scoreService from '../../services/scores';
 
 // ugh, hardcoded
-const locations = ['Hämeenlinna', 'Helsinki', 'Joensuu', 'Tampere', 'Turku', 'Tallinn', 'Tartu'];
+const locations = {
+  Hämeenlinna: '#008FFB',
+  Helsinki: '#31A350',
+  Joensuu: '#FEB019',
+  Tampere: '#FF4560',
+  Turku: '#775DD0',
+  Tallinn: '#546E7A',
+  Tartu: '#26a69a'
+};
+
 const series = ['Defaults', 'Pros'];
 
 const LeaderBoardView = ({ challenge, user }) => {
@@ -15,7 +24,7 @@ const LeaderBoardView = ({ challenge, user }) => {
   const [weekFilter, setWeekFilter] = useState(0);
 
   const [showFilterButtons, setShowFilterButtons] = useState(false);
-  const [locationFilters, setLocationFilters] = useState(locations);
+  const [locationFilters, setLocationFilters] = useState(Object.keys(locations));
   const [seriesFilters, setSeriesFilters] = useState(series);
 
   useEffect(() => {
@@ -73,10 +82,14 @@ const LeaderBoardView = ({ challenge, user }) => {
               ))}
             </div>
             <div className="buttons is-pulled-right">
-              {locations.map(loc => (
+              {Object.keys(locations).map((loc, idx) => (
                 <button
                   key={loc}
-                  className={`button is-small ${locationFilters.includes(loc) && 'is-warning'}`}
+                  style={{
+                    backgroundColor: locationFilters.includes(loc) ? locations[loc] : '#ffffff',
+                    color: locationFilters.includes(loc) ? '#ffffff' : '#000000'
+                  }}
+                  className="button is-small"
                   onClick={() => toggleLocations(loc)}
                 >
                   {loc}

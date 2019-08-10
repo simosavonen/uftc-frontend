@@ -11,7 +11,7 @@ const caseInsensitiveNameSort = (a, b) => {
 
 const locations = {
   Hämeenlinna: '#008FFB',
-  Helsinki: '#00E396',
+  Helsinki: '#31A350',
   Joensuu: '#FEB019',
   Tampere: '#FF4560',
   Turku: '#775DD0',
@@ -72,10 +72,15 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
       }
     },
     annotations: {
+      position: 'front',
       yaxis: [
         {
-          y: weekFilter === 0 ? 7500 : 750,
-          borderColor: '#00E396'
+          label: {
+            text: ' '
+          },
+          y: weekFilter === 0 ? 7490 : 740,
+          y2: weekFilter === 0 ? 7510 : 760,
+          fillColor: '#00E396'
         }
       ]
     },
