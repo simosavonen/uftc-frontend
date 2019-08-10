@@ -130,7 +130,9 @@ const WeeklyScoresTable = ({
                     {week}
                   </td>
                 ))}
-                <td className="has-text-centered">{score.data.reduce((sum, i) => sum + i, 0)}</td>
+                <td className="has-text-centered">
+                  {Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
+                </td>
               </tr>
               {score.id.toString() === showUser && (
                 <tr>

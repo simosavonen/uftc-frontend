@@ -39,12 +39,7 @@ const ActivitiesView = ({ challenge, activities, workouts, user }) => {
             <ChallengeTitle challenge={challenge} />
           </div>
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-            <CircleProgress
-              workouts={workouts}
-              activities={activities}
-              challenge={challenge}
-              user={user}
-            />
+            <CircleProgress workouts={workouts} activities={activities} challenge={challenge} />
           </div>
         </div>
       </section>

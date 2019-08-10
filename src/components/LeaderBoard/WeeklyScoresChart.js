@@ -82,6 +82,9 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
         }
       }
     ],
+    yaxis: {
+      decimalsInFloat: 0
+    },
     annotations: {
       yaxis: [
         {
