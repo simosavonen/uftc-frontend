@@ -16,7 +16,8 @@ const WeeklyScoresTable = ({
   weekFilter,
   setWeekFilter,
   locationFilters,
-  seriesFilters
+  seriesFilters,
+  user
 }) => {
   const [showUser, setShowUser] = useState('');
   const [pointBonus, setPointBonus] = useState(1);
@@ -118,11 +119,12 @@ const WeeklyScoresTable = ({
             <React.Fragment key={score.id.toString()}>
               <tr
                 onClick={() => toggleShowUser(score.id.toString(), score.pointBonus)}
-                className={`is-clickable hover-effect-green ${score.id.toString() === showUser &&
-                  'is-selected has-text-dark'}`}
+                className={`${score.id === user.id &&
+                  'has-text-weight-bold'} is-clickable hover-effect-green ${score.id.toString() ===
+                  showUser && 'is-selected has-text-dark'}`}
               >
                 <td>{index + 1}</td>
-                <td>{score.name}</td>
+                <td className={score.id === user.id ? 'has-text-danger' : ''}>{score.name}</td>
                 <td>{score.seriesTitle}</td>
                 <td>{score.location}</td>
                 {score.data.map((week, idx) => (

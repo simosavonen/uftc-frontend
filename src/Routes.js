@@ -78,7 +78,10 @@ const Routes = props => {
           />
         )}
       />
-      <Route path="/leaderboard" render={() => <LeaderBoardView challenge={activeChallenge()} />} />
+      <Route
+        path="/leaderboard"
+        render={() => <LeaderBoardView challenge={activeChallenge()} user={user} />}
+      />
       <Route
         path="/addchallenge"
         render={() => (
