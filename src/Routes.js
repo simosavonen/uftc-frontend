@@ -80,7 +80,7 @@ const Routes = props => {
       />
       <Route
         path="/leaderboard"
-        render={() => <LeaderBoardView challenge={activeChallenge()} user={user} />}
+        render={() => <LeaderBoardView challenges={challenges} user={user} />}
       />
       <Route
         path="/addchallenge"

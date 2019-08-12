@@ -17,15 +17,14 @@ const locations = {
   Tartu: '#26a69a'
 };
 
-const series = ['Defaults', 'Pros'];
-
-const LeaderBoardView = ({ challenge, user }) => {
+const LeaderBoardView = ({ challenges, user }) => {
   const [weeklyData, setWeeklyData] = useState([]);
   const [weekFilter, setWeekFilter] = useState(0);
 
   const [showFilterButtons, setShowFilterButtons] = useState(false);
   const [locationFilters, setLocationFilters] = useState(Object.keys(locations));
-  const [seriesFilters, setSeriesFilters] = useState(series);
+  const [seriesFilters, setSeriesFilters] = useState([]);
+  const [series, setSeries] = useState([]);
 
   useEffect(() => {
     scoreService
@@ -35,6 +34,14 @@ const LeaderBoardView = ({ challenge, user }) => {
       })
       .catch(error => console.log('weeklyData', error.message));
   }, []);
+
+  useEffect(() => {
+    const seriesArray = challenges.map(c => c.seriesTitle);
+    if (seriesArray.length) {
+      setSeriesFilters(seriesArray);
+      setSeries(seriesArray);
+    }
+  }, [challenges]);
 
   const toggleSeries = series => {
     if (seriesFilters.includes(series)) {

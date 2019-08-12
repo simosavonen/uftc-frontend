@@ -57,7 +57,7 @@ const WeeklyScoresTable = ({
   };
 
   return (
-    <table className="table is-fullwidth is-narrow is-size-7-mobile is-size-6-tablet is-size-5-widescreen is-size-4-fullhd">
+    <table className="table is-fullwidth is-narrow is-size-7-mobile is-size-7-tablet is-size-6-widescreen is-size-5-fullhd">
       <thead>
         <tr>
           <th>#</th>

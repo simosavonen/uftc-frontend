@@ -20,7 +20,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     }).points;
 
     for (const instance of workout.instances) {
-      const result = Math.round(instance.amount * points * bonus * 10) / 10;
+      const result = instance.amount * points * bonus;
       if (
         monday.isSameOrBefore(instance.date, 'day') &&
         sunday.isSameOrAfter(instance.date, 'day')
@@ -83,7 +83,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
         height: 0
       },
       formatter: function(seriesName, opts) {
-        return seriesName + ':  ' + values[opts.seriesIndex];
+        return seriesName + ':  ' + Math.round(values[opts.seriesIndex] * 10) / 10;
       },
       itemMargin: {
         horizontal: 4
