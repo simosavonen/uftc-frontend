@@ -13,7 +13,7 @@ describe('add activity', function() {
     });
 
     it('go to add activitypage', function() {
-      cy.wait(200);
+      cy.wait(100);
       cy.contains('add activity').click();
     });
 

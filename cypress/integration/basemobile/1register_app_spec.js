@@ -24,13 +24,7 @@ describe('Login app', function() {
       cy.get('#Password').type('salasana');
       cy.get('#Email').type('särmä.säätäjä@ambientia.fi');
       cy.contains('Log in').click();
-      //navbar code needed
-      //cy.contains('log out');
-      //cy.get('navbar-burger burger has-text-white false')
-      // cy.get('div')
-      //   .should('have.class', 'navbar-burger burger has-text-white false')
-      //   .find('burger')
-      //   .click();
+
       cy.get('#navmenu').click();
       cy.wait(100);
       cy.contains('log out').click();

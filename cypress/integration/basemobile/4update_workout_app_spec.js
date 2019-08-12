@@ -12,7 +12,10 @@ describe('update workout', function() {
     });
 
     it('random update workout', function() {
+      cy.viewport('iphone-4');
       cy.wait(500);
+      cy.get('#navmenu').click();
+      cy.wait(100);
       cy.contains('activities').click();
       cy.contains('most recent activities');
       cy.wait(500);
