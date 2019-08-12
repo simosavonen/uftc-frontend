@@ -85,14 +85,14 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
       ]
     },
     noData: {
-      text: 'Unable to find any data.',
+      text: 'No data? Still loading, or the filters are too strict.',
       align: 'center',
       verticalAlign: 'middle',
       offsetX: 0,
       offsetY: 0,
       style: {
-        color: '#ff2457',
-        fontSize: '14px',
+        color: '#000000',
+        fontSize: '22px',
         fontFamily: 'Raleway'
       }
     }

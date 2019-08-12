@@ -161,6 +161,11 @@ const WeeklyScoresTable = ({
               )}
             </React.Fragment>
           ))}
+        {weeklyData.length === 0 && (
+          <tr>
+            <td colSpan={5}>Loading data...</td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

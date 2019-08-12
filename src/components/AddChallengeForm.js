@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import PreviewSeries from './PreviewSeries';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -57,11 +58,11 @@ const AddChallengeForm = props => {
                   ? `Give the series it's own icon, title, description and a point bonus.`
                   : 'You will be set as the organizer, can add more later'}
               </h2>
-              <div className="field">
-                <label className="label" htmlFor="name">
-                  Challenge name
-                </label>
-                <div className="control">
+              <div className="field is-grouped">
+                <div className="control is-expanded">
+                  <label className="label" htmlFor="name">
+                    Challenge name
+                  </label>
                   <input
                     className="input"
                     id="name"
@@ -69,6 +70,18 @@ const AddChallengeForm = props => {
                     value={name}
                     title="All series should share the same challenge name"
                     readOnly={props.challenges.length !== 0}
+                  />
+                </div>
+                <div className="control is-expanded">
+                  <label className="label" htmlFor="pointsGoal">
+                    Points goal
+                  </label>
+                  <input
+                    className={`input ${props.challenges.length && 'is-warning'}`}
+                    id="pointsGoal"
+                    type="number"
+                    onChange={({ target }) => setPointsGoal(target.value)}
+                    value={pointsGoal}
                   />
                 </div>
               </div>
@@ -79,11 +92,7 @@ const AddChallengeForm = props => {
                   </label>
                   <input
                     className={`input ${props.challenges.length && 'is-warning'}`}
-                    title={
-                      props.challenges.length
-                        ? "All series should share a start date, unless it's for latecomers"
-                        : ''
-                    }
+                    title={props.challenges.length ? 'All series should share a start date' : ''}
                     id="startdate"
                     type="date"
                     onChange={({ target }) => setStartDate(target.value)}
@@ -101,7 +110,7 @@ const AddChallengeForm = props => {
                     type="date"
                     onChange={({ target }) => setEndDate(target.value)}
                     value={endDate}
-                    title={`Duration: ${moment(endDate).diff(moment(startDate), 'days') + 1} days`}
+                    title={`Duration: ${moment(endDate).diff(moment(startDate), 'days')} days`}
                   />
                 </div>
               </div>
@@ -116,7 +125,7 @@ const AddChallengeForm = props => {
                     type="date"
                     onChange={({ target }) => setReleaseDate(target.value)}
                     value={releaseDate}
-                    title="The date when the challenge is revealed to visitors"
+                    title="The date when the series is revealed to users"
                   />
                 </div>
 
@@ -134,35 +143,7 @@ const AddChallengeForm = props => {
                   />
                 </div>
               </div>
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="pointsGoal">
-                    Points goal
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    id="pointsGoal"
-                    type="number"
-                    onChange={({ target }) => setPointsGoal(target.value)}
-                    value={pointsGoal}
-                  />
-                </div>
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="pointBonus">
-                    Point bonus factor
-                  </label>
-                  <input
-                    className="input"
-                    id="pointBonus"
-                    type="number"
-                    step=".01"
-                    min="0.1"
-                    onChange={({ target }) => setPointBonus(target.value)}
-                    value={pointBonus}
-                    title="Decimal value, +20% bonus = 1.2"
-                  />
-                </div>
-              </div>
+              <div className="field is-grouped" />
               <div className="field">
                 <label className="label" htmlFor="seriesTitle">
                   Series title
@@ -189,11 +170,27 @@ const AddChallengeForm = props => {
                   />
                 </div>
               </div>
-              <div className="field">
-                <label className="label" htmlFor="icon">
-                  FontAwesome icon
-                </label>
-                <div className="control">
+              <div className="field is-grouped">
+                <div className="control is-expanded">
+                  <label className="label" htmlFor="pointBonus">
+                    Point bonus factor
+                  </label>
+                  <input
+                    className="input"
+                    id="pointBonus"
+                    type="number"
+                    step=".01"
+                    min="0.1"
+                    onChange={({ target }) => setPointBonus(target.value)}
+                    value={pointBonus}
+                    title="Decimal value, +20% bonus = 1.2"
+                  />
+                </div>
+
+                <div className="control is-expanded">
+                  <label className="label" htmlFor="icon">
+                    FontAwesome icon
+                  </label>
                   <input
                     className="input"
                     id="icon"
@@ -202,10 +199,16 @@ const AddChallengeForm = props => {
                   />
                 </div>
               </div>
-              <button type="submit">Add new challenge</button>
+              <div className="control">
+                <button className="button is-info" type="submit">
+                  {props.challenges.length ? 'Add a series' : 'Add new challenge'}
+                </button>
+              </div>
             </form>
           </div>
-          <div className="column" id="previewOfSeries" />
+          <div className="column" id="previewOfSeries">
+            <PreviewSeries challenges={props.challenges} />
+          </div>
         </div>
       </div>
     </section>
