@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import ApexCharts from 'apexcharts';
 import { isMobile } from 'react-device-detect';
+import moment from 'moment';
 
 const sampleData = [
   {
@@ -31,6 +32,10 @@ const sampleData = [
 ];
 
 const WorkoutsChart = ({ chartData = sampleData }) => {
+  const today = moment().valueOf();
+  const twoWeeksAgo = moment()
+    .subtract(7, 'days')
+    .valueOf();
   // fixes an issue with a series remaining toggled off
   // when we hide or unhide the div containing the chart
   useEffect(() => {
@@ -43,7 +48,9 @@ const WorkoutsChart = ({ chartData = sampleData }) => {
       type: 'line'
     },
     xaxis: {
-      type: 'datetime'
+      type: 'datetime',
+      min: twoWeeksAgo,
+      max: today
     },
     stroke: {
       curve: 'smooth',
