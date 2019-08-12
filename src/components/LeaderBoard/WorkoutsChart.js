@@ -4,36 +4,9 @@ import ApexCharts from 'apexcharts';
 import { isMobile } from 'react-device-detect';
 import moment from 'moment';
 
-const sampleData = [
-  {
-    name: 'Kahvakuulanosto',
-    data: [{ x: '2019-06-01', y: 21 }, { x: '2019-07-02', y: 11 }, { x: '2019-08-01', y: 31 }]
-  },
-  {
-    name: 'Uinti',
-    data: [{ x: '2019-07-03', y: 2 }, { x: '2019-08-04', y: 12 }, { x: '2019-09-05', y: 22 }]
-  },
-  {
-    name: 'Kävelykokous',
-    data: [{ x: '2019-08-12', y: 34 }, { x: '2019-08-22', y: 24 }, { x: '2019-09-02', y: 14 }]
-  },
-  {
-    name: 'Työmatkapyöräily',
-    data: [{ x: '2019-08-17', y: 42 }, { x: '2019-08-27', y: 40 }, { x: '2019-09-07', y: 45 }]
-  },
-  {
-    name: 'Burbee',
-    data: [{ x: '2019-06-3', y: 45 }, { x: '2019-06-26', y: 22 }, { x: '2019-08-01', y: 2 }]
-  },
-  {
-    name: 'Lankutus',
-    data: [{ x: '2019-07-025', y: 43 }, { x: '2019-08-14', y: 20 }, { x: '2019-9-10', y: 55 }]
-  }
-];
-
-const WorkoutsChart = ({ chartData = sampleData }) => {
+const WorkoutsChart = ({ chartData }) => {
   const today = moment().valueOf();
-  const twoWeeksAgo = moment()
+  const weekAgo = moment()
     .subtract(7, 'days')
     .valueOf();
   // fixes an issue with a series remaining toggled off
@@ -49,7 +22,7 @@ const WorkoutsChart = ({ chartData = sampleData }) => {
     },
     xaxis: {
       type: 'datetime',
-      min: twoWeeksAgo,
+      min: weekAgo,
       max: today
     },
     stroke: {

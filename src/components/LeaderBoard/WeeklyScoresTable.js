@@ -52,6 +52,7 @@ const WeeklyScoresTable = ({
   }, [showUser, workouts]);
 
   const toggleShowUser = (id, pointBonus) => {
+    setChartData([]);
     showUser === id ? setShowUser('') : setShowUser(id);
     setPointBonus(pointBonus);
   };
@@ -148,7 +149,11 @@ const WeeklyScoresTable = ({
                         />
                       </div>
                       <div className="column is-8 is-paddingless">
-                        <WorkoutsChart chartData={chartData} />
+                        {chartData.length !== 0 ? (
+                          <WorkoutsChart chartData={chartData} />
+                        ) : (
+                          'Loading chart data...'
+                        )}
                       </div>
                     </div>
                   </td>
