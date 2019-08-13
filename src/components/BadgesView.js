@@ -42,13 +42,17 @@ const BadgesView = props => {
 
   const [myBadges, setMyBadges] = useState([]);
   useEffect(() => {
-    setMyBadges(checkAchievements(props.workouts, props.activities, props.achievements));
-  }, [props.achievements, props.activities, props.workouts]);
+    setMyBadges(
+      checkAchievements(props.workouts, props.activities, props.achievements, props.challenge)
+    );
+  }, [props.achievements, props.activities, props.challenge, props.workouts]);
 
   const [myDailyBadges, setMyDailyBadges] = useState([]);
   useEffect(() => {
-    setMyDailyBadges(checkDailyChallenges(props.workouts, props.activities, props.achievements));
-  }, [props.achievements, props.activities, props.workouts]);
+    setMyDailyBadges(
+      checkDailyChallenges(props.workouts, props.activities, props.achievements, props.challenge)
+    );
+  }, [props.achievements, props.activities, props.challenge, props.workouts]);
 
   const badges = myBadges.map(a => (
     <Badge

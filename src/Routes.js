@@ -95,7 +95,12 @@ const Routes = props => {
       <Route
         path="/badges"
         render={() => (
-          <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
+          <BadgesView
+            workouts={workouts}
+            activities={activities}
+            achievements={achievements}
+            challenge={activeChallenge()}
+          />
         )}
       />
       <Route

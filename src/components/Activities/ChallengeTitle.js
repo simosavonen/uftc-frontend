@@ -19,7 +19,7 @@ const challengeTiming = challenge => {
   const start = moment(challenge.startDate);
   const end = moment(challenge.endDate);
 
-  const length = end.diff(start, 'days');
+  const length = end.diff(start, 'days') + 1; // including last day
   const today = moment();
   let timing = '';
   if (today < start) {
