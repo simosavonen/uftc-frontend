@@ -55,7 +55,12 @@ const App = props => {
 
   const addWorkout = workout => {
     if (user.activeChallenge) {
-      const myBadgesBefore = checkAchievements(workouts, activities, achievements);
+      const myBadgesBefore = checkAchievements(
+        workouts,
+        activities,
+        achievements,
+        activeChallenge()
+      );
       workoutService
         .add(workout)
         .then(response => {
@@ -75,7 +80,12 @@ const App = props => {
           }
           setWorkouts(newWorkouts);
           toast.success('Workout saved.');
-          const myBadgesAfter = checkAchievements(newWorkouts, activities, achievements);
+          const myBadgesAfter = checkAchievements(
+            newWorkouts,
+            activities,
+            achievements,
+            activeChallenge()
+          );
           if (myBadgesAfter.length > myBadgesBefore.length) {
             toast.success('New badge unlocked!');
           }
