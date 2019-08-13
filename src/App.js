@@ -41,7 +41,7 @@ const App = props => {
           setWorkouts(result.data);
           //console.log('workouts', result.data);
         })
-        .catch(error => console.log('workouts', error.message));
+        .catch(error => console.log('workouts', error.response.data));
     }
   }, [user]);
 
@@ -81,7 +81,7 @@ const App = props => {
           }
         })
         .catch(error => {
-          console.log('addWorkout', error.message);
+          console.log('addWorkout', error.response.data);
         });
     } else {
       toast.warn('Workout not saved! Please select a challenge first.');
@@ -100,7 +100,7 @@ const App = props => {
           toast.success('Workout updated.');
         })
         .catch(error => {
-          console.log('updateWorkout', error.message);
+          console.log('updateWorkout', error.response.data);
         });
     } else {
       toast.warn('Workout not saved! Please select a challenge first.');
@@ -118,7 +118,7 @@ const App = props => {
         props.history.push('/');
       })
       .catch(error => {
-        console.log('login', error.message);
+        console.log('login', error.response.data);
         toast.error('Login failed.');
       });
   };
@@ -130,7 +130,7 @@ const App = props => {
         login(userDetails);
       })
       .catch(error => {
-        console.log('register', error.message);
+        console.log('register', error.response.data);
       });
   };
 

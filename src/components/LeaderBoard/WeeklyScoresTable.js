@@ -35,18 +35,20 @@ const WeeklyScoresTable = ({
         usersWorkouts = workouts.filter(w => w.user.toString() === showUser);
       }
 
-      usersWorkouts = usersWorkouts.map(i => {
-        return {
-          name: i.activity.name,
-          data: i.instances
-            .sort((a, b) => {
-              return new Date(b.date) - new Date(a.date);
-            })
-            .map(x => {
-              return { x: x.date, y: x.amount };
-            })
-        };
-      });
+      usersWorkouts = usersWorkouts
+        .filter(w => w.instances.length > 0)
+        .map(i => {
+          return {
+            name: i.activity.name,
+            data: i.instances
+              .sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+              })
+              .map(x => {
+                return { x: x.date, y: x.amount };
+              })
+          };
+        });
       setChartData(usersWorkouts);
     }
   }, [showUser, workouts]);
