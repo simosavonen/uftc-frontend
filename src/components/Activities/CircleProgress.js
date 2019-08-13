@@ -5,18 +5,22 @@ import moment from 'moment';
 const CircleProgress = ({ workouts, activities, challenge }) => {
   if (!activities.length) return <div>No activities found.</div>;
   if (!workouts.length) return <div>No workouts found.</div>;
+  if (!challenge) return <div>Pick a series first.</div>;
 
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);
   const today = moment();
   const values = [0, 0, 0]; // challenge, weekly, daily
 
+  const bonus = challenge.pointBonus;
+
   for (const workout of workouts) {
     const points = activities.find(act => {
       return act.id === workout.activity;
     }).points;
+
     for (const instance of workout.instances) {
-      const result = instance.amount * points;
+      const result = instance.amount * points * bonus;
       if (
         monday.isSameOrBefore(instance.date, 'day') &&
         sunday.isSameOrAfter(instance.date, 'day')
@@ -79,7 +83,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
         height: 0
       },
       formatter: function(seriesName, opts) {
-        return seriesName + ':  ' + values[opts.seriesIndex];
+        return seriesName + ':  ' + Math.round(values[opts.seriesIndex] * 10) / 10;
       },
       itemMargin: {
         horizontal: 4

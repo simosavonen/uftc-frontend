@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import slug from 'slug';
 
 import userService from './services/user';
 import workoutService from './services/workouts';
 import { useResource } from './services/useResource';
 import Header from './components/Header';
-import AddChallengeForm from './components/AddChallengeForm';
-import LoginForm from './components/LoginForm';
-import AddActivityForm from './components/AddActivityForm';
-import UpdateUserForm from './components/UpdateUserForm';
-import AddAchievementForm from './components/AddAchievementForm';
-import BadgesView from './components/BadgesView';
-import FrontPage from './components/FrontPage';
 import Footer from './components/Footer';
-import PasswordResetForm from './components/PasswordResetForm';
-import RequestResetEmailForm from './components/RequestResetEmailForm';
-import StyleGuide from './components/StyleGuide';
 import { apiUrls } from './config/config';
-
-import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
+import { checkAchievements } from './badges/utils';
+import Routes from './Routes';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -34,11 +25,11 @@ const App = props => {
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const localStorageUser = JSON.parse(loggedUserJSON);
+      setUser(localStorageUser);
 
       // set the axios global default token
-      userService.setToken(user.token);
+      userService.setToken(localStorageUser.token);
     }
   }, []);
 
@@ -63,37 +54,57 @@ const App = props => {
   };
 
   const addWorkout = workout => {
-    workoutService
-      .add(workout)
-      .then(response => {
-        //console.log('response.data', response.data);
-        if (workouts.length === 0 || workouts.filter(w => w.id === response.data.id).length === 0) {
-          setWorkouts([...workouts, response.data]);
-        } else {
-          const workoutsWithNew = workouts.map(w =>
-            w.id !== response.data.id ? w : response.data
-          );
-          //console.log(workoutsWithNew, workoutsWithNew);
-          setWorkouts(workoutsWithNew);
-        }
-        toast.success('Workout saved.');
-      })
-      .catch(error => {
-        console.log('addWorkout', error.message);
-      });
+    if (user.activeChallenge) {
+      const myBadgesBefore = checkAchievements(workouts, activities, achievements);
+      workoutService
+        .add(workout)
+        .then(response => {
+          //console.log('response.data', response.data);
+          let newWorkouts;
+          if (
+            workouts.length === 0 ||
+            workouts.filter(w => w.id === response.data.id).length === 0
+          ) {
+            newWorkouts = [...workouts, response.data];
+          } else {
+            const workoutsWithNew = workouts.map(w =>
+              w.id !== response.data.id ? w : response.data
+            );
+            //console.log(workoutsWithNew, workoutsWithNew);
+            newWorkouts = workoutsWithNew;
+          }
+          setWorkouts(newWorkouts);
+          toast.success('Workout saved.');
+          const myBadgesAfter = checkAchievements(newWorkouts, activities, achievements);
+          if (myBadgesAfter.length > myBadgesBefore.length) {
+            toast.success('New badge unlocked!');
+          }
+        })
+        .catch(error => {
+          console.log('addWorkout', error.message);
+        });
+    } else {
+      toast.warn('Workout not saved! Please select a challenge first.');
+    }
   };
 
   const updateWorkout = workout => {
-    workoutService
-      .update(workout)
-      .then(response => {
-        const workoutsWithNew = workouts.map(w => (w.id !== response.data.id ? w : response.data));
-        setWorkouts(workoutsWithNew);
-        toast.success('Workout updated.');
-      })
-      .catch(error => {
-        console.log('updateWorkout', error.message);
-      });
+    if (user.activeChallenge) {
+      workoutService
+        .update(workout)
+        .then(response => {
+          const workoutsWithNew = workouts.map(w =>
+            w.id !== response.data.id ? w : response.data
+          );
+          setWorkouts(workoutsWithNew);
+          toast.success('Workout updated.');
+        })
+        .catch(error => {
+          console.log('updateWorkout', error.message);
+        });
+    } else {
+      toast.warn('Workout not saved! Please select a challenge first.');
+    }
   };
 
   const login = userDetails => {
@@ -103,7 +114,6 @@ const App = props => {
         setUser(response.data);
         // set the axios global default token
         userService.setToken(response.data.token);
-
         localStorage.setItem('loggedUser', JSON.stringify(response.data));
         props.history.push('/');
       })
@@ -134,21 +144,26 @@ const App = props => {
     return localStorage.getItem('loggedUser') !== null;
   };
 
-  const isResettingPassword = () => {
-    return props.location.pathname.startsWith('/passwordreset');
-  };
-
-  const activityById = id => {
+  const activityByName = name => {
     for (let a of activities) {
-      if (a.id.substr(0, 8) === id) {
+      if (slug(a.name, { lower: true }) === name) {
         return a;
       }
     }
   };
 
+  const activeChallenge = () => {
+    if (user && user.activeChallenge) {
+      return challenges.find(c => c.id === user.activeChallenge);
+    }
+    return undefined; // components check for undefined, not null
+  };
+
   // todo: more than 1 background image?
   const background = () => {
-    return props.location.pathname.startsWith('/login') ? 'kettlebeach' : '';
+    if (!isAuthenticated()) {
+      return 'kettlebeach';
+    }
   };
 
   // todo: add other colors
@@ -167,72 +182,25 @@ const App = props => {
   return (
     <div className={`site ${background()}`}>
       <div className={`main ${gradient()}`}>
-        {!isAuthenticated() && !isResettingPassword() && <Redirect to="/login" />}
         {isAuthenticated() && <Header logout={logout} />}
-        <Switch>
-          <Route path="/login" render={() => <LoginForm login={login} register={register} />} />
-          <Route
-            exact
-            path="/activities"
-            render={() => (
-              <ActivitiesView
-                challenges={challenges}
-                workouts={workouts}
-                activities={activities}
-                user={user}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/activities/:id"
-            render={({ match }) => (
-              <WorkoutView
-                activity={activityById(match.params.id)}
-                addWorkout={addWorkout}
-                challenge={challenges[0]}
-                workouts={workouts}
-                updateWorkout={updateWorkout}
-              />
-            )}
-          />
-          <Route path="/leaderboard" render={() => <LeaderBoardView />} />
-          <Route
-            path="/addchallenge"
-            render={() => <AddChallengeForm addChallenge={challengeService.add} />}
-          />
-          <Route
-            path="/addachievement"
-            render={() => <AddAchievementForm addAchievement={achievementService.add} />}
-          />
-          <Route
-            path="/badges"
-            render={() => (
-              <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
-            )}
-          />
-          <Route
-            path="/addactivity"
-            render={() => <AddActivityForm addActivity={activityService.add} />}
-          />
-          <Route
-            path="/updateuser"
-            render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
-          />
-
-          <Route exact path="/passwordreset" render={() => <RequestResetEmailForm />} />
-          <Route
-            exact
-            path="/passwordreset/:token"
-            render={({ match }) => <PasswordResetForm resetToken={match.params.token} />}
-          />
-          <Route exact path="/styleguide" render={() => <StyleGuide />} />
-          <Route
-            exact
-            path="/"
-            render={() => <FrontPage challenges={challenges} updateUser={updateUser} user={user} />}
-          />
-        </Switch>
+        <Routes
+          user={user}
+          updateUser={updateUser}
+          login={login}
+          register={register}
+          isAuthenticated={isAuthenticated}
+          activityByName={activityByName}
+          activeChallenge={activeChallenge}
+          workouts={workouts}
+          activities={activities}
+          achievements={achievements}
+          challenges={challenges}
+          addWorkout={addWorkout}
+          updateWorkout={updateWorkout}
+          challengeService={challengeService}
+          achievementService={achievementService}
+          activityService={activityService}
+        />
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
         {isAuthenticated() && <Footer />}
       </div>

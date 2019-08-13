@@ -7,16 +7,24 @@ import WeeklyScoresTable from './WeeklyScoresTable';
 import scoreService from '../../services/scores';
 
 // ugh, hardcoded
-const locations = ['Hämeenlinna', 'Helsinki', 'Joensuu', 'Tampere', 'Turku', 'Tallinn', 'Tartu'];
-const series = ['Defaults', 'Pros'];
+const locations = {
+  Hämeenlinna: '#008FFB',
+  Helsinki: '#31A350',
+  Joensuu: '#FEB019',
+  Tampere: '#FF4560',
+  Turku: '#775DD0',
+  Tallinn: '#546E7A',
+  Tartu: '#26a69a'
+};
 
-const LeaderBoardView = () => {
+const LeaderBoardView = ({ challenges, user }) => {
   const [weeklyData, setWeeklyData] = useState([]);
   const [weekFilter, setWeekFilter] = useState(0);
 
   const [showFilterButtons, setShowFilterButtons] = useState(false);
-  const [locationFilters, setLocationFilters] = useState(locations);
-  const [seriesFilters, setSeriesFilters] = useState(series);
+  const [locationFilters, setLocationFilters] = useState(Object.keys(locations));
+  const [seriesFilters, setSeriesFilters] = useState([]);
+  const [series, setSeries] = useState([]);
 
   useEffect(() => {
     scoreService
@@ -26,6 +34,14 @@ const LeaderBoardView = () => {
       })
       .catch(error => console.log('weeklyData', error.message));
   }, []);
+
+  useEffect(() => {
+    const seriesArray = challenges.map(c => c.seriesTitle);
+    if (seriesArray.length) {
+      setSeriesFilters(seriesArray);
+      setSeries(seriesArray);
+    }
+  }, [challenges]);
 
   const toggleSeries = series => {
     if (seriesFilters.includes(series)) {
@@ -73,10 +89,14 @@ const LeaderBoardView = () => {
               ))}
             </div>
             <div className="buttons is-pulled-right">
-              {locations.map(loc => (
+              {Object.keys(locations).map((loc, idx) => (
                 <button
                   key={loc}
-                  className={`button is-small ${locationFilters.includes(loc) && 'is-warning'}`}
+                  style={{
+                    backgroundColor: locationFilters.includes(loc) ? locations[loc] : '#ffffff',
+                    color: locationFilters.includes(loc) ? '#ffffff' : '#000000'
+                  }}
+                  className="button is-small"
                   onClick={() => toggleLocations(loc)}
                 >
                   {loc}
@@ -120,6 +140,7 @@ const LeaderBoardView = () => {
           setWeekFilter={setWeekFilter}
           locationFilters={locationFilters}
           seriesFilters={seriesFilters}
+          user={user}
         />
       </div>
     </section>

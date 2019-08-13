@@ -73,7 +73,7 @@ const RecentActivities = props => {
         </h1>
 
         {lstActName.map(item => (
-          <ActivityDetails activity={item} key={item.name} />
+          <ActivityDetails activity={item} key={item.name} challenge={props.challenge} />
         ))}
       </div>
     );

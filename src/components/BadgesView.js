@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { checkAchievements, badgeRewardsTotal } from '../badges/utils';
+import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../badges/utils';
 
 const Badge = ({ achievement, activity }) => {
   return (
@@ -40,9 +40,25 @@ const BadgesView = props => {
 
   const toggleShowAll = () => setShowAll(!showAll);
 
-  const myAchievements = checkAchievements(props.workouts, props.activities, props.achievements);
+  const [myBadges, setMyBadges] = useState([]);
+  useEffect(() => {
+    setMyBadges(checkAchievements(props.workouts, props.activities, props.achievements));
+  }, [props.achievements, props.activities, props.workouts]);
 
-  const badges = myAchievements.map(a => (
+  const [myDailyBadges, setMyDailyBadges] = useState([]);
+  useEffect(() => {
+    setMyDailyBadges(checkDailyChallenges(props.workouts, props.activities, props.achievements));
+  }, [props.achievements, props.activities, props.workouts]);
+
+  const badges = myBadges.map(a => (
+    <Badge
+      achievement={a}
+      key={a.id}
+      activity={props.activities.find(ac => ac.id === a.activity)}
+    />
+  ));
+
+  const dailyBadges = myDailyBadges.map(a => (
     <Badge
       achievement={a}
       key={a.id}
@@ -60,9 +76,8 @@ const BadgesView = props => {
       />
     ));
 
-  // Daily challenge achievements have a null activity field
-  const dailyChallenges = props.achievements
-    .filter(a => !a.activity)
+  const allDailyChallenges = props.achievements
+    .filter(a => !a.activity) // Daily challenge achievements have a null activity field
     .map(a => <Badge achievement={a} key={a.id} activity={a.activity} />);
 
   return (
@@ -72,8 +87,16 @@ const BadgesView = props => {
           <FontAwesomeIcon icon="medal" size="2x" />
           Your badges
         </h1>
-        <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myAchievements)}`}</h2>
+        <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myBadges)}`}</h2>
         <div className="section is-size-6-mobile is-size-6-tablet">{badges}</div>
+      </section>
+      <section className="section">
+        <h1 className="title is-4">
+          <FontAwesomeIcon icon="medal" size="2x" />
+          Your daily challenge badges
+        </h1>
+        <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myDailyBadges)}`}</h2>
+        <div className="section is-size-6-mobile is-size-6-tablet">{dailyBadges}</div>
       </section>
       <section className="section">
         <h1 className="title is-4">
@@ -93,7 +116,7 @@ const BadgesView = props => {
             <FontAwesomeIcon icon="medal" size="2x" />
             Daily challenges
           </h1>
-          <div className="section is-size-6-mobile is-size-6-tablet">{dailyChallenges}</div>
+          <div className="section is-size-6-mobile is-size-6-tablet">{allDailyChallenges}</div>
         </section>
       )}
     </div>

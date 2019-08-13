@@ -75,13 +75,13 @@ const UpdateWorkout = props => {
     return 0;
   });
 
-  oneTypeAct.sort(cmpDate);
+  oneTypeAct.sort(cmpDescDate);
 
-  function cmpDate(a, b) {
-    if (a.date < b.date) {
+  function cmpDescDate(a, b) {
+    if (b.date < a.date) {
       return -1;
     }
-    if (a.date > b.date) {
+    if (b.date > a.date) {
       return 1;
     }
     return 0;

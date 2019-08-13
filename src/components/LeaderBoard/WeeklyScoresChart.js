@@ -1,33 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import faker from 'faker';
-
-// size = how many random people to generate
-// weeks = number of weeks the challenge lasts
-// (in case the challenge doesn't last 10 weeks)
-// eslint-disable-next-line
-const generateSampleData = (size, weeks) => {
-  let sampleData = [];
-
-  for (let i = 0; i < size; i++) {
-    const baseLevel = Math.floor(Math.random() * 1000);
-    const startWeek = Math.floor(Math.random() * 5 + 1);
-    let points = [];
-    for (let x = 1; x <= weeks; x++) {
-      const value = x < startWeek ? 0 : Math.abs(baseLevel + Math.floor(Math.random() * 400 - 200));
-      points.push(value);
-    }
-    const abbreviated = faker.name.firstName() + ' ' + faker.name.lastName().substr(0, 1) + '.';
-    const entry = {
-      name: abbreviated,
-      data: points
-    };
-
-    sampleData.push(entry);
-  }
-
-  return sampleData;
-};
 
 const caseInsensitiveNameSort = (a, b) => {
   return a.name.toLowerCase() > b.name.toLowerCase()
@@ -37,81 +9,96 @@ const caseInsensitiveNameSort = (a, b) => {
     : 0;
 };
 
+const locations = {
+  Hämeenlinna: '#008FFB',
+  Helsinki: '#31A350',
+  Joensuu: '#FEB019',
+  Tampere: '#FF4560',
+  Turku: '#775DD0',
+  Tallinn: '#546E7A',
+  Tartu: '#26a69a'
+};
+
 const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
-  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([{ data: [] }]); // empty [] causes a warning
+  const [categories, setCategories] = useState([]); // array of names
+  const [colors, setColors] = useState([]);
 
   useEffect(() => {
-    let filtered = [];
+    let filteredData = [];
     if (!weekFilter) {
-      filtered = [
+      filteredData = [
         {
           name: 'Total',
-          data: weeklyData.sort(caseInsensitiveNameSort).map(d => ({
-            x: d.name,
-            y: d.data.reduce((sum, item) => sum + item, 0)
-          }))
+          data: weeklyData
+            .sort(caseInsensitiveNameSort)
+            .map(d => d.data.reduce((sum, item) => sum + item, 0))
         }
       ];
-      setFilteredData(filtered);
+      setData(filteredData);
     } else {
-      filtered = [
+      filteredData = [
         {
           name: `Week ${weekFilter}`,
-          data: weeklyData.sort(caseInsensitiveNameSort).map(d => ({
-            x: d.name,
-            y: d.data[weekFilter - 1]
-          }))
+          data: weeklyData.sort(caseInsensitiveNameSort).map(d => d.data[weekFilter - 1])
         }
       ];
-      setFilteredData(filtered);
+      setData(filteredData);
     }
+    setCategories(weeklyData.sort(caseInsensitiveNameSort).map(d => d.name));
+    setColors(weeklyData.sort(caseInsensitiveNameSort).map(d => locations[d.location]));
   }, [weekFilter, weeklyData]);
 
   let options = {
+    colors: colors,
+    plotOptions: {
+      bar: {
+        distributed: true
+      }
+    },
     dataLabels: {
       enabled: false
     },
-    colors: [
-      function({ value, seriesIndex, w }) {
-        if (value > 7499) {
-          return '#ff2457';
-        } else if (value > 749) {
-          return '#248aff';
-        } else {
-          return '#57ff24';
+    yaxis: {
+      decimalsInFloat: 0
+    },
+    xaxis: {
+      categories: categories,
+      labels: {
+        style: {
+          colors: colors,
+          fontSize: '14px'
         }
       }
-    ],
+    },
     annotations: {
+      position: 'front',
       yaxis: [
         {
-          y: weekFilter === 0 ? 7500 : 750,
-          borderColor: '#00E396'
+          label: {
+            text: ' '
+          },
+          y: weekFilter === 0 ? 7490 : 740,
+          y2: weekFilter === 0 ? 7510 : 760,
+          fillColor: '#00E396'
         }
       ]
     },
-    grid: {
-      yaxis: {
-        lines: {
-          show: false
-        }
-      }
-    },
     noData: {
-      text: 'Unable to find any data.',
+      text: 'No data? Still loading, or the filters are too strict.',
       align: 'center',
       verticalAlign: 'middle',
       offsetX: 0,
       offsetY: 0,
       style: {
-        color: '#ff2457',
-        fontSize: '14px',
+        color: '#000000',
+        fontSize: '22px',
         fontFamily: 'Raleway'
       }
     }
   };
 
-  return <Chart type="bar" height="300" options={options} series={filteredData} />;
+  return <Chart type="bar" height="300" options={options} series={data} />;
 };
 
 export default WeeklyScoresChart;

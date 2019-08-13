@@ -8,8 +8,8 @@ const Ikonipallo = ({
   iconName,
   bgColor,
   handleClick,
-  selected,
-  activeChallenge
+  isSelected,
+  isActiveChallenge
 }) => {
   let styles = {
     width: '33vw',
@@ -25,7 +25,7 @@ const Ikonipallo = ({
     justifyContent: 'center',
     margin: 'auto'
   };
-  if (selected && !activeChallenge) {
+  if (isSelected && !isActiveChallenge) {
     styles = {
       ...styles,
       borderStyle: 'solid',
@@ -36,16 +36,14 @@ const Ikonipallo = ({
   const bulmaClass =
     'has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
   let customClass = 'series-button-hoverable';
-  if (activeChallenge) customClass = 'series-button';
+  if (isActiveChallenge) customClass = 'series-button';
   const className = bulmaClass + ' ' + customClass;
-  console.log(className);
 
   return (
     <div
       style={styles}
       className={className}
       onClick={() => {
-        console.log('klikkasit', sarja);
         handleClick();
       }}
     >
@@ -58,19 +56,19 @@ const Ikonipallo = ({
   );
 };
 
-const BraceLeft = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7b;</span>;
+const BraceLeft = () => (
+  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>
+);
 
-const BraceRight = () => <span style={{ fontFamily: 'Verdana', color: '#ff2457' }}>&#x7d;</span>;
+const BraceRight = () => (
+  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
+);
 
-const FrontPage = props => {
+const ChallengeSelectView = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
-  let hasActiveChallenge = false;
-  if (props.user && props.user.activeChallenge) {
-    hasActiveChallenge = true;
-  }
 
   const handleClickOnBall = seriesId => () => {
-    if (!hasActiveChallenge) return setSelectedSeries(seriesId);
+    return setSelectedSeries(seriesId);
   };
 
   const saveSelection = () => {
@@ -78,7 +76,6 @@ const FrontPage = props => {
       ...props.user,
       activeChallenge: selectedSeries
     };
-    console.log('Updating user data:', userDetails);
     props.updateUser(userDetails);
   };
 
@@ -114,35 +111,35 @@ const FrontPage = props => {
           iconName={c.icon || 'stopwatch'}
           bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
-          selected={c.id === selectedSeries}
-          activeChallenge={hasActiveChallenge}
+          isSelected={c.id === selectedSeries}
+          isActiveChallenge={c.id === props.user.activeChallenge}
         />
         <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
           {props.user && props.user.activeChallenge === c.id && showActiveChallenge()}
         </div>
-        <section className="section">
+        <div>
           {props.user &&
-            !props.user.activeChallenge &&
             selectedSeries === c.id &&
+            props.user.activeChallenge !== c.id &&
             showSelectionButton()}
-        </section>
+        </div>
       </div>
     ));
 
   return (
     <>
       <section className="section has-text-centered">
-        <h1 className="title is-1 ">Welcome to UFTC!</h1>
+        <h1 className="title is-3 ">Welcome to UFTC!</h1>
       </section>
       {challengeNames.map(challengeName => (
-        <section className="section" key={challengeName}>
-          <div className="section has-text-centered">
-            <h1 className="title is-2">
-              <BraceLeft /> {challengeName} <BraceRight />
-            </h1>
-            <h2 className="title is-3">Select series</h2>
-          </div>
+        <section className="section has-text-centered " key={challengeName}>
+          <h1 className="is-size-4">
+            <BraceLeft /> {challengeName} <BraceRight />
+          </h1>
+          <br />
+          <h2 className="title is-5">Select series</h2>
+
           <div className="columns is-centered">
             {challengeSelections(challengesToShow.filter(c => c.name === challengeName))}
           </div>
@@ -152,4 +149,4 @@ const FrontPage = props => {
   );
 };
 
-export default FrontPage;
+export default ChallengeSelectView;

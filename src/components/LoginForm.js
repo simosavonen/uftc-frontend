@@ -46,6 +46,7 @@ const LoginForm = props => {
     if (isNewUser) {
       userDetails.name = name;
       userDetails.location = location;
+      userDetails.secret = props.secret ? props.secret : '';
       props.register(userDetails);
     } else {
       props.login(userDetails);
@@ -192,6 +193,8 @@ const LoginForm = props => {
                       event.preventDefault();
                       setIsNewUser(!isNewUser);
                     }}
+                    disabled={props.secret === undefined}
+                    title={'Use the link provided by the organizers'}
                   >
                     {isNewUser ? 'cancel' : 'create an account'}
                   </button>

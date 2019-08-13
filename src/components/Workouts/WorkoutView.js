@@ -1,45 +1,59 @@
 import React from 'react';
 import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
+import { icon } from '../Activities/utils';
 
-const placeholder = {
-  name: 'loading...',
-  points: 100,
-  type: 'Placeholders',
-  unit: '1 kg',
-  description: 'This is a placeholder object',
-  url: 'http://fake.you.tube/123',
-  id: '12341234123412341234'
-};
-
-const WorkoutView = ({
-  activity = placeholder,
-  addWorkout,
-  challenge,
-  workouts,
-  updateWorkout
-}) => {
+const WorkoutView = ({ activity, addWorkout, challenge, workouts, updateWorkout }) => {
+  if (!activity)
+    return (
+      <div className="section container">
+        <h1 className="title">Error: No such activity exists</h1>
+      </div>
+    );
+  if (!challenge)
+    return (
+      <div className="section container">
+        <h1 className="title">Pick a series first.</h1>
+      </div>
+    );
   return (
     <>
-      <div className="section columns is-centered">
-        {/* tähän yleistä tietoa  urheilulajista */}
-        <div className="column is-6">
-          <h4 className="title ">{activity.name}</h4>
+      <section className="section">
+        <div className="columns is-centered">
+          <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
+            <div className="media">
+              <div className="media-left image is-48x48">
+                <span className="icon is-large">{icon(activity.icon)}</span>
+              </div>
+              <div className="media-content">
+                <div className="content">
+                  <h4 className="title is-size-5-mobile is-size-4">{activity.name}</h4>
+                  <h5 className="subtitle is-size-6-mobile is-size-5">1 unit = {activity.unit}</h5>
+                </div>
+              </div>
+              <div className="media-right has-text-right">
+                <h1 className="title is-5 has-text-danger">
+                  {Math.round(activity.points * challenge.pointBonus * 10) / 10} points
+                </h1>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <section className="section columns is-centered">
-        <div className="column is-6 ">
-          <AddWorkoutForm
-            addWorkout={addWorkout}
-            activity={activity}
-            challenge={challenge}
-            workouts={workouts}
-          />
+
+        <div className="columns is-centered">
+          <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
+            <AddWorkoutForm
+              addWorkout={addWorkout}
+              activity={activity}
+              challenge={challenge}
+              workouts={workouts}
+            />
+          </div>
         </div>
       </section>
 
-      <div className="section columns is-centered">
-        <div className="column is-6">
+      <section className="section columns is-centered">
+        <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
           <ul>
             <li>Sport activity type: {activity.type}</li>
             <li>Unit: {activity.unit}</li>
@@ -54,9 +68,9 @@ const WorkoutView = ({
             )}
           </ul>
         </div>
-      </div>
+      </section>
       <section className="section columns is-centered">
-        <div className="column is-6 ">
+        <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
           <UpdateWorkout workouts={workouts} activity={activity} updateWorkout={updateWorkout} />
         </div>
       </section>

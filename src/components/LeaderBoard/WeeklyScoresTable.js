@@ -16,9 +16,11 @@ const WeeklyScoresTable = ({
   weekFilter,
   setWeekFilter,
   locationFilters,
-  seriesFilters
+  seriesFilters,
+  user
 }) => {
   const [showUser, setShowUser] = useState('');
+  const [pointBonus, setPointBonus] = useState(1);
   const [workouts, setWorkouts] = useState([]);
   const [chartData, setChartData] = useState([]); // filtered weeklyData for showing in the chart
 
@@ -49,12 +51,14 @@ const WeeklyScoresTable = ({
     }
   }, [showUser, workouts]);
 
-  const toggleShowUser = id => {
+  const toggleShowUser = (id, pointBonus) => {
+    setChartData([]);
     showUser === id ? setShowUser('') : setShowUser(id);
+    setPointBonus(pointBonus);
   };
 
   return (
-    <table className="table is-fullwidth is-narrow is-size-7-mobile is-size-6-tablet is-size-5-widescreen is-size-4-fullhd">
+    <table className="table is-fullwidth is-narrow is-size-7-mobile is-size-7-tablet is-size-6-widescreen is-size-5-fullhd">
       <thead>
         <tr>
           <th>#</th>
@@ -115,12 +119,13 @@ const WeeklyScoresTable = ({
           .map((score, index) => (
             <React.Fragment key={score.id.toString()}>
               <tr
-                onClick={() => toggleShowUser(score.id.toString())}
-                className={`is-clickable hover-effect-green ${score.id.toString() === showUser &&
-                  'is-selected has-text-dark'}`}
+                onClick={() => toggleShowUser(score.id.toString(), score.pointBonus)}
+                className={`${score.id === user.id &&
+                  'has-text-weight-bold'} is-clickable hover-effect-green ${score.id.toString() ===
+                  showUser && 'is-selected has-text-dark'}`}
               >
                 <td>{index + 1}</td>
-                <td>{score.name}</td>
+                <td className={score.id === user.id ? 'has-text-danger' : ''}>{score.name}</td>
                 <td>{score.seriesTitle}</td>
                 <td>{score.location}</td>
                 {score.data.map((week, idx) => (
@@ -128,17 +133,27 @@ const WeeklyScoresTable = ({
                     {week}
                   </td>
                 ))}
-                <td className="has-text-centered">{score.data.reduce((sum, i) => sum + i, 0)}</td>
+                <td className="has-text-centered">
+                  {Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
+                </td>
               </tr>
               {score.id.toString() === showUser && (
                 <tr>
                   <td colSpan={5 + score.data.length} style={{ padding: '2vw' }}>
                     <div className="columns is-centered">
                       <div className="column is-4">
-                        <WorkoutsTable workouts={workouts} showUser={showUser} />
+                        <WorkoutsTable
+                          workouts={workouts}
+                          showUser={showUser}
+                          pointBonus={pointBonus}
+                        />
                       </div>
                       <div className="column is-8 is-paddingless">
-                        <WorkoutsChart chartData={chartData} />
+                        {chartData.length !== 0 ? (
+                          <WorkoutsChart chartData={chartData} />
+                        ) : (
+                          'Loading chart data...'
+                        )}
                       </div>
                     </div>
                   </td>
@@ -146,6 +161,11 @@ const WeeklyScoresTable = ({
               )}
             </React.Fragment>
           ))}
+        {weeklyData.length === 0 && (
+          <tr>
+            <td colSpan={5}>Loading data...</td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
