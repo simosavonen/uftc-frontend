@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 const DeleteWorkout = props => {
   console.log('DeleteWorkout');
@@ -40,7 +41,11 @@ const DeleteWorkout = props => {
   return (
     <form onSubmit={submit}>
       <div className="field is-grouped">
-        <p className="help is-size-6">Do you want to delete workout?</p>
+        <p className="help is-size-6 has-text-white">
+          Do you want to delete workout from
+          {'  '}
+          date {moment(props.delWorkout.date).format('ddd MMM Do')}?
+        </p>
         <div className="field">
           <p className="control">
             <button className="button is-success is-fullwidth is-medium">Yes</button>
