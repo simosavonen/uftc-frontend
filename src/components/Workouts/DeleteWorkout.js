@@ -54,7 +54,12 @@ const DeleteWorkout = props => {
             onClick={event => {
               event.preventDefault();
               props.setDeleteWorkout(null);
-              props.history.goBack();
+              props.setShowModal(false);
+              let modalWnd = document.querySelector('.modal');
+              if (modalWnd) {
+                modalWnd.classList.remove('is-active');
+              }
+              //props.history.goBack();
             }}
           >
             Go back

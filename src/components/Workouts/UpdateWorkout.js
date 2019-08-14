@@ -33,6 +33,10 @@ const UpdateWorkout = props => {
         setWorkoutSelected(null);
         setShowModal(false);
       }
+      if (deleteSelected) {
+        setDeleteWorkout(null);
+        setShowModal(false);
+      }
     }
   };
   /*
@@ -45,6 +49,10 @@ const UpdateWorkout = props => {
     );
   };
 */
+  if (workoutSelected) {
+    console.log('workoutselected', workoutSelected);
+  }
+
   const Icon = posed.div({
     up: {
       rotate: '0deg'
@@ -111,6 +119,7 @@ const UpdateWorkout = props => {
 
   //tee roskakori tee oma delete workout, app.js
   //className="is-clickable hover-effect-dark"
+  //key={deleteSelected}
   return (
     <>
       <div
@@ -183,6 +192,7 @@ const UpdateWorkout = props => {
                     //<DeleteWorkout item={item} />;
                     //deleteClick(item);
                     setDeleteWorkout(item);
+                    setShowModal(true);
                   }}
                 >
                   Del
@@ -199,6 +209,7 @@ const UpdateWorkout = props => {
                   <UpdateWorkoutForm
                     workout={workoutSelected}
                     updateWorkout={props.updateWorkout}
+                    setWorkoutSelected={setWorkoutSelected}
                     setShowModal={setShowModal}
                   />
                 </div>
@@ -217,17 +228,28 @@ const UpdateWorkout = props => {
           </div>
           <div>
             {deleteSelected && (
-              <DeleteWorkout
-                key={deleteSelected}
-                delWorkout={deleteSelected}
-                setDeleteWorkout={setDeleteWorkout}
-              />
+              <div className={`modal ${showModal && 'is-active'}`}>
+                <div className="modal-background" />
+                <div className="modal-content">
+                  <DeleteWorkout
+                    delWorkout={deleteSelected}
+                    setDeleteWorkout={setDeleteWorkout}
+                    setShowModal={setShowModal}
+                  />
+                </div>
+                <button
+                  className="modal-close is-large"
+                  aria-label="close"
+                  onClick={() => {
+                    if (deleteSelected) {
+                      setDeleteWorkout(null);
+                    }
+                    setShowModal(false);
+                  }}
+                />
+              </div>
             )}
-            {/*setDeleteWorkout(null)*/}
           </div>
-          {/* deleteSelected && <p onClick={() => setDeleteWorkout(null)}> </p> */}
-          {/*deleteSelected && setDeleteWorkout(null)*/}
-          {/*workoutSelected && setDeleteWorkout(null)*/}
         </div>
       )}
     </>

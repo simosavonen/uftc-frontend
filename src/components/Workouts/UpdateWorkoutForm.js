@@ -81,6 +81,7 @@ const UpdateWorkoutForm = props => {
             className="button is-danger is-fullwidth"
             onClick={event => {
               event.preventDefault();
+              props.setWorkoutSelected(null);
               props.setShowModal(false);
               let modalWnd = document.querySelector('.modal');
               if (modalWnd) {
