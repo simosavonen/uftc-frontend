@@ -1,25 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 
-const placeholder = {
-  organizers: ['5d1798065367df2f28dd0708'],
-  activities: [],
-  name: 'loading...',
-  pointsGoal: 7500,
-  releaseDate: '2019-07-01',
-  startDate: '2019-07-10',
-  endDate: '2019-07-20',
-  deadline: '2019-12-14',
-  seriesTitle: 'Placeholder',
-  pointBonus: 1,
-  id: '5d1c5237c360412fbcc98dcc'
-};
-
 const challengeTiming = challenge => {
   const start = moment(challenge.startDate);
   const end = moment(challenge.endDate);
 
-  const length = end.diff(start, 'days') + 1; // including last day
+  const length = end.diff(start, 'days');
   const today = moment();
   let timing = '';
   if (today < start) {
@@ -34,7 +20,10 @@ const challengeTiming = challenge => {
   return timing;
 };
 
-const ChallengeTitle = ({ challenge = placeholder }) => {
+const ChallengeTitle = ({ challenge }) => {
+  if (!challenge) {
+    return <div>Pick a series first.</div>;
+  }
   return (
     <div className="is-size-4 is-size-3-fullhd">
       <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>{' '}
