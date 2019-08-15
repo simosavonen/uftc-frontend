@@ -3,12 +3,14 @@ import moment from 'moment';
 import UpdateWorkoutForm from './UpdateWorkoutForm';
 import posed from 'react-pose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DeleteWorkout from './DeleteWorkout';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
   const [showActivities, setshowActivities] = useState(false);
   const [opened, setOpened] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [deleteSelected, setDeleteWorkout] = useState(null);
   const actNameTbl = [];
   let oneTypeAct = [];
   let oneTypeActLenght;
@@ -28,6 +30,10 @@ const UpdateWorkout = props => {
     if (!showActivities) {
       if (workoutSelected) {
         setWorkoutSelected(null);
+        setShowModal(false);
+      }
+      if (deleteSelected) {
+        setDeleteWorkout(null);
         setShowModal(false);
       }
     }
@@ -96,7 +102,6 @@ const UpdateWorkout = props => {
       </p>
     );
   }
-  //};
 
   return (
     <>
@@ -116,38 +121,58 @@ const UpdateWorkout = props => {
         <div>
           <ul>
             {oneTypeAct.map(item => (
-              <li
-                key={item.date + item.amount}
-                className="is-clickable hover-effect-dark"
-                onClick={() => {
-                  setWorkoutSelected(item);
-                  setShowModal(true);
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'verdana',
-                    fontSize: 'larger',
-                    fontWeight: '700',
-                    color: '#0f0f0f'
+              <li key={item.date + item.amount}>
+                <button
+                  key={item.date + item.amount}
+                  type="button"
+                  onClick={() => {
+                    setWorkoutSelected(item);
+                    setShowModal(true);
                   }}
                 >
-                  {moment(item.date).format('ddd MMM Do')}
-                </span>
-                {' \u00b7 '}
-                <span
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#0f0f0f'
+                    }}
+                  >
+                    {moment(item.date).format('ddd MMM Do')}
+                  </span>
+                  {' \u00b7 '}
+                  <span
+                    style={{
+                      fontFamily: 'verdana',
+                      fontSize: 'larger',
+                      fontWeight: '700',
+                      color: '#ff2457'
+                    }}
+                  >
+                    {item.amount}
+                  </span>
+                </button>
+                <button
+                  key={'trash' + item.date}
+                  type="button"
+                  className="fas fa-trash-alt"
                   style={{
                     fontFamily: 'verdana',
                     fontSize: 'larger',
                     fontWeight: '700',
                     color: '#ff2457'
                   }}
+                  onClick={() => {
+                    setDeleteWorkout(item);
+                    setShowModal(true);
+                  }}
                 >
-                  {item.amount}
-                </span>
+                  Del
+                </button>
               </li>
             ))}
           </ul>
+
           <div>
             {workoutSelected && (
               <div className={`modal ${showModal && 'is-active'}`}>
@@ -156,6 +181,7 @@ const UpdateWorkout = props => {
                   <UpdateWorkoutForm
                     workout={workoutSelected}
                     updateWorkout={props.updateWorkout}
+                    setWorkoutSelected={setWorkoutSelected}
                     setShowModal={setShowModal}
                   />
                 </div>
@@ -165,6 +191,31 @@ const UpdateWorkout = props => {
                   onClick={() => {
                     if (workoutSelected) {
                       setWorkoutSelected(null);
+                    }
+                    setShowModal(false);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+          <div>
+            {deleteSelected && (
+              <div className={`modal ${showModal && 'is-active'}`}>
+                <div className="modal-background" />
+                <div className="modal-content">
+                  <DeleteWorkout
+                    delWorkout={deleteSelected}
+                    setDeleteWorkout={setDeleteWorkout}
+                    setShowModal={setShowModal}
+                    deleteWorkoutInstance={props.deleteWorkoutInstance}
+                  />
+                </div>
+                <button
+                  className="modal-close is-large"
+                  aria-label="close"
+                  onClick={() => {
+                    if (deleteSelected) {
+                      setDeleteWorkout(null);
                     }
                     setShowModal(false);
                   }}

@@ -28,6 +28,7 @@ const Routes = props => {
     achievements,
     addWorkout,
     updateWorkout,
+    deleteWorkoutInstance,
     challengeService,
     achievementService,
     activityService
@@ -75,6 +76,7 @@ const Routes = props => {
             challenge={activeChallenge()}
             workouts={workouts}
             updateWorkout={updateWorkout}
+            deleteWorkoutInstance={deleteWorkoutInstance}
           />
         )}
       />
