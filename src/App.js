@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import slug from 'slug';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 import userService from './services/user';
 import workoutService from './services/workouts';
 import { useResource } from './services/useResource';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Badge } from './components/BadgesView';
 import { apiUrls } from './config/config';
 import { checkAchievements } from './badges/utils';
 import Routes from './Routes';
@@ -87,7 +90,8 @@ const App = props => {
             activeChallenge()
           );
           if (myBadgesAfter.length > myBadgesBefore.length) {
-            toast.success('New badge unlocked!');
+            const newBadges = myBadgesAfter.filter(x => !myBadgesBefore.includes(x));
+            badgeAlert(newBadges);
           }
         })
         .catch(error => {
@@ -100,6 +104,12 @@ const App = props => {
 
   const updateWorkout = workout => {
     if (user.activeChallenge) {
+      const myBadgesBefore = checkAchievements(
+        workouts,
+        activities,
+        achievements,
+        activeChallenge()
+      );
       workoutService
         .update(workout)
         .then(response => {
@@ -108,6 +118,16 @@ const App = props => {
           );
           setWorkouts(workoutsWithNew);
           toast.success('Workout updated.');
+          const myBadgesAfter = checkAchievements(
+            workoutsWithNew,
+            activities,
+            achievements,
+            activeChallenge()
+          );
+          if (myBadgesAfter.length > myBadgesBefore.length) {
+            const newBadges = myBadgesAfter.filter(x => !myBadgesBefore.includes(x));
+            badgeAlert(newBadges);
+          }
         })
         .catch(error => {
           console.log('updateWorkout', error.response.data);
@@ -187,6 +207,32 @@ const App = props => {
         }
         return '';
     }
+  };
+
+  const MySwal = withReactContent(Swal);
+  const badgeAlert = achs => {
+    MySwal.fire({
+      titleText: 'Good job!',
+      html: (
+        <div>
+          <p>
+            <span role="img" aria-label="fire">
+              🔥
+            </span>
+            {achs.length > 1 ? 'New badges unlocked:' : 'New badge unlocked:'}
+          </p>
+          {achs.map(a => (
+            <Badge
+              achievement={a}
+              key={a.id}
+              activity={activities.find(ac => ac.id === a.activity)}
+            />
+          ))}
+        </div>
+      ),
+      type: 'success',
+      showCloseButton: true
+    });
   };
 
   return (

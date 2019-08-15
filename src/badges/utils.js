@@ -38,7 +38,7 @@ const dayScore = (workouts, activities, date, pointBonus) => {
 };
 
 const checkAchievements = (workouts, activities, achievements, challenge) => {
-  if (workouts.length && activities.length && achievements.length) {
+  if (workouts.length && activities.length && achievements.length && challenge) {
     return achievements
       .filter(ach => ach.activity !== null)
       .filter(ach => {
@@ -55,11 +55,13 @@ const checkAchievements = (workouts, activities, achievements, challenge) => {
 };
 
 const checkDailyChallenges = (workouts, activities, achievements, challenge) => {
-  return achievements
-    .filter(ach => ach.date !== null)
-    .filter(ach =>
-      checkRequirement(ach, dayScore(workouts, activities, ach.date, challenge.pointBonus))
-    );
+  if (workouts.length && activities.length && achievements.length && challenge) {
+    return achievements
+      .filter(ach => ach.date !== null)
+      .filter(ach =>
+        checkRequirement(ach, dayScore(workouts, activities, ach.date, challenge.pointBonus))
+      );
+  } else return [];
 };
 
 const badgeRewardsTotal = achievements => {
