@@ -19,7 +19,7 @@ const Badge = ({ achievement, activity }) => {
         </p>
         <div className="media-content">
           <p className="content">
-            <strong>{achievement.name}</strong>
+            <span className="has-text-weight-semibold">{achievement.name}</span>
             <br />
             Get {achievement.requirement} points{' '}
             {activity
@@ -127,4 +127,5 @@ const BadgesView = props => {
   );
 };
 
+export { Badge };
 export default BadgesView;
