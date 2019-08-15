@@ -12,12 +12,13 @@ import {
   faTrophy,
   faAward,
   faMedal,
-  faAngleUp,
-  faTrashAlt
+  faAngleUp
 } from '@fortawesome/free-solid-svg-icons';
+import { far, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 library.add(
   fas,
+  far,
   faAt,
   faUser,
   faLock,

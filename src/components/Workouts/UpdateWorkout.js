@@ -4,6 +4,7 @@ import UpdateWorkoutForm from './UpdateWorkoutForm';
 import posed from 'react-pose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteWorkout from './DeleteWorkout';
+import ConfirmButton from '../ConfirmButton';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
@@ -103,6 +104,8 @@ const UpdateWorkout = props => {
     );
   }
 
+  console.log('oneTypeAct', oneTypeAct);
+
   return (
     <>
       <div
@@ -152,23 +155,19 @@ const UpdateWorkout = props => {
                     {item.amount}
                   </span>
                 </button>
-                <button
-                  key={'trash' + item.date}
-                  type="button"
-                  className="fas fa-trash-alt"
-                  style={{
-                    fontFamily: 'verdana',
-                    fontSize: 'larger',
-                    fontWeight: '700',
-                    color: '#ff2457'
-                  }}
-                  onClick={() => {
-                    setDeleteWorkout(item);
-                    setShowModal(true);
-                  }}
-                >
-                  Del
-                </button>
+                <ConfirmButton
+                  icon={['far', 'trash-alt']}
+                  classNames="is-small is-danger is-outlined"
+                  texts={['delete', 'confirm']}
+                  action={() =>
+                    props.deleteWorkoutInstance({
+                      id: item.workoutid,
+                      instance: {
+                        id: item._id
+                      }
+                    })
+                  }
+                />
               </li>
             ))}
           </ul>

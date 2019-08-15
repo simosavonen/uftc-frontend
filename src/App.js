@@ -142,14 +142,19 @@ const App = props => {
       workoutService
         .deleteWInstance(workout)
         .then(response => {
-          const workoutsWithNew = workouts.map(w =>
-            w.id !== response.data.id ? w : response.data
-          );
-          setWorkouts(workoutsWithNew);
-          toast.success('Workout instace deleted.');
+          if (response.status === 204) {
+            setWorkouts(workouts.filter(w => w.id !== workout.id));
+            toast.success('Whole workout deleted.');
+          } else {
+            const workoutsWithNew = workouts.map(w =>
+              w.id !== response.data.id ? w : response.data
+            );
+            setWorkouts(workoutsWithNew);
+            toast.success('Workout instance deleted.');
+          }
         })
         .catch(error => {
-          console.log('deleteWorkoutInstance', error.message);
+          console.log('deleteWorkoutInstance', error.response.data);
         });
     } else {
       toast.warn('Workout instance not deleted! Please select a challenge first.');
