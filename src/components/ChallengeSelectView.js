@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 
-const Ikonipallo = ({
-  sarja,
-  osallistujia,
-  iconName,
-  bgColor,
-  handleClick,
-  isSelected,
-  isActiveChallenge
-}) => {
+const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActiveChallenge }) => {
   let styles = {
     width: '33vw',
     minWidth: '110px',
@@ -48,9 +40,9 @@ const Ikonipallo = ({
       }}
     >
       <FontAwesomeIcon icon={iconName} size="2x" />
-      <p>{sarja.seriesTitle}</p>
-      <p style={{ color: '#000000', fontWeight: 'bold' }}>
-        {osallistujia ? osallistujia : <>&nbsp;</>}
+      <p>{series.seriesTitle}</p>
+      <p style={{ color: '#000000', fontWeight: 'bold' }} title="participants">
+        {series.participants ? series.participants : <>&nbsp;</>}
       </p>
     </div>
   );
@@ -107,7 +99,7 @@ const ChallengeSelectView = props => {
     challenges.map(c => (
       <div className="column is-4 has-text-centered " key={c.id}>
         <Ikonipallo
-          sarja={c}
+          series={c}
           iconName={c.icon || 'stopwatch'}
           bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
