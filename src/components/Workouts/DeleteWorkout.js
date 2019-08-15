@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 
 const DeleteWorkout = props => {
-  console.log('DeleteWorkout', props);
-  // if (props.delWorkout.length <= 0) {
   if (!props.delWorkout) {
     props.setDeleteWorkout(null);
     return (
@@ -15,8 +13,8 @@ const DeleteWorkout = props => {
   }
   const submit = event => {
     event.preventDefault();
-    props.setDeleteWorkout(null); //remove this or do something to take this concern
-    console.log('submit btn pressed');
+    props.setDeleteWorkout(null); //if you remove this, do something to take this state concern
+
     const delworkout = {
       id: props.delWorkout.workoutid,
       activity: props.delWorkout.activity,
@@ -26,17 +24,9 @@ const DeleteWorkout = props => {
         amount: props.delWorkout.amount
       }
     };
-    //props.updateWorkout(workout);
+
     props.deleteWorkoutInstance(delworkout);
   };
-
-  /*  {/*<>
-      <div>
-        <p>I was here</p>
-      </div>
-    <div> } */
-  //{/*    </div>
-  //    </> */}
 
   return (
     <form onSubmit={submit}>
@@ -64,7 +54,6 @@ const DeleteWorkout = props => {
               if (modalWnd) {
                 modalWnd.classList.remove('is-active');
               }
-              //props.history.goBack();
             }}
           >
             Go back

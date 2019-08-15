@@ -4,7 +4,6 @@ import UpdateWorkoutForm from './UpdateWorkoutForm';
 import posed from 'react-pose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteWorkout from './DeleteWorkout';
-//import { isTemplateElement } from '@babel/types';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
@@ -39,19 +38,6 @@ const UpdateWorkout = props => {
       }
     }
   };
-  /*
-  const deleteClick = item => {
-    console.log('deleteClick');
-    return (
-      <div>
-        <DeleteWorkout key={item} item={item} />
-      </div>
-    );
-  };
-*/
-  if (workoutSelected) {
-    console.log('workoutselected', workoutSelected);
-  }
 
   const Icon = posed.div({
     up: {
@@ -117,9 +103,6 @@ const UpdateWorkout = props => {
     );
   }
 
-  //tee roskakori tee oma delete workout, app.js
-  //className="is-clickable hover-effect-dark"
-  //key={deleteSelected}
   return (
     <>
       <div
@@ -139,11 +122,6 @@ const UpdateWorkout = props => {
           <ul>
             {oneTypeAct.map(item => (
               <li key={item.date + item.amount}>
-                {/*       onClick={() => {
-                  setWorkoutSelected(item);
-                  setShowModal(true);
-                }}  
-              > */}
                 <button
                   key={item.date + item.amount}
                   type="button"
@@ -185,12 +163,6 @@ const UpdateWorkout = props => {
                     color: '#ff2457'
                   }}
                   onClick={() => {
-                    //setWorkoutSelected(null);
-                    //setShowModal(false);
-
-                    console.log('onclick', item);
-                    //<DeleteWorkout item={item} />;
-                    //deleteClick(item);
                     setDeleteWorkout(item);
                     setShowModal(true);
                   }}

@@ -20,9 +20,7 @@ const update = workout => {
 };
 
 const deleteWInstance = workout => {
-  console.log('deleteWI', baseUrl + '/' + workout.id + '/' + workout.instance.id);
   return axios.delete(baseUrl + '/' + workout.id + '/' + workout.instance.id, workout);
-  //return 0;
 };
 
 export default { get, getWorkoutsByUser, add, update, deleteWInstance };
