@@ -6,6 +6,7 @@ const ConfirmButton = ({ classNames = '', icon, texts, action }) => {
 
   const handleClick = event => {
     event.preventDefault();
+    event.stopPropagation();
     if (clicks + 1 >= texts.length) {
       action();
     } else {

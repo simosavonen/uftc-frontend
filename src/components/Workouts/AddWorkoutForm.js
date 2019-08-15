@@ -42,7 +42,6 @@ const AddWorkoutForm = props => {
   };
 
   const handleDateChange = d => {
-    console.log('date', d.toString());
     setDate(d);
   };
 
@@ -55,7 +54,6 @@ const AddWorkoutForm = props => {
   const submit = event => {
     event.preventDefault();
 
-    // toISOString causes problems
     const dateString = moment(date).format('YYYY-MM-DD');
 
     const workout = {
@@ -69,9 +67,8 @@ const AddWorkoutForm = props => {
   const highlight = ({ date, view }) => {
     if (view === 'month') {
       return !!dates.find(d => {
-        // toISOString converted dates in local timezone to tomorrow
         const dateString = moment(date).format('YYYY-MM-DD');
-        return d.toISOString().substr(0, 10) === dateString;
+        return moment(d).format('YYYY-MM-DD') === dateString;
       })
         ? 'highlighted-calendar-day'
         : '';
