@@ -177,7 +177,7 @@ const UpdateWorkout = props => {
                 <button
                   key={'trash' + item.date}
                   type="button"
-                  className="fa fa-trash-o"
+                  className="fas fa-trash-alt"
                   style={{
                     fontFamily: 'verdana',
                     fontSize: 'larger',
@@ -235,6 +235,7 @@ const UpdateWorkout = props => {
                     delWorkout={deleteSelected}
                     setDeleteWorkout={setDeleteWorkout}
                     setShowModal={setShowModal}
+                    deleteWorkoutInstance={props.deleteWorkoutInstance}
                   />
                 </div>
                 <button

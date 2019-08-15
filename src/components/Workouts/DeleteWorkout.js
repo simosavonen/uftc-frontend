@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 
 const DeleteWorkout = props => {
-  console.log('DeleteWorkout');
+  console.log('DeleteWorkout', props);
   // if (props.delWorkout.length <= 0) {
   if (!props.delWorkout) {
     props.setDeleteWorkout(null);
@@ -27,7 +27,7 @@ const DeleteWorkout = props => {
       }
     };
     //props.updateWorkout(workout);
-    //props.deleteWorkout(delworkout);
+    props.deleteWorkoutInstance(delworkout);
   };
 
   /*  {/*<>
@@ -42,7 +42,7 @@ const DeleteWorkout = props => {
     <form onSubmit={submit}>
       <div className="field is-grouped">
         <p className="help is-size-6 has-text-white">
-          Do you want to delete workout from
+          Do you want to delete workout {props.match.params.name} from
           {'  '}
           date {moment(props.delWorkout.date).format('ddd MMM Do')}?
         </p>

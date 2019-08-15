@@ -3,7 +3,14 @@ import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
 import { icon } from '../Activities/utils';
 
-const WorkoutView = ({ activity, addWorkout, challenge, workouts, updateWorkout }) => {
+const WorkoutView = ({
+  activity,
+  addWorkout,
+  challenge,
+  workouts,
+  updateWorkout,
+  deleteWorkoutInstance
+}) => {
   if (!activity)
     return (
       <div className="section container">
@@ -71,7 +78,12 @@ const WorkoutView = ({ activity, addWorkout, challenge, workouts, updateWorkout 
       </section>
       <section className="section columns is-centered">
         <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
-          <UpdateWorkout workouts={workouts} activity={activity} updateWorkout={updateWorkout} />
+          <UpdateWorkout
+            workouts={workouts}
+            activity={activity}
+            updateWorkout={updateWorkout}
+            deleteWorkoutInstance={deleteWorkoutInstance}
+          />
         </div>
       </section>
     </>

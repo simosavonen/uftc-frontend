@@ -107,6 +107,25 @@ const App = props => {
     }
   };
 
+  const deleteWorkoutInstance = workout => {
+    if (user.activeChallenge) {
+      workoutService
+        .deleteWInstance(workout)
+        .then(response => {
+          const workoutsWithNew = workouts.map(w =>
+            w.id !== response.data.id ? w : response.data
+          );
+          setWorkouts(workoutsWithNew);
+          toast.success('Workout instace deleted.');
+        })
+        .catch(error => {
+          console.log('deleteWorkoutInstance', error.message);
+        });
+    } else {
+      toast.warn('Workout instance not deleted! Please select a challenge first.');
+    }
+  };
+
   const login = userDetails => {
     userService
       .login(userDetails)
@@ -197,6 +216,7 @@ const App = props => {
           challenges={challenges}
           addWorkout={addWorkout}
           updateWorkout={updateWorkout}
+          deleteWorkoutInstance={deleteWorkoutInstance}
           challengeService={challengeService}
           achievementService={achievementService}
           activityService={activityService}

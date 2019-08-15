@@ -12,7 +12,8 @@ import {
   faTrophy,
   faAward,
   faMedal,
-  faAngleUp
+  faAngleUp,
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -28,5 +29,6 @@ library.add(
   faCrown,
   faTrophy,
   faAward,
-  faAngleUp
+  faAngleUp,
+  faTrashAlt
 );
