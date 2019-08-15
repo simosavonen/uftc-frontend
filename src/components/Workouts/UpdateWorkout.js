@@ -172,7 +172,7 @@ const UpdateWorkout = props => {
               </li>
             ))}
           </ul>
-          <p>ul out</p>
+
           <div>
             {workoutSelected && (
               <div className={`modal ${showModal && 'is-active'}`}>
