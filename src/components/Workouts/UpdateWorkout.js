@@ -101,13 +101,15 @@ const UpdateWorkout = props => {
   return (
     <>
       <div
-        className={`columns is-centered is-mobile has-background-dark has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop `}
-        style={{ padding: '1vw', margin: '1vw 4vw' }}
+        className={`columns is-centered is-mobile has-background-dark has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-clickable`}
+        style={{ padding: '0.5vw', margin: '1vw 0vw' }}
         onClick={handleClick}
       >
-        <div className="column is-11">{showActivities ? 'Hide activities' : 'Your history'}</div>
+        <div className="column is-10">
+          {showActivities ? 'Hide workout history' : 'Show workout history'}
+        </div>
 
-        <Icon className="column is-1" pose={opened ? 'up' : 'down'}>
+        <Icon className="column is-2 has-text-centered" pose={opened ? 'up' : 'down'}>
           <FontAwesomeIcon icon="angle-up" />
         </Icon>
       </div>
@@ -124,15 +126,18 @@ const UpdateWorkout = props => {
             {oneTypeAct.map(item => (
               <tr
                 key={item.date}
+                className="is-clickable"
                 onClick={() => {
                   setWorkoutSelected(item);
                   setShowModal(true);
                 }}
               >
-                <td>{moment(item.date).format('dddd')}</td>
-                <td>{moment(item.date).format('MMMM')}</td>
-                <td>{moment(item.date).format('Do')}</td>
-                <td className="has-text-centered has-text-danger">{item.amount}</td>
+                <td title="edit the workout">{moment(item.date).format('dddd')}</td>
+                <td title="edit the workout">{moment(item.date).format('MMMM')}</td>
+                <td title="edit the workout">{moment(item.date).format('Do')}</td>
+                <td className="has-text-centered has-text-danger" title="edit the workout">
+                  {item.amount}
+                </td>
                 <td>
                   <ConfirmButton
                     icon={['far', 'trash-alt']}
