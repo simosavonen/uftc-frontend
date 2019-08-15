@@ -73,7 +73,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
       fontFamily: 'Raleway',
       fontSize: '20px',
       position: 'left',
-      offsetX: 30,
+      offsetX: 20,
       offsetY: 17,
       labels: {
         useSeriesColors: true
@@ -95,7 +95,11 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
   };
 
   return (
-    <div className="has-text-right is-flex" style={{ justifyContent: 'center' }}>
+    <div
+      id="circleprogress"
+      className="has-text-right is-flex"
+      style={{ justifyContent: 'center' }}
+    >
       <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
     </div>
   );

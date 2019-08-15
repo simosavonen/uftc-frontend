@@ -55,94 +55,100 @@ const AddChallengeForm = props => {
               </h1>
               <h2 className="subtitle is-6">
                 {props.challenges.length
-                  ? `Give the series it's own icon, title, description and a point bonus.`
+                  ? `Give the series it's own title, description, point bonus and an icon.`
                   : 'You will be set as the organizer, can add more later'}
               </h2>
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="name">
-                    Challenge name
-                  </label>
-                  <input
-                    className="input"
-                    id="name"
-                    onChange={({ target }) => setName(target.value)}
-                    value={name}
-                    title="All series should share the same challenge name"
-                    readOnly={props.challenges.length !== 0}
-                  />
-                </div>
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="pointsGoal">
-                    Points goal
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    id="pointsGoal"
-                    type="number"
-                    onChange={({ target }) => setPointsGoal(target.value)}
-                    value={pointsGoal}
-                  />
-                </div>
-              </div>
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="startdate">
-                    Start date
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    title={props.challenges.length ? 'All series should share a start date' : ''}
-                    id="startdate"
-                    type="date"
-                    onChange={({ target }) => setStartDate(target.value)}
-                    value={startDate}
-                  />
-                </div>
 
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="endDate">
-                    End date
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    id="endDate"
-                    type="date"
-                    onChange={({ target }) => setEndDate(target.value)}
-                    value={endDate}
-                    title={`Duration: ${moment(endDate).diff(moment(startDate), 'days')} days`}
-                  />
+              <div className={props.challenges.length ? 'is-hidden' : ''}>
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="name">
+                      Challenge name
+                    </label>
+                    <input
+                      className="input"
+                      id="name"
+                      onChange={({ target }) => setName(target.value)}
+                      value={name}
+                      title="All series should share the same challenge name"
+                      readOnly={props.challenges.length !== 0}
+                    />
+                  </div>
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="pointsGoal">
+                      Points goal
+                    </label>
+                    <input
+                      className={`input ${props.challenges.length && 'is-warning'}`}
+                      id="pointsGoal"
+                      type="number"
+                      onChange={({ target }) => setPointsGoal(target.value)}
+                      value={pointsGoal}
+                      title="All series should share the same points goal"
+                      readOnly={props.challenges.length !== 0}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="releaseDate">
-                    Release date
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    id="releaseDate"
-                    type="date"
-                    onChange={({ target }) => setReleaseDate(target.value)}
-                    value={releaseDate}
-                    title="The date when the series is revealed to users"
-                  />
-                </div>
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="startdate">
+                      Start date
+                    </label>
+                    <input
+                      className={`input ${props.challenges.length && 'is-warning'}`}
+                      title={props.challenges.length ? 'All series should share a start date' : ''}
+                      id="startdate"
+                      type="date"
+                      onChange={({ target }) => setStartDate(target.value)}
+                      value={startDate}
+                    />
+                  </div>
 
-                <div className="control is-expanded">
-                  <label className="label" htmlFor="deadline">
-                    Deadline
-                  </label>
-                  <input
-                    className={`input ${props.challenges.length && 'is-warning'}`}
-                    id="deadline"
-                    type="date"
-                    onChange={({ target }) => setDeadline(target.value)}
-                    value={deadline}
-                    title="Last day to save workouts"
-                  />
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="endDate">
+                      End date (zero hour)
+                    </label>
+                    <input
+                      className={`input ${props.challenges.length && 'is-warning'}`}
+                      id="endDate"
+                      type="date"
+                      onChange={({ target }) => setEndDate(target.value)}
+                      value={endDate}
+                      title="Stored with time set at 00:00. If you want the challenge to end on sunday, pick the next monday"
+                    />
+                  </div>
+                </div>
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="releaseDate">
+                      Release date
+                    </label>
+                    <input
+                      className={`input ${props.challenges.length && 'is-warning'}`}
+                      id="releaseDate"
+                      type="date"
+                      onChange={({ target }) => setReleaseDate(target.value)}
+                      value={releaseDate}
+                      title="The date when the series is revealed to users"
+                    />
+                  </div>
+
+                  <div className="control is-expanded">
+                    <label className="label" htmlFor="deadline">
+                      Deadline
+                    </label>
+                    <input
+                      className={`input ${props.challenges.length && 'is-warning'}`}
+                      id="deadline"
+                      type="date"
+                      onChange={({ target }) => setDeadline(target.value)}
+                      value={deadline}
+                      title="The date for publishing results, ie. last day to save workouts."
+                    />
+                  </div>
                 </div>
               </div>
+
               <div className="field is-grouped" />
               <div className="field">
                 <label className="label" htmlFor="seriesTitle">
