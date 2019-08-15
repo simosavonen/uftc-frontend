@@ -117,9 +117,9 @@ const UpdateWorkout = props => {
         <table className="table is-fullwidth is-hoverable">
           <thead>
             <tr>
-              <td colSpan={3}>Date</td>
-              <td className="has-text-centered">Amount</td>
-              <td />
+              <th colSpan={3}>Date</th>
+              <th className="has-text-centered">Amount</th>
+              <th />
             </tr>
           </thead>
           <tbody>

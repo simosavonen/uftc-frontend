@@ -78,6 +78,7 @@ const WeeklyScoresTable = ({
                 W{idx + 1}
               </th>
             ))}
+          <th className="has-text-centered">Badges</th>
           <th
             className={`is-clickable has-text-centered hover-effect-green ${weekFilter === 0 &&
               'is-selected has-text-dark'}`}
@@ -104,6 +105,7 @@ const WeeklyScoresTable = ({
                 W{idx + 1}
               </th>
             ))}
+          <th className="has-text-centered">Badges</th>
           <th
             className={`is-clickable has-text-centered hover-effect-green ${weekFilter === 0 &&
               'is-selected has-text-dark'}`}
@@ -135,8 +137,10 @@ const WeeklyScoresTable = ({
                     {week}
                   </td>
                 ))}
+                <td className="has-text-centered">{score.pointsFromAchievements}</td>
                 <td className="has-text-centered">
-                  {Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
+                  {score.pointsFromAchievements +
+                    Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
                 </td>
               </tr>
               {score.id.toString() === showUser && (
