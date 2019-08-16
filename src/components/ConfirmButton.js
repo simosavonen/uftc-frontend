@@ -14,8 +14,13 @@ const ConfirmButton = ({ classNames = '', icon, texts, action }) => {
     }
   };
 
+  const reset = event => {
+    event.preventDefault();
+    setClicks(0);
+  };
+
   return (
-    <button className={`button ${classNames}`} onClick={handleClick}>
+    <button className={`button ${classNames}`} onClick={handleClick} onBlur={reset}>
       <span className="icon">
         <FontAwesomeIcon icon={icon} />
       </span>
