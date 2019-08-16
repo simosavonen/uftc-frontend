@@ -97,7 +97,7 @@ const UpdateWorkout = props => {
       </p>
     );
   }
-
+  //modal-background-background-color    muuta   mystyles.css  arvoon back nappulan väri muuttaa, numero arvo ei 0 alkuun
   return (
     <>
       <div
@@ -170,7 +170,7 @@ const UpdateWorkout = props => {
             />
           </div>
           <button
-            className="modal-close is-large"
+            className="modal-close is-larget"
             aria-label="close"
             onClick={() => {
               if (workoutSelected) {
