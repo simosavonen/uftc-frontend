@@ -114,7 +114,7 @@ const UpdateWorkout = props => {
         </Icon>
       </div>
       {showActivities && (
-        <table className="table is-fullwidth is-hoverable">
+        <table className="table is-fullwidth is-narrow is-hoverable">
           <thead>
             <tr>
               <th colSpan={3}>Date</th>
@@ -132,8 +132,8 @@ const UpdateWorkout = props => {
                   setShowModal(true);
                 }}
               >
-                <td title="edit the workout">{moment(item.date).format('dddd')}</td>
-                <td title="edit the workout">{moment(item.date).format('MMMM')}</td>
+                <td title="edit the workout">{moment(item.date).format('ddd')}</td>
+                <td title="edit the workout">{moment(item.date).format('MMM')}</td>
                 <td title="edit the workout">{moment(item.date).format('Do')}</td>
                 <td className="has-text-centered has-text-danger" title="edit the workout">
                   {item.amount}

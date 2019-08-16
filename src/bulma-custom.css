@@ -1640,7 +1640,7 @@ a.list-item {
     display: flex; }
 
 .modal-background {
-  background-color: rgba(10, 10, 10, 0.86); }
+  background-color: rgba(0, 0, 0, 0.6); }
 
 .modal-content,
 .modal-card {
