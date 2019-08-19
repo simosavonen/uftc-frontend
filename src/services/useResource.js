@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useResource = baseUrl => {
+const useResource = (baseUrl, user) => {
   const [data, setData] = useState([]);
   //console.log('useResource', baseUrl);
 
@@ -13,8 +13,10 @@ const useResource = baseUrl => {
   };
 
   useEffect(() => {
-    fetchData(baseUrl);
-  }, [baseUrl]);
+    if (user) {
+      fetchData(baseUrl);
+    }
+  }, [baseUrl, user]);
 
   const add = async resource => {
     console.log('add', resource);
