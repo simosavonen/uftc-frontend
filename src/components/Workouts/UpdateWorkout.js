@@ -22,7 +22,8 @@ const UpdateWorkout = props => {
         <p>hmm, ...it seems that workouts was null or undefined</p>
       </p>
     );
-
+  console.log('update workout', props.workouts);
+  console.log('update activity', props.activity);
   const handleClick = () => {
     setOpened(!opened);
     setshowActivities(!showActivities);
@@ -47,10 +48,12 @@ const UpdateWorkout = props => {
   props.workouts.map(item => {
     const a = item.activity;
     const _workoutid = item.id;
+    const activityname = '';
     return item.instances.map(ind => {
       return actNameTbl.push({
         date: ind.date,
         activity: a,
+        activityname: activityname,
         workoutid: _workoutid,
         amount: ind.amount,
         _id: ind._id
@@ -72,6 +75,7 @@ const UpdateWorkout = props => {
 
   actNameTbl.map(ind => {
     if (ind.activity === props.activity.id) {
+      ind.activityname = props.activity.name;
       oneTypeAct.push(ind);
     }
     return 0;
@@ -92,13 +96,9 @@ const UpdateWorkout = props => {
   oneTypeActLenght = oneTypeAct.length;
 
   if (!oneTypeActLenght) {
-    return (
-      <p>
-        <b>Hi there, you can make good exercise!</b>
-      </p>
-    );
+    return <></>;
   }
-
+  //modal-background-background-color    muuta   mystyles.css  arvoon back nappulan väri muuttaa, numero arvo ei 0 alkuun
   return (
     <>
       <div
@@ -187,7 +187,7 @@ const UpdateWorkout = props => {
             />
           </div>
           <button
-            className="modal-close is-large"
+            className="modal-close is-larget"
             aria-label="close"
             onClick={() => {
               if (workoutSelected) {
