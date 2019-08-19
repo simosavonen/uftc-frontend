@@ -22,8 +22,7 @@ const UpdateWorkout = props => {
         <p>hmm, ...it seems that workouts was null or undefined</p>
       </p>
     );
-  console.log('update workout', props.workouts);
-  console.log('update activity', props.activity);
+
   const handleClick = () => {
     setOpened(!opened);
     setshowActivities(!showActivities);
@@ -98,7 +97,7 @@ const UpdateWorkout = props => {
   if (!oneTypeActLenght) {
     return <></>;
   }
-  //modal-background-background-color    muuta   mystyles.css  arvoon back nappulan väri muuttaa, numero arvo ei 0 alkuun
+
   return (
     <>
       <div
