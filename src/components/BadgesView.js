@@ -5,44 +5,48 @@ import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../b
 
 const Badge = ({ achievement, activity }) => {
   return (
-    <div className="box blue-white-gradient">
-      <article className="media">
-        <p className="media-left">
-          <span
-            className="is-flex has-backround-white"
-            style={{
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              background: 'white',
-              boxShadow: '2px 2px  rgba(0,0,0,0.6)',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <span className="fa-layers fa-fw" style={{ width: '50px', height: '50px' }}>
-              <FontAwesomeIcon
-                icon={achievement.fontAwesomeIcon}
-                size="2x"
-                color={achievement.iconColor}
-              />
+    <div className="column is-6">
+      <div className="box blue-white-gradient">
+        <article className="media">
+          <p className="media-left">
+            <span
+              className="is-flex has-backround-white"
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'white',
+                boxShadow: '2px 2px  rgba(0,0,0,0.6)',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <span className="fa-layers fa-fw" style={{ width: '50px', height: '50px' }}>
+                <FontAwesomeIcon
+                  icon={achievement.fontAwesomeIcon}
+                  size="2x"
+                  color={achievement.iconColor}
+                />
+              </span>
             </span>
-          </span>
-        </p>
-        <div className="media-content">
-          <p className="content">
-            <span className="has-text-weight-semibold">{achievement.name}</span>
-            <br />
-            Get {achievement.requirement} points{' '}
-            {activity
-              ? `from ${activity.name}`
-              : `total on ${moment(achievement.date).format('YYYY-MM-DD')}`}
-            .
-            <br />
-            <span className="has-text-danger">Reward: {achievement.pointsReward} extra points</span>
           </p>
-        </div>
-      </article>
+          <div className="media-content">
+            <p className="content">
+              <span className="has-text-weight-semibold">{achievement.name}</span>
+              <br />
+              Get {achievement.requirement} points{' '}
+              {activity
+                ? `from ${activity.name}`
+                : `total on ${moment(achievement.date).format('YYYY-MM-DD')}`}
+              .
+              <br />
+              <span className="has-text-danger">
+                Reward: {achievement.pointsReward} extra points
+              </span>
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   );
 };
@@ -104,7 +108,7 @@ const BadgesView = props => {
           Your badges
         </h1>
         <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myBadges)}`}</h2>
-        <div className="section is-size-6-mobile is-size-6-tablet">{badges}</div>
+        <div className="columns is-multiline is-size-6-mobile is-size-6-tablet">{badges}</div>
       </section>
       <section className="section">
         <h1 className="title is-4">
@@ -112,7 +116,7 @@ const BadgesView = props => {
           Your daily challenge badges
         </h1>
         <h2 className="subtitle">{`Total reward points: ${badgeRewardsTotal(myDailyBadges)}`}</h2>
-        <div className="section is-size-6-mobile is-size-6-tablet">{dailyBadges}</div>
+        <div className="columns is-multiline is-size-6-mobile is-size-6-tablet">{dailyBadges}</div>
       </section>
       <section className="section">
         <h1 className="title is-4">
