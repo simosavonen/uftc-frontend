@@ -96,7 +96,3 @@
 .series-button-hoverable:hover {
   background-color: #d61a3c;
 }
-
-#circleprogress .apexcharts-legend {
-  min-width: 180px;
-}

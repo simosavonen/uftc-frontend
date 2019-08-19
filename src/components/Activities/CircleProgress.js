@@ -45,7 +45,6 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     plotOptions: {
       radialBar: {
         offsetY: -15,
-        offsetX: 0,
         startAngle: 0,
         endAngle: 270,
         hollow: {
@@ -73,7 +72,8 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
       fontFamily: 'Raleway',
       fontSize: '20px',
       position: 'left',
-      offsetX: 20,
+      width: 300,
+      offsetX: -120,
       offsetY: 17,
       labels: {
         useSeriesColors: true
@@ -83,7 +83,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
         height: 0
       },
       formatter: function(seriesName, opts) {
-        return seriesName + ':  ' + Math.round(values[opts.seriesIndex] * 10) / 10;
+        return seriesName + ':  ' + Math.round(values[opts.seriesIndex]);
       },
       itemMargin: {
         horizontal: 4
@@ -95,12 +95,8 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
   };
 
   return (
-    <div
-      id="circleprogress"
-      className="has-text-right is-flex"
-      style={{ justifyContent: 'center' }}
-    >
-      <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
+    <div className="has-text-right" style={{ width: 400, margin: 'auto' }}>
+      <Chart options={options} type={'radialBar'} series={series} height="400" />
     </div>
   );
 };
