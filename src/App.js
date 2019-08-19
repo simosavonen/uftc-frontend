@@ -21,9 +21,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const App = props => {
   const [workouts, setWorkouts] = useState([]);
   const [user, setUser] = useState(null);
-  const [challenges, challengeService] = useResource(apiUrls.challenges);
-  const [activities, activityService] = useResource(apiUrls.activities);
-  const [achievements, achievementService] = useResource(apiUrls.achievements);
+  const [challenges, challengeService] = useResource(apiUrls.challenges, user);
+  const [activities, activityService] = useResource(apiUrls.activities, user);
+  const [achievements, achievementService] = useResource(apiUrls.achievements, user);
 
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem('loggedUser');
