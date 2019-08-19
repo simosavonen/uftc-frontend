@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WorkoutsChart from './WorkoutsChart';
 import WorkoutsTable from './WorkoutsTable';
 import workoutService from '../../services/workouts';
+import { locations } from '../../config/config';
 
 const compareBySums = (a, b) => {
   const aSum = a.data.reduce((sum, i) => sum + i, 0);
@@ -131,7 +132,15 @@ const WeeklyScoresTable = ({
                 <td>{index + 1}</td>
                 <td className={score.id === user.id ? 'has-text-danger' : ''}>{score.name}</td>
                 <td>{score.seriesTitle}</td>
-                <td>{score.location}</td>
+                <td
+                  style={{
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: 10,
+                    borderLeftColor: locations[score.location]
+                  }}
+                >
+                  {score.location}
+                </td>
                 {score.data.map((week, idx) => (
                   <td key={idx} className="has-text-centered is-hidden-mobile">
                     {week}
