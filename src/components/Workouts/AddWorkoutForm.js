@@ -34,14 +34,13 @@ const AddWorkoutForm = props => {
   };
 
   const handleAmountChange = event => {
-    let theValue = Number(event.target.value);
-    if (Number.isNaN(theValue)) {
-      theValue = 1;
+    if (!Number.isNaN(+event.target.value)) {
+      let theValue = +event.target.value;
+      if (theValue < 0) {
+        theValue = Math.abs(theValue);
+      }
+      setAmount(theValue);
     }
-    if (theValue < 0) {
-      theValue = Math.abs(theValue);
-    }
-    setAmount(theValue);
   };
 
   const handleDateChange = d => {

@@ -12,7 +12,6 @@ const UpdateWorkoutForm = props => {
     }
   }, [props.workout]);
 
-  console.log('updateworkoutform', props.workout);
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);
@@ -28,14 +27,13 @@ const UpdateWorkoutForm = props => {
   };
 
   const handleAmountChange = event => {
-    let theValue = Number(event.target.value);
-    if (Number.isNaN(theValue)) {
-      theValue = 1;
+    if (!Number.isNaN(+event.target.value)) {
+      let theValue = +event.target.value;
+      if (theValue < 0) {
+        theValue = Math.abs(theValue);
+      }
+      setAmount(theValue);
     }
-    if (theValue < 0) {
-      theValue = Math.abs(theValue);
-    }
-    setAmount(theValue);
   };
 
   const dontAllowZero = event => {
@@ -57,12 +55,12 @@ const UpdateWorkoutForm = props => {
     };
     props.updateWorkout(workout);
   };
-  console.log('upd f props', props.workout.activityname);
+
   return (
     <div className="box">
       <form onSubmit={submit}>
         <label className="label has-text-centered">{props.workout.activityname}</label>
-        <label className="label has-text-centered">Suorituskertoja (kpl):</label>
+        <label className="label has-text-centered">Number of workouts:</label>
         <div className="field is-grouped">
           <p className="control">
             <button className="button is-danger is-large" onClick={handleLessClick}>
