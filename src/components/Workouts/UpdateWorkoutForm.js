@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UpdateWorkoutForm = props => {
   const [amount, setAmount] = useState(props.workout.amount);
@@ -11,7 +12,7 @@ const UpdateWorkoutForm = props => {
     }
   }, [props.workout]);
 
-  //  console.log('updateworkoutform', props.workout);
+  console.log('updateworkoutform', props.workout);
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);
@@ -19,8 +20,8 @@ const UpdateWorkoutForm = props => {
 
   const handleLessClick = event => {
     event.preventDefault();
-    if (amount < 1) {
-      setAmount(0);
+    if (amount < 2) {
+      setAmount(1);
     } else {
       setAmount(+amount - 1);
     }
@@ -34,9 +35,9 @@ const UpdateWorkoutForm = props => {
     setAmount(theValue);
   };
 
-  const AllowZero = event => {
+  const dontAllowZero = event => {
     event.preventDefault();
-    if (amount <= 0) setAmount(0);
+    if (amount === 0) setAmount(1);
   };
 
   const submit = event => {
@@ -53,45 +54,66 @@ const UpdateWorkoutForm = props => {
     };
     props.updateWorkout(workout);
   };
-
+  console.log('upd f props', props.workout.activityname);
   return (
     <div className="box">
       <form onSubmit={submit}>
-        <label className="label">Suorituskertoja (kpl):</label>
-        <button className="button is-success is-large is-fullwidth" onClick={handleMoreClick}>
-          +
-        </button>
-        <input
-          className="input"
-          type="number"
-          min="1"
-          value={amount}
-          onChange={handleAmountChange}
-          onBlur={AllowZero}
-        />
-        <button className="button is-danger is-large is-fullwidth" onClick={handleLessClick}>
-          -
-        </button>
-        <label className="label has-text-black">Date: {modDate} </label>
+        <label className="label has-text-centered">{props.workout.activityname}</label>
+        <label className="label has-text-centered">Suorituskertoja (kpl):</label>
+        <div className="field is-grouped">
+          <p className="control">
+            <button className="button is-danger is-large" onClick={handleLessClick}>
+              <span className="icon is-large">
+                <FontAwesomeIcon icon="minus" />
+              </span>
+            </button>
+          </p>
 
-        <p>
-          <button className="button is-success is-fullwidth">Save</button>
-          <br />
-          <button
-            className="button is-danger is-fullwidth"
-            onClick={event => {
-              event.preventDefault();
-              props.setWorkoutSelected(null);
-              props.setShowModal(false);
-              let modalWnd = document.querySelector('.modal');
-              if (modalWnd) {
-                modalWnd.classList.remove('is-active');
-              }
-            }}
-          >
-            Back
-          </button>
-        </p>
+          <div className="control is-expanded">
+            <input
+              className="input"
+              type="text"
+              min="1"
+              value={amount}
+              onChange={handleAmountChange}
+              onBlur={dontAllowZero}
+            />
+          </div>
+
+          <p className="control">
+            <button className="button is-success is-large" onClick={handleMoreClick}>
+              <span className="icon is-large">
+                <FontAwesomeIcon icon="plus" />
+              </span>
+            </button>
+          </p>
+        </div>
+
+        <label className="label has-text-black">Date: {modDate} </label>
+        <div>
+          <p>
+            <button className="button is-success is-fullwidth is-medium">Save changes</button>
+            <br />
+          </p>
+        </div>
+        <div className="field">
+          <p className="control">
+            <button
+              className="button is-fullwidth"
+              onClick={event => {
+                event.preventDefault();
+                props.setWorkoutSelected(null);
+                props.setShowModal(false);
+                let modalWnd = document.querySelector('.modal');
+                if (modalWnd) {
+                  modalWnd.classList.remove('is-active');
+                }
+              }}
+            >
+              Go back
+            </button>
+          </p>
+        </div>
       </form>
     </div>
   );
