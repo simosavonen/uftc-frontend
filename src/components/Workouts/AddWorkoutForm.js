@@ -35,6 +35,9 @@ const AddWorkoutForm = props => {
 
   const handleAmountChange = event => {
     let theValue = Number(event.target.value);
+    if (Number.isNaN(theValue)) {
+      theValue = 1;
+    }
     if (theValue < 0) {
       theValue = Math.abs(theValue);
     }
