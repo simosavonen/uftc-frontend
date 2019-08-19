@@ -4,6 +4,7 @@ import UpdateWorkoutForm from './UpdateWorkoutForm';
 import posed from 'react-pose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ConfirmButton from '../ConfirmButton';
+import { ReactComponent as Counter } from '../../images/counter.svg';
 
 const UpdateWorkout = props => {
   const [workoutSelected, setWorkoutSelected] = useState(null);
@@ -117,41 +118,57 @@ const UpdateWorkout = props => {
         <table className="table is-fullwidth is-narrow is-hoverable">
           <thead>
             <tr>
-              <th colSpan={3}>Date</th>
-              <th className="has-text-centered">Amount</th>
+              <th>Date</th>
+              <th className="has-text-centered">
+                <Counter height={25} width={25} />
+              </th>
               <th />
             </tr>
           </thead>
           <tbody>
             {oneTypeAct.map(item => (
-              <tr
-                key={item.date}
-                className="is-clickable"
-                onClick={() => {
-                  setWorkoutSelected(item);
-                  setShowModal(true);
-                }}
-              >
-                <td title="edit the workout">{moment(item.date).format('ddd')}</td>
-                <td title="edit the workout">{moment(item.date).format('MMM')}</td>
-                <td title="edit the workout">{moment(item.date).format('Do')}</td>
-                <td className="has-text-centered has-text-danger" title="edit the workout">
+              <tr key={item.date}>
+                <td title="date" className="is-hidden-mobile">
+                  {moment(item.date).format('ddd MMM Do')}
+                </td>
+                <td title="date" className="is-hidden-tablet">
+                  {moment(item.date).format('MMM Do')}
+                </td>
+                <td
+                  className="has-text-centered has-text-danger has-text-weight-bold"
+                  title="amount"
+                >
                   {item.amount}
                 </td>
                 <td>
-                  <ConfirmButton
-                    icon={['far', 'trash-alt']}
-                    classNames="is-small is-danger is-outlined"
-                    texts={['delete', 'confirm']}
-                    action={() =>
-                      props.deleteWorkoutInstance({
-                        id: item.workoutid,
-                        instance: {
-                          id: item._id
-                        }
-                      })
-                    }
-                  />
+                  <div className="buttons is-right">
+                    <button
+                      className="button is-info is-small is-outlined"
+                      onClick={() => {
+                        setWorkoutSelected(item);
+                        setShowModal(true);
+                      }}
+                    >
+                      <span className="icon">
+                        <FontAwesomeIcon icon="edit" />
+                      </span>
+                      <span>edit</span>
+                    </button>
+
+                    <ConfirmButton
+                      icon={['far', 'trash-alt']}
+                      classNames="is-small is-danger is-outlined"
+                      texts={['delete', 'confirm']}
+                      action={() =>
+                        props.deleteWorkoutInstance({
+                          id: item.workoutid,
+                          instance: {
+                            id: item._id
+                          }
+                        })
+                      }
+                    />
+                  </div>
                 </td>
               </tr>
             ))}
