@@ -185,6 +185,7 @@ const App = props => {
       })
       .catch(error => {
         console.log('register', error.response.data);
+        toast.error('Failed to create an account.');
       });
   };
 
