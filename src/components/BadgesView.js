@@ -8,13 +8,25 @@ const Badge = ({ achievement, activity }) => {
     <div className="box blue-white-gradient">
       <article className="media">
         <p className="media-left">
-          <span className="fa-layers fa-fw" style={{ width: '70px', height: '70px' }}>
-            <FontAwesomeIcon icon={'circle'} size="3x" color={'white'} />
-            <FontAwesomeIcon
-              icon={achievement.fontAwesomeIcon}
-              size="2x"
-              color={achievement.iconColor}
-            />
+          <span
+            className="is-flex has-backround-white"
+            style={{
+              width: '60px',
+              height: '60px',
+              borderRadius: '50%',
+              background: 'white',
+              boxShadow: '2px 2px  rgba(0,0,0,0.6)',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <span className="fa-layers fa-fw" style={{ width: '50px', height: '50px' }}>
+              <FontAwesomeIcon
+                icon={achievement.fontAwesomeIcon}
+                size="2x"
+                color={achievement.iconColor}
+              />
+            </span>
           </span>
         </p>
         <div className="media-content">
