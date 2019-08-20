@@ -25,11 +25,11 @@ const AccordionList = props => {
   return (
     <>
       <div
-        className={'columns button is-large is-centered is-mobile is-clickable hover-effect-grey'}
+        className={'columns is-mobile button is-large is-centered is-clickable hover-effect-grey'}
         style={{ marginTop: '1em', marginBottom: '1em' }}
         onClick={handleClick}
       >
-        <p className="column is-8 is-size-4 has-text-weight-semibold is-5-mobile is-4">
+        <p className="column is-8 is-size-5-desktop is-size-6 has-text-weight-semibold">
           {props.type}
         </p>
 

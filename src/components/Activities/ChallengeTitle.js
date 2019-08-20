@@ -30,16 +30,24 @@ const ChallengeTitle = ({ challenge }) => {
       <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>{' '}
       {challenge.name}{' '}
       <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
-      <p>{challengeTiming(challenge)}</p>
-      {isOngoing && (
-        <Line
-          percent={(dayNum / length) * 100}
-          strokeWidth="2"
-          strokeColor="#ff2457"
-          strokeLinecap="square"
-          trailWidth="1"
-          style={{ margin: '1em 0' }}
-        />
+      {isOngoing ? (
+        <div className="columns is-gapless is-vcentered is-mobile">
+          <div className="column is-9">
+            <Line
+              percent={(dayNum / length) * 100}
+              strokeWidth="2"
+              strokeColor="#ff2457"
+              strokeLinecap="square"
+              trailWidth="1"
+              style={{ margin: '0.25em 0' }}
+            />
+          </div>
+          <div className="column is-3 is-size-6-tablet is-size-7-mobile">
+            {challengeTiming(challenge)}
+          </div>
+        </div>
+      ) : (
+        <p>{challengeTiming(challenge)}</p>
       )}
       <div className="field is-grouped is-grouped-multiline">
         <div className="control">
@@ -65,13 +73,13 @@ const ChallengeTitle = ({ challenge }) => {
         </div>
         <div className="control">
           <div className="tags has-addons">
-            <span className="tag is-dark">Series</span>
+            <span className="tag is-dark">Active series</span>
             <span className="tag is-success">{challenge.seriesTitle}</span>
           </div>
         </div>
         <div className="control">
           <div className="tags has-addons">
-            <span className="tag is-dark">Point bonus</span>
+            <span className="tag is-dark">Series multiplier</span>
             <span className="tag is-success">{challenge.pointBonus}</span>
           </div>
         </div>

@@ -22,7 +22,7 @@ const WorkoutsTable = ({ workouts, showUser, pointBonus }) => {
                 <td>{w.activity.name}</td>
                 <td className="has-text-centered">{totalAmount}</td>
                 <td className="has-text-centered">
-                  {Math.round(totalAmount * points * pointBonus * 10) / 10}
+                  {Math.round(totalAmount * points * pointBonus)}
                 </td>
               </tr>
             );
