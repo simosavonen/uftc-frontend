@@ -36,7 +36,7 @@ const Badge = ({ achievement, activity }) => {
             Get {achievement.requirement} points{' '}
             {activity
               ? `from ${activity.name}`
-              : `total on ${moment(achievement.date).format('YYYY-MM-DD')}`}
+              : `total on ${moment(achievement.date).format('MMM Do')}`}
             .
             <br />
             <span className="has-text-danger">Reward: {achievement.pointsReward} extra points</span>
@@ -102,7 +102,7 @@ const DailyChallengeTable = ({ achievements }) => {
                 </span>
               </td>
               <td>{a.name}</td>
-              <td>{moment(a.date).format('YYYY-MM-DD')}</td>
+              <td>{moment(a.date).format('MMM Do')}</td>
               <td>{a.requirement}</td>
               <td>{a.pointsReward}</td>
             </tr>
