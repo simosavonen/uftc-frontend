@@ -16,15 +16,11 @@ const Footer = () => {
           <p>We Need This</p>
         </div>
         <div className="column is-4 has-text-centered">
-          Admin tools:
-          <p>
-            <Link to="/addchallenge">add challenge</Link>
-          </p>
-          <p>
-            <Link to="/addactivity">add activity</Link>
-          </p>
           <p>
             <Link to="/updateuser">update user</Link>
+          </p>
+          <p>
+            <Link to="/admin">Admin tools</Link>
           </p>
         </div>
       </div>

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AddChallengeForm from './components/AddChallengeForm';
+import AddChallengeForm from './components/Admin/AddChallengeForm';
 import LoginForm from './components/LoginForm';
-import AddActivityForm from './components/AddActivityForm';
+import AddActivityForm from './components/Admin/AddActivityForm';
 import UpdateUserForm from './components/UpdateUserForm';
-import AddAchievementForm from './components/AddAchievementForm';
+import AddAchievementForm from './components/Admin/AddAchievementForm';
 import BadgesView from './components/BadgesView';
 import ChallengeSelectView from './components/ChallengeSelectView';
 import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import NotFound from './components/NotFound';
-import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
+import { ActivitiesView, LeaderBoardView, WorkoutView, AdminView } from './components';
 
 const Routes = props => {
   const {
@@ -113,7 +113,7 @@ const Routes = props => {
         path="/updateuser"
         render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
       />
-
+      <Route path="/admin" render={() => <AdminView />} />
       <Route exact path="/styleguide" render={() => <StyleGuide />} />
       <Route
         exact
