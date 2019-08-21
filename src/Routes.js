@@ -31,7 +31,8 @@ const Routes = props => {
     deleteWorkoutInstance,
     challengeService,
     achievementService,
-    activityService
+    activityService,
+    userService
   } = props;
 
   return (
@@ -87,7 +88,12 @@ const Routes = props => {
       <Route
         path="/addchallenge"
         render={() => (
-          <AddChallengeForm addChallenge={challengeService.add} challenges={challenges} />
+          <AddChallengeForm
+            challengeService={challengeService}
+            challenges={challenges}
+            userService={userService}
+            user={user}
+          />
         )}
       />
       <Route

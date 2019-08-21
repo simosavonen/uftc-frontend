@@ -13,6 +13,9 @@ const AddChallengeForm = props => {
   const [seriesTitle, setSeriesTitle] = useState('');
   const [description, setDescription] = useState('');
   const [icon, setIcon] = useState('');
+  const [users, setUsers] = useState([]);
+  const [organizers, setOrganizers] = useState([]);
+  const [newOrganizer, setNewOrganizer] = useState('');
 
   useEffect(() => {
     if (props.challenges.length) {
@@ -22,10 +25,22 @@ const AddChallengeForm = props => {
       setReleaseDate(moment(props.challenges[0].releaseDate).format('YYYY-MM-DD'));
       setDeadline(moment(props.challenges[0].deadline).format('YYYY-MM-DD'));
       setPointsGoal(props.challenges[0].pointsGoal);
+      setOrganizers(props.challenges[0].organizers);
     }
   }, [props.challenges]);
 
-  const submit = event => {
+  useEffect(() => {
+    if (props.user) {
+      props.userService
+        .get()
+        .then(result => {
+          setUsers(result.data);
+        })
+        .catch(error => console.log('users', error.response.data));
+    }
+  }, [props.userService, props.user]);
+
+  const addChallengeOrSeries = event => {
     event.preventDefault();
     const newChallenge = {
       name,
@@ -37,9 +52,29 @@ const AddChallengeForm = props => {
       pointBonus,
       seriesTitle,
       description,
-      icon
+      icon,
+      organizers
     };
-    props.addChallenge(newChallenge);
+    props.challengeService.add(newChallenge);
+  };
+
+  const addOrganizer = event => {
+    event.preventDefault();
+    setOrganizers(organizers.concat([newOrganizer]));
+    setNewOrganizer('');
+    for (let c of props.challenges) {
+      props.challengeService.update({
+        id: c.id,
+        organizers: organizers.concat([newOrganizer])
+      });
+    }
+  };
+
+  const nameById = id => {
+    const result = users.find(u => u.id === id);
+    if (result) {
+      return result.name;
+    }
   };
 
   return (
@@ -47,7 +82,7 @@ const AddChallengeForm = props => {
       <div className="container">
         <div className="columns is-centered">
           <div className="column" id="addChallengeForm">
-            <form onSubmit={submit}>
+            <form onSubmit={addChallengeOrSeries}>
               <h1 className="title is-4">
                 {props.challenges.length
                   ? `Add a series to ${props.challenges[0].name}`
@@ -211,6 +246,48 @@ const AddChallengeForm = props => {
                 </button>
               </div>
             </form>
+
+            {organizers.length > 0 && (
+              <form style={{ marginTop: '2em' }} onSubmit={addOrganizer}>
+                <h1 className="title is-4">Organizers</h1>
+                <div className="field is-grouped is-grouped-multiline">
+                  {organizers.map((organizer, idx) => (
+                    <div key={organizer} className="control">
+                      <div className="tags has-addons">
+                        <span className="tag is-dark">#{idx + 1}</span>
+                        <span className="tag is-danger">{nameById(organizer)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="field is-grouped">
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        value={newOrganizer}
+                        onChange={({ target }) => setNewOrganizer(target.value)}
+                      >
+                        <option value="">Add a user to organizers</option>
+                        {users
+                          .filter(u => !organizers.includes(u.id))
+                          .map(u => (
+                            <option key={u.id} value={u.id}>
+                              {u.name}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="control">
+                    <button className="button is-info is-outlined" disabled={newOrganizer === ''}>
+                      add
+                    </button>
+                  </div>
+                </div>
+              </form>
+            )}
           </div>
           <div className="column" id="previewOfSeries">
             <PreviewSeries challenges={props.challenges} />

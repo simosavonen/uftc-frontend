@@ -282,6 +282,7 @@ const App = props => {
           challengeService={challengeService}
           achievementService={achievementService}
           activityService={activityService}
+          userService={userService}
         />
         <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
         {isAuthenticated() && <Footer />}
