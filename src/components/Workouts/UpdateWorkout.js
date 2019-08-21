@@ -177,7 +177,7 @@ const UpdateWorkout = props => {
       {workoutSelected && (
         <div className={`modal ${showModal && 'is-active'}`}>
           <div className="modal-background" />
-          <div className="modal-content">
+          <div className="modal-content-spacing-mobile">
             <UpdateWorkoutForm
               workout={workoutSelected}
               updateWorkout={props.updateWorkout}
@@ -186,7 +186,7 @@ const UpdateWorkout = props => {
             />
           </div>
           <button
-            className="modal-close is-larget"
+            className="modal-close is-large"
             aria-label="close"
             onClick={() => {
               if (workoutSelected) {

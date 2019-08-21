@@ -57,65 +57,70 @@ const UpdateWorkoutForm = props => {
   };
 
   return (
-    <div className="box">
-      <form onSubmit={submit}>
-        <label className="label has-text-centered">{props.workout.activityname}</label>
-        <label className="label has-text-centered">Number of workouts:</label>
-        <div className="field is-grouped">
-          <p className="control">
-            <button className="button is-danger is-large" onClick={handleLessClick}>
-              <span className="icon is-large">
-                <FontAwesomeIcon icon="minus" />
-              </span>
-            </button>
-          </p>
+    <div
+      className={`columns is-centered is-mobile is-size-5-mobile is-size-4-tablet is-size-3-desktop`}
+    >
+      <div className="box">
+        <form onSubmit={submit}>
+          <label className="label has-text-centered">{props.workout.activityname}</label>
+          <label className="label has-text-centered">Number of workouts:</label>
+          <div className="field is-grouped">
+            <p className="control">
+              <button className="button is-danger is-large" onClick={handleLessClick}>
+                <span className="icon is-large">
+                  <FontAwesomeIcon icon="minus" />
+                </span>
+              </button>
+            </p>
 
-          <div className="control is-expanded">
-            <input
-              className="input"
-              type="text"
-              min="1"
-              value={amount}
-              onChange={handleAmountChange}
-              onBlur={dontAllowZero}
-            />
+            <div className="control ">
+              <input
+                className="input is-primary is-large"
+                style={{ width: '60px' }}
+                type="text"
+                min="1"
+                value={amount}
+                onChange={handleAmountChange}
+                onBlur={dontAllowZero}
+              />
+            </div>
+
+            <p className="control">
+              <button className="button is-success is-large" onClick={handleMoreClick}>
+                <span className="icon is-large">
+                  <FontAwesomeIcon icon="plus" />
+                </span>
+              </button>
+            </p>
           </div>
 
-          <p className="control">
-            <button className="button is-success is-large" onClick={handleMoreClick}>
-              <span className="icon is-large">
-                <FontAwesomeIcon icon="plus" />
-              </span>
-            </button>
-          </p>
-        </div>
-
-        <label className="label has-text-black">Date: {modDate} </label>
-        <div>
-          <p>
-            <button className="button is-success is-fullwidth is-medium">Save changes</button>
-            <br />
-          </p>
-        </div>
-        <div className="field">
-          <p className="control">
-            <button
-              className="button is-fullwidth"
-              onClick={event => {
-                event.preventDefault();
-                props.setWorkoutSelected(null);
-                props.setShowModal(false);
-                let modalWnd = document.querySelector('.modal');
-                if (modalWnd) {
-                  modalWnd.classList.remove('is-active');
-                }
-              }}
-            >
-              Go back
-            </button>
-          </p>
-        </div>
-      </form>
+          <label className="label has-text-black">Date: {modDate} </label>
+          <div>
+            <p>
+              <button className="button is-success is-fullwidth is-medium">Save changes</button>
+              <br />
+            </p>
+          </div>
+          <div className="field">
+            <p className="control">
+              <button
+                className="button is-fullwidth"
+                onClick={event => {
+                  event.preventDefault();
+                  props.setWorkoutSelected(null);
+                  props.setShowModal(false);
+                  let modalWnd = document.querySelector('.modal');
+                  if (modalWnd) {
+                    modalWnd.classList.remove('is-active');
+                  }
+                }}
+              >
+                Go back
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
