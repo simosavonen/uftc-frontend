@@ -186,7 +186,7 @@ const UpdateWorkout = props => {
             />
           </div>
           <button
-            className="modal-close is-larget"
+            className="modal-close is-large"
             aria-label="close"
             onClick={() => {
               if (workoutSelected) {

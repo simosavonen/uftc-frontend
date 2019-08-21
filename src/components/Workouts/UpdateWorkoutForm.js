@@ -61,6 +61,7 @@ const UpdateWorkoutForm = props => {
       <form onSubmit={submit}>
         <label className="label has-text-centered">{props.workout.activityname}</label>
         <label className="label has-text-centered">Number of workouts:</label>
+
         <div className="field is-grouped">
           <p className="control">
             <button className="button is-danger is-large" onClick={handleLessClick}>
@@ -72,7 +73,7 @@ const UpdateWorkoutForm = props => {
 
           <div className="control is-expanded">
             <input
-              className="input"
+              className="input is-primary is-large"
               type="text"
               min="1"
               value={amount}
@@ -89,7 +90,6 @@ const UpdateWorkoutForm = props => {
             </button>
           </p>
         </div>
-
         <label className="label has-text-black">Date: {modDate} </label>
         <div>
           <p>
