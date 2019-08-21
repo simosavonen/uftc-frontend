@@ -217,6 +217,9 @@ const App = props => {
   // todo: more than 1 background image?
   const background = () => {
     if (!isAuthenticated()) {
+      if(props.location.pathname.startsWith('/passwordreset')) {
+        return '';
+      }
       return 'kettlebeach';
     }
     return '';

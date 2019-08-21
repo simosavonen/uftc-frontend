@@ -2,6 +2,7 @@ import React from 'react';
 import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
 import { icon } from '../Activities/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const WorkoutView = ({
   activity,
@@ -59,36 +60,53 @@ const WorkoutView = ({
         </div>
       </section>
 
-      <section className="section">
+      <section style={{ padding: '1rem 1.5rem' }}>
         <div className="columns is-centered">
-        <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
-          <ul>
-            <li>Sport activity type: {activity.type}</li>
-            <li>Unit: {activity.unit}</li>
-            <li>Description: {activity.description}</li>
-            {activity.url !== '' && (
-              <li>
-                Sport activity youtube link:{' '}
-                <a href={activity.url} target="_blank" rel="noopener noreferrer">
-                  {activity.url}
-                </a>
-              </li>
-            )}
-          </ul>
+          <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
+            <div className="message">
+              <div className="message-header">Instructions</div>
+              <div className="message-body">
+                {activity.description !== '' && (
+                  <div className="content">{activity.description}</div>
+                )}
+                {activity.url !== '' && (
+                  <a href={activity.url} target="_blank" rel="noopener noreferrer">
+                    <div className="media" style={{ padding: '1.5em' }}>
+                      <div className="media-left">
+                        <FontAwesomeIcon icon={['fab', 'youtube']} size="3x" color="#ff2457" />
+                      </div>
+                      <div className="media-content">
+                        <h1 className="title is-6">play the video</h1>
+                        <h2 className="subtitle is-7">{activity.url}</h2>
+                      </div>
+                    </div>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        </div>        
       </section>
+
+      {activity.url !== '' && (
+        <section style={{ padding: '1rem 1.5rem' }}>
+          <div className="columns is-centered">
+            <div className="column is-6-tablet is-5-desktop is-4-widescreen is-3-fullhd" />
+          </div>
+        </section>
+      )}
+
       <section className="section">
         <div className="columns is-centered">
-        <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
-          <UpdateWorkout
-            workouts={workouts}
-            activity={activity}
-            updateWorkout={updateWorkout}
-            deleteWorkoutInstance={deleteWorkoutInstance}
-          />
+          <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
+            <UpdateWorkout
+              workouts={workouts}
+              activity={activity}
+              updateWorkout={updateWorkout}
+              deleteWorkoutInstance={deleteWorkoutInstance}
+            />
+          </div>
         </div>
-        </div>       
       </section>
     </>
   );
