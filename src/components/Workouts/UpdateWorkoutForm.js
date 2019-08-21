@@ -63,40 +63,32 @@ const UpdateWorkoutForm = props => {
         <label className="label has-text-centered">Number of workouts:</label>
 
         <div className="field is-grouped">
-          <div className="columns is-centered">
-            <div column className="is-1">
-              <p className="control">
-                <button className="button is-danger is-large" onClick={handleLessClick}>
-                  <span className="icon is-large">
-                    <FontAwesomeIcon icon="minus" />
-                  </span>
-                </button>
-              </p>
-            </div>
+          <p className="control">
+            <button className="button is-danger is-large" onClick={handleLessClick}>
+              <span className="icon is-large">
+                <FontAwesomeIcon icon="minus" />
+              </span>
+            </button>
+          </p>
 
-            <div className="control is-expanded">
-              <div column className="is-4">
-                <input
-                  className="input is-primary is-large"
-                  type="text"
-                  min="1"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  onBlur={dontAllowZero}
-                />
-              </div>
-            </div>
-
-            <div column className="is-1">
-              <p className="control">
-                <button className="button is-success is-large" onClick={handleMoreClick}>
-                  <span className="icon is-large">
-                    <FontAwesomeIcon icon="plus" />
-                  </span>
-                </button>
-              </p>
-            </div>
+          <div className="control is-expanded">
+            <input
+              className="input is-primary is-large"
+              type="text"
+              min="1"
+              value={amount}
+              onChange={handleAmountChange}
+              onBlur={dontAllowZero}
+            />
           </div>
+
+          <p className="control">
+            <button className="button is-success is-large" onClick={handleMoreClick}>
+              <span className="icon is-large">
+                <FontAwesomeIcon icon="plus" />
+              </span>
+            </button>
+          </p>
         </div>
         <label className="label has-text-black">Date: {modDate} </label>
         <div>
