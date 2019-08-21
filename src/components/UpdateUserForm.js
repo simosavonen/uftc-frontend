@@ -62,7 +62,7 @@ const UpdateUserForm = props => {
   useEffect(() => {
     if (props.user) {
       userService.setToken(props.user.token);
-      userService.get().then(result => {
+      userService.me().then(result => {
         setId(result.data.id);
         setName(result.data.name);
         setEmail(result.data.email);

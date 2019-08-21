@@ -19,8 +19,12 @@ const get = () => {
   return axios.get(baseUrl);
 };
 
+const me = () => {
+  return axios.get(baseUrl + '/me');
+};
+
 const update = userDetails => {
   return axios.put(baseUrl + '/' + userDetails.id, userDetails);
 };
 
-export default { login, register, get, update, setToken };
+export default { login, register, get, me, update, setToken };

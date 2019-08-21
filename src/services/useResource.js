@@ -28,9 +28,10 @@ const useResource = (baseUrl, user) => {
   const update = async resource => {
     console.log('update', resource);
     const response = await axios.put(baseUrl + '/' + resource.id, resource);
-    const resourceUpdated = resource.map(r => (r.id !== response.data.id ? r : response.data));
     console.log('set updated data', response.data);
-    setData(resourceUpdated);
+    setData(function(data) {
+      return data.map(r => (r.id !== response.data.id ? r : response.data));
+    });
   };
 
   const service = {
