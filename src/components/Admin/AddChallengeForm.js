@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import PreviewSeries from './PreviewSeries';
+import PreviewSeries from '../PreviewSeries';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
