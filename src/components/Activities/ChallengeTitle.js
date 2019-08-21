@@ -51,14 +51,14 @@ const ChallengeTitle = ({ challenge }) => {
       )}
       <div className="field is-grouped is-grouped-multiline">
         <div className="control">
-          <div className="tags has-addons">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">Start date</span>
             <span className="tag is-info">{moment(challenge.startDate).format('YYYY-MM-DD')}</span>
           </div>
         </div>
 
         <div className="control">
-          <div className="tags has-addons">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">End date</span>
             <span className="tag is-info">{moment(challenge.endDate).format('YYYY-MM-DD')}</span>
           </div>
@@ -66,21 +66,15 @@ const ChallengeTitle = ({ challenge }) => {
       </div>
       <div className="field is-grouped is-grouped-multiline">
         <div className="control">
-          <div className="tags has-addons">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">Points goal</span>
             <span className="tag is-warning">{challenge.pointsGoal}</span>
           </div>
         </div>
         <div className="control">
-          <div className="tags has-addons">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">Active series</span>
             <span className="tag is-success">{challenge.seriesTitle}</span>
-          </div>
-        </div>
-        <div className="control">
-          <div className="tags has-addons">
-            <span className="tag is-dark">Series multiplier</span>
-            <span className="tag is-success">{challenge.pointBonus}</span>
           </div>
         </div>
       </div>

@@ -233,18 +233,18 @@ const App = props => {
         return '';
     }
   };
-
+  // styles
   const MySwal = withReactContent(Swal);
   const badgeAlert = achs => {
     MySwal.fire({
       titleText: 'Good job!',
       html: (
         <div>
-          <p>
+          <p className="is-size-5" style={{ padding: '1em' }}>
             <span role="img" aria-label="fire">
               🔥
             </span>
-            {achs.length > 1 ? 'New badges unlocked:' : 'New badge unlocked:'}
+            {achs.length > 1 ? ' New badges unlocked:' : ' New badge unlocked:'}
           </p>
           {achs.map(a => (
             <Badge
