@@ -219,6 +219,7 @@ const App = props => {
     if (!isAuthenticated()) {
       return 'kettlebeach';
     }
+    return '';
   };
 
   // todo: add other colors

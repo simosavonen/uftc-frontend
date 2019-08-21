@@ -105,10 +105,6 @@ const UpdateWorkoutForm = props => {
                 event.preventDefault();
                 props.setWorkoutSelected(null);
                 props.setShowModal(false);
-                let modalWnd = document.querySelector('.modal');
-                if (modalWnd) {
-                  modalWnd.classList.remove('is-active');
-                }
               }}
             >
               Go back

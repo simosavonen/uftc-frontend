@@ -175,7 +175,7 @@ const UpdateWorkout = props => {
         </table>
       )}
       {workoutSelected && (
-        <div className={`modal ${showModal && 'is-active'}`}>
+        <div className={`modal is-clipped ${showModal && 'is-active'}`}>
           <div className="modal-background" />
           <div className="modal-content">
             <UpdateWorkoutForm

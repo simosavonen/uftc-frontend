@@ -59,7 +59,8 @@ const WorkoutView = ({
         </div>
       </section>
 
-      <section className="section columns is-centered">
+      <section className="section">
+        <div className="columns is-centered">
         <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
           <ul>
             <li>Sport activity type: {activity.type}</li>
@@ -75,8 +76,10 @@ const WorkoutView = ({
             )}
           </ul>
         </div>
+        </div>        
       </section>
-      <section className="section columns is-centered">
+      <section className="section">
+        <div className="columns is-centered">
         <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
           <UpdateWorkout
             workouts={workouts}
@@ -85,6 +88,7 @@ const WorkoutView = ({
             deleteWorkoutInstance={deleteWorkoutInstance}
           />
         </div>
+        </div>       
       </section>
     </>
   );
