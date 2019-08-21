@@ -177,7 +177,7 @@ const UpdateWorkout = props => {
       {workoutSelected && (
         <div className={`modal ${showModal && 'is-active'}`}>
           <div className="modal-background" />
-          <div className="modal-content-spacing-mobile">
+          <div className="modal-content">
             <UpdateWorkoutForm
               workout={workoutSelected}
               updateWorkout={props.updateWorkout}
