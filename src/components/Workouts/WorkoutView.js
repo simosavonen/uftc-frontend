@@ -88,14 +88,6 @@ const WorkoutView = ({
         </div>
       </section>
 
-      {activity.url !== '' && (
-        <section style={{ padding: '1rem 1.5rem' }}>
-          <div className="columns is-centered">
-            <div className="column is-6-tablet is-5-desktop is-4-widescreen is-3-fullhd" />
-          </div>
-        </section>
-      )}
-
       <section className="section">
         <div className="columns is-centered">
           <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
