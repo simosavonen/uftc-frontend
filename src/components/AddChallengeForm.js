@@ -58,10 +58,10 @@ const AddChallengeForm = props => {
     props.challengeService.add(newChallenge);
   };
 
-  const addOrganizer = async event => {
+  const addOrganizer = event => {
     event.preventDefault();
     for (let c of props.challenges) {
-      await props.challengeService.update({
+      props.challengeService.update({
         id: c.id,
         organizers: organizers.concat([newOrganizer])
       });
