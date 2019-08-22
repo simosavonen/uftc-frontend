@@ -21,16 +21,15 @@ const RequestResetEmailForm = props => {
     passwordService
       .requestResetEmail(email)
       .then(response => {
-        if (response.status === 200) {
-          toast.success('Password reset link sent.');
-          setIsWaiting(false);
-          setEmail('');
-        }
+        toast.success('Password reset link sent.');
+        setIsWaiting(false);
+        setEmail('');
       })
       .catch(error => {
+        // showing an error would let bots find working emails
+        toast.success('Password reset link sent.');
         setIsWaiting(false);
-        toast.error('Unknown email.');
-        console.log('requestResetEmail', error.message);
+        setEmail('');
       });
   };
   return (
