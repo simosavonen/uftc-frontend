@@ -35,6 +35,7 @@ const AddActivityForm = props => {
           <div className="field-body">
             <input
               className="input"
+              id="name"
               onChange={({ target }) => setName(target.value)}
               value={name}
             />

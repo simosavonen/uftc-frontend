@@ -104,7 +104,7 @@ const AddWorkoutForm = props => {
         </div>
 
         <p className="control">
-          <button className="button is-success is-large" onClick={handleMoreClick}>
+          <button id="plus" className="button is-success is-large" onClick={handleMoreClick}>
             <span className="icon is-large">
               <FontAwesomeIcon icon="plus" />
             </span>

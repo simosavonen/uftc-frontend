@@ -143,6 +143,7 @@ const UpdateWorkout = props => {
                   <div className="buttons is-right">
                     <button
                       className="button is-info is-small is-outlined"
+                      id="editbtn"
                       onClick={() => {
                         setWorkoutSelected(item);
                         setShowModal(true);

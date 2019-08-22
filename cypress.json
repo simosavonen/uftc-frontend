@@ -2,5 +2,5 @@
   "viewportHeight": 720,
   "viewportWidth": 1280,
   "baseUrl": "http://localhost:3000",
-  "testFiles": "**/basemobile/*.*"
+  "testFiles": "**/base/*.*"
 }
