@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AddChallengeForm from './components/AddChallengeForm';
+import AddChallengeForm from './components/Admin/AddChallengeForm';
 import LoginForm from './components/LoginForm';
-import AddActivityForm from './components/AddActivityForm';
+import AddActivityForm from './components/Admin/AddActivityForm';
 import UpdateUserForm from './components/UpdateUserForm';
-import AddAchievementForm from './components/AddAchievementForm';
+import AddAchievementForm from './components/Admin/AddAchievementForm';
 import BadgesView from './components/BadgesView';
 import ChallengeSelectView from './components/ChallengeSelectView';
 import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import NotFound from './components/NotFound';
-import { ActivitiesView, LeaderBoardView, WorkoutView } from './components';
+import { ActivitiesView, LeaderBoardView, WorkoutView, AdminView } from './components';
 
 const Routes = props => {
   const {
@@ -28,9 +28,11 @@ const Routes = props => {
     achievements,
     addWorkout,
     updateWorkout,
+    deleteWorkoutInstance,
     challengeService,
     achievementService,
-    activityService
+    activityService,
+    userService
   } = props;
 
   return (
@@ -75,6 +77,7 @@ const Routes = props => {
             challenge={activeChallenge()}
             workouts={workouts}
             updateWorkout={updateWorkout}
+            deleteWorkoutInstance={deleteWorkoutInstance}
           />
         )}
       />
@@ -85,7 +88,12 @@ const Routes = props => {
       <Route
         path="/addchallenge"
         render={() => (
-          <AddChallengeForm addChallenge={challengeService.add} challenges={challenges} />
+          <AddChallengeForm
+            challengeService={challengeService}
+            challenges={challenges}
+            userService={userService}
+            user={user}
+          />
         )}
       />
       <Route
@@ -95,7 +103,12 @@ const Routes = props => {
       <Route
         path="/badges"
         render={() => (
-          <BadgesView workouts={workouts} activities={activities} achievements={achievements} />
+          <BadgesView
+            workouts={workouts}
+            activities={activities}
+            achievements={achievements}
+            challenge={activeChallenge()}
+          />
         )}
       />
       <Route
@@ -106,7 +119,7 @@ const Routes = props => {
         path="/updateuser"
         render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
       />
-
+      <Route path="/admin" render={() => <AdminView />} />
       <Route exact path="/styleguide" render={() => <StyleGuide />} />
       <Route
         exact

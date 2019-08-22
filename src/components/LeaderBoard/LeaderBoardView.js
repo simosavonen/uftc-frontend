@@ -5,17 +5,7 @@ import WeeklyScoresChart from './WeeklyScoresChart';
 import WeeklyScoresTable from './WeeklyScoresTable';
 
 import scoreService from '../../services/scores';
-
-// ugh, hardcoded
-const locations = {
-  Hämeenlinna: '#008FFB',
-  Helsinki: '#31A350',
-  Joensuu: '#FEB019',
-  Tampere: '#FF4560',
-  Turku: '#775DD0',
-  Tallinn: '#546E7A',
-  Tartu: '#26a69a'
-};
+import { locations } from '../../config/config';
 
 const LeaderBoardView = ({ challenges, user }) => {
   const [weeklyData, setWeeklyData] = useState([]);
@@ -58,6 +48,14 @@ const LeaderBoardView = ({ challenges, user }) => {
       setLocationFilters(locationFilters.concat(location));
     }
   };
+
+  if (!challenges.length) {
+    return (
+      <div className="section container">
+        <h1 className="title">No challenge found, please add one.</h1>
+      </div>
+    );
+  }
 
   return (
     <section className="section">

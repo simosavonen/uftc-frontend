@@ -2,10 +2,31 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 import moment from 'moment';
 
+const PlaceholderCirle = ({ text }) => {
+  const styles = {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    borderWidth: 10,
+    borderStyle: 'solid',
+    borderColor: '#ff2457',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 'auto'
+  };
+
+  return (
+    <div style={styles} className="is-size-5">
+      {text}
+    </div>
+  );
+};
+
 const CircleProgress = ({ workouts, activities, challenge }) => {
-  if (!activities.length) return <div>No activities found.</div>;
-  if (!workouts.length) return <div>No workouts found.</div>;
-  if (!challenge) return <div>Pick a series first.</div>;
+  if (!challenge) return <PlaceholderCirle text={'pick a series'} />;
+  if (!activities.length) return <PlaceholderCirle text={'loading activities'} />;
+  if (!workouts.length) return <PlaceholderCirle text={'save a workout'} />;
 
   const monday = moment().isoWeekday(1);
   const sunday = moment().isoWeekday(7);
@@ -34,18 +55,22 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
     }
   }
 
-  // hardcoded 750 and 7500 should come from props.challenge
+  const goal = +challenge.pointsGoal;
+  const weeks = Math.ceil(
+    moment(challenge.endDate).diff(moment(challenge.startDate), 'weeks', true)
+  );
+  const duration = moment(challenge.endDate).diff(moment(challenge.startDate), 'days');
+
   const series = [
-    Math.floor((100 * values[0]) / 7500),
-    Math.floor((100 * values[1]) / 750),
-    Math.floor((100 * values[2]) / (750 / 7))
+    Math.floor((100 * values[0]) / goal),
+    Math.floor((100 * values[1]) / (goal / weeks)),
+    Math.floor((100 * values[2]) / (goal / duration))
   ];
 
   const options = {
     plotOptions: {
       radialBar: {
         offsetY: -15,
-        offsetX: 0,
         startAngle: 0,
         endAngle: 270,
         hollow: {
@@ -73,7 +98,8 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
       fontFamily: 'Raleway',
       fontSize: '20px',
       position: 'left',
-      offsetX: 30,
+      width: 200,
+      offsetX: -20,
       offsetY: 17,
       labels: {
         useSeriesColors: true
@@ -83,7 +109,7 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
         height: 0
       },
       formatter: function(seriesName, opts) {
-        return seriesName + ':  ' + Math.round(values[opts.seriesIndex] * 10) / 10;
+        return seriesName + ':  ' + Math.round(values[opts.seriesIndex]);
       },
       itemMargin: {
         horizontal: 4
@@ -95,8 +121,8 @@ const CircleProgress = ({ workouts, activities, challenge }) => {
   };
 
   return (
-    <div className="has-text-right is-flex" style={{ justifyContent: 'center' }}>
-      <Chart options={options} height={400} width={450} type={'radialBar'} series={series} />
+    <div className="has-text-right" style={{ width: 400, margin: 'auto' }}>
+      <Chart options={options} type={'radialBar'} series={series} height="400" />
     </div>
   );
 };

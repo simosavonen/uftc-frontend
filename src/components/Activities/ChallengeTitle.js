@@ -1,46 +1,83 @@
 import React from 'react';
 import moment from 'moment';
+import { Line } from 'rc-progress';
 
-const placeholder = {
-  organizers: ['5d1798065367df2f28dd0708'],
-  activities: [],
-  name: 'loading...',
-  pointsGoal: 7500,
-  releaseDate: '2019-07-01',
-  startDate: '2019-07-10',
-  endDate: '2019-07-20',
-  deadline: '2019-12-14',
-  seriesTitle: 'Placeholder',
-  pointBonus: 1,
-  id: '5d1c5237c360412fbcc98dcc'
-};
-
-const challengeTiming = challenge => {
+const ChallengeTitle = ({ challenge }) => {
+  if (!challenge) {
+    return <div>Pick a series first.</div>;
+  }
   const start = moment(challenge.startDate);
   const end = moment(challenge.endDate);
-
-  const length = end.diff(start, 'days');
   const today = moment();
-  let timing = '';
-  if (today < start) {
-    timing = 'Challenge starts ' + start.fromNow();
-  } else if (today.isSame(start, 'day')) {
-    timing = 'Challenge starts today!';
-  } else if (today.isAfter(start, 'day') && today.isSameOrBefore(end, 'day')) {
-    timing = 'Day ' + today.diff(start, 'days') + '/' + length;
-  } else if (today.isAfter(end, 'day')) {
-    timing = 'Challenge has ended!';
-  } else timing = '';
-  return timing;
-};
+  const dayNum = today.diff(start, 'days') + 1; // starting from 1
+  const length = end.diff(start, 'days');
+  const isOngoing = today.isSameOrAfter(start, 'day') && today.isBefore(end, 'day');
 
-const ChallengeTitle = ({ challenge = placeholder }) => {
+  const challengeTiming = challenge => {
+    let timing = '';
+    if (today.isBefore(start, 'day')) {
+      timing = 'Challenge starts ' + start.fromNow();
+    } else if (isOngoing) {
+      timing = 'Day ' + dayNum + '/' + length;
+    } else if (today.isSameOrAfter(end, 'day')) {
+      timing = 'Challenge has ended!';
+    } else timing = '';
+    return timing;
+  };
+
   return (
     <div className="is-size-4 is-size-3-fullhd">
       <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>{' '}
       {challenge.name}{' '}
       <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
-      <p>{challengeTiming(challenge)}</p>
+      {isOngoing ? (
+        <div className="columns is-gapless is-vcentered is-mobile">
+          <div className="column is-9">
+            <Line
+              percent={(dayNum / length) * 100}
+              strokeWidth="2"
+              strokeColor="#ff2457"
+              strokeLinecap="square"
+              trailWidth="1"
+              style={{ margin: '0.25em 0' }}
+            />
+          </div>
+          <div className="column is-3 is-size-6-tablet is-size-7-mobile">
+            {challengeTiming(challenge)}
+          </div>
+        </div>
+      ) : (
+        <p>{challengeTiming(challenge)}</p>
+      )}
+      <div className="field is-grouped is-grouped-multiline">
+        <div className="control">
+          <div className="tags has-addons are-medium">
+            <span className="tag is-dark">Start date</span>
+            <span className="tag is-info">{moment(challenge.startDate).format('YYYY-MM-DD')}</span>
+          </div>
+        </div>
+
+        <div className="control">
+          <div className="tags has-addons are-medium">
+            <span className="tag is-dark">End date</span>
+            <span className="tag is-info">{moment(challenge.endDate).format('YYYY-MM-DD')}</span>
+          </div>
+        </div>
+      </div>
+      <div className="field is-grouped is-grouped-multiline">
+        <div className="control">
+          <div className="tags has-addons are-medium">
+            <span className="tag is-dark">Points goal</span>
+            <span className="tag is-warning">{challenge.pointsGoal}</span>
+          </div>
+        </div>
+        <div className="control">
+          <div className="tags has-addons are-medium">
+            <span className="tag is-dark">Active series</span>
+            <span className="tag is-success">{challenge.seriesTitle}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

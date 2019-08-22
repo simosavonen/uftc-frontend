@@ -19,4 +19,8 @@ const update = workout => {
   return axios.put(baseUrl + '/' + workout.id, workout);
 };
 
-export default { get, getWorkoutsByUser, add, update };
+const deleteWInstance = workout => {
+  return axios.delete(baseUrl + '/' + workout.id + '/' + workout.instance.id);
+};
+
+export default { get, getWorkoutsByUser, add, update, deleteWInstance };

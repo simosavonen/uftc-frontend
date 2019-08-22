@@ -14,9 +14,13 @@ import {
   faMedal,
   faAngleUp
 } from '@fortawesome/free-solid-svg-icons';
+import { far, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { fab, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
   fas,
+  far,
+  fab,
   faAt,
   faUser,
   faLock,
@@ -28,5 +32,7 @@ library.add(
   faCrown,
   faTrophy,
   faAward,
-  faAngleUp
+  faAngleUp,
+  faTrashAlt,
+  faYoutube
 );

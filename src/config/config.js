@@ -14,4 +14,14 @@ const apiUrls = {
   forgotpassword: host + '/api/passwords'
 };
 
-export { apiUrls };
+const locations = {
+  Hämeenlinna: '#008FFB',
+  Helsinki: '#31A350',
+  Joensuu: '#FEB019',
+  Tampere: '#FF4560',
+  Turku: '#775DD0',
+  Tallinn: '#546E7A',
+  Tartu: '#26a69a'
+};
+
+export { apiUrls, locations };

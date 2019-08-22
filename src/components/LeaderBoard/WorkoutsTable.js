@@ -13,6 +13,7 @@ const WorkoutsTable = ({ workouts, showUser, pointBonus }) => {
       <tbody>
         {workouts
           .filter(w => w.user.toString() === showUser)
+          .filter(w => w.instances.length > 0)
           .map(w => {
             const totalAmount = w.instances.reduce((sum, i) => sum + i.amount, 0);
             const points = w.activity.points;
@@ -21,7 +22,7 @@ const WorkoutsTable = ({ workouts, showUser, pointBonus }) => {
                 <td>{w.activity.name}</td>
                 <td className="has-text-centered">{totalAmount}</td>
                 <td className="has-text-centered">
-                  {Math.round(totalAmount * points * pointBonus * 10) / 10}
+                  {Math.round(totalAmount * points * pointBonus)}
                 </td>
               </tr>
             );

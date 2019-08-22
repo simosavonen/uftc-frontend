@@ -48,6 +48,13 @@ const Header = props => {
             >
               leaderboard
             </NavLink>
+            <NavLink
+              className="navbar-item has-text-white is-hidden-tablet"
+              to="/updateuser"
+              activeClassName="is-active has-text-dark"
+            >
+              update user
+            </NavLink>
           </div>
           <div className="navbar-end">
             <Link

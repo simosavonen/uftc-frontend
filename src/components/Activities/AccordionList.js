@@ -25,13 +25,13 @@ const AccordionList = props => {
   return (
     <>
       <div
-        className={'columns is-centered is-mobile is-clickable hover-effect-grey'}
+        className={'columns is-mobile button is-large is-centered is-clickable hover-effect-grey'}
         style={{ marginTop: '1em', marginBottom: '1em' }}
         onClick={handleClick}
       >
-        <div className="column is-8">
-          <p className="title is-5-mobile is-4">{props.type}</p>
-        </div>
+        <p className="column is-8 is-size-5-desktop is-size-6 has-text-weight-semibold">
+          {props.type}
+        </p>
 
         <Icon className="column is-2" pose={opened ? 'up' : 'down'}>
           <FontAwesomeIcon icon="angle-up" />

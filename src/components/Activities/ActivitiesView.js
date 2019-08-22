@@ -13,6 +13,7 @@ const ActivitiesView = ({ challenge, activities, workouts, user }) => {
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <ChallengeTitle challenge={challenge} />
           </div>
+          <div className="column is-1-desktop" />
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <CircleProgress
               workouts={workouts}
@@ -28,6 +29,7 @@ const ActivitiesView = ({ challenge, activities, workouts, user }) => {
         <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
           <RecentActivities activities={activities} workouts={workouts} challenge={challenge} />
         </div>
+        <div className="column is-1-desktop" />
         <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
           <ActivityMenu activities={activities} challenge={challenge} />
         </div>

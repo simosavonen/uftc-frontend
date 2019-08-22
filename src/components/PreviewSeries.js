@@ -5,13 +5,12 @@ import moment from 'moment';
 const SeriesRow = ({ challenge }) => {
   return (
     <tr>
-      <td title={challenge.icon}>
+      <td className="has-text-centered" title={challenge.icon}>
         <FontAwesomeIcon icon={challenge.icon} size="2x" />
       </td>
       <td>{challenge.seriesTitle}</td>
-      <td>{challenge.pointBonus}</td>
       <td>{challenge.description}</td>
-      <td>{moment(challenge.releaseDate).format('YYYY-MM-DD')}</td>
+      <td className="has-text-centered">{challenge.pointBonus}</td>
     </tr>
   );
 };
@@ -37,6 +36,15 @@ const PreviewSeries = ({ challenges }) => {
             <span className="tag is-dark">End date</span>
             <span className="tag is-info">
               {moment(challenges[0].endDate).format('YYYY-MM-DD')}
+            </span>
+          </div>
+        </div>
+
+        <div className="control">
+          <div className="tags has-addons">
+            <span className="tag is-dark">Release date</span>
+            <span className="tag is-info">
+              {moment(challenges[0].releaseDate).format('YYYY-MM-DD')}
             </span>
           </div>
         </div>
@@ -81,11 +89,12 @@ const PreviewSeries = ({ challenges }) => {
       <table className="table is-fullwidth">
         <thead>
           <tr>
-            <td>Icon</td>
+            <td className="has-text-centered">Icon</td>
             <td>Series Title</td>
-            <td>Point bonus</td>
             <td>Description</td>
-            <td>Released</td>
+            <td title="Point Bonus" className="has-text-centered">
+              PB
+            </td>
           </tr>
         </thead>
         <tbody>

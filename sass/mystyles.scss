@@ -28,8 +28,10 @@ $navbar-height: 4.5rem;
 $navbar-background-color: $raspberry;
 $navbar-item-hover-background-color: $darken;
 $navbar-item-color: #ffffff;
+$box-radius: 0px;
 
 $footer-background-color: #00000020; // footer semi transparent
+$modal-background-background-color: rgba(0, 0, 0, 0.6);
 
 // Import all or just the modules you ended up using.
 @import '../node_modules/bulma/sass/utilities/_all.sass';

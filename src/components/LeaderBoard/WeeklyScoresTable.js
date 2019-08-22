@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WorkoutsChart from './WorkoutsChart';
 import WorkoutsTable from './WorkoutsTable';
 import workoutService from '../../services/workouts';
+import { locations } from '../../config/config';
 
 const compareBySums = (a, b) => {
   const aSum = a.data.reduce((sum, i) => sum + i, 0);
@@ -35,18 +36,20 @@ const WeeklyScoresTable = ({
         usersWorkouts = workouts.filter(w => w.user.toString() === showUser);
       }
 
-      usersWorkouts = usersWorkouts.map(i => {
-        return {
-          name: i.activity.name,
-          data: i.instances
-            .sort((a, b) => {
-              return new Date(b.date) - new Date(a.date);
-            })
-            .map(x => {
-              return { x: x.date, y: x.amount };
-            })
-        };
-      });
+      usersWorkouts = usersWorkouts
+        .filter(w => w.instances.length > 0)
+        .map(i => {
+          return {
+            name: i.activity.name,
+            data: i.instances
+              .sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+              })
+              .map(x => {
+                return { x: x.date, y: x.amount };
+              })
+          };
+        });
       setChartData(usersWorkouts);
     }
   }, [showUser, workouts]);
@@ -76,6 +79,7 @@ const WeeklyScoresTable = ({
                 W{idx + 1}
               </th>
             ))}
+          <th className="has-text-centered">Badges</th>
           <th
             className={`is-clickable has-text-centered hover-effect-green ${weekFilter === 0 &&
               'is-selected has-text-dark'}`}
@@ -102,6 +106,7 @@ const WeeklyScoresTable = ({
                 W{idx + 1}
               </th>
             ))}
+          <th className="has-text-centered">Badges</th>
           <th
             className={`is-clickable has-text-centered hover-effect-green ${weekFilter === 0 &&
               'is-selected has-text-dark'}`}
@@ -127,14 +132,24 @@ const WeeklyScoresTable = ({
                 <td>{index + 1}</td>
                 <td className={score.id === user.id ? 'has-text-danger' : ''}>{score.name}</td>
                 <td>{score.seriesTitle}</td>
-                <td>{score.location}</td>
+                <td
+                  style={{
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: 10,
+                    borderLeftColor: locations[score.location]
+                  }}
+                >
+                  {score.location}
+                </td>
                 {score.data.map((week, idx) => (
                   <td key={idx} className="has-text-centered is-hidden-mobile">
                     {week}
                   </td>
                 ))}
+                <td className="has-text-centered">{score.pointsFromAchievements}</td>
                 <td className="has-text-centered">
-                  {Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
+                  {score.pointsFromAchievements +
+                    Math.round(score.data.reduce((sum, i) => sum + i, 0) * 10) / 10}
                 </td>
               </tr>
               {score.id.toString() === showUser && (

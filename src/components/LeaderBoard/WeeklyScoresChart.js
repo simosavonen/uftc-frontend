@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import { locations } from '../../config/config';
 
 const caseInsensitiveNameSort = (a, b) => {
   return a.name.toLowerCase() > b.name.toLowerCase()
@@ -7,16 +8,6 @@ const caseInsensitiveNameSort = (a, b) => {
     : a.name.toLowerCase() < b.name.toLowerCase()
     ? -1
     : 0;
-};
-
-const locations = {
-  Hämeenlinna: '#008FFB',
-  Helsinki: '#31A350',
-  Joensuu: '#FEB019',
-  Tampere: '#FF4560',
-  Turku: '#775DD0',
-  Tallinn: '#546E7A',
-  Tartu: '#26a69a'
 };
 
 const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
@@ -32,7 +23,7 @@ const WeeklyScoresChart = ({ weekFilter, weeklyData }) => {
           name: 'Total',
           data: weeklyData
             .sort(caseInsensitiveNameSort)
-            .map(d => d.data.reduce((sum, item) => sum + item, 0))
+            .map(d => d.pointsFromAchievements + d.data.reduce((sum, item) => sum + item, 0))
         }
       ];
       setData(filteredData);
