@@ -113,7 +113,7 @@ const Routes = props => {
       />
       <Route
         path="/addactivity"
-        render={() => <AddActivityForm addActivity={activityService.add} />}
+        render={() => <AddActivityForm addActivity={activityService.add} activities={activities} />}
       />
       <Route
         path="/updateuser"

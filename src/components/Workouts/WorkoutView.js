@@ -1,7 +1,7 @@
 import React from 'react';
 import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
-import { icon } from '../Activities/utils';
+import { icon } from '../../utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const WorkoutView = ({

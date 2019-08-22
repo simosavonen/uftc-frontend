@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { icon } from './utils';
+import { icon } from '../../utils/icons';
 import slug from 'slug';
 
 const ActivityDetails = ({ activity, challenge }) => {

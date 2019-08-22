@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { icons } from '../../config/config';
 
 const AddActivityForm = props => {
   const [name, setName] = useState('');
@@ -8,6 +9,19 @@ const AddActivityForm = props => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const [icon, setIcon] = useState('');
+  const [types, setTypes] = useState([]);
+
+  useEffect(() => {
+    if (props.activities) {
+      let names = [];
+      for (let a of props.activities) {
+        if (!names.includes(a.type)) {
+          names.push(a.type);
+        }
+      }
+      setTypes(names);
+    }
+  }, [props.activities]);
 
   const submit = event => {
     event.preventDefault();
@@ -37,6 +51,7 @@ const AddActivityForm = props => {
               className="input"
               onChange={({ target }) => setName(target.value)}
               value={name}
+              required
             />
           </div>
         </div>
@@ -52,7 +67,14 @@ const AddActivityForm = props => {
               id="type"
               onChange={({ target }) => setType(target.value)}
               value={type}
+              list="typelist"
+              required
             />
+            <datalist id="typelist">
+              {types.map(t => (
+                <option key={t} value={t} />
+              ))}
+            </datalist>
           </div>
         </div>
         <div className="field is-horizontal">
@@ -67,6 +89,7 @@ const AddActivityForm = props => {
               id="unit"
               onChange={({ target }) => setUnit(target.value)}
               value={unit}
+              required
             />
           </div>
         </div>
@@ -98,6 +121,7 @@ const AddActivityForm = props => {
               id="description"
               onChange={({ target }) => setDescription(target.value)}
               value={description}
+              required
             />
           </div>
         </div>
@@ -128,7 +152,13 @@ const AddActivityForm = props => {
               id="icon"
               onChange={({ target }) => setIcon(target.value)}
               value={icon}
+              list="iconlist"
             />
+            <datalist id="iconlist">
+              {icons.map(i => (
+                <option key={i} value={i} />
+              ))}
+            </datalist>
           </div>
         </div>
         <div className="field is-horizontal">
