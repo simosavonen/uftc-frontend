@@ -26,8 +26,6 @@ const AddAchievementForm = props => {
       fontAwesomeIcon,
       iconColor
     };
-    console.log(' uusi saavutus ' + newAchievement.name);
-    console.log(newAchievement);
     props.addAchievement(newAchievement);
   };
 
@@ -68,7 +66,6 @@ const AddAchievementForm = props => {
     );
   };
 
-  console.log('achievementform');
   return (
     <section className="section columns is-centered">
       <form onSubmit={submit} className="column is-6">
