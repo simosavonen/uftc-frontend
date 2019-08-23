@@ -121,7 +121,7 @@ const Routes = props => {
         path="/updateuser"
         render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
       />
-      <Route path="/admin" render={() => <AdminView />} />
+      <Route path="/admin" render={() => <AdminView challenges={challenges} />} />
       <Route exact path="/styleguide" render={() => <StyleGuide />} />
       <Route
         exact

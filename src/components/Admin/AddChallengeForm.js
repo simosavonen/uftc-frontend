@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import PreviewSeries from '../PreviewSeries';
+import PreviewSeries from './PreviewSeries';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -210,7 +210,7 @@ const AddChallengeForm = props => {
                   />
                 </div>
               </div>
-              <div className="field is-grouped">
+              <div className="field">
                 <div className="control is-expanded">
                   <label className="label" htmlFor="pointBonus">
                     Point bonus factor
@@ -226,7 +226,8 @@ const AddChallengeForm = props => {
                     title="Decimal value, +20% bonus = 1.2"
                   />
                 </div>
-
+              </div>
+              <div className="field">
                 <div className="control is-expanded">
                   <label className="label" htmlFor="icon">
                     FontAwesome icon
@@ -237,6 +238,29 @@ const AddChallengeForm = props => {
                     onChange={({ target }) => setIcon(target.value)}
                     value={icon}
                   />
+                  <p className="help">
+                    For <a href="https://fontawesome.com/icons?d=gallery&s=solid">Solid Style</a>{' '}
+                    icons like{' '}
+                    <a href="https://fontawesome.com/icons/couch?style=solid">fas fa-couch</a>,
+                    input <strong>couch</strong>
+                    <br />
+                    For <a href="https://fontawesome.com/icons?d=gallery&s=brands">
+                      Brands Style
+                    </a>{' '}
+                    icons like{' '}
+                    <a href="https://fontawesome.com/icons/hotjar?style=brands">fab fa-hotjar</a>,
+                    input <strong>fab hotjar</strong>
+                    <br />
+                    For{' '}
+                    <a href="https://fontawesome.com/icons?d=gallery&s=regular">
+                      Regular Style
+                    </a>{' '}
+                    icons like{' '}
+                    <a href="https://fontawesome.com/icons/trash-alt?style=regular">
+                      far fa-trash-alt
+                    </a>
+                    , input <strong>far trash-alt</strong>
+                  </p>
                 </div>
               </div>
               <div className="control">

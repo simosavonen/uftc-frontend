@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AdminView = () => {
+const AdminView = ({ challenges }) => {
   return (
     <div>
       <section className="section">
@@ -10,13 +10,15 @@ const AdminView = () => {
         <div className="menu">
           <ul className="menu-list">
             <li>
-              <Link to="/addchallenge">Add challenge</Link>
+              <Link to="/addchallenge">
+                {challenges.length === 0 ? 'Add a challenge' : 'Add a series'}
+              </Link>
             </li>
             <li>
-              <Link to="/addactivity">Add activity</Link>
+              <Link to="/addactivity">Add an activity</Link>
             </li>
             <li>
-              <Link to="/addachievement">Add achievement</Link>
+              <Link to="/addachievement">Add an achievement</Link>
             </li>
           </ul>
         </div>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import Icon from '../Icon';
 
 const SeriesRow = ({ challenge }) => {
   return (
     <tr>
       <td className="has-text-centered" title={challenge.icon}>
-        <FontAwesomeIcon icon={challenge.icon} size="2x" />
+        <Icon icon={challenge.icon} size="2x" />
       </td>
       <td>{challenge.seriesTitle}</td>
       <td>{challenge.description}</td>
