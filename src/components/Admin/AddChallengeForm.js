@@ -105,7 +105,7 @@ const AddChallengeForm = props => {
                       onChange={({ target }) => setName(target.value)}
                       value={name}
                       title="All series should share the same challenge name"
-                      readOnly={props.challenges.length !== 0}
+                      required
                     />
                   </div>
                   <div className="control is-expanded">
@@ -119,7 +119,7 @@ const AddChallengeForm = props => {
                       onChange={({ target }) => setPointsGoal(target.value)}
                       value={pointsGoal}
                       title="All series should share the same points goal"
-                      readOnly={props.challenges.length !== 0}
+                      required
                     />
                   </div>
                 </div>
@@ -135,6 +135,7 @@ const AddChallengeForm = props => {
                       type="date"
                       onChange={({ target }) => setStartDate(target.value)}
                       value={startDate}
+                      required
                     />
                   </div>
 
@@ -149,6 +150,7 @@ const AddChallengeForm = props => {
                       onChange={({ target }) => setEndDate(target.value)}
                       value={endDate}
                       title="Stored with time set at 00:00. If you want the challenge to end on sunday, pick the next monday"
+                      required
                     />
                   </div>
                 </div>
@@ -164,6 +166,7 @@ const AddChallengeForm = props => {
                       onChange={({ target }) => setReleaseDate(target.value)}
                       value={releaseDate}
                       title="The date when the series is revealed to users"
+                      required
                     />
                   </div>
 
@@ -178,6 +181,7 @@ const AddChallengeForm = props => {
                       onChange={({ target }) => setDeadline(target.value)}
                       value={deadline}
                       title="The date for publishing results, ie. last day to save workouts."
+                      required
                     />
                   </div>
                 </div>
@@ -194,6 +198,7 @@ const AddChallengeForm = props => {
                     id="seriesTitle"
                     onChange={({ target }) => setSeriesTitle(target.value)}
                     value={seriesTitle}
+                    required
                   />
                 </div>
               </div>
@@ -207,6 +212,7 @@ const AddChallengeForm = props => {
                     id="description"
                     onChange={({ target }) => setDescription(target.value)}
                     value={description}
+                    required
                   />
                 </div>
               </div>

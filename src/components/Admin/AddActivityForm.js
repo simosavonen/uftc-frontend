@@ -39,130 +39,165 @@ const AddActivityForm = props => {
 
   return (
     <section className="section is-centered columns">
-      <form onSubmit={submit} className="column is-10">
+      <form
+        onSubmit={submit}
+        className="column is-9-tablet is-8-desktop is-7-widescreen is-6-fullhd"
+      >
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="name">
-              Activity name:
+              Activity name
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              onChange={({ target }) => setName(target.value)}
-              value={name}
-              required
-            />
+            <div className="field">
+              <input
+                className="input"
+                onChange={({ target }) => setName(target.value)}
+                value={name}
+                required
+              />
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="type">
-              Activity type:
+              Activity type
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="type"
-              onChange={({ target }) => setType(target.value)}
-              value={type}
-              list="typelist"
-              required
-            />
-            <datalist id="typelist">
-              {types.map(t => (
-                <option key={t} value={t} />
-              ))}
-            </datalist>
+            <div className="field">
+              <input
+                className="input"
+                id="type"
+                onChange={({ target }) => setType(target.value)}
+                value={type}
+                list="typelist"
+                required
+              />
+              <datalist id="typelist">
+                {types.map(t => (
+                  <option key={t} value={t} />
+                ))}
+              </datalist>
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="unit">
-              Activity unit:
+              Activity unit
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="unit"
-              onChange={({ target }) => setUnit(target.value)}
-              value={unit}
-              required
-            />
+            <div className="field">
+              <input
+                className="input"
+                id="unit"
+                onChange={({ target }) => setUnit(target.value)}
+                value={unit}
+                required
+              />
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="points">
-              Point value per unit:
+              Point value per unit
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="points"
-              type="number"
-              onChange={({ target }) => setPoints(target.value)}
-              value={points}
-            />
+            <div className="field">
+              <input
+                className="input"
+                id="points"
+                type="number"
+                onChange={({ target }) => setPoints(target.value)}
+                value={points}
+              />
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="description">
-              Description:
+              Description
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="description"
-              onChange={({ target }) => setDescription(target.value)}
-              value={description}
-              required
-            />
+            <div className="field">
+              <input
+                className="input"
+                id="description"
+                onChange={({ target }) => setDescription(target.value)}
+                value={description}
+                required
+              />
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="url">
-              Video URL:
+              Video URL
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="url"
-              onChange={({ target }) => setUrl(target.value)}
-              value={url}
-            />
+            <div className="field">
+              <input
+                className="input"
+                id="url"
+                onChange={({ target }) => setUrl(target.value)}
+                value={url}
+              />
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label">
+          <div className="field-label is-normal">
             <label className="label" htmlFor="icon">
-              Icon:
+              Icon
             </label>
           </div>
           <div className="field-body">
-            <input
-              className="input"
-              id="icon"
-              onChange={({ target }) => setIcon(target.value)}
-              value={icon}
-              list="iconlist"
-            />
-            <datalist id="iconlist">
-              {icons.map(i => (
-                <option key={i} value={i} />
-              ))}
-            </datalist>
+            <div className="field">
+              <input
+                className="input"
+                id="icon"
+                onChange={({ target }) => setIcon(target.value)}
+                value={icon}
+                list="iconlist"
+              />
+              <datalist id="iconlist">
+                {icons.map(i => (
+                  <option key={i} value={i} />
+                ))}
+              </datalist>
+              <p className="help">
+                Select one of the suggested SVG files or give a FontAwesome icon: <br />
+                For <a href="https://fontawesome.com/icons?d=gallery&s=solid">Solid Style</a> icons
+                like <a href="https://fontawesome.com/icons/couch?style=solid">fas fa-couch</a>,
+                input <strong>couch</strong>
+                <br />
+                For <a href="https://fontawesome.com/icons?d=gallery&s=brands">Brands Style</a>{' '}
+                icons like{' '}
+                <a href="https://fontawesome.com/icons/hotjar?style=brands">fab fa-hotjar</a>, input{' '}
+                <strong>fab hotjar</strong>
+                <br />
+                For <a href="https://fontawesome.com/icons?d=gallery&s=regular">
+                  Regular Style
+                </a>{' '}
+                icons like{' '}
+                <a href="https://fontawesome.com/icons/trash-alt?style=regular">far fa-trash-alt</a>
+                , input <strong>far trash-alt</strong>
+              </p>
+            </div>
           </div>
         </div>
         <div className="field is-horizontal">
-          <div className="field-label" />
+          <div className="field-label is-normal" />
           <div className="field-body">
             <div className="field">
               <div className="control">
