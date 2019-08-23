@@ -42,7 +42,6 @@ const App = props => {
         .get()
         .then(result => {
           setWorkouts(result.data);
-          //console.log('workouts', result.data);
         })
         .catch(error => console.log('workouts', error.response.data));
     }
@@ -71,7 +70,6 @@ const App = props => {
       workoutService
         .add(workout)
         .then(response => {
-          //console.log('response.data', response.data);
           let newWorkouts;
           if (
             workouts.length === 0 ||
@@ -82,7 +80,6 @@ const App = props => {
             const workoutsWithNew = workouts.map(w =>
               w.id !== response.data.id ? w : response.data
             );
-            //console.log(workoutsWithNew, workoutsWithNew);
             newWorkouts = workoutsWithNew;
           }
           setWorkouts(newWorkouts);
