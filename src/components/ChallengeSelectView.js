@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import Icon from './Icon';
 
 const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActiveChallenge }) => {
   let styles = {
@@ -39,7 +39,7 @@ const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActi
         handleClick();
       }}
     >
-      <FontAwesomeIcon icon={iconName} size="2x" />
+      <Icon icon={iconName} size="2x" />
       <p>{series.seriesTitle}</p>
       <p style={{ color: '#000000', fontWeight: 'bold' }} title="participants">
         {series.participants ? series.participants : <>&nbsp;</>}

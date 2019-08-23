@@ -15,7 +15,7 @@ import {
   faAngleUp
 } from '@fortawesome/free-solid-svg-icons';
 import { far, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { fab, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { fab, faYoutube, faHotjar } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
   fas,
@@ -34,5 +34,6 @@ library.add(
   faAward,
   faAngleUp,
   faTrashAlt,
-  faYoutube
+  faYoutube,
+  faHotjar
 );
