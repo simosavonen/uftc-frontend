@@ -12,7 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { Badge } from './components/BadgesView';
 import { apiUrls } from './config/config';
-import { checkAchievements } from './badges/utils';
+import { checkAchievements } from './utils/badges';
 import Routes from './Routes';
 
 import './App.css';
