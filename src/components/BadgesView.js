@@ -39,7 +39,11 @@ const Badge = ({ achievement, activity }) => {
               : `total on ${moment(achievement.date).format('MMM Do')}`}
             .
             <br />
-            <span className="has-text-danger">Reward: {achievement.pointsReward} extra points</span>
+            {achievement.pointsReward > 0 && (
+              <span className="has-text-danger">
+                Reward: {achievement.pointsReward} extra points
+              </span>
+            )}
           </p>
         </div>
       </article>

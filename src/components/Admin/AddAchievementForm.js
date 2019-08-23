@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 //import Async from 'react-select/async';
 
 const AddAchievementForm = props => {
+  const [isDailyChallenge, setIsDailyChallenge] = useState(true);
   const [name, setName] = useState('');
   const [requirement, setRequirement] = useState(0);
   const [pointsReward, setPointsReward] = useState(0);
-  const [fontAwesomeIcon, setFontAwesomeIcon] = useState('');
-  const [iconColor, setIconColor] = useState('');
+  const [fontAwesomeIcon, setFontAwesomeIcon] = useState('medal');
+  const [iconColor, setIconColor] = useState('#CD7F32');
+  const [activity, setActivity] = useState('');
 
   const today = new Date().toISOString().substring(0, 10);
   const [date, setDate] = useState(today);
@@ -19,11 +21,13 @@ const AddAchievementForm = props => {
       name,
       requirement,
       pointsReward,
+      activity,
       date,
       fontAwesomeIcon,
       iconColor
     };
     console.log(' uusi saavutus ' + newAchievement.name);
+    console.log(newAchievement);
     props.addAchievement(newAchievement);
   };
 
@@ -34,16 +38,47 @@ const AddAchievementForm = props => {
     </p>
   );
 
+  const ActivityBadge = (
+    <p>
+      <label htmlFor="activity">Select the activity:</label>
+      <select
+        id="activity"
+        onChange={({ target }) => setActivity(target.value)}
+        value={activity.id}
+      >
+        {props.activities.map(a => (
+          <option key={a.id} value={a.id}>
+            {a.name}
+          </option>
+        ))}
+      </select>
+    </p>
+  );
+
+  const SelectButton = () => {
+    return (
+      <div className="buttons has-addons" onClick={() => setIsDailyChallenge(!isDailyChallenge)}>
+        <span className={isDailyChallenge ? 'button is-success is-selected' : 'button'}>
+          Add Daily Challenge
+        </span>
+        <span className={!isDailyChallenge ? 'button is-success is-selected' : 'button'}>
+          Add Activity Badge
+        </span>
+      </div>
+    );
+  };
+
   console.log('achievementform');
   return (
     <section className="section columns is-centered">
       <form onSubmit={submit} className="column is-6">
+        <SelectButton />
         <p>
           <label htmlFor="name">Achievement's name:</label>
           <input id="name" onChange={({ target }) => setName(target.value)} value={name} />
         </p>
         <p>
-          <label htmlFor="requirement">Demanded points for the achievement:</label>
+          <label htmlFor="requirement">Required points for the achievement:</label>
           <input
             id="requirement"
             onChange={({ target }) => setRequirement(target.value)}
@@ -60,7 +95,11 @@ const AddAchievementForm = props => {
         </p>
         <p>
           <label htmlFor="fontAwesomeIcon">Select icon:</label>
-          <select id="fontAwesomeIcon" onChange={({ target }) => setFontAwesomeIcon(target.value)}>
+          <select
+            id="fontAwesomeIcon"
+            value={fontAwesomeIcon}
+            onChange={({ target }) => setFontAwesomeIcon(target.value)}
+          >
             <option value="medal">medal</option>
             <option value="crown">crown</option>
             <option value="trophy">trophy</option>
@@ -69,13 +108,17 @@ const AddAchievementForm = props => {
         </p>
         <p>
           <label htmlFor="iconColor">icon's color:</label>
-          <select id="iconColor" onChange={({ target }) => setIconColor(target.value)}>
+          <select
+            id="iconColor"
+            value={iconColor}
+            onChange={({ target }) => setIconColor(target.value)}
+          >
             <option value="#CD7F32">bronze</option>
             <option value="#C0C0C0">silver</option>
             <option value="#FFD700">gold</option>
           </select>
         </p>
-        {DayAchievement}
+        {isDailyChallenge ? DayAchievement : ActivityBadge}
         <button type="submit">Add new achievement</button>
       </form>
     </section>
