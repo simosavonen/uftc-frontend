@@ -10,10 +10,13 @@ const AddAchievementForm = props => {
   const [pointsReward, setPointsReward] = useState(0);
   const [fontAwesomeIcon, setFontAwesomeIcon] = useState('medal');
   const [iconColor, setIconColor] = useState('#CD7F32');
-  const [activity, setActivity] = useState('');
+  const [activity, setActivity] = useState();
 
   const today = new Date().toISOString().substring(0, 10);
   const [date, setDate] = useState(today);
+
+  console.log('activity:', activity);
+  console.log('date:', date);
 
   const submit = event => {
     event.preventDefault();
@@ -39,11 +42,7 @@ const AddAchievementForm = props => {
   const ActivityBadge = (
     <p>
       <label htmlFor="activity">Select the activity:</label>
-      <select
-        id="activity"
-        onChange={({ target }) => setActivity(target.value)}
-        value={activity.id}
-      >
+      <select id="activity" onChange={({ target }) => setActivity(target.value)} value={activity}>
         {props.activities.map(a => (
           <option key={a.id} value={a.id}>
             {a.name}
@@ -53,9 +52,21 @@ const AddAchievementForm = props => {
     </p>
   );
 
+  const switchBadgeTypeState = () => {
+    if (isDailyChallenge) {
+      setIsDailyChallenge(false);
+      setDate('');
+      setActivity(props.activities[0].id);
+    } else {
+      setIsDailyChallenge(true);
+      setActivity('');
+      setDate(today);
+    }
+  };
+
   const SelectButton = () => {
     return (
-      <div className="buttons has-addons" onClick={() => setIsDailyChallenge(!isDailyChallenge)}>
+      <div className="buttons has-addons" onClick={() => switchBadgeTypeState()}>
         <span className={isDailyChallenge ? 'button is-success is-selected' : 'button'}>
           Add Daily Challenge
         </span>
