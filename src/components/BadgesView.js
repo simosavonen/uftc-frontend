@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../badges/utils';
+import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../utils/badges';
 
 const Badge = ({ achievement, activity }) => {
   return (
