@@ -207,13 +207,16 @@ const AddChallengeForm = props => {
                   Description
                 </label>
                 <div className="control">
-                  <input
-                    className="input"
+                  <testarea
+                    className="textarea"
                     id="description"
                     onChange={({ target }) => setDescription(target.value)}
                     value={description}
                     required
                   />
+                  <p className="help">
+                    HTML is <a href="https://bulma.io/documentation/elements/content/">allowed</a>
+                  </p>
                 </div>
               </div>
               <div className="field">

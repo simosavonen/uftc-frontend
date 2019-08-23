@@ -106,7 +106,10 @@ const ChallengeSelectView = props => {
           isSelected={c.id === selectedSeries}
           isActiveChallenge={c.id === props.user.activeChallenge}
         />
-        <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
+        <div
+          dangerouslySetInnerHTML={{ __html: c.description }}
+          className="content is-size-6-mobile is-size-5-tablet is-size-4"
+        />
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
           {props.user && props.user.activeChallenge === c.id && showActiveChallenge()}
         </div>
