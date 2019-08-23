@@ -9,7 +9,7 @@ const SeriesRow = ({ challenge }) => {
         <Icon icon={challenge.icon} size="2x" />
       </td>
       <td>{challenge.seriesTitle}</td>
-      <td>{challenge.description}</td>
+      <td dangerouslySetInnerHTML={{ __html: challenge.description }} />
       <td className="has-text-centered">{challenge.pointBonus}</td>
     </tr>
   );

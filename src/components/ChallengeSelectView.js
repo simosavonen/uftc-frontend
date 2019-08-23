@@ -4,13 +4,13 @@ import Icon from './Icon';
 
 const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActiveChallenge }) => {
   let styles = {
-    width: '33vw',
+    width: '20vw',
     minWidth: '110px',
     maxWidth: '200px',
-    height: '33vw',
+    height: '20vw',
     minHeight: '110px',
     maxHeight: '200px',
-    borderRadius: '33vw',
+    borderRadius: '20vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -97,7 +97,7 @@ const ChallengeSelectView = props => {
 
   const challengeSelections = challenges =>
     challenges.map(c => (
-      <div className="column is-4 has-text-centered " key={c.id}>
+      <div className="column has-text-centered " key={c.id}>
         <Ikonipallo
           series={c}
           iconName={c.icon || 'stopwatch'}

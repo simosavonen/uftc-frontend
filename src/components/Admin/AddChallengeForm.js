@@ -207,7 +207,7 @@ const AddChallengeForm = props => {
                   Description
                 </label>
                 <div className="control">
-                  <testarea
+                  <textarea
                     className="textarea"
                     id="description"
                     onChange={({ target }) => setDescription(target.value)}
@@ -215,7 +215,13 @@ const AddChallengeForm = props => {
                     required
                   />
                   <p className="help">
-                    HTML is <a href="https://bulma.io/documentation/elements/content/">allowed</a>
+                    HTML is{' '}
+                    <a
+                      href="https://bulma.io/documentation/elements/content/"
+                      title="bulma.io content class docs"
+                    >
+                      allowed
+                    </a>
                   </p>
                 </div>
               </div>
