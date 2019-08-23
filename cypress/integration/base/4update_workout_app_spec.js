@@ -24,9 +24,9 @@ describe('update workout', function() {
       cy.wait(400);
       cy.get('#updworplus').click();
       cy.get('#updworsave').click();
-      //cy.contains('Save changes').click();
+      
       cy.get('#updworback').click();
-     // cy.contains('Go back').click();
+     
     });
   });
 });

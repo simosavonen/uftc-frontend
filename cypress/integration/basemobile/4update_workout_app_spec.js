@@ -20,8 +20,9 @@ describe('update workout', function() {
       cy.contains('most recent activities');
       cy.wait(500);
       cy.contains('Pushup - punnerus').click({ force: true });
-      cy.contains('Your history').click();
-      cy.get('#showactivities')
+      //cy.contains('Your history').click();
+      cy.contains('Show workout history').click();
+      cy.get('#editbtn')
         .first()
         .click();
       cy.wait(400);

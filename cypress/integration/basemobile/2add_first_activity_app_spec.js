@@ -13,8 +13,10 @@ describe('add activity', function() {
     });
 
     it('go to add activitypage', function() {
+      cy.wait(200);
+      cy.contains('Admin tools').click();
       cy.wait(100);
-      cy.contains('add activity').click();
+      cy.contains('Add activity').click();
     });
 
     it('add pushup activity', function() {
