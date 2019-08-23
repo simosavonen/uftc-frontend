@@ -108,7 +108,7 @@ const ChallengeSelectView = props => {
         />
         <div
           dangerouslySetInnerHTML={{ __html: c.description }}
-          className="content is-size-6-mobile is-size-5-tablet is-size-4"
+          className="content is-size-6-mobile is-size-5-tablet is-size-4-widescreen"
         />
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
           {props.user && props.user.activeChallenge === c.id && showActiveChallenge()}

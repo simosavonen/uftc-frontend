@@ -218,29 +218,6 @@ const App = props => {
     return undefined; // components check for undefined, not null
   };
 
-  // todo: more than 1 background image?
-  const background = () => {
-    if (!isAuthenticated()) {
-      if (props.location.pathname.startsWith('/passwordreset')) {
-        return '';
-      }
-      return 'kettlebeach';
-    }
-    return '';
-  };
-
-  // todo: add other colors
-  const gradient = () => {
-    const path = props.location.pathname;
-    switch (path) {
-      default:
-        // the reset token is added to this, so startsWith()
-        if (path.startsWith('/passwordreset')) {
-          return 'blue-gradient';
-        }
-        return '';
-    }
-  };
   // styles
   const MySwal = withReactContent(Swal);
   const badgeAlert = achs => {
@@ -269,33 +246,33 @@ const App = props => {
   };
 
   return (
-    <div className={`site ${background()}`}>
-      <div className={`main ${gradient()}`}>
-        {isAuthenticated() && <Header logout={logout} />}
-        <Routes
-          user={user}
-          updateUser={updateUser}
-          login={login}
-          register={register}
-          isAuthenticated={isAuthenticated}
-          activityByName={activityByName}
-          activeChallenge={activeChallenge}
-          workouts={workouts}
-          activities={activities}
-          achievements={achievements}
-          challenges={challenges}
-          addWorkout={addWorkout}
-          updateWorkout={updateWorkout}
-          deleteWorkoutInstance={deleteWorkoutInstance}
-          challengeService={challengeService}
-          achievementService={achievementService}
-          activityService={activityService}
-          userService={userService}
-        />
-        <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
-        {isAuthenticated() && <Footer />}
-      </div>
-    </div>
+    <>
+      {isAuthenticated() && <Header logout={logout} />}
+
+      <Routes
+        user={user}
+        updateUser={updateUser}
+        login={login}
+        register={register}
+        isAuthenticated={isAuthenticated}
+        activityByName={activityByName}
+        activeChallenge={activeChallenge}
+        workouts={workouts}
+        activities={activities}
+        achievements={achievements}
+        challenges={challenges}
+        addWorkout={addWorkout}
+        updateWorkout={updateWorkout}
+        deleteWorkoutInstance={deleteWorkoutInstance}
+        challengeService={challengeService}
+        achievementService={achievementService}
+        activityService={activityService}
+        userService={userService}
+      />
+
+      <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
+      {isAuthenticated() && <Footer />}
+    </>
   );
 };
 export default withRouter(App);

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AdminView = ({ challenges }) => {
   return (
-    <div>
+    <div className="site-content">
       <section className="section">
         <h1 className="title is-4">Admin tools</h1>
         <h2 className="subtitle is-6">For organizers only!</h2>

@@ -97,111 +97,113 @@ const LoginForm = props => {
   );
 
   return (
-    <section className="is-fullheight">
-      <div className="columns is-centered is-fullheight is-marginless">
-        <div className="column is-4 is-hidden-mobile" />
-        <div className="column is-7-tablet is-6-desktop is-5-widescreen blue-white-gradient is-fullheight is-paddingless">
-          <form
-            className="is-fullheight"
-            onSubmit={submit}
-            style={{
-              padding: 'calc(0.5em + 1vh) calc(1em + 3vw)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
-            }}
-          >
-            <div
-              id="top"
-              className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
+    <div className="kettlebeach">
+      <section className="is-fullheight">
+        <div className="columns is-centered is-fullheight is-marginless">
+          <div className="column is-4 is-hidden-mobile" />
+          <div className="column is-7-tablet is-6-desktop is-5-widescreen blue-white-gradient is-fullheight is-paddingless">
+            <form
+              className="is-fullheight"
+              onSubmit={submit}
+              style={{
+                padding: 'calc(0.5em + 1vh) calc(1em + 3vw)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
             >
-              <Logo height="80%" />
-              <h1
-                className="is-size-6-mobile is-size-6-tablet is-size-5 has-text-white has-text-weight-bold"
-                style={{ marginTop: '0.5vh' }}
+              <div
+                id="top"
+                className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
               >
-                Ultimate Functional Training Challenge
-              </h1>
-            </div>
-
-            <div id="middle" style={{ width: '100%' }}>
-              <div className="field" style={{ width: '100%' }}>
-                <label className="label has-text-white">Email</label>
-                <div className="control is-expanded has-icons-left">
-                  <input
-                    className="input"
-                    type="email"
-                    placeholder="first.last@ambientia.fi"
-                    value={email}
-                    onChange={({ target }) => formatEmail(target.value.toLowerCase())}
-                    required
-                  />
-                  <span className="icon is-small is-left">
-                    <FontAwesomeIcon icon="envelope" />
-                  </span>
-                </div>
-              </div>
-
-              <div className="field" style={{ width: '100%' }}>
-                <label className="label has-text-white">Password</label>
-                <div className="control has-icons-left">
-                  <input
-                    className="input"
-                    type="password"
-                    value={password}
-                    onChange={({ target }) => setPassword(target.value)}
-                    required
-                  />
-                  <span className="icon is-small is-left">
-                    <FontAwesomeIcon icon="lock" />
-                  </span>
-                </div>
-                <Link
-                  to="/passwordreset"
-                  className={`help has-text-white has-text-right ${isNewUser && 'is-hidden'}`}
+                <Logo height="80%" />
+                <h1
+                  className="is-size-6-mobile is-size-6-tablet is-size-5 has-text-white has-text-weight-bold"
+                  style={{ marginTop: '0.5vh' }}
                 >
-                  forgot your password?
-                </Link>
+                  Ultimate Functional Training Challenge
+                </h1>
               </div>
 
-              {isNewUser && registerFields}
-
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <button
-                    className={`button is-fullwidth has-text-weight-bold ${isValid &&
-                      'is-success'}`}
-                    disabled={!isValid}
-                    title={isValid ? '' : 'Check the form fields'}
-                  >
-                    {isNewUser ? 'Create an account' : 'Log in'}
-                  </button>
+              <div id="middle" style={{ width: '100%' }}>
+                <div className="field" style={{ width: '100%' }}>
+                  <label className="label has-text-white">Email</label>
+                  <div className="control is-expanded has-icons-left">
+                    <input
+                      className="input"
+                      type="email"
+                      placeholder="first.last@ambientia.fi"
+                      value={email}
+                      onChange={({ target }) => formatEmail(target.value.toLowerCase())}
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <FontAwesomeIcon icon="envelope" />
+                    </span>
+                  </div>
                 </div>
-                <div className="control">
-                  <button
-                    className="button is-text has-text-weight-bold"
-                    onClick={event => {
-                      event.preventDefault();
-                      setIsNewUser(!isNewUser);
-                    }}
-                    disabled={props.secret === undefined}
-                    title={'Use the link provided by the organizers'}
+
+                <div className="field" style={{ width: '100%' }}>
+                  <label className="label has-text-white">Password</label>
+                  <div className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="password"
+                      value={password}
+                      onChange={({ target }) => setPassword(target.value)}
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <FontAwesomeIcon icon="lock" />
+                    </span>
+                  </div>
+                  <Link
+                    to="/passwordreset"
+                    className={`help has-text-white has-text-right ${isNewUser && 'is-hidden'}`}
                   >
-                    {isNewUser ? 'cancel' : 'create an account'}
-                  </button>
+                    forgot your password?
+                  </Link>
+                </div>
+
+                {isNewUser && registerFields}
+
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <button
+                      className={`button is-fullwidth has-text-weight-bold ${isValid &&
+                        'is-success'}`}
+                      disabled={!isValid}
+                      title={isValid ? '' : 'Check the form fields'}
+                    >
+                      {isNewUser ? 'Create an account' : 'Log in'}
+                    </button>
+                  </div>
+                  <div className="control">
+                    <button
+                      className="button is-text has-text-weight-bold"
+                      onClick={event => {
+                        event.preventDefault();
+                        setIsNewUser(!isNewUser);
+                      }}
+                      disabled={props.secret === undefined}
+                      title={'Use the link provided by the organizers'}
+                    >
+                      {isNewUser ? 'cancel' : 'create an account'}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              id="bottom"
-              className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
-            >
-              <AmbientiaLogo width="70%" />
-            </div>
-          </form>
+              <div
+                id="bottom"
+                className={`has-text-centered ${isNewUser ? 'logobox-small' : 'logobox-big'}`}
+              >
+                <AmbientiaLogo width="70%" />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
