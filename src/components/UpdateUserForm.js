@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../services/user';
-import { useResource } from '../services/useResource';
-import { apiUrls } from '../config/config';
 import { locations } from '../config/config';
 
 const UpdateUserForm = props => {
@@ -9,8 +7,6 @@ const UpdateUserForm = props => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('Please select one');
-  const [counter, setCounter] = useState(0);
-  const [challenges] = useResource(apiUrls.challenges);
 
   useEffect(() => {
     if (props.user) {
