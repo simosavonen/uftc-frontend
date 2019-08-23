@@ -49,11 +49,15 @@ const App = props => {
   }, [user]);
 
   const updateUser = updatedUser => {
-    userService.update(updatedUser).then(response => {
-      const newUserState = { token: user.token, ...response.data };
-      setUser(newUserState);
-      localStorage.setItem('loggedUser', JSON.stringify(newUserState));
-    });
+    userService
+      .update(updatedUser)
+      .then(response => {
+        const newUserState = { token: user.token, ...response.data };
+        setUser(newUserState);
+        localStorage.setItem('loggedUser', JSON.stringify(newUserState));
+        toast.success('User profile updated.');
+      })
+      .catch(error => toast.warn('Failed to update user profile.'));
   };
 
   const addWorkout = workout => {
@@ -217,7 +221,7 @@ const App = props => {
   // todo: more than 1 background image?
   const background = () => {
     if (!isAuthenticated()) {
-      if(props.location.pathname.startsWith('/passwordreset')) {
+      if (props.location.pathname.startsWith('/passwordreset')) {
         return '';
       }
       return 'kettlebeach';

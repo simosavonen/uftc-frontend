@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
 import { ReactComponent as AmbientiaLogo } from '../logos/Ambientia_logo_RED_RGB.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { locations } from '../config/config';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
@@ -53,6 +54,8 @@ const LoginForm = props => {
     }
   };
 
+  const locationNames = Object.keys(locations);
+
   // show these if we're registering a new user
   const registerFields = (
     <>
@@ -62,13 +65,9 @@ const LoginForm = props => {
           <div className="select is-fullwidth">
             <select value={location} onChange={({ target }) => setLocation(target.value)}>
               <option disabled>Please select one</option>
-              <option>Hämeenlinna</option>
-              <option>Helsinki</option>
-              <option>Joensuu</option>
-              <option>Tampere</option>
-              <option>Turku</option>
-              <option>Tallinn</option>
-              <option>Tartu</option>
+              {locationNames.map(loc => (
+                <option key={loc}>{loc}</option>
+              ))}
             </select>
           </div>
           <div className="icon is-small is-left">
