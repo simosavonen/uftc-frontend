@@ -32,7 +32,9 @@ const icons = [
   'plank.svg',
   'pullup.svg',
   'pushup.svg',
-  'walking.svg'
+  'walking.svg',
+  'challenge.svg',
+  'olympics.svg'
 ];
 
 export { apiUrls, locations, icons };

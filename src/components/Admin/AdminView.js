@@ -1,29 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { icon } from '../../utils/icons';
 
 const AdminView = ({ challenges }) => {
   return (
-    <div className="site-content">
-      <section className="section">
-        <h1 className="title is-4">Admin tools</h1>
-        <h2 className="subtitle is-6">For organizers only!</h2>
-        <div className="menu">
-          <ul className="menu-list">
-            <li>
-              <Link to="/addchallenge">
-                {challenges.length === 0 ? 'Add a challenge' : 'Add a series'}
-              </Link>
-            </li>
-            <li>
-              <Link to="/addactivity">Add an activity</Link>
-            </li>
-            <li>
-              <Link to="/addachievement">Add an achievement</Link>
-            </li>
-          </ul>
+    <section className="section">
+      <div className="box">
+        <h1 className="title is-3">
+          <span className="icon is-large">{icon('cog', '#000000', '1x')}</span>
+          <span>Admin tools</span>
+        </h1>
+        <div className="columns is-centered">
+          <div className="column has-text-centered">
+            <Link to="/addchallenge" className="button is-large is-link">
+              <span className="icon is-large">{icon('challenge.svg', '#ffffff')}</span>
+              <span>Challenge</span>
+            </Link>
+            <p className="is-size-6" style={{ padding: '1em' }}>
+              Edit the overall challenge details. Also, can add or edit the series here.
+            </p>
+          </div>
+          <div className="column has-text-centered">
+            <Link to="/addactivity" className="button is-large is-link">
+              <span className="icon is-large">{icon('olympics.svg', '#ffffff')}</span>
+              <span>Activities</span>
+            </Link>
+            <p className="is-size-6" style={{ padding: '1em' }}>
+              Add sports activities and edit their points, the category, the icon and write
+              instructions.
+            </p>
+          </div>
+          <div className="column has-text-centered">
+            <Link to="/addachievement" className="button is-large is-link">
+              <span className="icon is-large">{icon('medal', '#ffffff', '1x')}</span>
+              <span>Achievements</span>
+            </Link>
+            <p className="is-size-6" style={{ padding: '1em' }}>
+              Achievements can be added for a specific activity, or they can be set for a single
+              date when points from all activities are taken into account.
+            </p>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
