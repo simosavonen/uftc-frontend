@@ -177,20 +177,58 @@ const AddActivityForm = props => {
               </datalist>
               <p className="help">
                 Select one of the suggested SVG files or give a FontAwesome icon: <br />
-                For <a href="https://fontawesome.com/icons?d=gallery&s=solid">Solid Style</a> icons
-                like <a href="https://fontawesome.com/icons/couch?style=solid">fas fa-couch</a>,
-                input <strong>couch</strong>
-                <br />
-                For <a href="https://fontawesome.com/icons?d=gallery&s=brands">Brands Style</a>{' '}
+                For{' '}
+                <a
+                  href="https://fontawesome.com/icons?d=gallery&s=solid&m=free"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solid Style
+                </a>{' '}
                 icons like{' '}
-                <a href="https://fontawesome.com/icons/hotjar?style=brands">fab fa-hotjar</a>, input{' '}
-                <strong>fab hotjar</strong>
+                <a
+                  href="https://fontawesome.com/icons/couch?style=solid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  fas fa-couch
+                </a>
+                , input <strong>couch</strong>
                 <br />
-                For <a href="https://fontawesome.com/icons?d=gallery&s=regular">
+                For{' '}
+                <a
+                  href="https://fontawesome.com/icons?d=gallery&s=brands&m=free"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Brands Style
+                </a>{' '}
+                icons like{' '}
+                <a
+                  href="https://fontawesome.com/icons/hotjar?style=brands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  fab fa-hotjar
+                </a>
+                , input <strong>fab hotjar</strong>
+                <br />
+                For{' '}
+                <a
+                  href="https://fontawesome.com/icons?d=gallery&s=regular&m=free"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Regular Style
                 </a>{' '}
                 icons like{' '}
-                <a href="https://fontawesome.com/icons/trash-alt?style=regular">far fa-trash-alt</a>
+                <a
+                  href="https://fontawesome.com/icons/trash-alt?style=regular"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  far fa-trash-alt
+                </a>
                 , input <strong>far trash-alt</strong>
               </p>
             </div>

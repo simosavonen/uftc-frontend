@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PreviewSeries from './PreviewSeries';
 import EditChallengeForm from './EditChallengeForm';
+import { toast } from 'react-toastify';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -19,6 +20,7 @@ const AddChallengeForm = props => {
   const [newOrganizer, setNewOrganizer] = useState('');
 
   const [editingChallenge, setEditingChallenge] = useState(false);
+  const [editingSeries, setEditingSeries] = useState(null);
 
   useEffect(() => {
     if (props.challenges.length) {
@@ -43,22 +45,46 @@ const AddChallengeForm = props => {
     }
   }, [props.userService, props.user]);
 
-  const addChallengeOrSeries = event => {
+  useEffect(() => {
+    if (editingSeries) {
+      setSeriesTitle(editingSeries.seriesTitle);
+      setDescription(editingSeries.description ? editingSeries.description : '');
+      setPointBonus(editingSeries.pointBonus);
+      setIcon(editingSeries.icon);
+    }
+  }, [editingSeries]);
+
+  const addOrEdit = event => {
     event.preventDefault();
-    const newChallenge = {
-      name,
-      startDate,
-      endDate,
-      releaseDate,
-      deadline,
-      pointsGoal,
-      pointBonus,
-      seriesTitle,
-      description,
-      icon,
-      organizers
-    };
-    props.challengeService.add(newChallenge);
+    if (!editingSeries) {
+      const newChallenge = {
+        name,
+        startDate,
+        endDate,
+        releaseDate,
+        deadline,
+        pointsGoal,
+        pointBonus,
+        seriesTitle,
+        description,
+        icon,
+        organizers
+      };
+      props.challengeService.add(newChallenge);
+    } else {
+      try {
+        props.challengeService.update({
+          id: editingSeries.id,
+          seriesTitle,
+          description,
+          pointBonus,
+          icon
+        });
+        toast.success('Series updated.');
+      } catch (error) {
+        toast.warn('Failed to update the series.');
+      }
+    }
   };
 
   const addOrganizer = event => {
@@ -70,6 +96,15 @@ const AddChallengeForm = props => {
       });
     }
     setNewOrganizer('');
+  };
+
+  const reset = event => {
+    event.preventDefault();
+    setEditingSeries(null);
+    setSeriesTitle('');
+    setDescription('');
+    setPointBonus(1);
+    setIcon('');
   };
 
   const nameById = id => {
@@ -84,17 +119,23 @@ const AddChallengeForm = props => {
       <div className="container">
         <div className="columns is-centered">
           <div className="column" id="addChallengeForm">
-            <form onSubmit={addChallengeOrSeries}>
-              <h1 className="title is-4">
-                {props.challenges.length
-                  ? `Add a series to ${props.challenges[0].name}`
-                  : 'Add the challenge'}
-              </h1>
-              <h2 className="subtitle is-6">
-                {props.challenges.length
-                  ? `Give the series it's own title, description, point bonus and an icon.`
-                  : 'You will be set as the organizer, can add more later'}
-              </h2>
+            <form onSubmit={addOrEdit}>
+              {!editingSeries ? (
+                <>
+                  <h1 className="title is-4">
+                    {props.challenges.length
+                      ? `Add a series to ${props.challenges[0].name}`
+                      : 'Add the challenge'}
+                  </h1>
+                  <h2 className="subtitle is-6">
+                    {props.challenges.length
+                      ? `Give the series it's own title, description, point bonus and an icon.`
+                      : 'You will be set as the organizer, can add more later'}
+                  </h2>
+                </>
+              ) : (
+                <h1 className="title is-4">Edit the series</h1>
+              )}
 
               <div className={props.challenges.length ? 'is-hidden' : ''}>
                 <div className="field is-grouped">
@@ -215,16 +256,18 @@ const AddChallengeForm = props => {
                     id="description"
                     onChange={({ target }) => setDescription(target.value)}
                     value={description}
-                    required
                   />
                   <p className="help">
-                    HTML is{' '}
+                    Can use{' '}
                     <a
                       href="https://bulma.io/documentation/elements/content/"
-                      title="bulma.io content class docs"
+                      title="Bulma Content class documentation"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      allowed
-                    </a>
+                      a limited set
+                    </a>{' '}
+                    of HTML tags
                   </p>
                 </div>
               </div>
@@ -257,24 +300,56 @@ const AddChallengeForm = props => {
                     value={icon}
                   />
                   <p className="help">
-                    For <a href="https://fontawesome.com/icons?d=gallery&s=solid">Solid Style</a>{' '}
+                    For{' '}
+                    <a
+                      href="https://fontawesome.com/icons?d=gallery&s=solid&m=free"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Solid Style
+                    </a>{' '}
                     icons like{' '}
-                    <a href="https://fontawesome.com/icons/couch?style=solid">fas fa-couch</a>,
-                    input <strong>couch</strong>
+                    <a
+                      href="https://fontawesome.com/icons/couch?style=solid"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      fas fa-couch
+                    </a>
+                    , input <strong>couch</strong>
                     <br />
-                    For <a href="https://fontawesome.com/icons?d=gallery&s=brands">
+                    For{' '}
+                    <a
+                      href="https://fontawesome.com/icons?d=gallery&s=brands&m=free"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Brands Style
                     </a>{' '}
                     icons like{' '}
-                    <a href="https://fontawesome.com/icons/hotjar?style=brands">fab fa-hotjar</a>,
-                    input <strong>fab hotjar</strong>
+                    <a
+                      href="https://fontawesome.com/icons/hotjar?style=brands"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      fab fa-hotjar
+                    </a>
+                    , input <strong>fab hotjar</strong>
                     <br />
                     For{' '}
-                    <a href="https://fontawesome.com/icons?d=gallery&s=regular">
+                    <a
+                      href="https://fontawesome.com/icons?d=gallery&s=regular&m=free"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Regular Style
                     </a>{' '}
                     icons like{' '}
-                    <a href="https://fontawesome.com/icons/trash-alt?style=regular">
+                    <a
+                      href="https://fontawesome.com/icons/trash-alt?style=regular"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       far fa-trash-alt
                     </a>
                     , input <strong>far trash-alt</strong>
@@ -282,9 +357,18 @@ const AddChallengeForm = props => {
                 </div>
               </div>
               <div className="control">
-                <button className="button is-info" type="submit">
-                  {props.challenges.length ? 'Add a series' : 'Add new challenge'}
-                </button>
+                {editingSeries ? (
+                  <div className="buttons">
+                    <button className="button is-info">Save changes</button>
+                    <button className="button is-text" onClick={reset}>
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <button className="button is-info">
+                    {props.challenges.length ? 'Add a series' : 'Add a new challenge'}
+                  </button>
+                )}
               </div>
             </form>
 
@@ -331,7 +415,7 @@ const AddChallengeForm = props => {
             )}
           </div>
           <div className="column" id="previewOfSeries">
-            <PreviewSeries challenges={props.challenges} />
+            <PreviewSeries challenges={props.challenges} setEditingSeries={setEditingSeries} />
             <div className="notification is-danger">
               {editingChallenge ? (
                 <EditChallengeForm
