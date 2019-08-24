@@ -29,7 +29,7 @@ const Ikonipallo = ({ series, iconName, handleClick, isSelected, isActiveChallen
   return (
     <div
       style={styles}
-      className="red-circle-gradient has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
+      className="red-circle-gradient is-clickable has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
       onClick={() => {
         handleClick();
       }}

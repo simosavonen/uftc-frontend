@@ -1,7 +1,7 @@
 import React from 'react';
 import AddWorkoutForm from './AddWorkoutForm';
 import UpdateWorkout from './UpdateWorkout';
-import { icon } from '../../utils/icons';
+import { customIcon } from '../../utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const WorkoutView = ({
@@ -31,7 +31,7 @@ const WorkoutView = ({
           <div className="column is-7-tablet is-6-desktop is-5-widescreen is-4-fullhd">
             <div className="media">
               <div className="media-left image is-48x48">
-                <span className="icon is-large">{icon(activity.icon)}</span>
+                <span className="icon is-large">{customIcon(activity.icon)}</span>
               </div>
               <div className="media-content">
                 <div className="content">

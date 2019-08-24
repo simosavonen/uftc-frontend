@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { icon } from '../../utils/icons';
+import { customIcon } from '../../utils/icons';
 import slug from 'slug';
 
 const ActivityDetails = ({ activity, challenge }) => {
@@ -13,7 +13,7 @@ const ActivityDetails = ({ activity, challenge }) => {
         className="media hover-effect-grey hover-svg-red"
         style={{ padding: '0.2em', marginBottom: '0.5em' }}
       >
-        <figure className="media-left image is-48x48">{icon(activity.icon)}</figure>
+        <figure className="media-left image is-48x48">{customIcon(activity.icon)}</figure>
         <div className="media-content">
           <div className="content">
             <p className="title is-5">{activity.name}</p>

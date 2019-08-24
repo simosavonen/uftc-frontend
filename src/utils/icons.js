@@ -10,7 +10,7 @@ import { ReactComponent as Challenge } from '../icons/challenge.svg';
 import { ReactComponent as Olympics } from '../icons/olympics.svg';
 import Icon from '../components/Icon';
 
-const icon = (iconName, color = '#000000', size = '2x') => {
+const customIcon = (iconName, color = '#000000', size = '2x') => {
   if (!iconName.toLowerCase().endsWith('.svg')) {
     return <Icon icon={iconName} size={size} color={color} />;
   }
@@ -36,4 +36,4 @@ const icon = (iconName, color = '#000000', size = '2x') => {
   }
 };
 
-export { icon };
+export { customIcon };
