@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PreviewSeries from './PreviewSeries';
+import EditChallengeForm from './EditChallengeForm';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -16,6 +17,8 @@ const AddChallengeForm = props => {
   const [users, setUsers] = useState([]);
   const [organizers, setOrganizers] = useState([]);
   const [newOrganizer, setNewOrganizer] = useState('');
+
+  const [editingChallenge, setEditingChallenge] = useState(false);
 
   useEffect(() => {
     if (props.challenges.length) {
@@ -329,6 +332,29 @@ const AddChallengeForm = props => {
           </div>
           <div className="column" id="previewOfSeries">
             <PreviewSeries challenges={props.challenges} />
+            <div className="notification is-danger">
+              {editingChallenge ? (
+                <EditChallengeForm
+                  challenges={props.challenges}
+                  challengeService={props.challengeService}
+                  setEditingChallenge={setEditingChallenge}
+                />
+              ) : (
+                <div className="columns">
+                  <div className="column">
+                    <div
+                      className="button is-outlined is-light is-size-7-mobile is-size-7-tablet is-size-6-desktop"
+                      onClick={() => setEditingChallenge(!editingChallenge)}
+                    >
+                      Edit the challenge
+                    </div>
+                  </div>
+                  <div className="column is-7 is-size-7">
+                    Changing the dates after the challenge has started can cause issues.
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
