@@ -90,7 +90,7 @@ const PreviewSeries = ({ challenges, setEditingSeries }) => {
         <thead>
           <tr>
             <td className="has-text-centered">Icon</td>
-            <td>Series Title</td>
+            <td>Series</td>
             <td>Description</td>
             <td title="Point Bonus" className="has-text-centered">
               PB

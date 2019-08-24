@@ -16,6 +16,14 @@
   background: linear-gradient(180deg, rgba(255, 36, 87, 1) 0%, rgba(255, 36, 87, 0) 12%);
 }
 
+.red-circle-gradient {
+  background: radial-gradient(
+    farthest-corner at 40px 40px,
+    rgba(255, 36, 87, 1) 10%,
+    rgba(143, 21, 49, 1) 100%
+  );
+}
+
 .dark-cyan-gradient {
   background: linear-gradient(343deg, rgba(0, 186, 199, 1) 0%, rgba(10, 46, 71, 1) 100%);
 }

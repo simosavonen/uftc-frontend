@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import Icon from './Icon';
 
-const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActiveChallenge }) => {
+const Ikonipallo = ({ series, iconName, handleClick, isSelected, isActiveChallenge }) => {
   let styles = {
     width: '20vw',
     minWidth: '110px',
@@ -26,7 +26,7 @@ const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActi
     };
   }
   const bulmaClass =
-    'has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
+    'has-text-centered has-text-white-ter red-circle-gradient is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
   let customClass = 'series-button-hoverable';
   if (isActiveChallenge) customClass = 'series-button';
   const className = bulmaClass + ' ' + customClass;
@@ -101,14 +101,13 @@ const ChallengeSelectView = props => {
         <Ikonipallo
           series={c}
           iconName={c.icon || 'stopwatch'}
-          bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
           isSelected={c.id === selectedSeries}
           isActiveChallenge={c.id === props.user.activeChallenge}
         />
         <div
           dangerouslySetInnerHTML={{ __html: c.description }}
-          className="content is-size-6-mobile is-size-5-tablet is-size-4-widescreen"
+          className="content is-size-6-mobile is-size-6-tablet is-size-5-desktop"
           style={{ padding: '0.5em' }}
         />
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
