@@ -24,6 +24,14 @@
   );
 }
 
+.red-circle-gradient:hover {
+  background: radial-gradient(
+    farthest-corner at 50px 50px,
+    rgba(255, 36, 87, 1) 30%,
+    rgba(143, 21, 49, 1) 100%
+  );
+}
+
 .dark-cyan-gradient {
   background: linear-gradient(343deg, rgba(0, 186, 199, 1) 0%, rgba(10, 46, 71, 1) 100%);
 }
@@ -89,18 +97,4 @@
 .hover-svg-red:hover path,
 .hover-svg-red:hover circle {
   fill: #ff2457;
-}
-
-.series-button {
-  background-color: #ff2457;
-}
-
-.series-button-hoverable {
-  background-color: #ff2457;
-  transition: background-color 0.5s;
-  cursor: pointer;
-}
-
-.series-button-hoverable:hover {
-  background-color: #d61a3c;
 }

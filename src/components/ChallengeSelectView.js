@@ -25,16 +25,11 @@ const Ikonipallo = ({ series, iconName, handleClick, isSelected, isActiveChallen
       borderWidth: '6px'
     };
   }
-  const bulmaClass =
-    'has-text-centered has-text-white-ter red-circle-gradient is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
-  let customClass = 'series-button-hoverable';
-  if (isActiveChallenge) customClass = 'series-button';
-  const className = bulmaClass + ' ' + customClass;
 
   return (
     <div
       style={styles}
-      className={className}
+      className="red-circle-gradient has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
       onClick={() => {
         handleClick();
       }}
