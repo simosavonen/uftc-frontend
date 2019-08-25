@@ -33,7 +33,7 @@ const AdminView = ({ challenges, user }) => {
                 <span>Challenge</span>
               </Link>
               <p className="is-size-6" style={{ padding: '1em' }}>
-                Edit the overall challenge details. Can also add or edit the series here.
+                Edit the overall challenge details. Add or edit series. Grant organizer status.
               </p>
             </div>
             <div className="column has-text-centered">

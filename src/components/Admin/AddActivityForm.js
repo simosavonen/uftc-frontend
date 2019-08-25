@@ -275,58 +275,64 @@ const AddActivityForm = props => {
             </form>
           </div>
           <div className="column">
-            <div className="box">
-              <h1 className="title is-size-6">Summary of the activities</h1>
-              <table className="table is-size-7 is-fullwidth is-hoverable is-narrow">
-                <thead>
-                  <tr>
-                    <th>Icon</th>
-                    <th>Name</th>
-                    <th className="is-hidden-touch">Type</th>
-                    <th>Unit</th>
-                    <th title="points per unit" className="has-text-centered">
-                      P
-                    </th>
-                    <th title="description" className="has-text-centered">
-                      D
-                    </th>
-                    <th title="video URL" className="has-text-centered">
-                      V
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.activities.map(a => (
-                    <tr key={a.id} className="is-clickable" onClick={() => setEditingActivity(a)}>
-                      <td
-                        className="has-text-centered"
-                        style={{ width: '35px', height: '30px' }}
-                        title={a.icon}
-                      >
-                        {customIcon(a.icon, '#000000', '1x')}
-                      </td>
-                      <td>{a.name}</td>
-                      <td className="is-hidden-touch">{a.type}</td>
-                      <td>{a.unit}</td>
-                      <td className="has-text-centered">{a.points}</td>
-                      <td className="has-text-centered" title={a.description ? a.description : ''}>
-                        {a.description ? 'Y' : ''}
-                      </td>
-                      <td className="has-text-centered" title={a.url ? a.url : ''}>
-                        {a.url ? (
-                          <a href={a.url} target="_blank" rel="noopener noreferrer">
-                            Y
-                          </a>
-                        ) : (
-                          ''
-                        )}
-                      </td>
+            {props.activities.length > 0 && (
+              <div className="box">
+                <h1 className="title is-size-6">Summary of the activities</h1>
+                <table className="table is-size-7 is-fullwidth is-hoverable is-narrow">
+                  <thead>
+                    <tr>
+                      <th>Icon</th>
+                      <th>Name</th>
+                      <th className="is-hidden-touch">Type</th>
+                      <th>Unit</th>
+                      <th title="points per unit" className="has-text-centered">
+                        P
+                      </th>
+                      <th title="description" className="has-text-centered">
+                        D
+                      </th>
+                      <th title="video URL" className="has-text-centered">
+                        V
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="has-text-right is-size-7">click on a row to edit the activity</p>
-            </div>
+                  </thead>
+                  <tbody>
+                    {props.activities.map(a => (
+                      <tr key={a.id} className="is-clickable" onClick={() => setEditingActivity(a)}>
+                        <td
+                          className="has-text-centered"
+                          style={{ width: '35px', height: '30px' }}
+                          title={a.icon}
+                        >
+                          {customIcon(a.icon, '#000000', '1x')}
+                        </td>
+                        <td>{a.name}</td>
+                        <td className="is-hidden-touch">{a.type}</td>
+                        <td>{a.unit}</td>
+                        <td className="has-text-centered">{a.points}</td>
+                        <td
+                          className="has-text-centered"
+                          title={a.description ? a.description : ''}
+                        >
+                          {a.description ? 'Y' : ''}
+                        </td>
+                        <td className="has-text-centered" title={a.url ? a.url : ''}>
+                          {a.url ? (
+                            <a href={a.url} target="_blank" rel="noopener noreferrer">
+                              Y
+                            </a>
+                          ) : (
+                            ''
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="has-text-right is-size-7">click on a row to edit the activity</p>
+              </div>
+            )}
+
             <div className="box">
               <h1 className="title is-size-6">Preview of the imported SVG files</h1>
               <div className="is-clearfix">
