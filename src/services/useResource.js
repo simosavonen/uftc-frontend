@@ -27,9 +27,17 @@ const useResource = (baseUrl, user) => {
     });
   };
 
+  const remove = async resource => {
+    const response = await axios.delete(baseUrl + '/' + resource.id);
+    if (response.status === 204) {
+      setData(data.filter(item => item.id !== resource.id));
+    }
+  };
+
   const service = {
     add,
-    update
+    update,
+    remove
   };
 
   return [data, service];

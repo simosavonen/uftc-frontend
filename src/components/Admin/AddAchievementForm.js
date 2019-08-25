@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import Select from 'react-select'
-//import Async from 'react-select/async';
+import ConfirmButton from '../ConfirmButton';
 
 const AddAchievementForm = props => {
   const [isOneDayChallenge, setIsOneDayChallenge] = useState(true);
@@ -11,10 +10,49 @@ const AddAchievementForm = props => {
   const [pointsReward, setPointsReward] = useState(0);
   const [fontAwesomeIcon, setFontAwesomeIcon] = useState('medal');
   const [iconColor, setIconColor] = useState('#CD7F32');
-  const [activity, setActivity] = useState(null);
+  const [activity, setActivity] = useState('');
 
   const today = moment().format('YYYY-MM-DD');
   const [date, setDate] = useState(today);
+
+  const [editingAchievement, setEditingAchievement] = useState(null);
+
+  useEffect(() => {
+    if (editingAchievement) {
+      setName(editingAchievement.name);
+      setRequirement(editingAchievement.requirement);
+      setPointsReward(editingAchievement.pointsReward);
+      setFontAwesomeIcon(editingAchievement.fontAwesomeIcon);
+      setIconColor(editingAchievement.iconColor);
+      setDate(editingAchievement.date ? moment(editingAchievement.date).format('YYYY-MM-DD') : '');
+      setActivity(editingAchievement.activity ? editingAchievement.activity : '');
+    }
+  }, [editingAchievement]);
+
+  // code refers to props.activities[0].id, activities can be an empty array
+  if (props.activities.length === 0) {
+    return (
+      <div className="section">
+        <h1 className="title is-5">Add an activity before using this form.</h1>
+      </div>
+    );
+  }
+
+  const reset = () => {
+    if (isOneDayChallenge) {
+      setDate(today);
+      setActivity('');
+    } else {
+      setDate('');
+      setActivity(props.activities[0].id);
+    }
+    setName('');
+    setRequirement(100);
+    setPointsReward(0);
+    setFontAwesomeIcon('medal');
+    setIconColor('#CD7F32');
+    setEditingAchievement(null);
+  };
 
   const submit = event => {
     event.preventDefault();
@@ -22,12 +60,20 @@ const AddAchievementForm = props => {
       name,
       requirement,
       pointsReward,
-      activity,
-      date,
+      activity: activity === '' ? null : activity,
+      date: date === '' ? null : date,
       fontAwesomeIcon,
       iconColor
     };
-    props.addAchievement(newAchievement);
+    props.achievementService.add(newAchievement);
+  };
+
+  const activityNameById = id => {
+    const activity = props.activities.find(a => a.id === id);
+    if (activity) {
+      return activity.name;
+    }
+    return '';
   };
 
   const OneDayChallenge = (
@@ -71,11 +117,11 @@ const AddAchievementForm = props => {
   const switchBadgeTypeState = () => {
     if (isOneDayChallenge) {
       setIsOneDayChallenge(false);
-      setDate(null);
+      setDate('');
       setActivity(props.activities[0].id);
     } else {
       setIsOneDayChallenge(true);
-      setActivity(null);
+      setActivity('');
       setDate(today);
     }
   };
@@ -83,7 +129,7 @@ const AddAchievementForm = props => {
   const SelectButton = () => {
     return (
       <div className="field">
-        <div className="label">Choose achievement type</div>
+        <div className="label">Choose what type of achievement to add</div>
         <div className="buttons has-addons" onClick={() => switchBadgeTypeState()}>
           <span className={isOneDayChallenge ? 'button is-success is-selected' : 'button'}>
             One-day-challenge
@@ -102,7 +148,11 @@ const AddAchievementForm = props => {
         <div className="columns is-centered">
           <div className="column">
             <form onSubmit={submit}>
-              <SelectButton />
+              {!editingAchievement ? (
+                <SelectButton />
+              ) : (
+                <h1 className="title is-5">Edit the achievement</h1>
+              )}
 
               {isOneDayChallenge ? OneDayChallenge : ActivityBadge}
 
@@ -179,9 +229,27 @@ const AddAchievementForm = props => {
                 </div>
               </div>
               <div className="field">
-                <button className="button is-link">
-                  Add new {isOneDayChallenge ? 'one-day-challenge' : 'activity badge'}
-                </button>
+                {editingAchievement ? (
+                  <div className="buttons">
+                    <button className="button is-link">Save changes</button>
+                    <button className="button is-text" onClick={() => reset()}>
+                      Cancel
+                    </button>
+                    <ConfirmButton
+                      icon={['far', 'trash-alt']}
+                      classNames="is-danger is-outlined"
+                      texts={['delete', 'confirm']}
+                      action={() => {
+                        props.achievementService.remove({ id: editingAchievement.id });
+                        reset();
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <button className="button is-link">
+                    Add new {isOneDayChallenge ? 'one-day-challenge' : 'activity badge'}
+                  </button>
+                )}
               </div>
             </form>
           </div>
@@ -189,30 +257,82 @@ const AddAchievementForm = props => {
             {props.achievements.length > 0 && (
               <div className="box">
                 <h1 className="title is-5">Summary of the achievements</h1>
-                <table className="table is-hoverable is-fullwidth is-narrow">
+                <table className="table is-hoverable is-fullwidth is-narrow is-size-7">
                   <thead>
                     <tr>
-                      <th>Icon</th>
+                      <th className="has-text-centered">Icon</th>
                       <th>Name</th>
-                      <th>Req</th>
-                      <th>Rew</th>
+                      <th>Activity</th>
+                      <th className="has-text-centered" title="Points requirement">
+                        Req
+                      </th>
+                      <th className="has-text-centered" title="Points reward">
+                        Rew
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {props.achievements
                       .filter(a => a.date === null)
                       .map(a => (
-                        <tr key={a.id}>
-                          <td>
+                        <tr
+                          key={a.id}
+                          className="is-clickable"
+                          onClick={() => {
+                            setEditingAchievement(a);
+                            setIsOneDayChallenge(false);
+                          }}
+                        >
+                          <td className="has-text-centered">
                             <FontAwesomeIcon icon={a.fontAwesomeIcon} color={a.iconColor} />
                           </td>
                           <td>{a.name}</td>
-                          <td>{a.requirement}</td>
-                          <td>{a.pointsReward}</td>
+                          <td>{activityNameById(a.activity)}</td>
+                          <td className="has-text-centered">{a.requirement}</td>
+                          <td className="has-text-centered">{a.pointsReward}</td>
                         </tr>
                       ))}
                   </tbody>
                 </table>
+
+                <table className="table is-hoverable is-fullwidth is-narrow is-size-7">
+                  <thead>
+                    <tr>
+                      <th className="has-text-centered">Icon</th>
+                      <th>Name</th>
+                      <th>Date</th>
+                      <th className="has-text-centered" title="Points requirement">
+                        Req
+                      </th>
+                      <th className="has-text-centered" title="Points reward">
+                        Rew
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {props.achievements
+                      .filter(a => a.date !== null)
+                      .map(a => (
+                        <tr
+                          key={a.id}
+                          className="is-clickable"
+                          onClick={() => {
+                            setEditingAchievement(a);
+                            setIsOneDayChallenge(true);
+                          }}
+                        >
+                          <td className="has-text-centered">
+                            <FontAwesomeIcon icon={a.fontAwesomeIcon} color={a.iconColor} />
+                          </td>
+                          <td>{a.name}</td>
+                          <td>{moment(a.date).format('YYYY-MM-DD')}</td>
+                          <td className="has-text-centered">{a.requirement}</td>
+                          <td className="has-text-centered">{a.pointsReward}</td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+                <p className="is-size-7 has-text-right">click on a row to edit the achievement</p>
               </div>
             )}
           </div>

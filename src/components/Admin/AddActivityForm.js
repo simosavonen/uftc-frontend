@@ -36,8 +36,6 @@ const AddActivityForm = props => {
       setDescription(editingActivity.description);
       setUrl(editingActivity.url);
       setIcon(editingActivity.icon);
-    } else {
-      reset();
     }
   }, [editingActivity]);
 
@@ -263,7 +261,7 @@ const AddActivityForm = props => {
                   {editingActivity ? (
                     <div className="buttons">
                       <button className="button is-info">Save changes</button>
-                      <button className="button is-text" onClick={() => setEditingActivity(null)}>
+                      <button className="button is-text" onClick={() => reset()}>
                         Cancel
                       </button>
                     </div>

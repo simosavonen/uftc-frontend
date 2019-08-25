@@ -100,7 +100,7 @@ const Routes = props => {
         path="/addachievement"
         render={() => (
           <AddAchievementForm
-            addAchievement={achievementService.add}
+            achievementService={achievementService}
             activities={activities}
             achievements={achievements}
           />
