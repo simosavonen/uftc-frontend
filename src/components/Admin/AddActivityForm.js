@@ -39,7 +39,7 @@ const AddActivityForm = props => {
     }
   }, [editingActivity]);
 
-  const submit = event => {
+  const submit = async event => {
     event.preventDefault();
     if (!editingActivity) {
       const newActivity = {
@@ -52,7 +52,7 @@ const AddActivityForm = props => {
         icon
       };
       try {
-        props.activityService.add(newActivity);
+        await props.activityService.add(newActivity);
         toast.success('Activity added.');
         reset();
       } catch (error) {
@@ -60,7 +60,7 @@ const AddActivityForm = props => {
       }
     } else {
       try {
-        props.activityService.update({
+        await props.activityService.update({
           id: editingActivity.id,
           name,
           points,

@@ -3,6 +3,7 @@ import moment from 'moment';
 import PreviewSeries from './PreviewSeries';
 import EditChallengeForm from './EditChallengeForm';
 import { toast } from 'react-toastify';
+import ConfirmButton from '../ConfirmButton';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -54,7 +55,7 @@ const AddChallengeForm = props => {
     }
   }, [editingSeries]);
 
-  const addOrEdit = event => {
+  const addOrEdit = async event => {
     event.preventDefault();
     if (!editingSeries) {
       const newChallenge = {
@@ -70,10 +71,15 @@ const AddChallengeForm = props => {
         icon,
         organizers
       };
-      props.challengeService.add(newChallenge);
+      try {
+        await props.challengeService.add(newChallenge);
+        toast.success('Challenge or series created.');
+      } catch (error) {
+        toast.warn('Failed to create a challenge or series.');
+      }
     } else {
       try {
-        props.challengeService.update({
+        await props.challengeService.update({
           id: editingSeries.id,
           seriesTitle,
           description,
@@ -87,19 +93,33 @@ const AddChallengeForm = props => {
     }
   };
 
-  const addOrganizer = event => {
+  const addOrganizer = async event => {
     event.preventDefault();
-    for (let c of props.challenges) {
-      props.challengeService.update({
-        id: c.id,
-        organizers: organizers.concat([newOrganizer])
-      });
+    try {
+      for (let c of props.challenges) {
+        await props.challengeService.update({
+          id: c.id,
+          organizers: organizers.concat([newOrganizer])
+        });
+      }
+      setNewOrganizer('');
+      toast.success('New organizer added.');
+    } catch (error) {
+      toast.warn('Failed to add an organizer.');
     }
-    setNewOrganizer('');
   };
 
-  const reset = event => {
-    event.preventDefault();
+  const deleteSeries = async event => {
+    try {
+      await props.challengeService.remove({ id: editingSeries.id });
+      toast.success('Series deleted.');
+      reset();
+    } catch (error) {
+      toast.warn('Failed to delete the series.');
+    }
+  };
+
+  const reset = () => {
     setEditingSeries(null);
     setSeriesTitle('');
     setDescription('');
@@ -363,6 +383,12 @@ const AddChallengeForm = props => {
                     <button className="button is-text" onClick={reset}>
                       Cancel
                     </button>
+                    <ConfirmButton
+                      icon={['far', 'trash-alt']}
+                      classNames="is-danger is-outlined"
+                      texts={['delete', 'confirm']}
+                      action={() => deleteSeries()}
+                    />
                   </div>
                 ) : (
                   <button className="button is-info">

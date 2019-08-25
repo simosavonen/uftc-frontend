@@ -21,11 +21,11 @@ const EditChallengeForm = props => {
     }
   }, [props.challenges]);
 
-  const submit = event => {
+  const submit = async event => {
     event.preventDefault();
     try {
       for (let c of props.challenges) {
-        props.challengeService.update({
+        await props.challengeService.update({
           id: c.id,
           name,
           startDate,

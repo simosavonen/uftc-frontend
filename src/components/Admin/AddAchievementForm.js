@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ConfirmButton from '../ConfirmButton';
+import { toast } from 'react-toastify';
 
 const AddAchievementForm = props => {
   const [isOneDayChallenge, setIsOneDayChallenge] = useState(true);
@@ -54,7 +55,7 @@ const AddAchievementForm = props => {
     setEditingAchievement(null);
   };
 
-  const submit = event => {
+  const submit = async event => {
     event.preventDefault();
     if (!editingAchievement) {
       const newAchievement = {
@@ -66,18 +67,39 @@ const AddAchievementForm = props => {
         fontAwesomeIcon,
         iconColor
       };
-      props.achievementService.add(newAchievement);
+      try {
+        await props.achievementService.add(newAchievement);
+        toast.success('Achievement added.');
+      } catch (error) {
+        toast.warn('Failed to add the achievement.');
+      }
     } else {
-      props.achievementService.update({
-        id: editingAchievement.id,
-        name,
-        requirement,
-        pointsReward,
-        activity: activity === '' ? null : activity,
-        date: date === '' ? null : date,
-        fontAwesomeIcon,
-        iconColor
-      });
+      try {
+        await props.achievementService.update({
+          id: editingAchievement.id,
+          name,
+          requirement,
+          pointsReward,
+          activity: activity === '' ? null : activity,
+          date: date === '' ? null : date,
+          fontAwesomeIcon,
+          iconColor
+        });
+        toast.success('Achievement updated.');
+      } catch (error) {
+        toast.warn('Failed to update the achievement.');
+      }
+    }
+  };
+
+  const deleteAchievement = async event => {
+    event.preventDefault();
+    try {
+      await props.achievementService.remove({ id: editingAchievement.id });
+      toast.success('Achievement deleted.');
+      reset();
+    } catch (error) {
+      toast.warn('Failed to delete the achievement.');
     }
   };
 
@@ -253,10 +275,7 @@ const AddAchievementForm = props => {
                       icon={['far', 'trash-alt']}
                       classNames="is-danger is-outlined"
                       texts={['delete', 'confirm']}
-                      action={() => {
-                        props.achievementService.remove({ id: editingAchievement.id });
-                        reset();
-                      }}
+                      action={() => deleteAchievement()}
                     />
                   </div>
                 ) : (
