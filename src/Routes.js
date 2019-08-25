@@ -115,7 +115,7 @@ const Routes = props => {
       />
       <Route
         path="/addactivity"
-        render={() => <AddActivityForm addActivity={activityService.add} activities={activities} />}
+        render={() => <AddActivityForm activityService={activityService} activities={activities} />}
       />
       <Route
         path="/updateuser"

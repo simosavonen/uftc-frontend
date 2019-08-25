@@ -26,7 +26,7 @@ const locations = {
 
 // list of manually added and cleaned SVG files
 const icons = [
-  'icon.svg',
+  'box.svg',
   'cycling.svg',
   'kettlebell.svg',
   'plank.svg',

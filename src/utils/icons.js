@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Box } from '../icons/icon.svg'; // placeholder box
+import { ReactComponent as Box } from '../icons/box.svg'; // placeholder box
 import { ReactComponent as KettleBell } from '../icons/kettlebell.svg';
 import { ReactComponent as Walking } from '../icons/walking.svg';
 import { ReactComponent as Cycling } from '../icons/cycling.svg';

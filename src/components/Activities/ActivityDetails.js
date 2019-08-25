@@ -17,7 +17,7 @@ const ActivityDetails = ({ activity, challenge }) => {
         <div className="media-content">
           <div className="content">
             <p className="title is-5">{activity.name}</p>
-            <p className="subtitle is-6">{activity.description}</p>
+            <p className="subtitle is-6">{activity.description.split('.')[0]}</p>
           </div>
         </div>
         <div className="media-right has-text-right">
