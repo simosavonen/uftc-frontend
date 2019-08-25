@@ -125,11 +125,32 @@ const Routes = props => {
       <Route exact path="/styleguide" render={() => <StyleGuide />} />
       <Route
         exact
-        path="/"
+        path="/selectseries"
         render={() => (
           <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
         )}
       />
+      {!activeChallenge() ? (
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
+          )}
+        />
+      ) : (
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <ActivitiesView
+              challenge={activeChallenge()}
+              workouts={workouts}
+              activities={activities}
+            />
+          )}
+        />
+      )}
       <Route path="/" component={NotFound} />
     </Switch>
   );

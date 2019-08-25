@@ -39,7 +39,7 @@ const UpdateUserForm = props => {
       <form onSubmit={submit} className="column is-6">
         <h1 className="title is-5">Update user profile</h1>
         <div className="field">
-          <label className="label">Display Name:</label>
+          <label className="label">Display Name</label>
           <div className="control">
             <input
               className="input"
@@ -48,11 +48,12 @@ const UpdateUserForm = props => {
               value={name}
               required
             />
+            <p className="help">Surnames shown abbreviated. Nicknames are OK.</p>
           </div>
         </div>
 
         <div className="field">
-          <label className="label">Email:</label>
+          <label className="label">Email</label>
           <div className="control">
             <input
               className="input"
@@ -64,7 +65,7 @@ const UpdateUserForm = props => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Location:</label>
+          <label className="label">Location</label>
           <div className="select">
             <select value={location} onChange={({ target }) => setLocation(target.value)}>
               {locationNames.map(loc => (
@@ -76,7 +77,7 @@ const UpdateUserForm = props => {
 
         <div className="field">
           <div className="control">
-            <button className="button is-info">save changes</button>
+            <button className="button is-info">Save changes</button>
           </div>
         </div>
       </form>

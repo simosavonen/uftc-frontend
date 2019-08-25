@@ -9,7 +9,7 @@ const Header = props => {
     <nav className="navbar has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-desktop">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/">
+          <Link className="navbar-item" to="/selectseries">
             <Logo width={100} height={35} />
           </Link>
           <div

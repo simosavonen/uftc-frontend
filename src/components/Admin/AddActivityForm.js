@@ -327,20 +327,24 @@ const AddActivityForm = props => {
               </table>
               <p className="has-text-right is-size-7">click on a row to edit the activity</p>
             </div>
-            <div className="box is-clearfix">
+            <div className="box">
               <h1 className="title is-size-6">Preview of the imported SVG files</h1>
-              {icons.map(i => (
-                <div
-                  key={i}
-                  className="has-text-centered is-pulled-left"
-                  style={{ padding: '0.5em' }}
-                >
-                  <div className="image is-48x48" style={{ margin: 'auto' }}>
-                    {customIcon(i, '#000000', '1x')}
+              <div className="is-clearfix">
+                {icons.map(i => (
+                  <div
+                    key={i}
+                    className="has-text-centered is-pulled-left is-clickable hover-effect-grey"
+                    style={{ padding: '0.5em' }}
+                    onClick={() => setIcon(i)}
+                  >
+                    <div className="image is-48x48" style={{ margin: 'auto' }}>
+                      {customIcon(i, '#000000', '1x')}
+                    </div>
+                    <p className="is-size-7">{i}</p>
                   </div>
-                  <p className="is-size-7">{i}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+              <p className="is-size-7 has-text-right">can select the icon by clicking</p>
             </div>
           </div>
         </div>
