@@ -59,7 +59,7 @@ const App = props => {
       .catch(error => toast.warn('Failed to update user profile.'));
   };
 
-  const addWorkout = workout => {
+  const addWorkout = (activityId, workout) => {
     if (user.activeChallenge) {
       const myBadgesBefore = checkAchievements(
         workouts,
@@ -68,7 +68,7 @@ const App = props => {
         activeChallenge()
       );
       workoutService
-        .add(workout)
+        .add(activityId, workout)
         .then(response => {
           let newWorkouts;
           if (

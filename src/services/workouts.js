@@ -11,8 +11,8 @@ const getWorkoutsByUser = id => {
   return axios.get(baseUrl + `/${id}`);
 };
 
-const add = workout => {
-  return axios.post(baseUrl, workout);
+const add = (activity, workout) => {
+  return axios.post(baseUrl + `/${activity}`, workout);
 };
 
 const update = workout => {
