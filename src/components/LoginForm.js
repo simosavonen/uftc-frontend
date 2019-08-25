@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../logos/plank_UFTC.svg';
-import { ReactComponent as AmbientiaLogo } from '../logos/Ambientia_logo_RED_RGB.svg';
+import { ReactComponent as AmbientiaLogo } from '../logos/ambientia-fc-logo-white.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { locations } from '../config/config';
 
