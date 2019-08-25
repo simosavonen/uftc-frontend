@@ -20,8 +20,8 @@ const AddAchievementForm = props => {
   useEffect(() => {
     if (editingAchievement) {
       setName(editingAchievement.name);
-      setRequirement(editingAchievement.requirement);
-      setPointsReward(editingAchievement.pointsReward);
+      setRequirement(+editingAchievement.requirement);
+      setPointsReward(+editingAchievement.pointsReward);
       setFontAwesomeIcon(editingAchievement.fontAwesomeIcon);
       setIconColor(editingAchievement.iconColor);
       setDate(editingAchievement.date ? moment(editingAchievement.date).format('YYYY-MM-DD') : '');
@@ -56,16 +56,29 @@ const AddAchievementForm = props => {
 
   const submit = event => {
     event.preventDefault();
-    const newAchievement = {
-      name,
-      requirement,
-      pointsReward,
-      activity: activity === '' ? null : activity,
-      date: date === '' ? null : date,
-      fontAwesomeIcon,
-      iconColor
-    };
-    props.achievementService.add(newAchievement);
+    if (!editingAchievement) {
+      const newAchievement = {
+        name,
+        requirement,
+        pointsReward,
+        activity: activity === '' ? null : activity,
+        date: date === '' ? null : date,
+        fontAwesomeIcon,
+        iconColor
+      };
+      props.achievementService.add(newAchievement);
+    } else {
+      props.achievementService.update({
+        id: editingAchievement.id,
+        name,
+        requirement,
+        pointsReward,
+        activity: activity === '' ? null : activity,
+        date: date === '' ? null : date,
+        fontAwesomeIcon,
+        iconColor
+      });
+    }
   };
 
   const activityNameById = id => {
@@ -175,7 +188,7 @@ const AddAchievementForm = props => {
                   <input
                     className="input"
                     id="requirement"
-                    onChange={({ target }) => setRequirement(target.value)}
+                    onChange={({ target }) => setRequirement(+target.value)}
                     value={requirement}
                     required
                   />
@@ -186,8 +199,9 @@ const AddAchievementForm = props => {
                   <input
                     className="input"
                     id="pointsReward"
-                    onChange={({ target }) => setPointsReward(target.value)}
+                    onChange={({ target }) => setPointsReward(+target.value)}
                     value={pointsReward}
+                    required
                   />
                 </div>
               </div>
