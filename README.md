@@ -5,10 +5,10 @@
 <div align="center"><h3>Ultimate Functional Training Challenge</h3></div>
 
 <div align="center">
-![GitHub issues](https://img.shields.io/github/issues/simosavonen/uftc-frontend)
-![GitHub](https://img.shields.io/github/license/simosavonen/uftc-frontend)
-![GitHub contributors](https://img.shields.io/github/contributors/simosavonen/uftc-frontend)
-![GitHub last commit](https://img.shields.io/github/last-commit/simosavonen/uftc-frontend)
+ <img alt="GitHub issues" src="https://img.shields.io/github/issues/simosavonen/uftc-frontend">
+ <img alt="GitHub" src="https://img.shields.io/github/license/simosavonen/uftc-frontend">
+ <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/simosavonen/uftc-frontend">
+ <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simosavonen/uftc-frontend">
 </div>
 
 ---
