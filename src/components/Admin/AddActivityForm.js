@@ -100,6 +100,7 @@ const AddActivityForm = props => {
                   <label className="label">Name</label>
                   <input
                     className="input"
+                    id="name"
                     onChange={({ target }) => setName(target.value)}
                     value={name}
                     required

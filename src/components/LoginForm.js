@@ -136,6 +136,7 @@ const LoginForm = props => {
                   <div className="control is-expanded has-icons-left">
                     <input
                       className="input"
+                      id="Email"
                       type="email"
                       placeholder="first.last@ambientia.fi"
                       value={email}
@@ -153,6 +154,7 @@ const LoginForm = props => {
                   <div className="control has-icons-left">
                     <input
                       className="input"
+                      id="Password"
                       type="password"
                       value={password}
                       onChange={({ target }) => setPassword(target.value)}
@@ -178,6 +180,7 @@ const LoginForm = props => {
                       className={`button is-fullwidth has-text-weight-bold ${isValid &&
                         'is-success'}`}
                       disabled={!isValid}
+                      id="Create"
                       title={isValid ? '' : 'Check the form fields'}
                     >
                       {isNewUser ? 'Create an account' : 'Log in'}

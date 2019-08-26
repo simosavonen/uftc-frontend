@@ -16,7 +16,7 @@ describe('add activity', function() {
       cy.wait(200);
       cy.contains('Admin tools').click();
       cy.wait(100);
-      cy.contains('Add activity').click();
+      cy.contains('Activities').click();
     });
 
     it('add pushup activity', function() {
