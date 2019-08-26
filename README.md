@@ -5,10 +5,12 @@
 <div align="center"><h3>Ultimate Functional Training Challenge</h3></div>
 
 <div align="center">
- <img alt="GitHub issues" src="https://img.shields.io/github/issues/simosavonen/uftc-frontend">
- <img alt="GitHub" src="https://img.shields.io/github/license/simosavonen/uftc-frontend">
- <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/simosavonen/uftc-frontend">
- <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simosavonen/uftc-frontend">
+ <a href="https://github.com/simosavonen/uftc-frontend/issues" rel="noopener">
+ <img alt="GitHub issues" src="https://img.shields.io/github/issues/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/blob/master/LICENSE" rel="noopener">
+ <img alt="GitHub" src="https://img.shields.io/github/license/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/graphs/contributors" rel="noopener"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/commits/master" rel="noopener"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simosavonen/uftc-frontend"></a>
 </div>
 
 ---
