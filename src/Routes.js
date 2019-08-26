@@ -98,7 +98,13 @@ const Routes = props => {
       />
       <Route
         path="/addachievement"
-        render={() => <AddAchievementForm addAchievement={achievementService.add} />}
+        render={() => (
+          <AddAchievementForm
+            achievementService={achievementService}
+            activities={activities}
+            achievements={achievements}
+          />
+        )}
       />
       <Route
         path="/badges"
@@ -113,21 +119,42 @@ const Routes = props => {
       />
       <Route
         path="/addactivity"
-        render={() => <AddActivityForm addActivity={activityService.add} />}
+        render={() => <AddActivityForm activityService={activityService} activities={activities} />}
       />
       <Route
         path="/updateuser"
         render={() => <UpdateUserForm updateUser={updateUser} user={user} />}
       />
-      <Route path="/admin" render={() => <AdminView />} />
+      <Route path="/admin" render={() => <AdminView challenges={challenges} user={user} />} />
       <Route exact path="/styleguide" render={() => <StyleGuide />} />
       <Route
         exact
-        path="/"
+        path="/selectseries"
         render={() => (
           <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
         )}
       />
+      {!activeChallenge() ? (
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <ChallengeSelectView challenges={challenges} updateUser={updateUser} user={user} />
+          )}
+        />
+      ) : (
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <ActivitiesView
+              challenge={activeChallenge()}
+              workouts={workouts}
+              activities={activities}
+            />
+          )}
+        />
+      )}
       <Route path="/" component={NotFound} />
     </Switch>
   );

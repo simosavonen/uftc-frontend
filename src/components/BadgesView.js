@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../badges/utils';
+import { checkAchievements, checkDailyChallenges, badgeRewardsTotal } from '../utils/badges';
 
 const Badge = ({ achievement, activity }) => {
   return (
@@ -39,7 +39,11 @@ const Badge = ({ achievement, activity }) => {
               : `total on ${moment(achievement.date).format('MMM Do')}`}
             .
             <br />
-            <span className="has-text-danger">Reward: {achievement.pointsReward} extra points</span>
+            {achievement.pointsReward > 0 && (
+              <span className="has-text-danger">
+                Reward: {achievement.pointsReward} extra points
+              </span>
+            )}
           </p>
         </div>
       </article>

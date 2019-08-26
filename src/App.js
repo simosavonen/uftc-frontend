@@ -12,7 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { Badge } from './components/BadgesView';
 import { apiUrls } from './config/config';
-import { checkAchievements } from './badges/utils';
+import { checkAchievements } from './utils/badges';
 import Routes from './Routes';
 
 import './App.css';
@@ -42,21 +42,24 @@ const App = props => {
         .get()
         .then(result => {
           setWorkouts(result.data);
-          //console.log('workouts', result.data);
         })
         .catch(error => console.log('workouts', error.response.data));
     }
   }, [user]);
 
   const updateUser = updatedUser => {
-    userService.update(updatedUser).then(response => {
-      const newUserState = { token: user.token, ...response.data };
-      setUser(newUserState);
-      localStorage.setItem('loggedUser', JSON.stringify(newUserState));
-    });
+    userService
+      .update(updatedUser)
+      .then(response => {
+        const newUserState = { token: user.token, ...response.data };
+        setUser(newUserState);
+        localStorage.setItem('loggedUser', JSON.stringify(newUserState));
+        toast.success('User profile updated.');
+      })
+      .catch(error => toast.warn('Failed to update user profile.'));
   };
 
-  const addWorkout = workout => {
+  const addWorkout = (activityId, workout) => {
     if (user.activeChallenge) {
       const myBadgesBefore = checkAchievements(
         workouts,
@@ -65,9 +68,8 @@ const App = props => {
         activeChallenge()
       );
       workoutService
-        .add(workout)
+        .add(activityId, workout)
         .then(response => {
-          //console.log('response.data', response.data);
           let newWorkouts;
           if (
             workouts.length === 0 ||
@@ -78,7 +80,6 @@ const App = props => {
             const workoutsWithNew = workouts.map(w =>
               w.id !== response.data.id ? w : response.data
             );
-            //console.log(workoutsWithNew, workoutsWithNew);
             newWorkouts = workoutsWithNew;
           }
           setWorkouts(newWorkouts);
@@ -214,29 +215,6 @@ const App = props => {
     return undefined; // components check for undefined, not null
   };
 
-  // todo: more than 1 background image?
-  const background = () => {
-    if (!isAuthenticated()) {
-      if(props.location.pathname.startsWith('/passwordreset')) {
-        return '';
-      }
-      return 'kettlebeach';
-    }
-    return '';
-  };
-
-  // todo: add other colors
-  const gradient = () => {
-    const path = props.location.pathname;
-    switch (path) {
-      default:
-        // the reset token is added to this, so startsWith()
-        if (path.startsWith('/passwordreset')) {
-          return 'blue-gradient';
-        }
-        return '';
-    }
-  };
   // styles
   const MySwal = withReactContent(Swal);
   const badgeAlert = achs => {
@@ -265,33 +243,33 @@ const App = props => {
   };
 
   return (
-    <div className={`site ${background()}`}>
-      <div className={`main ${gradient()}`}>
-        {isAuthenticated() && <Header logout={logout} />}
-        <Routes
-          user={user}
-          updateUser={updateUser}
-          login={login}
-          register={register}
-          isAuthenticated={isAuthenticated}
-          activityByName={activityByName}
-          activeChallenge={activeChallenge}
-          workouts={workouts}
-          activities={activities}
-          achievements={achievements}
-          challenges={challenges}
-          addWorkout={addWorkout}
-          updateWorkout={updateWorkout}
-          deleteWorkoutInstance={deleteWorkoutInstance}
-          challengeService={challengeService}
-          achievementService={achievementService}
-          activityService={activityService}
-          userService={userService}
-        />
-        <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
-        {isAuthenticated() && <Footer />}
-      </div>
-    </div>
+    <>
+      {isAuthenticated() && <Header logout={logout} />}
+
+      <Routes
+        user={user}
+        updateUser={updateUser}
+        login={login}
+        register={register}
+        isAuthenticated={isAuthenticated}
+        activityByName={activityByName}
+        activeChallenge={activeChallenge}
+        workouts={workouts}
+        activities={activities}
+        achievements={achievements}
+        challenges={challenges}
+        addWorkout={addWorkout}
+        updateWorkout={updateWorkout}
+        deleteWorkoutInstance={deleteWorkoutInstance}
+        challengeService={challengeService}
+        achievementService={achievementService}
+        activityService={activityService}
+        userService={userService}
+      />
+
+      <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
+      {isAuthenticated() && <Footer />}
+    </>
   );
 };
 export default withRouter(App);

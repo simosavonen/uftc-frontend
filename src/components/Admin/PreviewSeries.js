@@ -1,21 +1,21 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import Icon from '../Icon';
 
-const SeriesRow = ({ challenge }) => {
+const SeriesRow = ({ challenge, setEditingSeries }) => {
   return (
-    <tr>
+    <tr className="is-clickable" title="click to edit" onClick={() => setEditingSeries(challenge)}>
       <td className="has-text-centered" title={challenge.icon}>
-        <FontAwesomeIcon icon={challenge.icon} size="2x" />
+        <Icon icon={challenge.icon} size="2x" />
       </td>
       <td>{challenge.seriesTitle}</td>
-      <td>{challenge.description}</td>
+      <td dangerouslySetInnerHTML={{ __html: challenge.description }} />
       <td className="has-text-centered">{challenge.pointBonus}</td>
     </tr>
   );
 };
 
-const PreviewSeries = ({ challenges }) => {
+const PreviewSeries = ({ challenges, setEditingSeries }) => {
   if (!challenges.length) return null;
 
   return (
@@ -86,11 +86,11 @@ const PreviewSeries = ({ challenges }) => {
         </div>
       </div>
 
-      <table className="table is-fullwidth">
+      <table className="table is-fullwidth is-hoverable">
         <thead>
           <tr>
             <td className="has-text-centered">Icon</td>
-            <td>Series Title</td>
+            <td>Series</td>
             <td>Description</td>
             <td title="Point Bonus" className="has-text-centered">
               PB
@@ -99,10 +99,11 @@ const PreviewSeries = ({ challenges }) => {
         </thead>
         <tbody>
           {challenges.map(c => (
-            <SeriesRow key={c.id} challenge={c} />
+            <SeriesRow key={c.id} challenge={c} setEditingSeries={setEditingSeries} />
           ))}
         </tbody>
       </table>
+      <p className="is-size-7 has-text-right">click at a row to edit the series</p>
     </div>
   );
 };

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import Icon from './Icon';
 
-const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActiveChallenge }) => {
+const Ikonipallo = ({ series, iconName, handleClick, isSelected, isActiveChallenge }) => {
   let styles = {
-    width: '33vw',
+    width: '20vw',
     minWidth: '110px',
     maxWidth: '200px',
-    height: '33vw',
+    height: '20vw',
     minHeight: '110px',
     maxHeight: '200px',
-    borderRadius: '33vw',
+    borderRadius: '20vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -25,21 +25,16 @@ const Ikonipallo = ({ series, iconName, bgColor, handleClick, isSelected, isActi
       borderWidth: '6px'
     };
   }
-  const bulmaClass =
-    'has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3';
-  let customClass = 'series-button-hoverable';
-  if (isActiveChallenge) customClass = 'series-button';
-  const className = bulmaClass + ' ' + customClass;
 
   return (
     <div
       style={styles}
-      className={className}
+      className="red-circle-gradient is-clickable has-text-centered has-text-white-ter is-size-6-mobile is-size-5-tablet is-size-4-desktop is-size-3"
       onClick={() => {
         handleClick();
       }}
     >
-      <FontAwesomeIcon icon={iconName} size="2x" />
+      <Icon icon={iconName} size="2x" />
       <p>{series.seriesTitle}</p>
       <p style={{ color: '#000000', fontWeight: 'bold' }} title="participants">
         {series.participants ? series.participants : <>&nbsp;</>}
@@ -97,16 +92,19 @@ const ChallengeSelectView = props => {
 
   const challengeSelections = challenges =>
     challenges.map(c => (
-      <div className="column is-4 has-text-centered " key={c.id}>
+      <div className="column has-text-centered " key={c.id}>
         <Ikonipallo
           series={c}
           iconName={c.icon || 'stopwatch'}
-          bgColor="#ff2457"
           handleClick={handleClickOnBall(c.id)}
           isSelected={c.id === selectedSeries}
           isActiveChallenge={c.id === props.user.activeChallenge}
         />
-        <div className="is-size-6-mobile is-size-5-tablet is-size-4">{c.description || ''}</div>
+        <div
+          dangerouslySetInnerHTML={{ __html: c.description }}
+          className="content is-size-6-mobile is-size-6-tablet is-size-5-desktop"
+          style={{ padding: '0.5em' }}
+        />
         <div className="has-text-weight-bold is-size-6-mobile is-size-5-tablet is-size-4">
           {props.user && props.user.activeChallenge === c.id && showActiveChallenge()}
         </div>

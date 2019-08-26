@@ -21,67 +21,68 @@ const RequestResetEmailForm = props => {
     passwordService
       .requestResetEmail(email)
       .then(response => {
-        if (response.status === 200) {
-          toast.success('Password reset link sent.');
-          setIsWaiting(false);
-          setEmail('');
-        }
+        toast.success('Password reset link sent.');
+        setIsWaiting(false);
+        setEmail('');
       })
       .catch(error => {
+        // showing an error would let bots find working emails
+        toast.success('Password reset link sent.');
         setIsWaiting(false);
-        toast.error('Unknown email.');
-        console.log('requestResetEmail', error.message);
+        setEmail('');
       });
   };
   return (
-    <div className="section container is-fullheight">
-      <h1 className="title is-size-5-mobile has-text-white">Forgot your password?</h1>
-      <h2 className="subtitle is-size-6-mobile has-text-white">
-        Email yourself a password reset link
-      </h2>
-      <form onSubmit={submit}>
-        <div className="field">
-          <label className="label has-text-white">Email</label>
-
+    <div className="blue-gradient">
+      <div className="section container is-fullheight">
+        <h1 className="title is-size-5-mobile has-text-white">Forgot your password?</h1>
+        <h2 className="subtitle is-size-6-mobile has-text-white">
+          Email yourself a password reset link
+        </h2>
+        <form onSubmit={submit}>
           <div className="field">
-            <div className="control is-expanded has-icons-left">
-              <input
-                className="input"
-                type="email"
-                placeholder="first.last@ambientia.fi"
-                value={email}
-                onChange={({ target }) => setEmail(target.value.toLowerCase())}
-                required
-              />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon="envelope" />
-              </span>
+            <label className="label has-text-white">Email</label>
+
+            <div className="field">
+              <div className="control is-expanded has-icons-left">
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="first.last@ambientia.fi"
+                  value={email}
+                  onChange={({ target }) => setEmail(target.value.toLowerCase())}
+                  required
+                />
+                <span className="icon is-small is-left">
+                  <FontAwesomeIcon icon="envelope" />
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="field is-grouped">
-          <div className="control">
-            <button
-              className={`button ${isWaiting && 'is-loading'} has-text-weight-bold ${isValid &&
-                'is-success'}`}
-              disabled={!isValid}
-            >
-              Send reset link
-            </button>
+          <div className="field is-grouped">
+            <div className="control">
+              <button
+                className={`button ${isWaiting && 'is-loading'} has-text-weight-bold ${isValid &&
+                  'is-success'}`}
+                disabled={!isValid}
+              >
+                Send reset link
+              </button>
+            </div>
+            <div className="control">
+              <button
+                className="button is-text has-text-weight-bold"
+                onClick={event => {
+                  event.preventDefault();
+                  props.history.goBack();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-          <div className="control">
-            <button
-              className="button is-text has-text-weight-bold"
-              onClick={event => {
-                event.preventDefault();
-                props.history.goBack();
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

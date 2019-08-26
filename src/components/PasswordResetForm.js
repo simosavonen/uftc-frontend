@@ -44,60 +44,62 @@ const PasswordResetForm = ({ resetToken, history }) => {
   };
 
   return (
-    <div className="section container is-fullheight">
-      <h1 className="title has-text-white">Reset your password</h1>
-      <form onSubmit={submit}>
-        <div className="field">
-          <label className="label has-text-white">Email</label>
-          <p className="control">
-            <input
-              className="input is-static has-text-white"
-              type="email"
-              value={email}
-              autoComplete={email}
-            />
-          </p>
-        </div>
-
-        <div className="field">
-          <label className="label has-text-white">Password</label>
-          <p className="control has-icons-left">
-            <input
-              className="input"
-              type="password"
-              placeholder="new password"
-              autoComplete="new-password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
-            <span className="icon is-small is-left">
-              <FontAwesomeIcon icon="lock" />
-            </span>
-          </p>
-        </div>
-
-        <div className="field is-grouped">
-          <div className="control">
-            <button
-              className={`button ${isValid && 'is-success'} has-text-weight-bold`}
-              disabled={!isValid}
-            >
-              Reset password
-            </button>
+    <div className="blue-gradient">
+      <div className="section container is-fullheight">
+        <h1 className="title has-text-white">Reset your password</h1>
+        <form onSubmit={submit}>
+          <div className="field">
+            <label className="label has-text-white">Email</label>
+            <p className="control">
+              <input
+                className="input is-static has-text-white"
+                type="email"
+                value={email}
+                autoComplete={email}
+              />
+            </p>
           </div>
-          <div className="control">
-            <button
-              className="button is-text has-text-weight-bold"
-              onClick={event => {
-                event.preventDefault();
-                history.push('/');
-              }}
-            >
-              cancel
-            </button>
+
+          <div className="field">
+            <label className="label has-text-white">Password</label>
+            <p className="control has-icons-left">
+              <input
+                className="input"
+                type="password"
+                placeholder="new password"
+                autoComplete="new-password"
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+              />
+              <span className="icon is-small is-left">
+                <FontAwesomeIcon icon="lock" />
+              </span>
+            </p>
           </div>
-        </div>
-      </form>
+
+          <div className="field is-grouped">
+            <div className="control">
+              <button
+                className={`button ${isValid && 'is-success'} has-text-weight-bold`}
+                disabled={!isValid}
+              >
+                Reset password
+              </button>
+            </div>
+            <div className="control">
+              <button
+                className="button is-text has-text-weight-bold"
+                onClick={event => {
+                  event.preventDefault();
+                  history.push('/');
+                }}
+              >
+                cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

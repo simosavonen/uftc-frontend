@@ -55,15 +55,11 @@ const AddWorkoutForm = props => {
 
   const submit = event => {
     event.preventDefault();
-
-    const dateString = moment(date).format('YYYY-MM-DD');
-
     const workout = {
-      amount: amount,
-      date: dateString,
-      activity: props.activity.id
+      amount,
+      date: moment(date).format('YYYY-MM-DD')
     };
-    props.addWorkout(workout);
+    props.addWorkout(props.activity.id, workout);
   };
 
   const highlight = ({ date, view }) => {

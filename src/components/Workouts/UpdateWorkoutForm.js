@@ -83,11 +83,7 @@ const UpdateWorkoutForm = props => {
           </div>
 
           <p className="control">
-            <button
-              className="button is-success is-large"
-              id="updworplus"
-              onClick={handleMoreClick}
-            >
+            <button className="button is-success is-large" onClick={handleMoreClick}>
               <span className="icon is-large">
                 <FontAwesomeIcon icon="plus" />
               </span>
@@ -97,9 +93,7 @@ const UpdateWorkoutForm = props => {
         <label className="label has-text-black">Date: {modDate} </label>
         <div>
           <p>
-            <button className="button is-success is-fullwidth is-medium" id="updworsave">
-              Save changes
-            </button>
+            <button className="button is-success is-fullwidth is-medium">Save changes</button>
             <br />
           </p>
         </div>
@@ -107,7 +101,6 @@ const UpdateWorkoutForm = props => {
           <p className="control">
             <button
               className="button is-fullwidth"
-              id="updworback"
               onClick={event => {
                 event.preventDefault();
                 props.setWorkoutSelected(null);

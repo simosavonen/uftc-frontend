@@ -9,11 +9,27 @@
 }
 
 .blue-white-gradient {
-  background: linear-gradient(11deg, rgba(36, 138, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
+  background: linear-gradient(11deg, rgba(36, 138, 255, 0.4) 0%, rgba(255, 255, 255, 0.3) 100%);
 }
 
 .red-white-short-gradient {
   background: linear-gradient(180deg, rgba(255, 36, 87, 1) 0%, rgba(255, 36, 87, 0) 12%);
+}
+
+.red-circle-gradient {
+  background: radial-gradient(
+    farthest-corner at 40px 40px,
+    rgba(255, 36, 87, 1) 10%,
+    rgba(143, 21, 49, 1) 100%
+  );
+}
+
+.red-circle-gradient:hover {
+  background: radial-gradient(
+    farthest-corner at 50px 50px,
+    rgba(255, 36, 87, 1) 30%,
+    rgba(143, 21, 49, 1) 100%
+  );
 }
 
 .dark-cyan-gradient {
@@ -81,18 +97,4 @@
 .hover-svg-red:hover path,
 .hover-svg-red:hover circle {
   fill: #ff2457;
-}
-
-.series-button {
-  background-color: #ff2457;
-}
-
-.series-button-hoverable {
-  background-color: #ff2457;
-  transition: background-color 0.5s;
-  cursor: pointer;
-}
-
-.series-button-hoverable:hover {
-  background-color: #d61a3c;
 }
