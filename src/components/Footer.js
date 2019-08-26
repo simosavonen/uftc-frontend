@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = () => {
   return (
-    <div className="footer is-hidden-mobile is-size-6-tablet">
+    <div className="footer is-hidden-mobile is-size-6-tablet red-linear-gradient has-text-light">
       <div className="columns is-mobile is-centered">
         <div className="column is-4 has-text-centered">
           UFTC
@@ -18,14 +18,18 @@ const Footer = () => {
         </div>
         <div className="column is-4 has-text-centered">
           <p>
-            <Link to="/updateuser">
-              <FontAwesomeIcon icon="user-alt" />
+            <Link to="/updateuser" className="has-text-light">
+              <span className="icon is-medium">
+                <FontAwesomeIcon icon="user-alt" />
+              </span>
               User profile
             </Link>
           </p>
           <p>
-            <Link to="/admin">
-              <FontAwesomeIcon icon="cog" />
+            <Link to="/admin" className="has-text-light">
+              <span className="icon is-medium">
+                <FontAwesomeIcon icon="cog" />
+              </span>
               Admin tools
             </Link>
           </p>
