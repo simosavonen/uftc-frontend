@@ -10,6 +10,19 @@ import { ReactComponent as Challenge } from '../icons/challenge.svg';
 import { ReactComponent as Olympics } from '../icons/olympics.svg';
 import Icon from '../components/Icon';
 
+// list of manually added and cleaned SVG files
+const icons = [
+  'box.svg',
+  'cycling.svg',
+  'kettlebell.svg',
+  'plank.svg',
+  'pullup.svg',
+  'pushup.svg',
+  'walking.svg',
+  'challenge.svg',
+  'olympics.svg'
+];
+
 const customIcon = (iconName, color = '#000000', size = '2x') => {
   if (!iconName.toLowerCase().endsWith('.svg')) {
     return <Icon icon={iconName} size={size} color={color} />;
@@ -36,4 +49,4 @@ const customIcon = (iconName, color = '#000000', size = '2x') => {
   }
 };
 
-export { customIcon };
+export { customIcon, icons };

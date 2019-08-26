@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { icons } from '../../config/config';
-import { customIcon } from '../../utils/icons';
+import { customIcon, icons } from '../../utils/icons';
 
 const AddActivityForm = props => {
   const [name, setName] = useState('');
