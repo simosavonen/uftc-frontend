@@ -1,22 +1,11 @@
-html {
-  height: 100%;
-}
-
-body {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-.footer {
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
 .kettlebeach {
   background: url('./images/kettlebell_bg.png');
   background-size: cover;
   background-position: 70% 50%;
+}
+
+.push-footer-to-bottom {
+  min-height: calc(100vh - 288px);
 }
 
 .blue-gradient {

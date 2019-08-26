@@ -245,28 +245,28 @@ const App = props => {
   return (
     <>
       {isAuthenticated() && <Header logout={logout} />}
-
-      <Routes
-        user={user}
-        updateUser={updateUser}
-        login={login}
-        register={register}
-        isAuthenticated={isAuthenticated}
-        activityByName={activityByName}
-        activeChallenge={activeChallenge}
-        workouts={workouts}
-        activities={activities}
-        achievements={achievements}
-        challenges={challenges}
-        addWorkout={addWorkout}
-        updateWorkout={updateWorkout}
-        deleteWorkoutInstance={deleteWorkoutInstance}
-        challengeService={challengeService}
-        achievementService={achievementService}
-        activityService={activityService}
-        userService={userService}
-      />
-
+      <div className="push-footer-to-bottom">
+        <Routes
+          user={user}
+          updateUser={updateUser}
+          login={login}
+          register={register}
+          isAuthenticated={isAuthenticated}
+          activityByName={activityByName}
+          activeChallenge={activeChallenge}
+          workouts={workouts}
+          activities={activities}
+          achievements={achievements}
+          challenges={challenges}
+          addWorkout={addWorkout}
+          updateWorkout={updateWorkout}
+          deleteWorkoutInstance={deleteWorkoutInstance}
+          challengeService={challengeService}
+          achievementService={achievementService}
+          activityService={activityService}
+          userService={userService}
+        />
+      </div>
       <ToastContainer pauseOnFocusLoss={false} position="bottom-right" />
       {isAuthenticated() && <Footer />}
     </>
