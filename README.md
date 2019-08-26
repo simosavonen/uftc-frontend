@@ -35,7 +35,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Make sure you have a recent version of <a href="https://nodejs.org/en/" rel="noopener">Node.js</a> installed.
 
-For this React frontend to work, the <a href="https://github.com/simosavonen/uftc-backend" rel="noopener">backend server</a> needs to be up and running.
+For this React frontend to work, start the <a href="https://github.com/simosavonen/uftc-backend" rel="noopener">backend server</a> on the same machine.
 
 ### Installing
 
