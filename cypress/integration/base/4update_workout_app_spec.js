@@ -7,17 +7,22 @@ describe('update workout', function() {
     it('it random login', function() {
       cy.get('#Email').type('random.person@ambientia.fi');
       cy.get('#Password').type('salasana');
-      cy.wait(500);
+      cy.wait(2000);
       cy.contains('Log in').click();
     });
 
     it('random update workout', function() {
-      cy.wait(500);
+      //cy.wait(5000);
+      cy.contains('activities');
+      cy.contains('activities');
+      //cy.wait(100);
       cy.contains('activities').click();
+      cy.wait(1000);
       cy.contains('most recent activities');
       cy.wait(500);
       cy.contains('Pushup - punnerus').click({ force: true });
       cy.contains('Show workout history').click();
+      cy.wait(100);
       cy.get('#editbtn')
         .first()
         .click();

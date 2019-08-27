@@ -30,6 +30,7 @@ describe('Add workout random', function() {
       cy.contains('Go back').click();
       cy.wait(300);
       cy.contains('Your 1 most recent activities');
+      cy.wait(1000);
     });
   });
 });
