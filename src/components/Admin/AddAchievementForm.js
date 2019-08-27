@@ -92,8 +92,7 @@ const AddAchievementForm = props => {
     }
   };
 
-  const deleteAchievement = async event => {
-    event.preventDefault();
+  const deleteAchievement = async () => {
     try {
       await props.achievementService.remove({ id: editingAchievement.id });
       toast.success('Achievement deleted.');
