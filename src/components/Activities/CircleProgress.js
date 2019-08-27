@@ -5,8 +5,8 @@ import { isMobile } from 'react-device-detect';
 
 const PlaceholderCirle = ({ text }) => {
   const styles = {
-    width: 300,
-    height: 300,
+    width: isMobile ? 200 : 300,
+    height: isMobile ? 200 : 300,
     borderRadius: 150,
     borderWidth: 10,
     borderStyle: 'solid',
@@ -18,7 +18,7 @@ const PlaceholderCirle = ({ text }) => {
   };
 
   return (
-    <div style={styles} className="is-size-5">
+    <div style={styles} className="is-size-6-mobile is-size-5">
       {text}
     </div>
   );

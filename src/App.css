@@ -4,6 +4,10 @@
   background-position: 70% 50%;
 }
 
+.push-footer-to-bottom {
+  min-height: calc(100vh - 288px);
+}
+
 .blue-gradient {
   background: linear-gradient(344deg, rgba(36, 138, 255, 0.6) 0%, rgba(18, 69, 128, 0.6) 100%);
 }
@@ -30,6 +34,10 @@
     rgba(255, 36, 87, 1) 30%,
     rgba(143, 21, 49, 1) 100%
   );
+}
+
+.red-linear-gradient {
+  background: linear-gradient(120deg, rgba(255, 36, 87, 1) 10%, rgba(143, 21, 49, 1) 100%);
 }
 
 .dark-cyan-gradient {
@@ -97,4 +105,10 @@
 .hover-svg-red:hover path,
 .hover-svg-red:hover circle {
   fill: #ff2457;
+}
+
+.topfivecards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1em;
 }
