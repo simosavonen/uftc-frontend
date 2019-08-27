@@ -3,6 +3,7 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ConfirmButton from '../ConfirmButton';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const AddAchievementForm = props => {
   const [isOneDayChallenge, setIsOneDayChallenge] = useState(true);
@@ -179,6 +180,19 @@ const AddAchievementForm = props => {
   return (
     <section className="section">
       <div className="container">
+        <div className="tabs">
+          <ul>
+            <li>
+              <Link to="/addchallenge">Challenges / Series</Link>
+            </li>
+            <li>
+              <Link to="/addactivity">Activities</Link>
+            </li>
+            <li className="is-active">
+              <Link to="/addachievement">Achievements</Link>
+            </li>
+          </ul>
+        </div>
         <div className="columns is-centered">
           <div className="column">
             <form onSubmit={submit}>

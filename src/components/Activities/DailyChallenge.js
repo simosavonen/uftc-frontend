@@ -39,9 +39,9 @@ const DailyChallenge = ({ workouts, activities, challenge, achievements }) => {
             <div key={a.id}>
               <div className="box notification">
                 <span className="has-text-weight-semibold">{a.name}</span>
-                <br />
-                Get {a.requirement} points total in any activities
-                <br />
+                <p style={{ padding: '0.5em 0' }}>
+                  Get <strong>{a.requirement} points</strong> total in any activities
+                </p>
                 <span>
                   <progress
                     className="progress is-info"
@@ -52,7 +52,7 @@ const DailyChallenge = ({ workouts, activities, challenge, achievements }) => {
                   </progress>
                 </span>
                 <span>
-                  {challengeProgress}/{a.requirement}
+                  {Math.floor(challengeProgress)}/{a.requirement}
                 </span>
                 {progress >= a.requirement && (
                   <p className="has-text-weight-semibold">Well done!</p>

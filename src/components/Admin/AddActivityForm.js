@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { customIcon, icons } from '../../utils/icons';
+import { Link } from 'react-router-dom';
 
 const AddActivityForm = props => {
   const [name, setName] = useState('');
@@ -91,6 +92,19 @@ const AddActivityForm = props => {
   return (
     <section className="section">
       <div className="container">
+        <div className="tabs">
+          <ul>
+            <li>
+              <Link to="/addchallenge">Challenges / Series</Link>
+            </li>
+            <li className="is-active">
+              <Link to="/addactivity">Activities</Link>
+            </li>
+            <li>
+              <Link to="/addachievement">Achievements</Link>
+            </li>
+          </ul>
+        </div>
         <div className="columns is-centered">
           <div className="column">
             <form onSubmit={submit}>

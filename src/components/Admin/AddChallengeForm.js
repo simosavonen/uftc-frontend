@@ -4,6 +4,7 @@ import PreviewSeries from './PreviewSeries';
 import EditChallengeForm from './EditChallengeForm';
 import { toast } from 'react-toastify';
 import ConfirmButton from '../ConfirmButton';
+import { Link } from 'react-router-dom';
 
 const AddChallengeForm = props => {
   const [name, setName] = useState('');
@@ -137,6 +138,19 @@ const AddChallengeForm = props => {
   return (
     <section className="section">
       <div className="container">
+        <div className="tabs">
+          <ul>
+            <li className="is-active">
+              <Link to="/addchallenge">Challenges / Series</Link>
+            </li>
+            <li>
+              <Link to="/addactivity">Activities</Link>
+            </li>
+            <li>
+              <Link to="/addachievement">Achievements</Link>
+            </li>
+          </ul>
+        </div>
         <div className="columns is-centered">
           <div className="column" id="addChallengeForm">
             <form onSubmit={addOrEdit}>
