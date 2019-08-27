@@ -78,6 +78,33 @@ npm run build
 
 Copy the contents of the 'build' folder into your web server.
 
+## 🍭 Cypress end-to-end testing
+
+In the branch **mm_test** there is a set of end-to-end Cypress tests.
+
+```
+git checkout mm_test
+npm install
+npm start
+```
+
+Running the tests requires the <a href="https://github.com/simosavonen/uftc-backend" rel="noopener">backend server</a> was started in **test mode**.
+
+Make sure the .env file has defined a TEST_MONGODB_URI which is different from your development database, since the tests delete all data from Mongo.
+
+```
+git checkout mm_test
+npm run watch:test
+```
+
+In the frontend folder, start the Cypress tests with
+
+```
+npm run cypress:open
+```
+
+After Cypress finishes loading, you can click at the button **run all specs** which launches a battery of tests.
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [ReactJs](https://reactjs.org/) - Web Framework
