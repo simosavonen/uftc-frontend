@@ -37,7 +37,14 @@ const ActivitiesView = ({ challenge, activities, workouts, user, achievements })
       <section className="section">
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-            <RecentActivities activities={activities} workouts={workouts} challenge={challenge} />
+            {workouts.length === 0 ? (
+              <div className="notification">
+                Waiting for you to <strong>save a workout</strong>.
+                <p>Will display your most recent activities.</p>
+              </div>
+            ) : (
+              <RecentActivities activities={activities} workouts={workouts} challenge={challenge} />
+            )}
           </div>
           <div className="column is-1-desktop" />
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">

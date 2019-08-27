@@ -21,8 +21,23 @@ const TopFives = ({ activities }) => {
   return (
     <section className="section">
       <div className="container" style={{ marginBottom: '2em' }}>
-        <h1 className="title is-4">Top 5 by activity</h1>
-        <h2 className="subtitle is-6">sorted by total amount of workouts</h2>
+        <div className="columns">
+          <div className="column">
+            <h1 className="title is-4">Top 5 by activity</h1>
+            <h2 className="subtitle is-6">sorted by total amount of workouts</h2>
+          </div>
+          <div className="column tags">
+            {Object.keys(locations).map(loc => (
+              <div
+                key={loc}
+                className="tag is-rounded has-text-light"
+                style={{ backgroundColor: locations[loc] }}
+              >
+                {loc}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="container topfivecards">
         {Object.keys(totals).map(t => (
