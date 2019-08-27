@@ -56,6 +56,18 @@ const EditChallengeForm = props => {
             value={name}
             required
           />
+          <p className="help">
+            Can use{' '}
+            <a
+              href="https://bulma.io/documentation/elements/content/"
+              title="Bulma Content class documentation"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              a limited set
+            </a>{' '}
+            of HTML tags
+          </p>
         </div>
       </div>
       <div className="field is-grouped">

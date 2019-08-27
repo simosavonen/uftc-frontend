@@ -109,7 +109,7 @@ const AddChallengeForm = props => {
     }
   };
 
-  const deleteSeries = async event => {
+  const deleteSeries = async () => {
     try {
       await props.challengeService.remove({ id: editingSeries.id });
       toast.success('Series deleted.');
@@ -143,9 +143,7 @@ const AddChallengeForm = props => {
               {!editingSeries ? (
                 <>
                   <h1 className="title is-4">
-                    {props.challenges.length
-                      ? `Add a series to ${props.challenges[0].name}`
-                      : 'Add the challenge'}
+                    {props.challenges.length ? `Add a series` : 'Add the challenge'}
                   </h1>
                   <h2 className="subtitle is-6">
                     {props.challenges.length
@@ -168,9 +166,20 @@ const AddChallengeForm = props => {
                       id="name"
                       onChange={({ target }) => setName(target.value)}
                       value={name}
-                      title="All series should share the same challenge name"
                       required
                     />
+                    <p className="help">
+                      Can use{' '}
+                      <a
+                        href="https://bulma.io/documentation/elements/content/"
+                        title="Bulma Content class documentation"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        a limited set
+                      </a>{' '}
+                      of HTML tags
+                    </p>
                   </div>
                   <div className="control is-expanded">
                     <label className="label" htmlFor="pointsGoal">

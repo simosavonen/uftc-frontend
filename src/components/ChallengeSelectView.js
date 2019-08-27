@@ -43,14 +43,6 @@ const Ikonipallo = ({ series, iconName, handleClick, isSelected, isActiveChallen
   );
 };
 
-const BraceLeft = () => (
-  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>
-);
-
-const BraceRight = () => (
-  <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
-);
-
 const ChallengeSelectView = props => {
   const [selectedSeries, setSelectedSeries] = useState(null);
 
@@ -75,7 +67,7 @@ const ChallengeSelectView = props => {
   const showActiveChallenge = () => (
     <>
       <div className="ambientia-block" />
-      <div> Your challenge</div>
+      <div>Your series</div>
     </>
   );
 
@@ -119,16 +111,36 @@ const ChallengeSelectView = props => {
 
   return (
     <>
-      <section className="section has-text-centered">
-        <h1 className="title is-3 ">Welcome to UFTC!</h1>
+      <section className="section has-text-centered" style={{ paddingBottom: '0.5em' }}>
+        <h1 className="title is-3 ">Welcome to the UFTC!</h1>
+        <h2 className="subtitle is-5">Ultimate Functional Training Challenge</h2>
+        <p
+          className="is-size-7-mobile is-size-6-tablet is-size-5-desktop"
+          style={{ minWidth: '250px', maxWidth: '70%', margin: 'auto' }}
+        >
+          UFTC is a fun exercise competition where the participants record their workouts and earn
+          points towards the challenge goal.
+          <br />
+          <br />
+          Achieve enough points from a <strong>single activity</strong> or during a special{' '}
+          <strong>one-day-challenge</strong> and you'll be rewarded with badges.
+        </p>
       </section>
       {challengeNames.map(challengeName => (
-        <section className="section has-text-centered " key={challengeName}>
-          <h1 className="is-size-4">
-            <BraceLeft /> {challengeName} <BraceRight />
-          </h1>
+        <section className="section has-text-centered" key={challengeName}>
+          <div className="columns is-centered">
+            <div className="column is-8-tablet is-7-desktop is-6-widescreen">
+              <div
+                className="notification is-danger is-size-6-mobile is-size-5-tablet is-size-4-desktop"
+                dangerouslySetInnerHTML={{ __html: challengeName }}
+              ></div>
+            </div>
+          </div>
+
           <br />
-          <h2 className="title is-5">Select series</h2>
+          <h2 className="title is-size-5-mobile is-size-4-tablet">
+            Challenger, choose your series:
+          </h2>
 
           <div className="columns is-centered">
             {challengeSelections(challengesToShow.filter(c => c.name === challengeName))}

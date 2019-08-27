@@ -27,9 +27,10 @@ const ChallengeTitle = ({ challenge }) => {
 
   return (
     <div className="is-size-4 is-size-3-fullhd">
-      <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7b;</span>{' '}
-      {challenge.name}{' '}
-      <span style={{ fontFamily: 'Verdana', color: '#ff2457', fontSize: 'larger' }}>&#x7d;</span>
+      <div
+        className="notification is-info content"
+        dangerouslySetInnerHTML={{ __html: challenge.name }}
+      ></div>
       {isOngoing ? (
         <div className="columns is-gapless is-vcentered is-mobile">
           <div className="column is-9">
