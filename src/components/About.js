@@ -127,7 +127,7 @@ const About = () => {
                     <td>MongoDB</td>
                   </tr>
                   <tr>
-                    <td>React-toastify</td>
+                    <td>Axios</td>
                     <td>Mongoose</td>
                   </tr>
                 </tbody>
@@ -144,6 +144,10 @@ const About = () => {
                 </li>
                 <li>
                   <a href="https://www.ambientia.fi/">Ambientia</a> - Original concept and support
+                </li>
+                <li>
+                  <a href="https://tech.utu.fi/fi/full-stack/">University of Turku</a> - Full Stack
+                  bootcamp
                 </li>
               </ul>
             </div>
