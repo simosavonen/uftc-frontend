@@ -22,6 +22,7 @@ import { ReactComponent as StepSquats } from '../icons/stepsquat.svg';
 import { ReactComponent as Stretching } from '../icons/stretching.svg';
 import { ReactComponent as UpStairs } from '../icons/upstairs.svg';
 import { ReactComponent as WalkingMeeting } from '../icons/walking2.svg';
+import { ReactComponent as FloorBall } from '../icons/floorball.svg';
 import Icon from '../components/Icon';
 
 // list of manually added and cleaned SVG files
@@ -48,7 +49,8 @@ const icons = [
   'stepsquat.svg',
   'stretching.svg',
   'upstairs.svg',
-  'walking2.svg'
+  'walking2.svg',
+  'floorball.svg'
 ];
 
 const customIcon = (iconName, color = '#000000', size = '2x') => {
@@ -100,6 +102,8 @@ const customIcon = (iconName, color = '#000000', size = '2x') => {
       return <UpStairs />;
     case 'walking2.svg':
       return <WalkingMeeting />;
+    case 'floorball.svg':
+      return <FloorBall />;
     default:
       return <Box />;
   }
