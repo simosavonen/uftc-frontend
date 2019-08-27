@@ -48,33 +48,39 @@ const ChallengeTitle = ({ challenge }) => {
           </div>
         </div>
       ) : (
-        <p>{challengeTiming(challenge)}</p>
+        <p className="is-size-6" style={{ margin: '1em' }}>
+          {challengeTiming(challenge)}
+        </p>
       )}
-      <div className="columns is-variable is-1 is-centered is-mobile">
-        <div className="column">
-          <div className="tags has-addons are-medium is-pulled-right">
+      <div className="field is-grouped is-grouped-multiline" style={{ padding: '1vw' }}>
+        <div className="control">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">Starts</span>
             <span className="tag is-info">{moment(challenge.startDate).format('MMM Do')}</span>
           </div>
         </div>
-        <div className="column">
+        <div className="control">
           <div className="tags are-medium has-addons">
             <span className="tag is-dark">Ends</span>
             <span className="tag is-info">{moment(challenge.endDate).format('MMM Do')}</span>
           </div>
         </div>
-      </div>
-      <div className="columns is-variable is-1 is-centered is-mobile">
-        <div className="column">
-          <div className="tags has-addons are-medium is-pulled-right">
+        <div className="control">
+          <div className="tags has-addons are-medium">
             <span className="tag is-dark">Goal</span>
             <span className="tag is-warning">{challenge.pointsGoal}</span>
           </div>
         </div>
-        <div className="column">
+        <div className="control">
           <div className="tags has-addons are-medium">
             <span className="tag is-dark">Series</span>
             <span className="tag is-success">{challenge.seriesTitle}</span>
+          </div>
+        </div>
+        <div className="control">
+          <div className="tags has-addons are-medium">
+            <span className="tag is-dark">Participants</span>
+            <span className="tag is-success">{challenge.participants}</span>
           </div>
         </div>
       </div>
