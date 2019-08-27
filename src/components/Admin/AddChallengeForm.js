@@ -43,7 +43,7 @@ const AddChallengeForm = props => {
         .then(result => {
           setUsers(result.data);
         })
-        .catch(error => console.log('users', error.response.data));
+        .catch(error => toast.warn('Failed to load list of users.'));
     }
   }, [props.userService, props.user]);
 

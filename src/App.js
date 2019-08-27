@@ -43,7 +43,7 @@ const App = props => {
         .then(result => {
           setWorkouts(result.data);
         })
-        .catch(error => console.log('workouts', error.response.data));
+        .catch(error => toast.warn('Failed to load your workouts.'));
     }
   }, [user]);
 
@@ -95,9 +95,7 @@ const App = props => {
             badgeAlert(newBadges);
           }
         })
-        .catch(error => {
-          console.log('addWorkout', error.response.data);
-        });
+        .catch(error => toast.warn('Failed to save a workout.'));
     } else {
       toast.warn('Workout not saved! Please select a challenge first.');
     }
@@ -130,9 +128,7 @@ const App = props => {
             badgeAlert(newBadges);
           }
         })
-        .catch(error => {
-          console.log('updateWorkout', error.response.data);
-        });
+        .catch(error => toast.warn('Failed to update the workout.'));
     } else {
       toast.warn('Workout not saved! Please select a challenge first.');
     }
@@ -154,9 +150,7 @@ const App = props => {
             toast.success('Workout instance deleted.');
           }
         })
-        .catch(error => {
-          console.log('deleteWorkoutInstance', error.response.data);
-        });
+        .catch(error => toast.warn('Failed to delete the workout instance.'));
     } else {
       toast.warn('Workout instance not deleted! Please select a challenge first.');
     }
@@ -173,7 +167,6 @@ const App = props => {
         props.history.push('/');
       })
       .catch(error => {
-        console.log('login', error.response.data);
         toast.error('Login failed.');
       });
   };
@@ -185,7 +178,6 @@ const App = props => {
         login(userDetails);
       })
       .catch(error => {
-        console.log('register', error.response.data);
         toast.error('Failed to create an account.');
       });
   };

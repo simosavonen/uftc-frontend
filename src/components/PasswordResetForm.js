@@ -14,13 +14,10 @@ const PasswordResetForm = ({ resetToken, history }) => {
       .verifyResetToken(resetToken)
       .then(response => {
         if (response.status === 200) {
-          console.log(response);
           setEmail(response.data.email);
         }
       })
-      .catch(error => {
-        console.log('verifyResetToken', error.message);
-      });
+      .catch(error => toast.warn('The reset token has expired.'));
   }, [resetToken]);
 
   useEffect(() => {
@@ -39,7 +36,6 @@ const PasswordResetForm = ({ resetToken, history }) => {
       })
       .catch(error => {
         toast.error('Failed to change password.');
-        console.log('resetPassword', error.message);
       });
   };
 

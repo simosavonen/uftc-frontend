@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { toast } from 'react-toastify';
 import WeeklyScoresChart from './WeeklyScoresChart';
 import WeeklyScoresTable from './WeeklyScoresTable';
 
@@ -22,7 +22,7 @@ const LeaderBoardView = ({ challenges, user }) => {
       .then(result => {
         setWeeklyData(result.data);
       })
-      .catch(error => console.log('weeklyData', error.message));
+      .catch(error => toast.warn('Failed to load the weekly scores.'));
   }, []);
 
   useEffect(() => {

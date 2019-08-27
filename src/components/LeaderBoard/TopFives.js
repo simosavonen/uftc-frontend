@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import scoreService from '../../services/scores';
 import { locations } from '../../config/config';
 import { customIcon } from '../../utils/icons';
+import { toast } from 'react-toastify';
 
 const TopFives = ({ activities }) => {
   const [totals, setTotals] = useState([]);
@@ -12,7 +13,7 @@ const TopFives = ({ activities }) => {
       .then(result => {
         setTotals(result.data);
       })
-      .catch(error => console.log('total amounts', error.message));
+      .catch(error => toast.warn('Failed to load the top 5 scores.'));
   }, []);
 
   if (activities.length === 0) return <div className="section">Loading activities...</div>;
