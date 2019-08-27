@@ -91,12 +91,13 @@ Copy the contents of the 'build' folder into your web server.
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@shonkala](https://github.com/shonkala) - Achievements, popup alerts, series selection
-- [@simosavonen](https://github.com/simosavonen) - Leaderboard, admin tools, quality control
+- [@simosavonen](https://github.com/simosavonen) - Leaderboard, Top5, admin tools
 - [@MMattila75](https://github.com/MMattila75) - Recent activities, Cypress testing
 - [@jarigithub](https://github.com/jarigithub) - User profile, data input forms
+- [@SirjeH](https://github.com/SirjeH) - UX design, communications
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - [FullStackOpen](https://fullstackopen.com/) - Helsinki University's free course material
 - [Ambientia](https://www.ambientia.fi/) - Original concept, support and guidance
-- [Jarko Papalitsas](https://www.utu.fi/fi/ihmiset/jarko-papalitsas) - Tutorial on deploying to AWS EC2
+- [University of Turku](https://tech.utu.fi/fi/full-stack/) - Full Stack bootcamp

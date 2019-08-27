@@ -19,6 +19,19 @@ const AddWorkoutForm = props => {
     }
   }, [props.workouts, props.activity]);
 
+  const checkDate = () => {
+    if (moment(date).isBefore(moment(props.challenge.startDate))) {
+      return false;
+    }
+    if (moment(date).isAfter(moment())) {
+      return false;
+    }
+    if (moment(date).isAfter(moment(props.challenge.endDate))) {
+      return false;
+    }
+    return true;
+  };
+
   const handleMoreClick = event => {
     event.preventDefault();
     setAmount(+amount + 1);
@@ -118,7 +131,9 @@ const AddWorkoutForm = props => {
 
       <div className="field">
         <p className="control">
-          <button className="button is-success is-fullwidth is-medium">Save a workout</button>
+          <button className="button is-success is-fullwidth is-medium" disabled={!checkDate()}>
+            Save a workout
+          </button>
         </p>
       </div>
       <div className="field">

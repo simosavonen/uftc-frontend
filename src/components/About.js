@@ -41,7 +41,11 @@ const About = () => {
                         <FontAwesomeIcon icon={['fab', 'linkedin-in']} />
                       </a>
                     </td>
-                    <td></td>
+                    <td>
+                      <a href="https://github.com/sirjeh">
+                        <FontAwesomeIcon icon={['fab', 'github']} />
+                      </a>
+                    </td>
                   </tr>
                   <tr>
                     <td>Salomon Honkala</td>
@@ -58,7 +62,11 @@ const About = () => {
                   </tr>
                   <tr>
                     <td>Marko Mattila</td>
-                    <td></td>
+                    <td>
+                      <a href="https://www.linkedin.com/in/marko-mattila-46577a186/">
+                        <FontAwesomeIcon icon={['fab', 'linkedin-in']} />
+                      </a>
+                    </td>
                     <td>
                       <a href="https://github.com/MMattila75">
                         <FontAwesomeIcon icon={['fab', 'github']} />
