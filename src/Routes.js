@@ -65,6 +65,7 @@ const Routes = props => {
             challenge={activeChallenge()}
             workouts={workouts}
             activities={activities}
+            achievements={achievements}
           />
         )}
       />
@@ -154,6 +155,7 @@ const Routes = props => {
               challenge={activeChallenge()}
               workouts={workouts}
               activities={activities}
+              achievements={achievements}
             />
           )}
         />
