@@ -11,4 +11,8 @@ const getWeekly = () => {
   return axios.get(baseUrl + '/weekly');
 };
 
-export default { get, getWeekly };
+const getByActivity = () => {
+  return axios.get(baseUrl + '/byactivity');
+};
+
+export default { get, getWeekly, getByActivity };

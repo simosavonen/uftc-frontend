@@ -5,10 +5,12 @@
 <div align="center"><h3>Ultimate Functional Training Challenge</h3></div>
 
 <div align="center">
- <img alt="GitHub issues" src="https://img.shields.io/github/issues/simosavonen/uftc-frontend">
- <img alt="GitHub" src="https://img.shields.io/github/license/simosavonen/uftc-frontend">
- <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/simosavonen/uftc-frontend">
- <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simosavonen/uftc-frontend">
+ <a href="https://github.com/simosavonen/uftc-frontend/issues" rel="noopener">
+ <img alt="GitHub issues" src="https://img.shields.io/github/issues/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/blob/master/LICENSE" rel="noopener">
+ <img alt="GitHub" src="https://img.shields.io/github/license/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/graphs/contributors" rel="noopener"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/simosavonen/uftc-frontend"></a>
+ <a href="https://github.com/simosavonen/uftc-frontend/commits/master" rel="noopener"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/simosavonen/uftc-frontend"></a>
 </div>
 
 ---
@@ -24,7 +26,7 @@ Participants record their exercises and gain points, trying to reach a set goal.
 ## 🧐 About <a name = "about"></a>
 
 <p>
-This was a capstone project for a University of Turku <a href="https://tech.utu.fi/fi/full-stack/" rel="noopener">Full Stack bootcamp</a>, which took place between March and August of 2019. A <a href="https://github.com/simosavonen/uftc-frontend/graphs/contributors" rel="noopener">team of five</a> was given three months and free hands to design and build it. Original concept and support was provided by <a href="https://www.ambientia.fi/">Ambientia</a>.
+This was a capstone project for a University of Turku <a href="https://tech.utu.fi/fi/full-stack/" rel="noopener">Full Stack bootcamp</a>, which took place between March and August of 2019. A <a href="https://github.com/simosavonen/uftc-frontend/graphs/contributors" rel="noopener">team of five</a> was given two months and free hands to design and build it. Original concept and support was provided by <a href="https://www.ambientia.fi/">Ambientia</a>.
 </p>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -89,7 +91,7 @@ Copy the contents of the 'build' folder into your web server.
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@shonkala](https://github.com/shonkala) - Achievements, popup alerts, series selection
-- [@simosavonen](https://github.com/simosavonen) - Leaderboard, quality control
+- [@simosavonen](https://github.com/simosavonen) - Leaderboard, admin tools, quality control
 - [@MMattila75](https://github.com/MMattila75) - Recent activities, Cypress testing
 - [@jarigithub](https://github.com/jarigithub) - User profile, data input forms
 
@@ -97,3 +99,4 @@ Copy the contents of the 'build' folder into your web server.
 
 - [FullStackOpen](https://fullstackopen.com/) - Helsinki University's free course material
 - [Ambientia](https://www.ambientia.fi/) - Original concept, support and guidance
+- [Jarko Papalitsas](https://www.utu.fi/fi/ihmiset/jarko-papalitsas) - Tutorial on deploying to AWS EC2

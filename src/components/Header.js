@@ -49,6 +49,13 @@ const Header = props => {
               leaderboard
             </NavLink>
             <NavLink
+              className="navbar-item has-text-white"
+              to="/topfives"
+              activeClassName="is-active has-text-dark"
+            >
+              top5
+            </NavLink>
+            <NavLink
               className="navbar-item has-text-white is-hidden-tablet"
               to="/updateuser"
               activeClassName="is-active has-text-dark"

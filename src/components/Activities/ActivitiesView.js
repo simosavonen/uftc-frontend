@@ -25,13 +25,15 @@ const ActivitiesView = ({ challenge, activities, workouts, user }) => {
         </div>
       </section>
 
-      <section className="section columns is-centered">
-        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <RecentActivities activities={activities} workouts={workouts} challenge={challenge} />
-        </div>
-        <div className="column is-1-desktop" />
-        <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
-          <ActivityMenu activities={activities} challenge={challenge} />
+      <section className="section">
+        <div className="columns is-centered">
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <RecentActivities activities={activities} workouts={workouts} challenge={challenge} />
+          </div>
+          <div className="column is-1-desktop" />
+          <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
+            <ActivityMenu activities={activities} challenge={challenge} />
+          </div>
         </div>
       </section>
 

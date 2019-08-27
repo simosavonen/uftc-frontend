@@ -11,7 +11,8 @@ import PasswordResetForm from './components/PasswordResetForm';
 import RequestResetEmailForm from './components/RequestResetEmailForm';
 import StyleGuide from './components/StyleGuide';
 import NotFound from './components/NotFound';
-import { ActivitiesView, LeaderBoardView, WorkoutView, AdminView } from './components';
+import About from './components/About';
+import { ActivitiesView, LeaderBoardView, WorkoutView, AdminView, TopFives } from './components';
 
 const Routes = props => {
   const {
@@ -85,6 +86,8 @@ const Routes = props => {
         path="/leaderboard"
         render={() => <LeaderBoardView challenges={challenges} user={user} />}
       />
+      <Route path="/topfives" render={() => <TopFives activities={activities} />} />
+      <Route path="/about" render={() => <About />} />
       <Route
         path="/addchallenge"
         render={() => (
