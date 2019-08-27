@@ -7,9 +7,6 @@ import ActivityMenu from './ActivityMenu';
 import DailyChallenge from './DailyChallenge';
 
 const ActivitiesView = ({ challenge, activities, workouts, user, achievements }) => {
-  //const [todaysChallenge, setTodaysChallenge] = useState([]);
-  console.log('render activitiesview, achievements:', achievements);
-
   return (
     <>
       <section className="section is-hidden-mobile">
@@ -17,8 +14,12 @@ const ActivitiesView = ({ challenge, activities, workouts, user, achievements })
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <ChallengeTitle challenge={challenge} />
             <div style={{ margin: '2em auto 1em' }}>
-              <h3 className="title is-5">Today's challenge</h3>
-              <DailyChallenge workouts={workouts} activities={activities} challenge={challenge} />
+              <DailyChallenge
+                workouts={workouts}
+                activities={activities}
+                challenge={challenge}
+                achievements={achievements}
+              />
             </div>
           </div>
 
@@ -50,6 +51,14 @@ const ActivitiesView = ({ challenge, activities, workouts, user, achievements })
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <ChallengeTitle challenge={challenge} />
+          </div>
+          <div style={{ margin: '1em auto' }}>
+            <DailyChallenge
+              workouts={workouts}
+              activities={activities}
+              challenge={challenge}
+              achievements={achievements}
+            />
           </div>
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <CircleProgress workouts={workouts} activities={activities} challenge={challenge} />
