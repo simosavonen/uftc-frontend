@@ -34,7 +34,7 @@ const ActivitiesView = ({ challenge, activities, workouts, user, achievements })
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             {workouts.length === 0 ? (
