@@ -50,31 +50,30 @@ const ChallengeTitle = ({ challenge }) => {
       ) : (
         <p>{challengeTiming(challenge)}</p>
       )}
-      <div className="field is-grouped is-grouped-multiline">
-        <div className="control">
-          <div className="tags has-addons are-medium">
-            <span className="tag is-dark">Start date</span>
-            <span className="tag is-info">{moment(challenge.startDate).format('YYYY-MM-DD')}</span>
+      <div className="columns is-variable is-1 is-centered is-mobile">
+        <div className="column">
+          <div className="tags has-addons are-medium is-pulled-right">
+            <span className="tag is-dark">Starts</span>
+            <span className="tag is-info">{moment(challenge.startDate).format('MMM Do')}</span>
           </div>
         </div>
-
-        <div className="control">
-          <div className="tags has-addons are-medium">
-            <span className="tag is-dark">End date</span>
-            <span className="tag is-info">{moment(challenge.endDate).format('YYYY-MM-DD')}</span>
+        <div className="column">
+          <div className="tags are-medium has-addons">
+            <span className="tag is-dark">Ends</span>
+            <span className="tag is-info">{moment(challenge.endDate).format('MMM Do')}</span>
           </div>
         </div>
       </div>
-      <div className="field is-grouped is-grouped-multiline">
-        <div className="control">
-          <div className="tags has-addons are-medium">
-            <span className="tag is-dark">Points goal</span>
+      <div className="columns is-variable is-1 is-centered is-mobile">
+        <div className="column">
+          <div className="tags has-addons are-medium is-pulled-right">
+            <span className="tag is-dark">Goal</span>
             <span className="tag is-warning">{challenge.pointsGoal}</span>
           </div>
         </div>
-        <div className="control">
+        <div className="column">
           <div className="tags has-addons are-medium">
-            <span className="tag is-dark">Active series</span>
+            <span className="tag is-dark">Series</span>
             <span className="tag is-success">{challenge.seriesTitle}</span>
           </div>
         </div>

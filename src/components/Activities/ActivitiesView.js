@@ -1,6 +1,5 @@
 import React from 'react';
 import ChallengeTitle from './ChallengeTitle';
-//import WeeklyProgress from './WeeklyProgress';
 import CircleProgress from './CircleProgress';
 import RecentActivities from './RecentActivities';
 import ActivityMenu from './ActivityMenu';
