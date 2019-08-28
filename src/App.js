@@ -12,7 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { Badge } from './components/BadgesView';
 import { apiUrls } from './config/config';
-import { checkAchievements } from './utils/badges';
+import { checkAchievements, checkDailyChallenges } from './utils/badges';
 import Routes from './Routes';
 
 import './App.css';
@@ -66,7 +66,7 @@ const App = props => {
         activities,
         achievements,
         activeChallenge()
-      );
+      ).concat(checkDailyChallenges(workouts, activities, achievements, activeChallenge()));
       workoutService
         .add(activityId, workout)
         .then(response => {
@@ -89,7 +89,7 @@ const App = props => {
             activities,
             achievements,
             activeChallenge()
-          );
+          ).concat(checkDailyChallenges(newWorkouts, activities, achievements, activeChallenge()));
           if (myBadgesAfter.length > myBadgesBefore.length) {
             const newBadges = myBadgesAfter.filter(x => !myBadgesBefore.includes(x));
             badgeAlert(newBadges);
@@ -108,7 +108,7 @@ const App = props => {
         activities,
         achievements,
         activeChallenge()
-      );
+      ).concat(checkDailyChallenges(workouts, activities, achievements, activeChallenge()));
       workoutService
         .update(workout)
         .then(response => {
@@ -122,6 +122,8 @@ const App = props => {
             activities,
             achievements,
             activeChallenge()
+          ).concat(
+            checkDailyChallenges(workoutsWithNew, activities, achievements, activeChallenge())
           );
           if (myBadgesAfter.length > myBadgesBefore.length) {
             const newBadges = myBadgesAfter.filter(x => !myBadgesBefore.includes(x));
