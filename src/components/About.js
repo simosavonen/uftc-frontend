@@ -7,7 +7,7 @@ const About = () => {
       <div className="container">
         <h1 className="title is-4 has-text-centered">About the UFTC app</h1>
         <div className="notification">
-          A single-page applipation for a team to track their progress in the{' '}
+          A single-page application for a team to track their progress in the{' '}
           <strong>Ultimate Functional Training Challenge</strong>, a fun exercise competition
           designed to promote an active lifestyle and get software engineers up from their desks
           during the work day.
