@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import scoreService from '../../services/scores';
-import { locations } from '../../config/config';
 import { customIcon } from '../../utils/icons';
 import { toast } from 'react-toastify';
 
-const TopFives = ({ activities }) => {
+const TopFives = ({ activities, challenges }) => {
   const [totals, setTotals] = useState([]);
+  const [series, setSeries] = useState([]);
+  const [seriesFilters, setSeriesFilters] = useState([]);
 
   useEffect(() => {
     scoreService
@@ -16,25 +17,45 @@ const TopFives = ({ activities }) => {
       .catch(error => toast.warn('Failed to load the top 5 scores.'));
   }, []);
 
-  if (activities.length === 0) return <div className="section">Loading activities...</div>;
+  useEffect(() => {
+    const titles = [];
+    for (let c of challenges) {
+      titles.push(c.seriesTitle);
+    }
+    setSeriesFilters(titles);
+    setSeries(titles);
+  }, [challenges]);
+
+  const toggleSeries = ser => {
+    if (seriesFilters.includes(ser)) {
+      setSeriesFilters(seriesFilters.filter(s => s !== ser));
+    } else {
+      setSeriesFilters(seriesFilters.concat(ser));
+    }
+  };
+
+  if (activities.length === 0 || challenges.length === 0)
+    return <div className="section">Loading...</div>;
 
   return (
     <section className="section">
       <div className="container" style={{ marginBottom: '2em' }}>
-        <div className="columns">
+        <div className="columns is-mobile">
           <div className="column">
             <h1 className="title is-4">Top 5 by activity</h1>
-            <h2 className="subtitle is-6">sorted by total amount of workouts</h2>
           </div>
-          <div className="column tags">
-            {Object.keys(locations).map(loc => (
-              <div
-                key={loc}
-                className="tag is-rounded has-text-light"
-                style={{ backgroundColor: locations[loc] }}
+          <div className="column buttons has-text-right">
+            <h1 className="title is-6 is-marginless" style={{ paddingBottom: '0.2em' }}>
+              Filter by series
+            </h1>
+            {series.map(ser => (
+              <button
+                key={ser}
+                className={`button is-small ${seriesFilters.includes(ser) && 'is-info'}`}
+                onClick={() => toggleSeries(ser)}
               >
-                {loc}
-              </div>
+                {ser}
+              </button>
             ))}
           </div>
         </div>
@@ -53,19 +74,18 @@ const TopFives = ({ activities }) => {
                   <p className="is-size-4">{activities.find(a => a.id === t).name}</p>
                 </div>
               </div>
-              <table className="table is-fullwidth is-striped is-size-6">
+              <table className="table is-fullwidth is-striped is-narrow is-size-6">
                 <tbody>
                   {totals[t]
                     .sort((a, b) => {
                       return b.total - a.total;
                     })
+                    .filter(user => seriesFilters.includes(user.series))
                     .slice(0, 5)
                     .map(row => (
                       <tr key={row.name}>
                         <td>{row.name}</td>
-                        <td title={row.location}>
-                          {customIcon('globe', locations[row.location], '1x')}
-                        </td>
+                        <td>{row.location}</td>
                         <td className="has-text-centered" title="total amount">
                           {row.total}
                         </td>

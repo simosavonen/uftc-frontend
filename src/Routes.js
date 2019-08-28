@@ -87,7 +87,10 @@ const Routes = props => {
         path="/leaderboard"
         render={() => <LeaderBoardView challenges={challenges} user={user} />}
       />
-      <Route path="/topfives" render={() => <TopFives activities={activities} />} />
+      <Route
+        path="/topfives"
+        render={() => <TopFives activities={activities} challenges={challenges} />}
+      />
       <Route path="/about" render={() => <About />} />
       <Route
         path="/addchallenge"
