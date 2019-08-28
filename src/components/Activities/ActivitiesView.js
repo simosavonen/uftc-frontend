@@ -8,7 +8,7 @@ import DailyChallenge from './DailyChallenge';
 const ActivitiesView = ({ challenge, activities, workouts, user, achievements }) => {
   return (
     <>
-      <section className="section is-hidden-mobile">
+      <section className="section is-hidden-mobile" style={{ paddingBottom: 0 }}>
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             <ChallengeTitle challenge={challenge} />
@@ -34,7 +34,7 @@ const ActivitiesView = ({ challenge, activities, workouts, user, achievements })
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="columns is-centered">
           <div className="column has-text-centered is-6-tablet is-5-desktop is-4-widescreen">
             {workouts.length === 0 ? (

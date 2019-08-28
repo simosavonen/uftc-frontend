@@ -24,7 +24,11 @@ const Header = props => {
             <span aria-hidden="true" />
           </div>
         </div>
-        <div id="navMenu" className={`navbar-menu ${burgerActive && 'is-active'}`}>
+        <div
+          id="navMenu"
+          className={`navbar-menu is-size-6-mobile is-size-5-tablet  ${burgerActive &&
+            'is-active'}`}
+        >
           <div className="navbar-start">
             <NavLink
               className="navbar-item has-text-white"
@@ -59,7 +63,14 @@ const Header = props => {
               to="/updateuser"
               activeClassName="is-active has-text-dark"
             >
-              update user
+              profile
+            </NavLink>
+            <NavLink
+              className="navbar-item has-text-white is-hidden-tablet"
+              to="/about"
+              activeClassName="is-active has-text-dark"
+            >
+              about
             </NavLink>
           </div>
           <div className="navbar-end">
