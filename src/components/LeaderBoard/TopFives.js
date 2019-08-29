@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import scoreService from '../../services/scores';
 import { customIcon } from '../../utils/icons';
 import { toast } from 'react-toastify';
+import { locations } from '../../config/config';
 
 const TopFives = ({ activities, challenges }) => {
   const [totals, setTotals] = useState([]);
@@ -85,7 +86,9 @@ const TopFives = ({ activities, challenges }) => {
                     .map(row => (
                       <tr key={row.name}>
                         <td>{row.name}</td>
-                        <td>{row.location}</td>
+                        <td title={row.location}>
+                          {customIcon('globe', locations[row.location], '1x')}
+                        </td>
                         <td className="has-text-centered" title="total amount">
                           {row.total}
                         </td>
