@@ -99,6 +99,32 @@ const TopFives = ({ activities, challenges }) => {
             </div>
           </div>
         ))}
+
+        <div key="colorcodes" className="card">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-left">
+                <figure className="icon is-medium">
+                  {customIcon('map-marker-alt', '#000000', 'lg')}
+                </figure>
+              </div>
+              <div className="media-content" style={{ marginBottom: '0.5em' }}>
+                <p className="is-size-4">Locations</p>
+              </div>
+            </div>
+
+            <ul>
+              {Object.keys(locations).map(row => (
+                <li key={row}>
+                  <span className="icon is-small" style={{ margin: '0 0.5em' }}>
+                    {customIcon('globe', locations[row], 'sm')}
+                  </span>
+                  {row}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
