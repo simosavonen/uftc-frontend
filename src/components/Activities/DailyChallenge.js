@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 const DailyChallenge = ({ workouts, activities, challenge, achievements }) => {
-  if (!challenge || !activities || !workouts || !achievements) return null;
+  if (!challenge || !activities.length || !workouts.length || !achievements.length) return null;
   let todaysChallenges = [];
 
   if (achievements && achievements.length) {
